@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emeric Ferreira Dos Santos | Développeur IA</title>
+
+    <!-- Anti-Bot / Anti-AI Meta Tags -->
+    <meta name="robots" content="noai, noimageai">
+    <meta name="googlebot" content="notranslate">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-glob"></div>
+    <div class="background-grid"></div>
+
+    <main class="bento-wrapper">
+        <div class="bento-grid" id="bento-grid">
+
+            <!-- Row 1: Hero (Span 2) -->
+            <div class="bento-card hero-card">
+                <div class="hero-content">
+                    <h1>
+                        <span class="first-name">Emeric</span>
+                        <br>
+                        <span class="last-name text-gradient">FERREIRA DOS SANTOS</span>
+                    </h1>
+                    <h2>Développeur IA</h2>
+                    <p class="tagline">Transformer la donnée en intelligence.</p>
+                </div>
+                <div class="hero-bg-anim"></div>
+            </div>
+
+            <!-- Row 1: About (Span 2) -->
+            <div class="bento-card about-card">
+                <h3>À Propos</h3>
+                <p>
+                    <strong>Architecte de solutions IA</strong> passionné par le rapprochement entre recherche et
+                    industrie.
+                    <br><br>
+                    Spécialisé en <strong>Computer Vision</strong> et <strong>NLP</strong>, je conçois des systèmes
+                    intelligents qui ont un impact réel. De l'optimisation de modèles à leur déploiement sur le cloud.
+                </p>
+            </div>
+
+            <!-- Row 2: Projects (Span 3) -->
+            <div class="bento-card domains-card">
+                <h3>Projets</h3>
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="ia">IA</button>
+                    <button class="filter-btn" data-filter="games">Jeux Vidéo</button>
+                    <button class="filter-btn" data-filter="design">Design</button>
+                    <button class="filter-btn" data-filter="other">Autre</button>
+                </div>
+
+                <!-- Fixed Header (Title + Nav) moved to top of card -->
+                <div class="project-header-fixed"
+                    style="padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border); margin-bottom: 1rem; flex-shrink: 0; width: 100%;">
+
+                    <!-- Single Row: Title + Status (Left) + Buttons (Right) -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+
+                        <!-- Title & Icon & Status -->
+                        <div style="display:flex; align-items:center; gap:0.5rem; flex: 1; min-width: 0;">
+                            <i id="project-icon" class="fas fa-code"
+                                style="color:var(--accent); font-size:1.2rem; flex-shrink: 0;"></i>
+                            <h3 id="project-title"
+                                style="margin:0; font-size: 1.5rem; color: var(--text-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                Titre du Projet
+                            </h3>
+                            <div id="project-status" class="status-indicator"
+                                style="display:inline-flex; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; margin-left: 0.5rem;">
+                                2024 • CATÉGORIE
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="project-nav-controls"
+                            style="display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0;">
+                            <button id="btn-prev-proj" class="nav-btn prev-proj" onclick="window.changeProject(-1)"
+                                aria-label="Projet Précédent"
+                                style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
+                                <i class="fas fa-chevron-left"></i> <span>Précédent</span>
+                            </button>
+
+                            <span id="project-nav-counter"
+                                style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500; min-width: 50px; text-align: center;">--
+                                / --</span>
+
+                            <button id="btn-next-proj" class="nav-btn next-proj" onclick="window.changeProject(1)"
+                                aria-label="Projet Suivant"
+                                style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
+                                <span>Suivant</span> <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Split Content -->
+                <div class="projects-content-wrapper">
+                    <!-- 1/3 Info (Project Details) -->
+                    <div class="project-info-container" id="project-info-panel"
+                        style="display: flex; flex-direction: column;">
+                        <!-- Scrollable Content -->
+                        <div id="dynamic-project-content" class="fade-content"
+                            style="flex: 1; overflow-y: auto; padding-right: 5px; margin-bottom: 1rem;">
+                            <!-- Description, Links, Tech Stack injected here -->
+                        </div>
+
+                        <!-- Fixed Tech Stack Footer -->
+                        <div id="static-project-tech"
+                            style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border); flex-shrink: 0;">
+                            <!-- Tech Stack injected here -->
+                        </div>
+                    </div>
+
+                    <!-- 2/3 Images (Image Slider) -->
+                    <div class="project-images-container" id="project-image-panel">
+                        <button id="btn-prev-img" class="img-nav-btn left" onclick="window.changeImage(-1)"
+                            aria-label="Image Précédent"><i class="fas fa-chevron-left"></i></button>
+                        <div id="dynamic-image-display" class="image-display">
+                            <!-- Image Injected by JS -->
+                        </div>
+                        <button id="btn-next-img" class="img-nav-btn right" onclick="window.changeImage(1)"
+                            aria-label="Image Suivant"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Row 3: Contact & Socials (Span 4) -->
+            <div class="bento-card contact-footer">
+
+                <!-- Contact Section -->
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <div class="email-wrapper-enhanced">
+                        <a href="javascript:void(0)" class="email-link" id="secure-email">Voir l'email</a>
+                    </div>
+                </div>
+
+                <!-- Location Section -->
+                <div class="footer-section">
+                    <h3>Localisation</h3>
+                    <a href="https://www.google.com/maps/place/Genève" target="_blank" class="location-wrapper">
+                        <p class="location-text"><i class="fas fa-map-marker-alt"
+                                style="margin-right: 8px; color: var(--accent);"></i> Genève, Suisse</p>
+                    </a>
+                </div>
+
+                <!-- Socials -->
+                <div class="footer-section">
+                    <h3>Liens</h3>
+                    <div class="social-links-footer">
+                        <a href="https://github.com" target="_blank" class="social-link-item" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="social-link-item" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Project Modal (Hidden by default) -->
+    <div id="project-modal" class="modal hidden">
+        <div class="modal-content glass">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
