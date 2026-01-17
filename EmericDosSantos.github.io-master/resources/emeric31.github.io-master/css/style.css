@@ -1,0 +1,361 @@
+body{
+	margin: 0;
+}
+body::-webkit-scrollbar{
+	display: none;
+}
+.container-fluid{
+	max-width: 100%;
+	max-height: auto;
+	margin: auto;
+	padding: 0;
+}
+/*------------------------HEAD-------------------------*/
+header{
+	width: 100%;
+	height: 120px;
+	background-color: #191919;
+}
+#defaultCanvas0{
+	width: 100%;
+}
+#headerP5{
+	position: absolute;
+	width: 100%;
+}
+#header-content{
+	width: 100%;
+	height: 120px;
+	position: absolute;
+	line-height: 25px;
+	margin-top: 10px;
+}
+#header-title{
+	height: 100%;
+	padding-left: 18px;
+	font-family: Helvetica;
+	color: white;
+}
+#header-text1{
+	font-size: 25px;
+	margin-bottom: 0px;
+	font-weight: bold;
+}
+#header-text2, #header-text3{
+	font-size: 18px;
+	margin: auto;
+}
+#header-text3{
+	font-style: italic;
+}
+/*-----------------------------------------------------*/
+.row{
+	margin: 0;
+}
+.menu-and-content{
+	min-height: 100%;
+	background-color: gray;
+	background: url(https://www.toptal.com/designers/subtlepatterns/patterns/dark-triangles.png);
+	background-repeat: repeat;
+	padding: 0;
+}
+scrolltop {
+	display:none;
+	width:100%;
+	margin:0 auto;
+	position:fixed;
+	bottom:20px;
+	right:10px;	
+}
+.scroll {
+	position:fixed;
+	border-radius: 16px;
+	right:20px;
+	bottom:100px;
+	background:#b2b2b2;
+	background:rgba(120,120,120,0.7);
+	padding:20px;
+	text-align: center;
+	margin: 0 0 0 0;
+	cursor:pointer;
+	transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s; 		
+}
+.scroll:hover {
+	background:rgba(120,120,120,1.0);
+	transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s; 		
+}
+.scroll:hover .fa {
+	padding-top:-10px;
+}
+.scroll .fa {
+	color: white;
+	font-size:30px;
+	margin-top:-5px;
+	margin-left:1px;
+	transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s; 	
+}
+/*------------------------MENU-------------------------*/
+.button-menu{
+	list-style: none;
+	text-align: center;
+	padding: 0;
+}
+.button-menu ul {
+    position: absolute;
+	width: 40%;
+    left: -999em;
+	z-index: 1000;
+	padding: 0;
+	line-height: 50px;
+	list-style: none;
+	background-color: gray;
+}
+.button-menu li:hover ul{
+	margin-top: 5px;
+	margin-left: -5px;
+    left: auto;
+	box-shadow: 0px 4px 7px black inset;
+	border: 12px solid orange;
+}
+.form-menu{
+	width: 15%;
+	height: 100%;
+	border: 3px solid orange;
+}
+.form-menu:hover{
+	box-shadow: 0px 4px 7px black inset;
+}
+.menu-icon{
+	color: white;
+	font-size: 30px;
+}
+.menu-icon:hover{
+	color: white;
+	text-decoration: none;
+}
+.menu{
+	padding: 0;
+}
+.categories{
+	padding: 0px;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 50px;
+}
+#categorie-active{
+	margin-top: 7px;
+	height: 50px;
+	color: black;
+	box-shadow: 0px 7px #845500 inset;
+	background-color: orange;
+}
+.categorie{
+	background-color: #474747;
+	margin-top: 7px;
+	height: 50px;
+	color: orange;
+}
+.categorie:hover{
+	color: black;
+	box-shadow: 0px 7px black inset;
+	background-color: darkgray;
+	cursor: pointer;
+}
+.categorie-title:link{ 
+	text-decoration:none; 
+} 
+#categorie-active .fa-chevron-right, .categorie .fa-chevron-right{
+	float: right;
+	margin-top: 18.5px;
+	margin-right: 10px;
+}
+/*------------------------CONTENT----------------------*/
+.content{
+	min-height: 600px;
+	padding: 0;
+	background-color: lightgray;
+}
+.main-content{
+	min-height: 800px;
+	background-color: #252c38;
+	border: 12px solid orange;
+	box-shadow: 4px 4px 7px black inset;
+    background: url(https://www.toptal.com/designers/subtlepatterns/patterns/footer_lodyas.png);
+	background-repeat: repeat;
+	-webkit-transform: translateZ(0);
+	animation: displace 15s linear infinite;
+}
+@keyframes displace {
+  from { background-position: 0 bottom; }
+  to { background-position: 200px bottom;}
+}
+.textUnderline {
+	text-decoration: underline;
+}
+.textForm{
+	width: 96%;
+	margin: auto;
+}
+.text-content{
+	min-height: 600px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 20px;
+}
+.text{
+	color: white;
+	font-size: 20px;
+	text-indent: 1.5%;
+    border-bottom: thick solid orange;
+}
+
+.text-article{
+	text-indent: 20px;
+}
+
+.title{
+	color: white;
+	font-weight: bold;
+	text-indent: 20px;
+	background-color: black;
+}
+
+@media (min-width: 768px){
+	.title{
+		font-size: 50px;
+	}
+}
+@media (max-width: 767px){
+	.title{
+		font-size: 30px;
+	}
+}
+.articleBackground{
+	background: rgba(80,80,80,0.6);
+	margin-bottom: 80px;
+	box-shadow: 4px 4px 10px black;
+}
+.article_title{
+	color: orange;
+	font-weight: bold;
+	font-size: 30px;
+	text-indent: 20px;
+	background-color: #232323;
+}
+.article_title:hover{
+	text-decoration: none;
+	color: orange;
+}
+.article_title_detail{
+	color: lightgray;
+	font-size: 16px;
+}
+@media (min-width: 768px){
+	.article_img_1{
+		width: 33%;
+	}
+}
+@media (max-width: 767px){
+	.article_img_1{
+		width: 50%;
+	}
+}
+.article_img_2{
+	width: 48%;
+}
+.article_img_3{
+	width: 32%;
+}
+.article_img_4{
+	width: 24%;
+}
+.article_img_5{
+	width: 100%;
+}
+.link{
+	color: lightblue;
+	word-wrap: break-word;
+}
+.link:hover{
+	color: orange;
+}
+.galleria{
+	width: 88%;
+	background: black;
+	margin: auto;
+}
+@media (min-width: 768px){
+	.galleria{
+		height: 650px;
+	}
+}
+@media (max-width: 767px){
+	.galleria{
+		height: 300px;
+	}
+}
+.video_medium {
+	width: 80%;
+	margin: auto;
+}
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+/*------------------------FOOTER-----------------------*/
+footer{
+	width: 100%;
+	height: 80px;
+	background-color: black;
+}
+#footer-content{
+	width: 100%;
+	height: 100%;
+	line-height: 80px;
+	text-indent: 10px;
+}
+#foot-icons{
+	margin: 0;
+	color: lightgray;
+	font-size: 40px;
+}
+.foot-icon{
+	color: inherit;
+}
+.foot-icon:hover{
+	color: orange;
+}
+#foot-update-date{
+	color: white;
+	float: right;
+	margin-right: 10px;
+}
+@media (max-width: 767px){
+	#foot-update-date{
+		font-size: 8px;
+	}
+}
+@media (min-width: 768px){
+	#foot-update-date{
+		font-size: 12px;
+	}
+}

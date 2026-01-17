@@ -67,117 +67,174 @@
                     <button class="filter-btn" data-filter="other">Autre</button>
                 </div>
 
-                <!-- Fixed Header (Title + Nav) moved to top of card -->
-                <div class="project-header-fixed"
-                    style="padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border); margin-bottom: 1rem; flex-shrink: 0; width: 100%;">
+                <!-- Unified Carousel Container -->
+                <div id="project-carousel-view"
+                    style="display: flex; flex-direction: column; width: 100%; height: 100%; overflow: hidden;">
 
-                    <!-- Single Row: Title + Status (Left) + Buttons (Right) -->
-                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                    <!-- Fixed Header (Title + Nav) moved to top of card -->
+                    <div class="project-header-fixed"
+                        style="padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border); margin-bottom: 1rem; flex-shrink: 0; width: 100%;">
 
-                        <!-- Title & Icon & Status -->
-                        <div style="display:flex; align-items:center; gap:0.5rem; flex: 1; min-width: 0;">
-                            <i id="project-icon" class="fas fa-code"
-                                style="color:var(--accent); font-size:1.2rem; flex-shrink: 0;"></i>
-                            <h3 id="project-title"
-                                style="margin:0; font-size: 1.5rem; color: var(--text-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                Titre du Projet
-                            </h3>
-                            <div id="project-status" class="status-indicator"
-                                style="display:inline-flex; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; margin-left: 0.5rem;">
-                                2024 • CATÉGORIE
+                        <!-- Single Row: Title + Status (Left) + Buttons (Right) -->
+                        <!-- Single Row: Title + Status (Left) -->
+                        <!-- Single Row: Title + Status (Left) + Buttons (Right) -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+
+                            <!-- Title & Icon & Status (Visible in Animation) -->
+                            <div style="display:flex; align-items:center; gap:0.5rem; flex: 1; min-width: 0;">
+                                <i id="project-icon" class="fas fa-code"
+                                    style="color:var(--accent); font-size:1.2rem; flex-shrink: 0;"></i>
+                                <h3 id="project-title"
+                                    style="margin:0; font-size: 1.5rem; color: var(--text-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    Titre du Projet
+                                </h3>
+                                <div id="project-status" class="status-indicator"
+                                    style="display:inline-flex; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; margin-left: 0.5rem;">
+                                    2024 • CATÉGORIE
+                                </div>
+                            </div>
+
+                            <!-- PHANTOM Buttons (Occupies space for layout, but invisible) -->
+                            <div class="project-nav-controls"
+                                style="display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; visibility: hidden;">
+                                <button class="nav-btn prev-proj"
+                                    style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
+                                    <i class="fas fa-chevron-left"></i> <span>Précédent</span>
+                                </button>
+
+                                <span style="font-size: 0.9rem; min-width: 50px; text-align: center;">-- / --</span>
+
+                                <button class="nav-btn next-proj"
+                                    style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
+                                    <span>Suivant</span> <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Split Content -->
+                    <div class="projects-content-wrapper">
+                        <!-- 1/3 Info (Project Details) -->
+                        <div class="project-info-container" id="project-info-panel"
+                            style="display: flex; flex-direction: column;">
+                            <!-- Scrollable Content -->
+                            <div id="dynamic-project-content" class="fade-content"
+                                style="flex: 1; overflow-y: auto; padding-right: 5px; margin-bottom: 1rem;">
+                                <!-- Description, Links, Tech Stack injected here -->
+                            </div>
+
+                            <!-- Fixed Tech Stack Footer -->
+                            <div id="static-project-tech"
+                                style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border); flex-shrink: 0;">
+                                <!-- Tech Stack injected here -->
                             </div>
                         </div>
 
-                        <!-- Navigation Buttons -->
-                        <div class="project-nav-controls"
-                            style="display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0;">
-                            <button id="btn-prev-proj" class="nav-btn prev-proj" onclick="window.changeProject(-1)"
-                                aria-label="Projet Précédent"
-                                style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                <i class="fas fa-chevron-left"></i> <span>Précédent</span>
-                            </button>
-
-                            <span id="project-nav-counter"
-                                style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500; min-width: 50px; text-align: center;">--
-                                / --</span>
-
-                            <button id="btn-next-proj" class="nav-btn next-proj" onclick="window.changeProject(1)"
-                                aria-label="Projet Suivant"
-                                style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                <span>Suivant</span> <i class="fas fa-chevron-right"></i>
-                            </button>
+                        <!-- 2/3 Images (Image Slider) -->
+                        <div class="project-images-container" id="project-image-panel">
+                            <button id="btn-prev-img" class="img-nav-btn left" onclick="window.changeImage(-1)"
+                                aria-label="Image Précédent"><i class="fas fa-chevron-left"></i></button>
+                            <div id="dynamic-image-display" class="image-display">
+                                <!-- Image Injected by JS -->
+                            </div>
+                            <button id="btn-next-img" class="img-nav-btn right" onclick="window.changeImage(1)"
+                                aria-label="Image Suivant"><i class="fas fa-chevron-right"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Split Content -->
-                <div class="projects-content-wrapper">
-                    <!-- 1/3 Info (Project Details) -->
-                    <div class="project-info-container" id="project-info-panel"
-                        style="display: flex; flex-direction: column;">
-                        <!-- Scrollable Content -->
-                        <div id="dynamic-project-content" class="fade-content"
-                            style="flex: 1; overflow-y: auto; padding-right: 5px; margin-bottom: 1rem;">
-                            <!-- Description, Links, Tech Stack injected here -->
-                        </div>
+                <!-- STATIC Navigation Overlay (Duplicates Layout for Perfect Alignment) -->
+                <!-- We duplicate the padding structure of .domains-card (2rem) AND the header structure -->
+                <div class="project-nav-overlay"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 2rem; pointer-events: none; z-index: 20; display: flex; flex-direction: column;">
 
-                        <!-- Fixed Tech Stack Footer -->
-                        <div id="static-project-tech"
-                            style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border); flex-shrink: 0;">
-                            <!-- Tech Stack injected here -->
-                        </div>
+                    <!-- SPACER: Duplicates H3 "Projets" -->
+                    <h3 style="visibility: hidden; margin-bottom: 0;">Projets</h3>
+
+                    <!-- SPACER: Duplicates .project-filters -->
+                    <div class="project-filters" style="visibility: hidden; margin: 1rem 0;">
+                        <button class="filter-btn">IA</button>
                     </div>
 
-                    <!-- 2/3 Images (Image Slider) -->
-                    <div class="project-images-container" id="project-image-panel">
-                        <button id="btn-prev-img" class="img-nav-btn left" onclick="window.changeImage(-1)"
-                            aria-label="Image Précédent"><i class="fas fa-chevron-left"></i></button>
-                        <div id="dynamic-image-display" class="image-display">
-                            <!-- Image Injected by JS -->
+                    <!-- Duplicated Header Structure (Matches project-header-fixed) -->
+                    <div
+                        style="padding-bottom: 1rem; border-bottom: 1px solid transparent; margin-bottom: 1rem; width: 100%;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+
+                            <!-- PHANTOM Title (Invisible, just for spacing if needed, though flex-between handles it) -->
+                            <div
+                                style="display:flex; align-items:center; gap:0.5rem; flex: 1; min-width: 0; visibility: hidden;">
+                                <i class="fas fa-code" style="font-size:1.2rem;"></i>
+                                <h3 style="margin:0; font-size: 1.5rem; line-height: 1.2;">Title</h3>
+                                <div class="status-indicator" style="font-size: 0.8rem;">Status</div>
+                            </div>
+
+                            <!-- REAL Buttons (Visible & Clickable) -->
+                            <div class="project-nav-controls"
+                                style="display: flex; align-items: center; gap: 0.8rem; pointer-events: auto;">
+                                <button id="btn-prev-proj" class="nav-btn prev-proj" onclick="window.changeProject(-1)"
+                                    aria-label="Projet Précédent"
+                                    style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
+                                    <i class="fas fa-chevron-left"></i> <span>Précédent</span>
+                                </button>
+
+                                <span id="project-nav-counter"
+                                    style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500; min-width: 50px; text-align: center;">--
+                                    / --</span>
+
+                                <button id="btn-next-proj" class="nav-btn next-proj" onclick="window.changeProject(1)"
+                                    aria-label="Projet Suivant"
+                                    style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
+                                    <span>Suivant</span> <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+
                         </div>
-                        <button id="btn-next-img" class="img-nav-btn right" onclick="window.changeImage(1)"
-                            aria-label="Image Suivant"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- Row 3: Contact & Socials (Span 4) -->
+        <div class="bento-card contact-footer">
 
-            <!-- Row 3: Contact & Socials (Span 4) -->
-            <div class="bento-card contact-footer">
-
-                <!-- Contact Section -->
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <div class="email-wrapper-enhanced">
-                        <a href="javascript:void(0)" class="email-link" id="secure-email">Voir l'email</a>
-                    </div>
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <div class="email-wrapper-enhanced">
+                    <a href="javascript:void(0)" class="email-link" id="secure-email">Voir l'email</a>
                 </div>
+            </div>
 
-                <!-- Location Section -->
-                <div class="footer-section">
-                    <h3>Localisation</h3>
-                    <a href="https://www.google.com/maps/place/Genève" target="_blank" class="location-wrapper">
-                        <p class="location-text"><i class="fas fa-map-marker-alt"
-                                style="margin-right: 8px; color: var(--accent);"></i> Genève, Suisse</p>
+            <!-- Location Section -->
+            <div class="footer-section">
+                <h3>Localisation</h3>
+                <a href="https://www.google.com/maps/place/Genève" target="_blank" class="location-wrapper">
+                    <p class="location-text"><i class="fas fa-map-marker-alt"
+                            style="margin-right: 8px; color: var(--accent);"></i> Genève, Suisse</p>
+                </a>
+            </div>
+
+            <!-- Socials -->
+            <div class="footer-section">
+                <h3>Liens</h3>
+                <div class="social-links-enhanced">
+                    <a href="https://www.linkedin.com/in/emeric-ferreira-dos-santos" target="_blank"
+                        class="social-btn linkedin" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/EmericDosSantos" target="_blank" class="social-btn github"
+                        aria-label="GitHub">
+                        <i class="fab fa-github"></i>
                     </a>
                 </div>
-
-                <!-- Socials -->
-                <div class="footer-section">
-                    <h3>Liens</h3>
-                    <div class="social-links-footer">
-                        <a href="https://github.com" target="_blank" class="social-link-item" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" class="social-link-item" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
             </div>
-
         </div>
-    </main>
+
+        </div> <!-- Close bento-grid -->
+    </main> <!-- Close bento-wrapper -->
+
+
 
     <!-- Project Modal (Hidden by default) -->
     <div id="project-modal" class="modal hidden">

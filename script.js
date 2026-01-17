@@ -8,70 +8,21 @@ const categories = [
 ];
 
 const projects = [
-    {
-        id: 1,
-        title: "Système de Détection d'Anomalies",
-        description: "Un modèle de vision par ordinateur pour détecter les défauts de fabrication sur une chaîne de production en temps réel. Utilise YOLOv8 pour une précision maximale.",
-        category: "cv",
-        year: "2025",
-        tech: ["Python", "TensorFlow", "OpenCV", "YOLOv8"],
-        icon: "fa-eye"
-    },
-    {
-        id: 2,
-        title: "Assistant Juridique LLM",
-        description: "Agent conversationnel spécialisé entraîné sur le droit français, utilisant RAG pour des citations précises et vérifiables.",
-        category: "nlp",
-        year: "2024",
-        tech: ["LangChain", "OpenAI API", "Pinecone", "React"],
-        icon: "fa-scale-balanced"
-    },
-    {
-        id: 3,
-        title: "Prédiction de Churn Client",
-        description: "Analyse prédictive des comportements clients pour une plateforme SaaS. Identification des facteurs de risque et augmentation de la rétention de 15%.",
-        category: "ml",
-        year: "2024",
-        tech: ["Scikit-learn", "Pandas", "XGBoost", "FastAPI"],
-        icon: "fa-chart-line"
-    },
-    {
-        id: 4,
-        title: "Générateur d'Assets de Jeu",
-        description: "Application web SaaS permettant aux créateurs de jeux indépendants de générer des assets 2D cohérents via Stable Diffusion.",
-        category: "web",
-        year: "2023",
-        tech: ["Next.js", "Stable Diffusion", "Node.js", "AWS"],
-        icon: "fa-gamepad"
-    },
-    {
-        id: 5,
-        title: "Reconnaissance Faciale",
-        description: "Système de contrôle d'accès sécurisé basé sur l'analyse faciale 3D avec détection de vivacité (Liveness Detection).",
-        category: "cv",
-        year: "2023",
-        tech: ["PyTorch", "FaceNet", "Docker"],
-        icon: "fa-id-card",
-        images: ["https://placehold.co/600x400/1e293b/06b6d4?text=Face+ID"]
-    },
+
     {
         id: 24,
         title: "Turn Base Battle Game",
-        description: `Ce projet est un jeu mobile iOS pour lequel j'ai conçu 14 niveaux. C'est un jeu de parkour à moto challengeant qui demande de franchir de nombreux obstacles.
-
-Le jeu adopte un style Low Poly élégant. J'ai créé plusieurs environnements distincts comme une ville, une forêt, une montagne et un chantier. Le résultat offre une expérience plaisante avec une courbe de difficulté bien pensée.
-
-Le jeu est développé d'abord pour iOS puis prévu pour Android.`,
+        description: "Voilà un projet de jeu pour mobile pour lequel j'ai créé 4 différentes scènes.\n\nJ'ai premièrement eu la tâche de réaliser l'environnement d'accueil qui apparait au début du jeu. Cette scène servira par la suite comme arrière-plan du menu d'accueil. Il représente l'entrée d'un donjon démoniaque où auront lieu les combats.\n\nPar la suite je me suis attelé à créer trois niveaux qui sont des zones de combat dans ce donjon. Le premier est une salle des trônes, le deuxième une bibliothèque et pour finir la troisième est les souterrains où l'on trouve des tombeaux.\n\nJ'ai aussi fait un dernier niveau en extérieur qui reste expérimental.",
         category: "games",
         year: "2021",
         tech: ["Level Design", "Mobile", "Unity"],
         icon: "fa-chess-board",
         images: [
-            "https://emericdossantos.github.io/img/games/TurnBaseBattle/Menu.webp",
-            "https://emericdossantos.github.io/img/games/TurnBaseBattle/DongeonA.webp",
-            "https://emericdossantos.github.io/img/games/TurnBaseBattle/DongeonB.webp",
-            "https://emericdossantos.github.io/img/games/TurnBaseBattle/DongeonC.webp",
-            "https://emericdossantos.github.io/img/games/TurnBaseBattle/Battle.webp"
+            "./img/games/TurnBaseBattle/Menu.webp",
+            "./img/games/TurnBaseBattle/DongeonA.webp",
+            "./img/games/TurnBaseBattle/DongeonB.webp",
+            "./img/games/TurnBaseBattle/DongeonC.webp",
+            "./img/games/TurnBaseBattle/Battle.webp"
         ]
     },
     {
@@ -85,11 +36,34 @@ Le gameplay est exigeant : il faut traverser des niveaux remplis d'obstacles var
         tech: ["Unity", "Level Design", "Mobile"],
         icon: "fa-motorcycle",
         images: [
-            "https://emericdossantos.github.io/img/games/GravityDefy/1.webp",
-            "https://emericdossantos.github.io/img/games/GravityDefy/2.webp",
-            "https://emericdossantos.github.io/img/games/GravityDefy/3.webp",
-            "https://emericdossantos.github.io/img/games/GravityDefy/4.webp",
-            "https://emericdossantos.github.io/img/games/GravityDefy/5.webp"
+            "./img/games/GravityDefy/1.webp",
+            "./img/games/GravityDefy/2.webp",
+            "./img/games/GravityDefy/3.webp",
+            "./img/games/GravityDefy/4.webp",
+            "./img/games/GravityDefy/5.webp",
+            "./img/games/GravityDefy/6.webp",
+            "./img/games/GravityDefy/7.webp",
+            "./img/games/GravityDefy/8.webp",
+            "./img/games/GravityDefy/9.webp",
+            "./img/games/GravityDefy/10.webp",
+            "./img/games/GravityDefy/11.webp",
+            "./img/games/GravityDefy/12.webp",
+            "./img/games/GravityDefy/13.webp",
+            "./img/games/GravityDefy/14.webp",
+            "./img/games/GravityDefy/15.webp",
+            "./img/games/GravityDefy/16.webp",
+            "./img/games/GravityDefy/17.webp",
+            "./img/games/GravityDefy/18.webp",
+            "./img/games/GravityDefy/19.webp",
+            "./img/games/GravityDefy/20.webp",
+            "./img/games/GravityDefy/21.webp",
+            "./img/games/GravityDefy/22.webp",
+            "./img/games/GravityDefy/23.webp",
+            "./img/games/GravityDefy/24.webp",
+            "./img/games/GravityDefy/25.webp",
+            "./img/games/GravityDefy/26.webp",
+            "./img/games/GravityDefy/27.webp",
+            "./img/games/GravityDefy/28.webp"
         ]
     },
     {
@@ -107,10 +81,27 @@ Le défi principal de cette carte était de créer un environnement avec une cir
             { label: "Vidéo Animation", url: "https://www.youtube.com/watch?v=HIJzEN4P0TA" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/CubicLevel/LevelCapture20.webp",
-            "https://emericdossantos.github.io/img/games/CubicLevel/LevelCapture21.webp",
-            "https://emericdossantos.github.io/img/games/CubicLevel/LevelCapture25.webp",
-            "https://emericdossantos.github.io/img/games/CubicLevel/LevelCapture30.webp"
+            "./img/games/CubicLevel/LevelCapture20.webp",
+            "./img/games/CubicLevel/LevelCapture21.webp",
+            "./img/games/CubicLevel/LevelCapture22.webp",
+            "./img/games/CubicLevel/LevelCapture23.webp",
+            "./img/games/CubicLevel/LevelCapture24.webp",
+            "./img/games/CubicLevel/LevelCapture25.webp",
+            "./img/games/CubicLevel/LevelCapture26.webp",
+            "./img/games/CubicLevel/LevelCapture27.webp",
+            "./img/games/CubicLevel/LevelCapture28.webp",
+            "./img/games/CubicLevel/LevelCapture29.webp",
+            "./img/games/CubicLevel/LevelCapture30.webp",
+            "./img/games/CubicLevel/LevelCapture31.webp",
+            "./img/games/CubicLevel/LevelCapture32.webp",
+            "./img/games/CubicLevel/LevelCapture33.webp",
+            "./img/games/CubicLevel/LevelCapture34.webp",
+            "./img/games/CubicLevel/LevelCapture35.webp",
+            "./img/games/CubicLevel/LevelCapture36.webp",
+            "./img/games/CubicLevel/LevelCapture37.webp",
+            "./img/games/CubicLevel/LevelCapture38.webp",
+            "./img/games/CubicLevel/LevelCapture39.webp",
+            "./img/games/CubicLevel/LevelCapture40.webp"
         ]
     },
     {
@@ -126,9 +117,35 @@ Certains niveaux sont aussi en intérieur, offrant de nouveaux défis et une var
         tech: ["Level Design", "Unity", "3D"],
         icon: "fa-running",
         images: [
-            "https://emericdossantos.github.io/img/games/ParkourGame/1.webp",
-            "https://emericdossantos.github.io/img/games/ParkourGame/2.webp",
-            "https://emericdossantos.github.io/img/games/ParkourGame/3.webp"
+            "./img/games/ParkourGame/1.webp",
+            "./img/games/ParkourGame/2.webp",
+            "./img/games/ParkourGame/3.webp",
+            "./img/games/ParkourGame/4.webp",
+            "./img/games/ParkourGame/5.webp",
+            "./img/games/ParkourGame/6.webp",
+            "./img/games/ParkourGame/7.webp",
+            "./img/games/ParkourGame/8.webp",
+            "./img/games/ParkourGame/9.webp",
+            "./img/games/ParkourGame/10.webp",
+            "./img/games/ParkourGame/11.webp",
+            "./img/games/ParkourGame/12.webp",
+            "./img/games/ParkourGame/13.webp",
+            "./img/games/ParkourGame/14.webp",
+            "./img/games/ParkourGame/15.webp",
+            "./img/games/ParkourGame/16.webp",
+            "./img/games/ParkourGame/17.webp",
+            "./img/games/ParkourGame/18.webp",
+            "./img/games/ParkourGame/19.webp",
+            "./img/games/ParkourGame/20.webp",
+            "./img/games/ParkourGame/21.webp",
+            "./img/games/ParkourGame/22.webp",
+            "./img/games/ParkourGame/23.webp",
+            "./img/games/ParkourGame/24.webp",
+            "./img/games/ParkourGame/25.webp",
+            "./img/games/ParkourGame/26.webp",
+            "./img/games/ParkourGame/27.webp",
+            "./img/games/ParkourGame/28.webp",
+            "./img/games/ParkourGame/29.webp"
         ]
     },
     {
@@ -148,9 +165,15 @@ Chaque jour, 4 nouveaux niveaux vous attendent, allant de relativement facile à
             { label: "Site Officiel", url: "http://thebinaryfamily.com/fr/pure-mahjong/" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/PureMahjong/PureMahjong1.webp",
-            "https://emericdossantos.github.io/img/games/PureMahjong/PureMahjong2.webp",
-            "https://emericdossantos.github.io/img/games/PureMahjong/PureMahjong3.webp"
+            "./img/games/PureMahjong/PureMahjong1.webp",
+            "./img/games/PureMahjong/PureMahjong2.webp",
+            "./img/games/PureMahjong/PureMahjong3.webp",
+            "./img/games/PureMahjong/PureMahjong4.webp",
+            "./img/games/PureMahjong/PureMahjong5.webp",
+            "./img/games/PureMahjong/PureMahjong6.webp",
+            "./img/games/PureMahjong/PureMahjong7.webp",
+            "./img/games/PureMahjong/PureMahjong8.webp",
+            "./img/games/PureMahjong/PureMahjong9.webp"
         ]
     },
     {
@@ -166,10 +189,17 @@ J'ai utilisé le moteur Unity et le générateur de terrain Gaea. Le projet a é
         tech: ["Gaea", "Unity", "Cartoon"],
         icon: "fa-tree",
         images: [
-            "https://emericdossantos.github.io/img/games/CartoonLevel/1.webp",
-            "https://emericdossantos.github.io/img/games/CartoonLevel/2.webp",
-            "https://emericdossantos.github.io/img/games/CartoonLevel/3.webp",
-            "https://emericdossantos.github.io/img/games/CartoonLevel/4.webp"
+            "./img/games/CartoonLevel/1.webp",
+            "./img/games/CartoonLevel/2.webp",
+            "./img/games/CartoonLevel/3.webp",
+            "./img/games/CartoonLevel/4.webp",
+            "./img/games/CartoonLevel/5.webp",
+            "./img/games/CartoonLevel/6.webp",
+            "./img/games/CartoonLevel/7.webp",
+            "./img/games/CartoonLevel/8.webp",
+            "./img/games/CartoonLevel/9.webp",
+            "./img/games/CartoonLevel/10.webp",
+            "./img/games/CartoonLevel/11.webp"
         ]
     },
     {
@@ -184,9 +214,24 @@ Le style graphique semi-réaliste a été créé avec un pack d'assets dédié e
         tech: ["Level Design", "Terrain", "Nature"],
         icon: "fa-tree",
         images: [
-            "https://emericdossantos.github.io/img/games/HuntingGame/HuntGame1.webp",
-            "https://emericdossantos.github.io/img/games/HuntingGame/HuntGame2.webp",
-            "https://emericdossantos.github.io/img/games/HuntingGame/HuntGame3.webp"
+            "./img/games/HuntingGame/HuntGame1.webp",
+            "./img/games/HuntingGame/HuntGame2.webp",
+            "./img/games/HuntingGame/HuntGame3.webp",
+            "./img/games/HuntingGame/HuntGame4.webp",
+            "./img/games/HuntingGame/HuntGame5.webp",
+            "./img/games/HuntingGame/HuntGame6.webp",
+            "./img/games/HuntingGame/HuntGame7.webp",
+            "./img/games/HuntingGame/HuntGame8.webp",
+            "./img/games/HuntingGame/HuntGame9.webp",
+            "./img/games/HuntingGame/HuntGame10.webp",
+            "./img/games/HuntingGame/HuntGame11.webp",
+            "./img/games/HuntingGame/HuntGame12.webp",
+            "./img/games/HuntingGame/HuntGame13.webp",
+            "./img/games/HuntingGame/HuntGame14.webp",
+            "./img/games/HuntingGame/HuntGame15.webp",
+            "./img/games/HuntingGame/HuntGame16.webp",
+            "./img/games/HuntingGame/HuntGame17.webp",
+            "./img/games/HuntingGame/HuntGame18.webp"
         ]
     },
     {
@@ -201,9 +246,12 @@ L'objectif est de parcourir la forêt et collecter des ressources pour construir
         tech: ["Level Design", "Freelance", "Unity"],
         icon: "fa-piggy-bank",
         images: [
-            "https://emericdossantos.github.io/img/games/3Pigs/3pigs1.webp",
-            "https://emericdossantos.github.io/img/games/3Pigs/3pigs2.webp",
-            "https://emericdossantos.github.io/img/games/3Pigs/3pigs3.webp"
+            "./img/games/3Pigs/3pigs1.webp",
+            "./img/games/3Pigs/3pigs2.webp",
+            "./img/games/3Pigs/3pigs3.webp",
+            "./img/games/3Pigs/3pigs4.webp",
+            "./img/games/3Pigs/3pigs5.webp",
+            "./img/games/3Pigs/3pigs6.webp"
         ]
     },
     {
@@ -223,9 +271,16 @@ L'objectif est de parcourir la forêt et collecter des ressources pour construir
             { label: "Trailer", url: "https://www.youtube.com/watch?v=RNpgW7T4oU8" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/Koda/Koda01.webp",
-            "https://emericdossantos.github.io/img/games/Koda/Koda02.webp",
-            "https://emericdossantos.github.io/img/games/Koda/Koda03.webp"
+            "./img/games/Koda/Koda01.webp",
+            "./img/games/Koda/Koda02.webp",
+            "./img/games/Koda/Koda03.webp",
+            "./img/games/Koda/Koda04.webp",
+            "./img/games/Koda/Koda05.webp",
+            "./img/games/Koda/Koda06.webp",
+            "./img/games/Koda/Koda07.webp",
+            "./img/games/Koda/Koda08.webp",
+            "./img/games/Koda/Koda09.webp",
+            "./img/games/Koda/Koda10.webp"
         ]
     },
     {
@@ -246,9 +301,30 @@ J'étais en charge du Level Design, imaginant cet univers virtuel et créant une
             { label: "Trailer", url: "https://www.youtube.com/watch?v=vxTW0W2Zbok" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/Antivirus/AntiVirus1.webp",
-            "https://emericdossantos.github.io/img/games/Antivirus/AntiVirus2.webp",
-            "https://emericdossantos.github.io/img/games/Antivirus/AntiVirus3.webp"
+            "./img/games/Antivirus/AntiVirus1.webp",
+            "./img/games/Antivirus/AntiVirus2.webp",
+            "./img/games/Antivirus/AntiVirus3.webp",
+            "./img/games/Antivirus/AntiVirus4.webp",
+            "./img/games/Antivirus/AntiVirus5.webp",
+            "./img/games/Antivirus/AntiVirus6.webp",
+            "./img/games/Antivirus/AntiVirus8.webp",
+            "./img/games/Antivirus/AntiVirus9.webp",
+            "./img/games/Antivirus/AntiVirus10.webp",
+            "./img/games/Antivirus/AntiVirus11.webp",
+            "./img/games/Antivirus/AntiVirus12.webp",
+            "./img/games/Antivirus/AntiVirus13.webp",
+            "./img/games/Antivirus/AntiVirus14.webp",
+            "./img/games/Antivirus/AntiVirus15.webp",
+            "./img/games/Antivirus/AntiVirus16.webp",
+            "./img/games/Antivirus/AntiVirus17.webp",
+            "./img/games/Antivirus/AntiVirus18.webp",
+            "./img/games/Antivirus/AntiVirus19.webp",
+            "./img/games/Antivirus/AntiVirus20.webp",
+            "./img/games/Antivirus/AntiVirus21.webp",
+            "./img/games/Antivirus/AntiVirus22.webp",
+            "./img/games/Antivirus/AntiVirus23.webp",
+            "./img/games/Antivirus/AntiVirus24.webp",
+            "./img/games/Antivirus/city.webp"
         ]
     },
     {
@@ -264,47 +340,43 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
         tech: ["Unreal Engine", "Level Design", "Multiplayer"],
         icon: "fa-water",
         links: [
-            { label: "Télécharger Map", url: "https://drive.google.com/open?id=1kJqXyxkYDHXsxM6L7c8BSUWpNnviDVaQ" },
+            { label: "Télécharger Map", url: "./content/pdf/UndergroundWaterJunction.pdf" },
             { label: "Trailer", url: "https://www.youtube.com/watch?v=C6l0aLzwxuM" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ01.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ02.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ03.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ04.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ05.webp"
+            "./img/games/UWJ/UWJ01.webp",
+            "./img/games/UWJ/UWJ02.webp",
+            "./img/games/UWJ/UWJ03.webp",
+            "./img/games/UWJ/UWJ04.webp",
+            "./img/games/UWJ/UWJ05.webp",
+            "./img/games/UWJ/UWJ06.webp",
+            "./img/games/UWJ/UWJ07.webp",
+            "./img/games/UWJ/UWJ08.webp",
+            "./img/games/UWJ/UWJmap.webp"
         ]
     },
+
     {
-        id: 13,
-        title: "Map Trackmania",
-        description: "Série de 3 circuits techniques pour Trackmania (Race, RPG, Trial). Travail approfondi sur le flow, la gestion de la vitesse et la courbe de difficulté progressive.",
-        category: "games",
-        year: "2018",
-        tech: ["Level Design", "Trackmania", "Racing"],
-        icon: "fa-car",
-        links: [
-            { label: "Télécharger Maps", url: "https://drive.google.com/open?id=14bbI118wa1I-sFTBqlJ3X11uBsUokgp6" }
-        ],
-        images: [
-            "https://emericdossantos.github.io/img/games/Trackmania/Trackmania1.webp",
-            "https://emericdossantos.github.io/img/games/Trackmania/Trackmania2.webp",
-            "https://emericdossantos.github.io/img/games/Trackmania/Trackmania3.webp"
-        ]
-    },
-    {
-        id: 12,
+        id: 30,
         title: "Sleeping Pit",
         description: "Puzzle game médiéval fantastique. Le joueur incarne un mage utilisant des slimes divisibles pour activer des mécanismes et résoudre des énigmes complexes dans un puits géant.",
         category: "games",
         year: "2018",
         tech: ["Game Design", "Unity", "Puzzle"],
         icon: "fa-dungeon",
+        links: [
+            { label: "Game Design Doc (PDF)", url: "./content/pdf/GDO_PSP_SLEEPING_PIT.pdf" }
+        ],
         images: [
-            "https://emericdossantos.github.io/img/games/sleepingPit/1.webp",
-            "https://emericdossantos.github.io/img/games/sleepingPit/2.webp",
-            "https://emericdossantos.github.io/img/games/sleepingPit/3.webp",
-            "https://emericdossantos.github.io/img/games/sleepingPit/4.webp"
+            "./img/games/sleepingPit/1.webp",
+            "./img/games/sleepingPit/2.webp",
+            "./img/games/sleepingPit/3.webp",
+            "./img/games/sleepingPit/4.webp",
+            "./img/games/sleepingPit/5.webp",
+            "./img/games/sleepingPit/6.webp",
+            "./img/games/sleepingPit/7.webp",
+            "./img/games/sleepingPit/8.webp",
+            "./img/games/sleepingPit/Level01PSP.webp"
         ]
     },
     {
@@ -316,10 +388,12 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
         tech: ["JavaScript", "HTML5", "Serious Game"],
         icon: "fa-puzzle-piece",
         links: [
-            { label: "Jouer (Web)", url: "https://emericdossantos.github.io/resources/Deficience_Web_V3/index.html" }
+            { label: "Jouer (Web)", url: "./EmericDosSantos.github.io-master/resources/Deficience_Web_V3/index.html" },
+            { label: "Game Concept (PDF)", url: "./content/pdf/DEFICIENCE.pdf" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/deficienceNew.webp"
+            "./img/games/deficienceNew.webp",
+            "./assets/images/legacy/Deficience.jpg"
         ]
     },
     {
@@ -331,10 +405,10 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
         tech: ["Unity", "Prototyping", "C#"],
         icon: "fa-cubes",
         images: [
-            "https://emericdossantos.github.io/img/games/Unity/Unity1.webp",
-            "https://emericdossantos.github.io/img/games/Unity/Unity2.webp",
-            "https://emericdossantos.github.io/img/games/Unity/Unity3.webp",
-            "https://emericdossantos.github.io/img/games/Unity/Unity4.webp"
+            "./img/games/Unity/Unity1.webp",
+            "./img/games/Unity/Unity2.webp",
+            "./img/games/Unity/Unity3.webp",
+            "./img/games/Unity/Unity4.webp"
         ]
     },
     {
@@ -346,14 +420,32 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
         tech: ["Unity", "2D", "Platformer", "C#"],
         icon: "fa-robot",
         links: [
-            { label: "Jouer (Web)", url: "https://emericdossantos.github.io/resources/Platform_Game_Prototype_1.4/index.html" }
+            { label: "Jouer (Web)", url: "./EmericDosSantos.github.io-master/resources/Platform_Game_Prototype_1.4/index.html" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/TomAtomRescu/platformGame1.webp",
-            "https://emericdossantos.github.io/img/games/TomAtomRescu/platformGame2.webp",
-            "https://emericdossantos.github.io/img/games/TomAtomRescu/platformGame3.webp",
-            "https://emericdossantos.github.io/img/games/TomAtomRescu/platformGame4.webp",
-            "https://emericdossantos.github.io/img/games/TomAtomRescu/platformGame5.webp"
+            "./img/games/TomAtomRescu/platformGame1.webp",
+            "./img/games/TomAtomRescu/platformGame2.webp",
+            "./img/games/TomAtomRescu/platformGame3.webp",
+            "./img/games/TomAtomRescu/platformGame4.webp",
+            "./img/games/TomAtomRescu/platformGame5.webp",
+            "./img/games/TomAtomRescu/Tom Atom printsc.webp",
+            "./img/games/TomAtomRescu/badrobot printsc.webp",
+            "./img/games/TomAtomRescu/perso.webp",
+            "./img/games/TomAtomRescu/player printsc.webp"
+        ]
+    },
+    {
+        id: 31,
+        title: "World Building",
+        description: "Terrains créés avec Gaea et intégrés dans Unity. Démonstration de création rapide d'environnements réalistes et variés.",
+        category: "design",
+        year: "2019",
+        tech: ["Gaea", "Unity", "Terrain", "World Building"],
+        icon: "fa-globe-europe",
+        images: [
+            "./img/games/WorldBuilding/terrain1.webp",
+            "./img/games/WorldBuilding/terrain2.webp",
+            "./img/games/WorldBuilding/terrain3.webp"
         ]
     },
     {
@@ -365,12 +457,24 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
         tech: ["3D", "Modeling", "Texturing"],
         icon: "fa-cube",
         images: [
-            "https://emericdossantos.github.io/img/3D/Grafiti.webp",
-            "https://emericdossantos.github.io/img/3D/Extintor1.webp",
-            "https://emericdossantos.github.io/img/3D/M1.webp",
-            "https://emericdossantos.github.io/img/3D/Render01.webp",
-            "https://emericdossantos.github.io/img/3D/Apple.webp",
-            "https://emericdossantos.github.io/img/3D/Arcade.webp"
+            "./img/3D/Grafiti.webp",
+            "./img/3D/Extintor1.webp",
+            "./img/3D/Extintor2.webp",
+            "./img/3D/M1.webp",
+            "./img/3D/M2.webp",
+            "./img/3D/photoshop-final.webp",
+            "./img/3D/Render01.webp",
+            "./img/3D/Apple.webp",
+            "./img/3D/ColgateBend.webp",
+            "./img/3D/Sayan_pods_final.webp",
+            "./img/3D/Torre01-1.webp",
+            "./img/3D/Torre01-2.webp",
+            "./img/3D/Torre02-01.webp",
+            "./img/3D/Torre02-02.webp",
+            "./img/3D/Torre02-1.webp",
+            "./img/3D/Arcade.webp",
+            "./img/3D/spinner.webp",
+            "./img/3D/VrSystem.webp"
         ]
     },
     {
@@ -382,9 +486,9 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
         tech: ["JavaScript", "HTML5", "Prototype"],
         icon: "fa-gamepad",
         links: [
-            { label: "Jouer", url: "https://emericdossantos.github.io/resources/game/index.html" }
+            { label: "Jouer", url: "./EmericDosSantos.github.io-master/resources/game/index.html" }
         ],
-        images: ["https://emericdossantos.github.io/img/games/Game1.webp"]
+        images: ["./img/games/Game1.webp"]
     },
     {
         id: 23,
@@ -395,9 +499,9 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
         tech: ["JavaScript", "HTML5", "Prototype"],
         icon: "fa-car-side",
         links: [
-            { label: "Jouer", url: "https://emericdossantos.github.io/resources/CarTest/index.html" }
+            { label: "Jouer", url: "./EmericDosSantos.github.io-master/resources/CarTest/index.html" }
         ],
-        images: ["https://emericdossantos.github.io/img/games/Game2.webp"]
+        images: ["./img/games/Game2.webp"]
     },
     {
         id: 21,
@@ -408,36 +512,47 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
         tech: ["Minecraft", "Voxel", "Level Design"],
         icon: "fa-building",
         images: [
-            "https://emericdossantos.github.io/img/games/minecraft/1.webp",
-            "https://emericdossantos.github.io/img/games/minecraft/2.webp",
-            "https://emericdossantos.github.io/img/games/minecraft/3.webp",
-            "https://emericdossantos.github.io/img/games/minecraft/4.webp",
-            "https://emericdossantos.github.io/img/games/minecraft/5.webp",
-            "https://emericdossantos.github.io/img/games/minecraft/10.webp"
+            "./img/games/minecraft/1.webp",
+            "./img/games/minecraft/2.webp",
+            "./img/games/minecraft/3.webp",
+            "./img/games/minecraft/4.webp",
+            "./img/games/minecraft/5.webp",
+            "./img/games/minecraft/6.webp",
+            "./img/games/minecraft/7.webp",
+            "./img/games/minecraft/8.webp",
+            "./img/games/minecraft/9.webp",
+            "./img/games/minecraft/10.webp",
+            "./img/games/minecraft/11.webp",
+            "./img/games/minecraft/12.webp",
+            "./img/games/minecraft/13.webp",
+            "./img/games/minecraft/14.webp",
+            "./img/games/minecraft/15.webp",
+            "./img/games/minecraft/16.webp",
+            "./img/games/minecraft/17.webp",
+            "./img/games/minecraft/18.webp",
+            "./img/games/minecraft/19.webp",
+            "./img/games/minecraft/20.webp",
+            "./img/games/minecraft/21.webp",
+            "./img/games/minecraft/22.webp",
+            "./img/games/minecraft/23.webp",
+            "./img/games/minecraft/24.webp",
+            "./img/games/minecraft/25.webp",
+            "./img/games/minecraft/26.webp",
+            "./img/games/minecraft/27.webp",
+            "./img/games/minecraft/28.webp",
+            "./img/games/minecraft/29.webp",
+            "./img/games/minecraft/30.webp",
+            "./img/games/minecraft/31.webp",
+            "./img/games/minecraft/32.webp",
+            "./img/games/minecraft/33.webp",
+            "./img/games/minecraft/34.webp",
+            "./img/games/minecraft/35.webp",
+            "./img/games/minecraft/36.webp",
+            "./img/games/minecraft/37.webp",
+            "./img/games/minecraft/38.webp"
         ]
     },
-    {
-        id: 12,
-        title: "Underground Water Junction",
-        description: `Carte pour Unreal Tournament (CTF 3v3). Concept d'égouts souterrains offrant confinement et cachettes.
-        
-Deux croisements de voies navigables avec accès multiples. Verticalité assurée par des bâtiments à un étage.`,
-        category: "games",
-        year: "2018",
-        tech: ["UDK", "Level Design", "FPS"],
-        icon: "fa-water",
-        links: [
-            { label: "Télécharger Map", url: "https://drive.google.com/open?id=1kJqXyxkYDHXsxM6L7c8BSUWpNnviDVaQ" }
-        ],
-        images: [
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ01.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ02.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ03.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ04.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ05.webp",
-            "https://emericdossantos.github.io/img/games/UWJ/UWJ06.webp"
-        ]
-    },
+
     {
         id: 28,
         title: "Map Trackmania",
@@ -452,15 +567,28 @@ Trois pistes distinctes :
         tech: ["Trackmania", "Racing", "Level Design"],
         icon: "fa-road",
         links: [
-            { label: "Télécharger Maps", url: "https://drive.google.com/open?id=14bbI118wa1I-sFTBqlJ3X11uBsUokgp6" }
+            { label: "Télécharger Maps (PDF)", url: "./content/pdf/Trackmania.pdf" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/Trackmania/track1.webp",
-            "https://emericdossantos.github.io/img/games/Trackmania/track2.webp",
-            "https://emericdossantos.github.io/img/games/Trackmania/track3.webp",
-            "https://emericdossantos.github.io/img/games/Trackmania/track4.webp",
-            "https://emericdossantos.github.io/img/games/Trackmania/track5.webp",
-            "https://emericdossantos.github.io/img/games/Trackmania/track16.webp"
+            "./img/games/Trackmania/track1.webp",
+            "./img/games/Trackmania/track2.webp",
+            "./img/games/Trackmania/track3.webp",
+            "./img/games/Trackmania/track4.webp",
+            "./img/games/Trackmania/track5.webp",
+            "./img/games/Trackmania/track8.webp",
+            "./img/games/Trackmania/track9.webp",
+            "./img/games/Trackmania/track11.webp",
+            "./img/games/Trackmania/track12.webp",
+            "./img/games/Trackmania/track13.webp",
+            "./img/games/Trackmania/track14.webp",
+            "./img/games/Trackmania/track16.webp",
+            "./img/games/Trackmania/track17.webp",
+            "./img/games/Trackmania/track19.webp",
+            "./img/games/Trackmania/track20.webp",
+            "./img/games/Trackmania/track21.webp",
+            "./img/games/Trackmania/track22.webp",
+            "./img/games/Trackmania/track23.webp",
+            "./img/games/Trackmania/track24.webp"
         ]
     },
     {
@@ -474,13 +602,118 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
         tech: ["JavaScript", "Puzzle", "2D"],
         icon: "fa-shapes",
         links: [
-            { label: "Jouer (Web)", url: "https://emericdossantos.github.io/resources/Perfect_Angle_Browser_Version/index.html" }
+            { label: "Jouer (Web)", url: "./EmericDosSantos.github.io-master/resources/Perfect_Angle_Browser_Version/index.html" }
         ],
         images: [
-            "https://emericdossantos.github.io/img/games/PerfectAngle/pa1.webp",
-            "https://emericdossantos.github.io/img/games/PerfectAngle/pa2.webp",
-            "https://emericdossantos.github.io/img/games/PerfectAngle/pa3.webp",
-            "https://emericdossantos.github.io/img/games/PerfectAngle/pa4.webp"
+            "./img/games/PerfectAngle/pa1.webp",
+            "./img/games/PerfectAngle/pa2.webp",
+            "./img/games/PerfectAngle/pa3.webp",
+            "./img/games/PerfectAngle/pa4.webp",
+            "./img/games/PerfectAngle/pa5.webp"
+        ]
+    },
+    {
+        id: 101,
+        title: "Tron (Prototype 3)",
+        description: "Jeu de Snake multijoueur local sur le thème de Tron. Vue de dessus 2D.",
+        category: "games",
+        year: "2017",
+        tech: ["JavaScript", "HTML5", "Local Multiplayer"],
+        icon: "fa-gamepad",
+        images: [
+            "./assets/images/legacy/tron1.png",
+            "./assets/images/legacy/tron2.png"
+        ]
+    },
+    {
+        id: 102,
+        title: "ZenSense Web Design",
+        description: "Design de site web pour une marque de bien-être. Focus sur l'esthétique épurée et relaxante.",
+        category: "web",
+        year: "2017",
+        tech: ["HTML", "CSS", "Web Design"],
+        icon: "fa-spa",
+        images: [
+            "./assets/images/legacy/html_css/ZenSense-01.jpg",
+            "./assets/images/legacy/html_css/ZenSense-02.jpg",
+            "./assets/images/legacy/html_css/ZenSense-03.jpg"
+        ]
+    },
+    {
+        id: 103,
+        title: "Online Store Design",
+        description: "Maquettes pour une boutique en ligne moderne. Présentation produits et interface utilisateur.",
+        category: "web",
+        year: "2017",
+        tech: ["HTML", "CSS", "E-commerce"],
+        icon: "fa-shopping-cart",
+        images: [
+            "./assets/images/legacy/html_css/OnlineStore-01.jpg",
+            "./assets/images/legacy/html_css/OnlineStore-02.jpg",
+            "./assets/images/legacy/html_css/OnlineStore-03.jpg",
+            "./assets/images/legacy/html_css/OnlineStore-04.jpg"
+        ]
+    },
+    {
+        id: 104,
+        title: "FabLab Website",
+        description: "Site web vitrine pour un FabLab. Mise en page responsive et présentation des activités.",
+        category: "web",
+        year: "2017",
+        tech: ["HTML", "Bootstrap", "Design"],
+        icon: "fa-tools",
+        images: [
+            "./assets/images/legacy/html_css/WebPage1.png",
+            "./assets/images/legacy/html_css/WebPage2.png",
+            "./assets/images/legacy/html_css/WebPage3.png",
+            "./assets/images/legacy/html_css/WebPage4.png"
+        ]
+    },
+    {
+        id: 105,
+        title: "Arduino Projects",
+        description: "Collection de projets électroniques réalisés avec Arduino. Prototypage et programmation embarquée.",
+        category: "other",
+        year: "2017",
+        tech: ["Arduino", "C++", "Electronics"],
+        icon: "fa-microchip",
+        images: [
+            "./assets/images/legacy/arduino/projeto1.jpg",
+            "./assets/images/legacy/arduino/projeto2.jpg",
+            "./assets/images/legacy/arduino/projeto3.jpg",
+            "./assets/images/legacy/arduino/projeto4.jpg",
+            "./assets/images/legacy/arduino/projeto5.jpg"
+        ]
+    },
+    {
+        id: 106,
+        title: "Graphic Design Portfolio",
+        description: "Travaux de design graphique incluant logos, mises en page et illustrations.",
+        category: "design",
+        year: "2017",
+        tech: ["Photoshop", "Illustrator", "InDesign"],
+        icon: "fa-paint-brush",
+        images: [
+            "./assets/images/legacy/design_grafic/Final_Lego-page-001.jpg",
+            "./assets/images/legacy/design_grafic/Final_Lego-page-002.jpg",
+            "./assets/images/legacy/design_grafic/Hand_Emeric.jpg",
+            "./assets/images/legacy/design_grafic/Logo.jpg"
+        ]
+    },
+    {
+        id: 107,
+        title: "Satoshi Tajiri Info",
+        description: "Mise en page éditoriale sur le créateur de Pokémon, Satoshi Tajiri.",
+        category: "design",
+        year: "2017",
+        tech: ["InDesign", "Layout", "Editorial"],
+        icon: "fa-book-open",
+        images: [
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-001.jpg",
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-002.jpg",
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-003.jpg",
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-004.jpg",
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-005.jpg"
         ]
     }
 ];
@@ -576,44 +809,78 @@ document.addEventListener('DOMContentLoaded', () => {
     projects.sort((a, b) => parseInt(b.year) - parseInt(a.year));
 
     // Update the Project View (Left Panel + Stack)
-    function updateProjectView() {
+    function updateProjectView(scope = document) {
         if (filteredProjects.length === 0) {
             // Handle empty state
-            document.getElementById('project-title').textContent = 'Aucun projet';
-            document.getElementById('dynamic-project-content').innerHTML = '<p class="text-muted">Aucun projet trouvé pour cette catégorie.</p>';
-            projectImagesPanel.innerHTML = '';
-            projectCounter.textContent = '0 / 0';
+            const titleEl = scope.getElementById ? scope.getElementById('project-title') : scope.querySelector('#project-title');
+            if (titleEl) titleEl.textContent = 'Aucun projet pour le moment';
+
+            // Clear other elements
+            const infoPanel = scope.getElementById ? scope.getElementById('dynamic-project-content') : scope.querySelector('#dynamic-project-content');
+            if (infoPanel) infoPanel.innerHTML = '<p class="current-project-desc">Sélectionnez une autre catégorie.</p>';
+
+            const techPanel = scope.getElementById ? scope.getElementById('static-project-tech') : scope.querySelector('#static-project-tech');
+            if (techPanel) techPanel.innerHTML = '';
+
+            const imagePanel = scope.getElementById ? scope.getElementById('dynamic-image-display') : scope.querySelector('#dynamic-image-display');
+            if (imagePanel) imagePanel.innerHTML = '';
+
+            const counterEl = scope.getElementById ? scope.getElementById('project-nav-counter') : scope.querySelector('#project-nav-counter');
+            if (counterEl) counterEl.textContent = '0 / 0';
+
+            const statusEl = scope.getElementById ? scope.getElementById('project-status') : scope.querySelector('#project-status');
+            if (statusEl) statusEl.textContent = '';
+
             return;
         }
 
         const project = filteredProjects[currentProjectIndex];
 
+        // Helper for scoped selection
+        const getEl = (id) => scope.getElementById ? scope.getElementById(id) : scope.querySelector(`#${id}`);
+
         // 1. Update Static Header
-        const titleEl = document.getElementById('project-title');
-        const iconEl = document.getElementById('project-icon');
-        const statusEl = document.getElementById('project-status');
+        const titleEl = getEl('project-title');
+        const iconEl = getEl('project-icon');
+        const statusEl = getEl('project-status');
 
         if (titleEl) titleEl.textContent = project.title;
         if (iconEl) iconEl.className = `fas ${project.icon || 'fa-code'}`;
-        if (statusEl) statusEl.textContent = project.year; // Only Year requested
+        if (statusEl) statusEl.textContent = project.year;
 
-        // 2. Update Scrollable Content (Description, Links)
-        projectInfoPanel.innerHTML = `
-            <div class="current-project-desc" style="white-space: pre-line;">${project.description}</div>
-            
-            ${project.links ? `
-                <div class="project-links" style="margin-top: 1.5rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
-                    ${project.links.map(link => `
-                        <a href="${link.url}" target="_blank" style="text-decoration: none; color: white; background: var(--accent); padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s;">
-                            <i class="fas fa-external-link-alt"></i> ${link.label}
-                        </a>
-                    `).join('')}
-                </div>
-            ` : ''}
-        `;
+        // 2. Update Scrollable Content
+        const infoPanel = getEl('dynamic-project-content'); // Used to be projectInfoPanel global var, but safer to query
+        // Note: global projectInfoPanel might be cached. Best to query.
+        if (infoPanel) {
+            // Basic Markdown Parser
+            let formattedDesc = project.description
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
+                .replace(/\n\n/g, '<br><br>')
+                .replace(/\n/g, '<br>');
+
+            if (formattedDesc.includes('<li>')) {
+                formattedDesc = formattedDesc.replace(/(<li>.*?<\/li>)+/g, '<ul style="padding-left: 20px; list-style-type: disc;">$&</ul>');
+            }
+
+            infoPanel.innerHTML = `
+                <div class="current-project-desc" style="white-space: normal;">${formattedDesc}</div>
+                
+                ${project.links ? `
+                    <div class="project-links" style="margin-top: 1.5rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        ${project.links.map(link => `
+                            <a href="${link.url}" target="_blank" style="text-decoration: none; color: white; background: var(--accent); padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s;">
+                                <i class="fas fa-external-link-alt"></i> ${link.label}
+                            </a>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+        }
+
 
         // 3. Update Fixed Tech Stack Footer
-        const techPanel = document.getElementById('static-project-tech');
+        const techPanel = getEl('static-project-tech');
         if (techPanel) {
             techPanel.innerHTML = `
                 <div class="project-tech-stack">
@@ -626,14 +893,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Update Counter
-        if (projectCounter) projectCounter.textContent = `${currentProjectIndex + 1} / ${filteredProjects.length}`;
-        // Also update the Header Nav Counter
-        const navCounter = document.getElementById('project-nav-counter');
-        if (navCounter) navCounter.textContent = `${currentProjectIndex + 1} / ${filteredProjects.length}`;
+        const counterEl = getEl('project-nav-counter');
+        if (counterEl) counterEl.textContent = `${currentProjectIndex + 1} / ${filteredProjects.length}`;
 
-        // Update Project Button Visibility (Linear)
-        const btnPrevParams = document.getElementById('btn-prev-proj');
-        const btnNextParams = document.getElementById('btn-next-proj');
+        // Update Project Button Visibility
+        const btnPrevParams = getEl('btn-prev-proj');
+        const btnNextParams = getEl('btn-next-proj');
 
         if (btnPrevParams) {
             btnPrevParams.style.visibility = (currentProjectIndex > 0) ? 'visible' : 'hidden';
@@ -646,11 +911,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update Image (Right Panel)
         currentImageIndex = 0;
-        updateImageDisplay(false); // No slide animation on project switch, just fade
+        updateImageDisplay(false, 1, scope);
     }
 
     // Update Image View with Animation Support
-    function updateImageDisplay(animate = true, direction = 1) {
+    function updateImageDisplay(animate = true, direction = 1, scope = document) {
         // Safety checks
         if (!filteredProjects || filteredProjects.length === 0) return;
         const project = filteredProjects[currentProjectIndex];
@@ -662,105 +927,187 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnNextImg = document.getElementById('btn-next-img');
 
         if (btnPrevImg) {
-            btnPrevImg.style.visibility = (images.length > 1 && currentImageIndex > 0) ? 'visible' : 'hidden';
-            btnPrevImg.disabled = (images.length <= 1 || currentImageIndex <= 0);
+            btnPrevImg.style.visibility = (images.length > 1) ? 'visible' : 'hidden'; // Always visible if > 1 image (circular)
+            btnPrevImg.disabled = (images.length <= 1);
         }
         if (btnNextImg) {
-            btnNextImg.style.visibility = (images.length > 1 && currentImageIndex < images.length - 1) ? 'visible' : 'hidden';
-            btnNextImg.disabled = (images.length <= 1 || currentImageIndex >= images.length - 1);
+            btnNextImg.style.visibility = (images.length > 1) ? 'visible' : 'hidden'; // Always visible if > 1 image (circular)
+            btnNextImg.disabled = (images.length <= 1);
         }
 
-        // Re-fetch panel in case of DOM issues
-        const panel = document.getElementById('dynamic-image-display');
+        const panel = scope.getElementById ? scope.getElementById('dynamic-image-display') : scope.querySelector('#dynamic-image-display');
         if (!panel) return;
 
-        panel.innerHTML = ''; // Clear existing content
-
-        if (images.length > 0) {
-            // Container for image to handle overflow/centering
-            const imgContainer = document.createElement('div');
+        // Container for image to handle overflow/centering
+        // We reuse the existing one or create it if empty
+        let imgContainer = panel.querySelector('.img-container-inner');
+        if (!imgContainer) {
+            panel.innerHTML = ''; // Clear panel
+            imgContainer = document.createElement('div');
+            imgContainer.className = 'img-container-inner';
             imgContainer.style.width = '100%';
             imgContainer.style.height = '100%';
+            imgContainer.style.position = 'relative'; // Crucial for absolute positioning of slides
             imgContainer.style.display = 'flex';
             imgContainer.style.alignItems = 'center';
             imgContainer.style.justifyContent = 'center';
             imgContainer.style.overflow = 'hidden';
+            panel.appendChild(imgContainer);
+        }
 
-            const img = document.createElement('img');
-
+        if (images.length > 0) {
             // Bounds Check
             if (currentImageIndex >= images.length) currentImageIndex = 0;
             if (currentImageIndex < 0) currentImageIndex = images.length - 1;
 
-            // Debug Link
-            img.src = 'https://placehold.co/600x400/orange/white?text=DEBUG+TEST';
-            console.log('Attempting to load image:', img.src);
+            const newImg = document.createElement('img');
+            newImg.src = images[currentImageIndex];
+            newImg.alt = `${project.title} image`;
 
-            img.onerror = function () {
-                console.log('Image failed to load');
-                this.onerror = null; // Prevent infinite loop
+            // Common Styles
+            newImg.style.maxWidth = '100%';
+            newImg.style.maxHeight = '100%';
+            newImg.style.objectFit = 'contain';
+            newImg.style.borderRadius = '8px';
+            newImg.style.display = 'block';
+            newImg.style.position = 'absolute'; // Absolute for overlapping animations
+            newImg.style.top = '50%';
+            newImg.style.left = '50%';
+            newImg.style.transform = 'translate(-50%, -50%)'; // Center it
+
+            // Error Handling
+            newImg.onerror = function () {
+                this.onerror = null;
                 this.src = 'https://placehold.co/800x600/333/fff?text=Image+Introuvable';
-                this.style.objectFit = 'contain';
             };
-            img.alt = `${project.title} image`;
-            img.style.border = '5px solid red'; // DEBUG VISIBILITY
-            img.style.maxWidth = '100%';
-            img.style.maxHeight = '100%';
-            img.style.objectFit = 'contain';
-            img.style.borderRadius = '8px';
-            img.style.display = 'block';
 
-            // Animation removed for debugging - ensure visibility first
-            img.style.opacity = '1';
+            // Initial Draw (No animation or Project Switch)
+            if (!animate) {
+                imgContainer.innerHTML = ''; // Clear old
+                imgContainer.appendChild(newImg);
+                updateCounter(imgContainer, currentImageIndex, images.length);
+                return;
+            }
 
-            /*
-            if (animate) {
-                const enterClass = direction === 1 ? 'slide-in-right' : 'slide-in-left';
-                img.classList.add(enterClass);
+            // --- Animation Logic ---
+            const oldImg = imgContainer.querySelector('img:not(.img-slide-out-left):not(.img-slide-out-right)');
+
+            if (oldImg) {
+                // Prepare OLD image for exit
+                const exitClass = direction === 1 ? 'img-slide-out-left' : 'img-slide-out-right';
+                // Reset standard display to ensure it processes the transform correctly if needed
+                oldImg.style.display = 'block';
+                oldImg.classList.add(exitClass);
+
+                // Prepare NEW image for enter
+                const enterClass = direction === 1 ? 'img-slide-in-right' : 'img-slide-in-left';
+                newImg.classList.add(enterClass);
+
+                // Append NEW image using absolute positioning
+                imgContainer.appendChild(newImg);
+
+                // Update Counter immediately
+                updateCounter(imgContainer, currentImageIndex, images.length);
+
+                // Cleanup after animation
+                setTimeout(() => {
+                    if (oldImg.parentNode === imgContainer) {
+                        imgContainer.removeChild(oldImg);
+                    }
+                    newImg.classList.remove(enterClass);
+                }, 500); // 500ms match CSS
             } else {
-                img.style.animation = 'fadeInUpProject 0.5s ease forwards';
+                // Fallback if no old image found
+                imgContainer.innerHTML = '';
+                imgContainer.appendChild(newImg);
+                updateCounter(imgContainer, currentImageIndex, images.length);
+
             }
-            */
-
-            imgContainer.appendChild(img);
-
-            // Indicator
-            if (images.length > 1) {
-                const indicator = document.createElement('div');
-                indicator.style.position = 'absolute';
-                indicator.style.bottom = '10px';
-                indicator.style.left = '50%';
-                indicator.style.transform = 'translateX(-50%)';
-                indicator.style.background = 'rgba(0,0,0,0.6)';
-                indicator.style.color = 'white';
-                indicator.style.padding = '4px 10px';
-                indicator.style.borderRadius = '12px';
-                indicator.style.fontSize = '0.8rem';
-                indicator.innerHTML = `${currentImageIndex + 1} / ${images.length}`;
-                imgContainer.appendChild(indicator);
-            }
-
-            panel.appendChild(imgContainer);
         } else {
             panel.innerHTML = '<div style="color: var(--text-muted);">Aucune image</div>';
         }
     }
 
+    function updateCounter(container, index, total) {
+        if (total <= 1) return;
+
+        let indicator = container.querySelector('.img-indicator');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.className = 'img-indicator';
+            indicator.style.position = 'absolute';
+            indicator.style.bottom = '10px';
+            indicator.style.left = '50%';
+            indicator.style.transform = 'translateX(-50%)';
+            indicator.style.background = 'rgba(0,0,0,0.6)';
+            indicator.style.color = 'white';
+            indicator.style.padding = '4px 10px';
+            indicator.style.borderRadius = '12px';
+            indicator.style.fontSize = '0.8rem';
+            indicator.style.zIndex = '5';
+            container.appendChild(indicator);
+        }
+        indicator.textContent = `${index + 1} / ${total}`;
+    }
+
+    // Global Navigation functions
     // Global Navigation functions
     window.changeProject = function (direction) {
         if (filteredProjects.length === 0) return;
+
+        const wrapper = document.getElementById('project-carousel-view');
+        if (!wrapper) return;
+        const parent = wrapper.parentElement;
+
+        // Ensure parent context for absolute positioning
+        if (getComputedStyle(parent).position === 'static') {
+            parent.style.position = 'relative';
+        }
+        parent.style.overflow = 'hidden';
+
+        // 1. Create Clone (Old Content)
+        const clone = wrapper.cloneNode(true);
+        clone.classList.add('clone-overlay');
+        // Remove IDs to prevent duplicates
+        clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+
+        // Position Clone Absolutely over the Parent (Respecting Padding)
+        clone.style.position = 'absolute';
+        clone.style.top = `${wrapper.offsetTop}px`;
+        clone.style.left = `${wrapper.offsetLeft}px`;
+        clone.style.width = `${wrapper.offsetWidth}px`;
+        clone.style.height = `${wrapper.offsetHeight}px`;
+        clone.style.zIndex = '10';
+        clone.style.pointerEvents = 'none'; // Click-through
+
+        parent.appendChild(clone);
+
+        // 2. Animate Clone OUT
+        const exitClass = direction === 1 ? 'proj-slide-out-left' : 'proj-slide-out-right';
+        clone.classList.add(exitClass);
+
+        // 3. Update Real Wrapper (New Content) Immediately
         const count = filteredProjects.length;
         currentProjectIndex = (currentProjectIndex + direction + count) % count;
 
-        // Add animation to wrapper for transition
-        const wrapper = document.querySelector('.projects-content-wrapper');
-        if (wrapper) {
-            wrapper.classList.remove('project-enter');
-            void wrapper.offsetWidth; // Trigger reflow
-            wrapper.classList.add('project-enter');
-        }
+        updateProjectView(); // Global scope update for Title/Counter
 
-        updateProjectView();
+        // 4. Animate Real Wrapper IN
+        const enterClass = direction === 1 ? 'proj-slide-in-right' : 'proj-slide-in-left';
+
+        // Clean previous classes
+        wrapper.classList.remove('proj-slide-out-left', 'proj-slide-out-right', 'proj-slide-in-left', 'proj-slide-in-right');
+
+        // Force Reflow
+        void wrapper.offsetWidth;
+
+        wrapper.classList.add(enterClass);
+
+        // 5. Cleanup
+        setTimeout(() => {
+            if (clone.parentNode === parent) parent.removeChild(clone);
+            wrapper.classList.remove(enterClass);
+        }, 300);
     };
 
     window.changeImage = function (direction) {
@@ -769,53 +1116,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!project.images || project.images.length === 0) return;
 
         const count = project.images.length;
-        // Linear Check
-        const newIndex = currentImageIndex + direction;
-        if (newIndex < 0 || newIndex >= count) return; // Stop if out of bounds
+        // Circular Check
+        const newIndex = (currentImageIndex + direction + count) % count;
 
-        // Apply exit animation to CURRENT image
-        const currentImg = projectImagesPanel.querySelector('img');
-        if (currentImg) {
-            const exitClass = direction === 1 ? 'slide-out-left' : 'slide-out-right';
-            currentImg.classList.add(exitClass);
-        }
+        /*
+        // Animation is now handled entirely inside updateImageDisplay relative to the Container
+        */
 
         currentImageIndex = newIndex;
         updateImageDisplay(true, direction);
     };
 
-    function updateImageDisplay(animate = false, direction = 1) {
-        const project = filteredProjects[currentProjectIndex];
-        const images = project.images || [];
-        projectImagesPanel.innerHTML = '';
-
-        if (images.length > 0) {
-            // Update Button Visibility
-            const btnPrev = document.getElementById('btn-prev-img');
-            const btnNext = document.getElementById('btn-next-img');
-            if (btnPrev) btnPrev.style.display = (currentImageIndex > 0) ? 'flex' : 'none';
-            if (btnNext) btnNext.style.display = (currentImageIndex < images.length - 1) ? 'flex' : 'none';
-
-            const imgContainer = document.createElement('div');
-            // ... (rest of image creation logic)
-            // Re-instantiate image logic here or better yet call the existing logic if I can find it. 
-            // Wait, I am replacing `updateImageDisplay` definition? No, I am observing `window.changeImage` calling it. 
-            // I need to EDIT `updateImageDisplay` function body itself to handle button visibility.
-            // But `updateImageDisplay` was defined WHERE? around line 630.
-            // I will target `window.changeImage` here (lines 703-722) AND I need to find `updateImageDisplay` definition to edit it.
-            // I'll stick to editing `window.changeImage` here to linearize it.
-            // And I will separate the `updateImageDisplay` edit into another chunk if I can find it.
-            // Ah, I can just manipulate buttons INSIDE `updateImageDisplay`?
-            // Yes.
-        }
-
-        // ... (previous logic)
-    }
-    // Wait, I can't overwrite `updateImageDisplay` if I don't see it full. 
-    // I see lines 560-630. It ends at `// Update Image View with Animation Support`.
-    // I need to READ lines 630+ to edit `updateImageDisplay` properly.
-    // For now I will Just fix `changeImage` to be linear.
-    // AND I will add a chunk to `updateProjectView` (already done above).
     // Filter Logic
     function filterProjects(filterId) {
         // currentFilter = filterId; // We can track this if needed
