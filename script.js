@@ -8,6 +8,28 @@ const categories = [
 ];
 
 const projects = [
+    {
+        id: 108,
+        title: "GhostLink",
+        description: `Share Secrets Securely. Encrypt text, files, or images into a secure link. Nothing is ever stored on a server. The link is the data.
+
+**Sécurité Totale :** Chiffrement AES-256 entièrement côté client. Vos données ne quittent jamais votre appareil sans être chiffrées.
+**Confidentialité :** Aucun stockage permanent. Le lien généré contient toutes les informations nécessaires au déchiffrement.
+**Simplicité :** Partagez des mots de passe, des clés privées ou des fichiers sensibles en un clic.`,
+        category: "web",
+        year: "2024",
+        tech: ["React", "Cryptography", "Web App"],
+        icon: "fa-user-secret",
+        links: [
+            { label: "GitHub", url: "https://github.com/EmericFDS/GhostLink" }
+        ],
+        images: [
+            "./img/web/GhostLink/ghostlink_4.png",
+            "./img/web/GhostLink/ghostlink_3.png",
+            "./img/web/GhostLink/ghostlink_2.png",
+            "./img/web/GhostLink/ghostlink_1.png"
+        ]
+    },
 
     {
         id: 24,
@@ -912,7 +934,49 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Image (Right Panel)
         currentImageIndex = 0;
         updateImageDisplay(false, 1, scope);
+
+        // --- Scroll Shadow Logic ---
+        // We need to wait for layout to settle (or at least content injection)
+        setTimeout(() => {
+            updateScrollShadow(scope);
+        }, 0);
     }
+
+    // Scroll Shadow Update Function
+    function updateScrollShadow(scope = document) {
+        const content = scope.getElementById ? scope.getElementById('dynamic-project-content') : scope.querySelector('#dynamic-project-content');
+        const shadow = scope.getElementById ? scope.getElementById('scroll-shadow') : scope.querySelector('#scroll-shadow'); // Using ID now
+
+        if (!content || !shadow) return;
+
+        // Determine if scrolling is possible
+        const isScrollable = content.scrollHeight > content.clientHeight;
+
+        // Determine if we are at the bottom
+        // Tolerance of 5px
+        const isAtBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 5;
+
+        // Verify if we need to show shadow
+        // Show if scrollable AND NOT at bottom
+        if (isScrollable && !isAtBottom) {
+            shadow.style.opacity = '1';
+        } else {
+            shadow.style.opacity = '0';
+        }
+    }
+
+    // Initialize Scroll Listener once
+    const contentPanel = document.getElementById('dynamic-project-content');
+    if (contentPanel) {
+        contentPanel.addEventListener('scroll', () => {
+            updateScrollShadow();
+        });
+    }
+
+    // Global Window Resize Listener for shadow update
+    window.addEventListener('resize', () => {
+        updateScrollShadow();
+    });
 
     // Update Image View with Animation Support
     function updateImageDisplay(animate = true, direction = 1, scope = document) {

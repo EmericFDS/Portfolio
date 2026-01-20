@@ -291,6 +291,55 @@ body {
     gap: 1rem;
 }
 
+/* Project Navigation Layout Fix */
+.project-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.project-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.project-nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Mobile Layout for Project Nav */
+@media (max-width: 600px) {
+    .project-header-row {
+        flex-direction: column-reverse;
+        /* Buttons on top */
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .project-nav-controls {
+        width: 100%;
+        justify-content: center;
+        /* Center buttons on mobile */
+        padding-top: 0;
+        padding-bottom: 0.5rem;
+        /* Space below buttons instead of top */
+    }
+}
+
+/* Hide Phantom Elements (used for spacing only) */
+.phantom-controls,
+.phantom-title {
+    visibility: hidden;
+}
+
 .social-link-item {
     width: 45px;
     height: 45px;
@@ -1149,6 +1198,48 @@ body {
     font-size: 1.2rem;
     text-decoration: none;
     border: 1px solid var(--glass-border);
+}
+
+/* Fix for interaction on overlay */
+.real-controls {
+    pointer-events: auto;
+}
+
+/* Scroll Shadow Indicator */
+.scroll-shadow-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 50px;
+    /* Reduced height slightly if needed, but opacity is key */
+    background: radial-gradient(farthest-side at bottom, rgba(0, 0, 0, 0.5), transparent);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+    border-radius: 100% 100% 0 0 / 20px 20px 0 0;
+    filter: blur(2px);
+}
+
+/* Custom Scrollbar for Project Content */
+#dynamic-project-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+#dynamic-project-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+}
+
+#dynamic-project-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+#dynamic-project-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .social-btn:hover {
