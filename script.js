@@ -9,6 +9,87 @@ const categories = [
 
 const projects = [
     {
+        id: 111,
+        title: "Obvious Tool",
+        description: `Votre Couteau Suisse Numérique. Une suite d'outils unifiée pour développeurs et créatifs.
+
+**Multi-Outils :** Plus de 50 outils essentiels (Convertisseurs, Encodeurs, Traitement Image/Audio) en une seule app.
+**IA Embarquée :** Modules de reformulation, correction de texte et traduction alimentés par l'IA.
+**Privé & Rapide :** Fonctionne localement, sans publicité, avec une interface moderne et fluide.`,
+        category: "nlp",
+        year: "2025",
+        tech: ["React", "Desktop App", "AI Utils", "Privacy"],
+        icon: "fa-toolbox",
+        links: [
+            { label: "Site Officiel", url: "https://www.obvioustool.com" }
+        ],
+        images: [
+            "./img/ia/ObviousTool/ot1.png",
+            "./img/ia/ObviousTool/ot2.png",
+            "./img/ia/ObviousTool/ot3.png",
+            "./img/ia/ObviousTool/ot4.png",
+            "./img/ia/ObviousTool/ot5.png",
+            "./img/ia/ObviousTool/ot6.png",
+            "./img/ia/ObviousTool/ot7.png",
+            "./img/ia/ObviousTool/ot8.png",
+            "./img/ia/ObviousTool/ot9.png",
+            "./img/ia/ObviousTool/ot10.png",
+            "./img/ia/ObviousTool/ot11.png"
+        ]
+    },
+    {
+        id: 110,
+        title: "CVite",
+        description: `Plateforme de création de CV intelligente propulsée par l'IA.
+
+**Extraction Intelligente :** Analyse automatique de CVs existants (PDF, Image) pour peupler votre profil instantanément.
+**Éditeur Avancé :** Personnalisation temps réel des modèles, couleurs et mises en page.
+**Focus UX :** Interface fluide et intuitive conçue pour simplifier la recherche d'emploi.`,
+        category: "nlp",
+        year: "2025",
+        tech: ["React", "NLP", "AI Integration", "Vite"],
+        icon: "fa-file-alt",
+        links: [
+            { label: "GitHub", url: "https://github.com/EmericFDS/CVite" }
+        ],
+        images: [
+            "./img/ia/CVite/cv1.png",
+            "./img/ia/CVite/cv2.png",
+            "./img/ia/CVite/cv3.png",
+            "./img/ia/CVite/cv4.png",
+            "./img/ia/CVite/cv5.png",
+            "./img/ia/CVite/cv6.png",
+            "./img/ia/CVite/cv7.png",
+            "./img/ia/CVite/cv8.png",
+            "./img/ia/CVite/cv9.png",
+            "./img/ia/CVite/cv10.png",
+            "./img/ia/CVite/cv11.png",
+            "./img/ia/CVite/cv12.png"
+        ]
+    },
+    {
+        id: 109,
+        title: "Smart Bucket",
+        description: `Système de gestion de portefeuille crypto autonome piloté par IA.
+
+**Pilotage Automatique :** Allocation d'actifs dynamique et rééquilibrage automatisé sur BTC, ETH, SOL, etc.
+**Analyse Stratégique :** Surveillance des marchés 24/7, analyse de sentiment et exécution à faible latence (0.0s).
+**Interface Moderne :** Dashboard complet pour le suivi des performances, liquidités et historique des transactions.`,
+        category: "ml",
+        year: "2025",
+        tech: ["Python", "Machine Learning", "React", "Trading"],
+        icon: "fa-robot",
+        links: [
+            { label: "GitHub", url: "https://github.com/EmericFDS/Smart-Bucket" }
+        ],
+        images: [
+            "./img/ia/SmartBucket/sb1.png",
+            "./img/ia/SmartBucket/sb2.png",
+            "./img/ia/SmartBucket/sb3.png",
+            "./img/ia/SmartBucket/sb4.png"
+        ]
+    },
+    {
         id: 108,
         title: "GhostLink",
         description: `Share Secrets Securely. Encrypt text, files, or images into a secure link. Nothing is ever stored on a server. The link is the data.
@@ -647,20 +728,7 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
             "./assets/images/legacy/tron2.png"
         ]
     },
-    {
-        id: 102,
-        title: "ZenSense Web Design",
-        description: "Design de site web pour une marque de bien-être. Focus sur l'esthétique épurée et relaxante.",
-        category: "web",
-        year: "2017",
-        tech: ["HTML", "CSS", "Web Design"],
-        icon: "fa-spa",
-        images: [
-            "./assets/images/legacy/html_css/ZenSense-01.jpg",
-            "./assets/images/legacy/html_css/ZenSense-02.jpg",
-            "./assets/images/legacy/html_css/ZenSense-03.jpg"
-        ]
-    },
+
     {
         id: 103,
         title: "Online Store Design",
@@ -678,12 +746,15 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
     },
     {
         id: 104,
-        title: "FabLab Website",
-        description: "Site web vitrine pour un FabLab. Mise en page responsive et présentation des activités.",
+        title: "FabLab Caldas da Rainha",
+        description: "Site web officiel du FabLab Caldas da Rainha. Plateforme interactive présentant les ressources, machines et projets de la communauté maker.",
         category: "web",
         year: "2017",
-        tech: ["HTML", "Bootstrap", "Design"],
+        tech: ["HTML", "Bootstrap", "Web Design"],
         icon: "fa-tools",
+        links: [
+            { label: "GitHub", url: "https://github.com/DesignAdvancedResources/fablabcr" }
+        ],
         images: [
             "./assets/images/legacy/html_css/WebPage1.png",
             "./assets/images/legacy/html_css/WebPage2.png",
@@ -693,12 +764,19 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
     },
     {
         id: 105,
-        title: "Arduino Projects",
-        description: "Collection de projets électroniques réalisés avec Arduino. Prototypage et programmation embarquée.",
+        title: "EMOT.IO",
+        description: `Expérience cinématique interactive. Une narration visuelle qui évolue en temps réel selon les émotions du spectateur.
+
+**Biofeedback :** Utilisation de capteurs Bitalino (Rythme cardiaque, Température) pour analyser l'état émotionnel.
+**Traitement Temps Réel :** Transformation dynamique de l'image et du son via Processing selon les données biométriques.
+**Concept :** Comparer les données physiologiques réelles avec l'expérience subjective du spectateur.`,
         category: "other",
         year: "2017",
-        tech: ["Arduino", "C++", "Electronics"],
-        icon: "fa-microchip",
+        tech: ["Arduino", "Processing", "Biofeedback", "Bitalino"],
+        icon: "fa-heartbeat",
+        links: [
+            { label: "GitHub", url: "https://github.com/ESADCR/EMOT.IO" }
+        ],
         images: [
             "./assets/images/legacy/arduino/projeto1.jpg",
             "./assets/images/legacy/arduino/projeto2.jpg",
@@ -743,14 +821,14 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
 // Main Logic
 document.addEventListener('DOMContentLoaded', () => {
     // Secure Email Injection
-    const user = 'emericfds';
-    const domain = 'pm.me';
+    const user = 'contact';
+    const domain = 'emericfds.com';
     const emailLink = document.getElementById('secure-email');
     const emailBtn = document.getElementById('email-btn');
 
     if (emailLink) {
         const address = `${user}@${domain}`;
-        emailLink.textContent = address;
+        emailLink.textContent = "Me Contacter";
         emailLink.href = `mailto:${address}`;
 
         if (emailBtn) {
@@ -807,7 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // State management for Carousel
     // --- Carousel Logic ---
-    let currentFilteredProjects = [];
+    let filteredProjects = [];
     let currentProjectIndex = 0;
     let currentImageIndex = 0;
 
@@ -1115,8 +1193,67 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Global Navigation functions
+    // --- Auto Scroll Logic ---
+    let autoScrollTimer = null;
+
+    function startAutoScroll() {
+        if (autoScrollTimer) clearInterval(autoScrollTimer);
+        autoScrollTimer = setInterval(handleAutoScroll, 3000); // 3 seconds per image
+    }
+
+    function stopAutoScroll() {
+        if (autoScrollTimer) {
+            clearInterval(autoScrollTimer);
+            autoScrollTimer = null;
+        }
+    }
+
+    function resetAutoScroll() {
+        stopAutoScroll();
+        startAutoScroll();
+    }
+
+    function handleAutoScroll() {
+        // Safety Check
+        if (!filteredProjects || filteredProjects.length === 0) return;
+
+        const project = filteredProjects[currentProjectIndex];
+        const images = project.images || [];
+
+        // 1. Advance Image
+        // Check if we are at the last image
+        if (currentImageIndex < images.length - 1) {
+            // Next Image
+            window.changeImage(1);
+        } else {
+            // 2. End of Images -> Next Project
+            if (currentProjectIndex < filteredProjects.length - 1) {
+                window.changeProject(1);
+            } else {
+                // 3. End of Projects -> Next Category
+                switchCategory();
+            }
+        }
+    }
+
+    function switchCategory() {
+        const btns = Array.from(document.querySelectorAll('.filter-btn'));
+        const activeBtn = document.querySelector('.filter-btn.active');
+        if (!activeBtn) return;
+
+        let index = btns.indexOf(activeBtn);
+
+        // Next Category (Looping)
+        const nextIndex = (index + 1) % btns.length;
+
+        // Trigger Click (handles update and reset)
+        btns[nextIndex].click();
+    }
+
     // Global Navigation functions
     window.changeProject = function (direction) {
+        resetAutoScroll(); // User interaction resets timer
+
         if (filteredProjects.length === 0) return;
 
         const wrapper = document.getElementById('project-carousel-view');
@@ -1175,6 +1312,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.changeImage = function (direction) {
+        // Note: handleAutoScroll calls this too, so it resets its own timer, which is fine.
+        resetAutoScroll();
+
         if (filteredProjects.length === 0) return;
         const project = filteredProjects[currentProjectIndex];
         if (!project.images || project.images.length === 0) return;
@@ -1222,6 +1362,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Filter Buttons
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            resetAutoScroll();
+
             // Remove active class from all
             filterBtns.forEach(b => b.classList.remove('active'));
             // Add active to clicked
@@ -1234,6 +1376,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Render
     filterProjects('ia');
+    startAutoScroll();
 });
 
 function openModal(project) {

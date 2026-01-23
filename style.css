@@ -59,6 +59,10 @@ body {
     color: transparent;
 }
 
+.mobile-name-break {
+    display: none;
+}
+
 /* Bento Grid Wrapper */
 .bento-wrapper {
     width: 100%;
@@ -735,6 +739,11 @@ body {
 
     body {
         padding: 1rem;
+    }
+
+    /* Force line break for name on mobile */
+    .mobile-name-break {
+        display: block;
     }
 }
 
