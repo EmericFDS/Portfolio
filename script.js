@@ -1227,7 +1227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function switchCategory() {
-        const btns = Array.from(document.querySelectorAll('.filter-btn'));
+        const btns = Array.from(document.querySelectorAll('.filter-btn[data-filter]'));
         const activeBtn = document.querySelector('.filter-btn.active');
         if (!activeBtn) return;
 
