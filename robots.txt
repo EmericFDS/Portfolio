@@ -19,3 +19,5 @@ Disallow: /
 User-agent: *
 Disallow: /private/
 Allow: /
+
+Sitemap: https://emericfds.com/sitemap.xml
