@@ -49,9 +49,7 @@ const projects = [
         year: "2025",
         tech: ["React", "NLP", "AI Integration", "Vite"],
         icon: "fa-file-alt",
-        links: [
-            { label: "GitHub", url: "https://github.com/EmericFDS/CVite" }
-        ],
+
         images: [
             "./img/ia/CVite/cv1.png",
             "./img/ia/CVite/cv2.png",
@@ -79,9 +77,7 @@ const projects = [
         year: "2025",
         tech: ["Python", "Machine Learning", "React", "Trading"],
         icon: "fa-robot",
-        links: [
-            { label: "GitHub", url: "https://github.com/EmericFDS/Smart-Bucket" }
-        ],
+
         images: [
             "./img/ia/SmartBucket/sb1.png",
             "./img/ia/SmartBucket/sb2.png",
@@ -101,9 +97,7 @@ const projects = [
         year: "2024",
         tech: ["React", "Cryptography", "Web App"],
         icon: "fa-user-secret",
-        links: [
-            { label: "GitHub", url: "https://github.com/EmericFDS/GhostLink" }
-        ],
+
         images: [
             "./img/web/GhostLink/ghostlink_4.png",
             "./img/web/GhostLink/ghostlink_3.png",
@@ -752,9 +746,7 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
         year: "2017",
         tech: ["HTML", "Bootstrap", "Web Design"],
         icon: "fa-tools",
-        links: [
-            { label: "GitHub", url: "https://github.com/DesignAdvancedResources/fablabcr" }
-        ],
+
         images: [
             "./assets/images/legacy/html_css/WebPage1.png",
             "./assets/images/legacy/html_css/WebPage2.png",
@@ -774,9 +766,7 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
         year: "2017",
         tech: ["Arduino", "Processing", "Biofeedback", "Bitalino"],
         icon: "fa-heartbeat",
-        links: [
-            { label: "GitHub", url: "https://github.com/ESADCR/EMOT.IO" }
-        ],
+
         images: [
             "./assets/images/legacy/arduino/projeto1.jpg",
             "./assets/images/legacy/arduino/projeto2.jpg",
@@ -966,7 +956,7 @@ document.addEventListener('DOMContentLoaded', () => {
             infoPanel.innerHTML = `
                 <div class="current-project-desc" style="white-space: normal;">${formattedDesc}</div>
                 
-                ${project.links ? `
+                ${project.links && project.links.length > 0 ? `
                     <div class="project-links" style="margin-top: 1.5rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
                         ${project.links.map(link => `
                             <a href="${link.url}" target="_blank" style="text-decoration: none; color: white; background: var(--accent); padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s;">
