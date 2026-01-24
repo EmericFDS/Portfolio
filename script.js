@@ -9,6 +9,29 @@ const categories = [
 
 const projects = [
     {
+        id: 112,
+        title: "PhotoLift",
+        description: `Application de bureau pour la gestion et le traitement rapide de photos.
+        
+**Flux de travail optimisé :** Importation automatique, tri par sessions et retouche rapide.
+**Outils puissants :** Éditeur d'images intégré avec ajustements colorimétriques, recadrage et filtres.
+**Interface Intuitive :** Design moderne et épuré pour une expérience utilisateur fluide.`,
+        category: "other",
+        year: "2026",
+        tech: ["Tauri", "React", "Rust", "Image Processing"],
+        icon: "fa-camera",
+        images: [
+            "./img/other/PhotoLift/pl1.png",
+            "./img/other/PhotoLift/pl2.png",
+            "./img/other/PhotoLift/pl3.png",
+            "./img/other/PhotoLift/pl4.png",
+            "./img/other/PhotoLift/pl5.png",
+            "./img/other/PhotoLift/pl6.png",
+            "./img/other/PhotoLift/pl7.png",
+            "./img/other/PhotoLift/pl8.png"
+        ]
+    },
+    {
         id: 111,
         title: "Obvious Tool",
         description: `Votre Couteau Suisse Numérique. Une suite d'outils unifiée pour développeurs et créatifs.
