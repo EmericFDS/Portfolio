@@ -26,19 +26,46 @@
     <meta property="twitter:description" content="Découvrez mes projets en Intelligence Artificielle, Web et Design.">
     <meta property="twitter:image" content="https://emericfds.com/img/profile.jpg">
 
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-H7GJV51SW0');
-    </script>
-
-    <!-- Anti-Bot / Anti-AI Meta Tags -->
-    <meta name="robots" content="noai, noimageai">
     <meta name="googlebot" content="notranslate">
+    <link rel="canonical" href="https://emericfds.com/">
+
+    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "dateCreated": "2024-01-01T00:00:00+00:00",
+        "dateModified": "2026-01-01T00:00:00+00:00",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Emeric Ferreira Dos Santos",
+          "alternateName": "Emeric FDS",
+          "jobTitle": "Développeur IA",
+          "url": "https://emericfds.com",
+          "image": "https://emericfds.com/img/profile.jpg",
+          "sameAs": [
+            "https://www.linkedin.com/in/emericfds/",
+            "https://github.com/EmericFDS"
+          ],
+          "description": "Développeur IA Polyvalent & Créatif. Expert en Agents IA, LLM, RAG et Développement web."
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Emeric FDS Portfolio",
+        "alternateName": ["Emeric Dos Santos", "EmericFDS"],
+        "url": "https://emericfds.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://emericfds.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -286,6 +313,33 @@
     </div>
 
     <script src="script.js" defer></script>
+
+    <!-- Deferred Google Analytics -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var gtmLoaded = false;
+            function loadGTM() {
+                if (gtmLoaded) return;
+                gtmLoaded = true;
+
+                var script = document.createElement("script");
+                script.src = "https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0";
+                script.async = true;
+                document.head.appendChild(script);
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-H7GJV51SW0');
+            }
+
+            // Load on interaction or after delay
+            window.addEventListener('scroll', loadGTM, { once: true });
+            window.addEventListener('mousemove', loadGTM, { once: true });
+            window.addEventListener('touchstart', loadGTM, { once: true });
+            setTimeout(loadGTM, 4000); // Fallback
+        });
+    </script>
 </body>
 
 </html>

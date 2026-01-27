@@ -87,7 +87,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
@@ -265,7 +265,7 @@ body {
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.05);
     /* Default BG */
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer;
     width: fit-content;
 }
@@ -399,7 +399,7 @@ body {
     border-radius: 20px;
     font-size: 0.85rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
 }
 
 .filter-btn:hover {
@@ -416,7 +416,6 @@ body {
     /* Simulated bold without layout shift */
 }
 
-.domains-list {}
 
 .project-item-list {
     display: flex;
@@ -1203,7 +1202,7 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--text-muted);
-    transition: all 0.2s;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
     font-size: 1.2rem;
     text-decoration: none;
     border: 1px solid var(--glass-border);

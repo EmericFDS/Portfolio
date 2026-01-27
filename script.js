@@ -1118,6 +1118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newImg = document.createElement('img');
             newImg.src = images[currentImageIndex];
             newImg.alt = `${project.title} image`;
+            newImg.decoding = 'async';
 
             // Common Styles
             newImg.style.maxWidth = '100%';
