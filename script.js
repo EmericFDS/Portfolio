@@ -1352,7 +1352,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Filter logic handling 'ia' group
         if (filterId === 'all') {
             filteredProjects = projects;
-        } else if (filterId === 'ia') {
+        } else if (filterId === 'ai') {
             filteredProjects = projects.filter(p => ['cv', 'nlp', 'ml'].includes(p.category));
         } else {
             filteredProjects = projects.filter(p => p.category === filterId);
@@ -1389,7 +1389,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial Render
-    filterProjects('ia');
+    filterProjects('ai');
     startAutoScroll();
 });
 
