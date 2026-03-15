@@ -1,6 +1,6 @@
 // Data directly inlined to ensure strictly local functionality without server
 const categories = [
-    { id: 'all', name: 'Tous' },
+    { id: 'all', name: 'All' },
     { id: 'cv', name: 'Computer Vision' },
     { id: 'nlp', name: 'NLP' },
     { id: 'ml', name: 'Machine Learning' },
@@ -11,11 +11,11 @@ const projects = [
     {
         id: 112,
         title: "PhotoLift",
-        description: `Application de bureau pour la gestion et le traitement rapide de photos.
+        description: `Desktop application for fast photo management and processing.
         
-**Flux de travail optimisé :** Importation automatique, tri par sessions et retouche rapide.
-**Outils puissants :** Éditeur d'images intégré avec ajustements colorimétriques, recadrage et filtres.
-**Interface Intuitive :** Design moderne et épuré pour une expérience utilisateur fluide.`,
+**Optimized Workflow:** Automatic import, sorting by sessions, and quick touch-ups.
+**Powerful Tools:** Integrated image editor with color adjustments, cropping, and filters.
+**Intuitive Interface:** Modern and clean design for a smooth user experience.`,
         category: "other",
         year: "2026",
         tech: ["Tauri", "React", "Rust", "Image Processing"],
@@ -34,17 +34,17 @@ const projects = [
     {
         id: 111,
         title: "Obvious Tool",
-        description: `Votre Couteau Suisse Numérique. Une suite d'outils unifiée pour développeurs et créatifs.
+        description: `Your Digital Swiss Army Knife. A unified suite of tools for developers and creatives.
 
-**Multi-Outils :** Plus de 50 outils essentiels (Convertisseurs, Encodeurs, Traitement Image/Audio) en une seule app.
-**IA Embarquée :** Modules de reformulation, correction de texte et traduction alimentés par l'IA.
-**Privé & Rapide :** Fonctionne localement, sans publicité, avec une interface moderne et fluide.`,
+**Multi-Tools:** Over 50 essential tools (Converters, Encoders, Image/Audio processing) in one app.
+**Embedded AI:** AI-powered modules for paraphrasing, text correction, and translation.
+**Private & Fast:** Runs locally, ad-free, with a modern and fluid interface.`,
         category: "nlp",
         year: "2025",
         tech: ["React", "Desktop App", "AI Utils", "Privacy"],
         icon: "fa-toolbox",
         links: [
-            { label: "Site Officiel", url: "https://www.obvioustool.com" }
+            { label: "Official Site", url: "https://www.obvioustool.com" }
         ],
         images: [
             "./img/ia/ObviousTool/ot1.png",
@@ -63,11 +63,11 @@ const projects = [
     {
         id: 110,
         title: "CVite",
-        description: `Plateforme de création de CV intelligente propulsée par l'IA.
+        description: `Intelligent resume creation platform powered by AI.
 
-**Extraction Intelligente :** Analyse automatique de CVs existants (PDF, Image) pour peupler votre profil instantanément.
-**Éditeur Avancé :** Personnalisation temps réel des modèles, couleurs et mises en page.
-**Focus UX :** Interface fluide et intuitive conçue pour simplifier la recherche d'emploi.`,
+**Smart Extraction:** Automatic analysis of existing resumes (PDF, Image) to populate your profile instantly.
+**Advanced Editor:** Real-time customization of templates, colors, and layouts.
+**UX Focused:** Smooth and intuitive interface designed to simplify job hunting.`,
         category: "nlp",
         year: "2025",
         tech: ["React", "NLP", "AI Integration", "Vite"],
@@ -91,11 +91,11 @@ const projects = [
     {
         id: 109,
         title: "Smart Bucket",
-        description: `Système de gestion de portefeuille crypto autonome piloté par IA.
+        description: `Autonomous crypto portfolio management system driven by AI.
 
-**Pilotage Automatique :** Allocation d'actifs dynamique et rééquilibrage automatisé sur BTC, ETH, SOL, etc.
-**Analyse Stratégique :** Surveillance des marchés 24/7, analyse de sentiment et exécution à faible latence (0.0s).
-**Interface Moderne :** Dashboard complet pour le suivi des performances, liquidités et historique des transactions.`,
+**Autopilot:** Dynamic asset allocation and automated rebalancing across BTC, ETH, SOL, etc.
+**Strategic Analysis:** 24/7 market monitoring, sentiment analysis, and low-latency execution (0.0s).
+**Modern Interface:** Comprehensive dashboard for tracking performance, liquidity, and transaction history.`,
         category: "ml",
         year: "2025",
         tech: ["Python", "Machine Learning", "React", "Trading"],
@@ -113,9 +113,9 @@ const projects = [
         title: "GhostLink",
         description: `Share Secrets Securely. Encrypt text, files, or images into a secure link. Nothing is ever stored on a server. The link is the data.
 
-**Sécurité Totale :** Chiffrement AES-256 entièrement côté client. Vos données ne quittent jamais votre appareil sans être chiffrées.
-**Confidentialité :** Aucun stockage permanent. Le lien généré contient toutes les informations nécessaires au déchiffrement.
-**Simplicité :** Partagez des mots de passe, des clés privées ou des fichiers sensibles en un clic.`,
+**Total Security:** Full client-side AES-256 encryption. Your data never leaves your device without being encrypted.
+**Privacy:** No permanent storage. The generated link contains all information needed for decryption.
+**Simplicity:** Share passwords, private keys, or sensitive files in one click.`,
         category: "web",
         year: "2024",
         tech: ["React", "Cryptography", "Web App"],
@@ -132,7 +132,7 @@ const projects = [
     {
         id: 24,
         title: "Turn Base Battle Game",
-        description: "Voilà un projet de jeu pour mobile pour lequel j'ai créé 4 différentes scènes.\n\nJ'ai premièrement eu la tâche de réaliser l'environnement d'accueil qui apparait au début du jeu. Cette scène servira par la suite comme arrière-plan du menu d'accueil. Il représente l'entrée d'un donjon démoniaque où auront lieu les combats.\n\nPar la suite je me suis attelé à créer trois niveaux qui sont des zones de combat dans ce donjon. Le premier est une salle des trônes, le deuxième une bibliothèque et pour finir la troisième est les souterrains où l'on trouve des tombeaux.\n\nJ'ai aussi fait un dernier niveau en extérieur qui reste expérimental.",
+        description: "This is a mobile game project for which I created 4 different scenes.\n\nFirst, I was tasked with creating the home environment that appears at the start of the game. This scene later serves as the background for the main menu. It represents the entrance to a demonic dungeon where battles take place.\n\nNext, I focused on creating three levels that are combat zones within this dungeon: a throne room, a library, and finally underground tombs.\n\nI also created a final outdoor level which remains experimental.",
         category: "games",
         year: "2021",
         tech: ["Level Design", "Mobile", "Unity"],
@@ -148,9 +148,9 @@ const projects = [
     {
         id: 8,
         title: "Gravity Defy",
-        description: `Gravity Defy est un jeu mobile de parkour à moto. J'ai participé à la création de 14 niveaux pour ce client.
+        description: `Gravity Defy is a mobile motorcycle parkour game. I participated in the creation of 14 levels for this client.
 
-Le gameplay est exigeant : il faut traverser des niveaux remplis d'obstacles variés. J'ai travaillé sur le level design pour offrir un challenge intéressant et progressif dans des environnements Low Poly soignés (ville, forêt, montagne).`,
+The gameplay is demanding: you must cross levels full of various obstacles. I worked on the level design to offer an interesting and progressive challenge in polished Low Poly environments (city, forest, mountain).`,
         category: "games",
         year: "2021",
         tech: ["Unity", "Level Design", "Mobile"],
@@ -189,10 +189,10 @@ Le gameplay est exigeant : il faut traverser des niveaux remplis d'obstacles var
     {
         id: 25,
         title: "Cubic Level",
-        description: `Un niveau charmant conçu pour un jeu mobile en vue de dessus (Top Down).
+        description: `A charming level designed for a top-down mobile game.
 
-Le niveau est entièrement composé de blocs et d'assets avec un style artistique cubique 'Voxel'.
-Le défi principal de cette carte était de créer un environnement avec une circulation fluide pour le joueur. J'ai réussi à rendre la navigation amusante tout en gardant une esthétique soignée. J'ai également créé quelques animations pour le jeu.`,
+The level is entirely composed of blocks and assets with a 'Voxel' cubic art style.
+The main challenge of this map was to create an environment with fluid circulation for the player. I managed to make navigation fun while maintaining a polished aesthetic. I also created some animations for the game.`,
         category: "games",
         year: "2021",
         tech: ["Voxel", "Level Design", "Mobile"],
@@ -227,11 +227,11 @@ Le défi principal de cette carte était de créer un environnement avec une cir
     {
         id: 11,
         title: "Parkour Game",
-        description: `Pour ce projet, j'ai créé 5 niveaux pour un jeu de type Parkour où le joueur doit sauter, escalader des murs et trouver la sortie.
+        description: `For this project, I created 5 levels for a Parkour-style game where the player must jump, climb walls, and find the exit.
 
-Le personnage est joué à la troisième personne, offrant une meilleure vue d'ensemble de l'environnement.
-C'est un environnement urbain conçu pour maximiser la verticalité et correspondre à l'univers du Parkour.
-Certains niveaux sont aussi en intérieur, offrant de nouveaux défis et une variété d'environnements.`,
+The character is played in the third person, offering a better overview of the environment.
+It's an urban environment designed to maximize verticality and match the Parkour universe.
+Some levels are also indoors, offering new challenges and a variety of environments.`,
         category: "games",
         year: "2020",
         tech: ["Level Design", "Unity", "3D"],
@@ -271,11 +271,11 @@ Certains niveaux sont aussi en intérieur, offrant de nouveaux défis et une var
     {
         id: 10,
         title: "Pure Mahjong",
-        description: `Pure Mahjong est un jeu de Mahjong photoréaliste qui emmène l'utilisateur dans un voyage à travers 24 événements chinois du calendrier solaire.
+        description: `Pure Mahjong is a photorealistic Mahjong game that takes the user on a journey through 24 Chinese solar calendar events.
 
-Le jeu contient des centaines de niveaux pour chaque jour de l'année. Avec plus de 1000 niveaux conçus individuellement, Pure Mahjong offre une grande variété de gameplay. Certains niveaux se résolvent en quelques minutes, d'autres peuvent prendre des heures.
+The game contains hundreds of levels for each day of the year. With over 1000 individually designed levels, Pure Mahjong offers a wide variety of gameplay. Some levels are solved in minutes, others can take hours.
 
-Chaque jour, 4 nouveaux niveaux vous attendent, allant de relativement facile à très difficile.`,
+Every day, 4 new levels await you, ranging from relatively easy to very difficult.`,
         category: "games",
         year: "2020",
         tech: ["Level Design", "Nintendo Switch", "Unity"],
@@ -299,11 +299,11 @@ Chaque jour, 4 nouveaux niveaux vous attendent, allant de relativement facile à
     {
         id: 26,
         title: "Cartoon Level",
-        description: `Carte prototype pour un jeu cartoon destiné à un jeune public.
+        description: `Prototype map for a cartoon game intended for a young audience.
 
-Les contraintes étaient de créer une carte de taille petite à moyenne dans un environnement naturel (forêt, montagne, lac, rivières). Le style cartoon a été choisi pour son impact visuel coloré.
+The constraints were to create a small to medium-sized map in a natural environment (forest, mountain, lake, rivers). The cartoon style was chosen for its colorful visual impact.
 
-J'ai utilisé le moteur Unity et le générateur de terrain Gaea. Le projet a été réalisé en un mois en itération constante avec le client.`,
+I used the Unity engine and the Gaea terrain generator. The project was completed in one month in constant iteration with the client.`,
         category: "games",
         year: "2019",
         tech: ["Gaea", "Unity", "Cartoon"],
@@ -325,10 +325,10 @@ J'ai utilisé le moteur Unity et le générateur de terrain Gaea. Le projet a é
     {
         id: 16,
         title: "Hunting Game Map",
-        description: `Création d'une vaste carte pour un jeu de chasse à la première personne (FPS).
+        description: `Creation of a vast map for a first-person shooter (FPS) hunting game.
 
-La carte est composée de forêts, lacs, marais, rivières, montagnes et plaines. Elle est conçue pour être vaste afin d'immerger le joueur dans un environnement naturel riche.
-Le style graphique semi-réaliste a été créé avec un pack d'assets dédié et un générateur de terrain pour l'ensemble de la topographie.`,
+The map is composed of forests, lakes, swamps, rivers, mountains, and plains. It is designed to be vast to immerse the player in a rich natural environment.
+The semi-realistic graphic style was created with a dedicated asset pack and a terrain generator for the entire topography.`,
         category: "games",
         year: "2019",
         tech: ["Level Design", "Terrain", "Nature"],
@@ -357,10 +357,10 @@ Le style graphique semi-réaliste a été créé avec un pack d'assets dédié e
     {
         id: 27,
         title: "3 Pigs Game",
-        description: `Niveau réalisé pour une mission freelance, basé sur l'histoire des 3 petits cochons.
+        description: `Level created for a freelance mission, based on the story of the 3 little pigs.
 
-Le niveau est linéaire (de droite à gauche) et divisé en 6 zones distinctes : la maison de la mère, la zone de construction paille, une zone d'ennemis, la maison bois, un pont traversant un lac, et enfin la maison brique.
-L'objectif est de parcourir la forêt et collecter des ressources pour construire les maisons et résister au loup.`,
+The level is linear (right to left) and divided into 6 distinct zones: the mother's house, the straw construction zone, an enemy zone, the wood house, a bridge crossing a lake, and finally the brick house.
+The goal is to travel through the forest and collect resources to build the houses and resist the wolf.`,
         category: "games",
         year: "2019",
         tech: ["Level Design", "Freelance", "Unity"],
@@ -377,11 +377,11 @@ L'objectif est de parcourir la forêt et collecter des ressources pour construir
     {
         id: 6,
         title: "Koda: Kiyomori's Guardian",
-        description: `Koda: Kiyomori's Guardian est un jeu d'aventure plateforme 3D onirique basé sur le folklore japonais. Vous incarnez Koda, un Tanuki gardien de la forêt.
+        description: `Koda: Kiyomori's Guardian is a dreamy 3D platform adventure game based on Japanese folklore. You play as Koda, a Tanuki guardian of the forest.
 
-**L'Histoire :** La forêt est divisée en 4 zones protégées par des entités divines. Après un événement terrible, la forêt est corrompue par des Yokais. Koda doit utiliser ses capacités pour purifier la forêt.
+**The Story:** The forest is divided into 4 zones protected by divine entities. After a terrible event, the forest is corrupted by Yokais. Koda must use his abilities to purify the forest.
 
-**Le Projet :** Projet étudiant de 3 mois (Gamagora) réalisé par 17 étudiants. Présenté lors du Gamagora Game Show 2018.`,
+**The Project:** 3-month student project (Gamagora) created by 17 students. Presented at the Gamagora Game Show 2018.`,
         category: "games",
         year: "2018",
         tech: ["Unity", "C#", "Level Design"],
@@ -406,12 +406,12 @@ L'objectif est de parcourir la forêt et collecter des ressources pour construir
     {
         id: 7,
         title: "Antivirus: Data City",
-        description: `Data City est attaquée par des virus destructeurs. Antivirus, le super-héros, doit défendre le Noyau (Core) de la ville.
+        description: `Data City is under attack by destructive viruses. Antivirus, the superhero, must defend the city's Core.
 
-**Objectif :** Protéger le Noyau au centre-ville avant que la corruption ne l'atteigne. Gelez les zones infectées et reconstruisez les cubes détruits.
+**Objective:** Protect the Core in the city center before corruption reaches it. Freeze infected areas and rebuild destroyed cubes.
 
-**Détails :** Le jeu se déroule dans une ville numérique style 'Tron' en voxel/néon. La ville est modulaire, composée de quartiers distincts reliés par des ponts, offrant une grande verticalité.
-J'étais en charge du Level Design, imaginant cet univers virtuel et créant une ville systémique où l'infection se propage quartier par quartier.`,
+**Details:** The game takes place in a voxel/neon 'Tron' style digital city. The city is modular, composed of distinct districts connected by bridges, offering great verticality.
+I was in charge of Level Design, imagining this virtual universe and creating a systemic city where the infection spreads district by district.`,
         category: "games",
         year: "2018",
         tech: ["Unity", "Voxel", "Level Design"],
@@ -450,11 +450,11 @@ J'étais en charge du Level Design, imaginant cet univers virtuel et créant une
     {
         id: 20,
         title: "Underground Water Junction",
-        description: `Carte multijoueur pour Unreal Tournament (CTF 3v3), créée avec UDK.
+        description: `Multiplayer map for Unreal Tournament (CTF 3v3), created with UDK.
 
-Le niveau représente un croisement d'égouts souterrains. Ce lieu confiné offre de multiples caches et accès, idéal pour le Capture The Flag.
-L'espace consiste en deux croisements de voies d'eau. Les joueurs peuvent longer les murs, entrer dans les bâtiments adjacents pour des embuscades, ou prendre des risques en sautant au-dessus de l'eau.
-La verticalité est présente avec des bâtiments à un étage, permettant des attaques surprises depuis le haut.`,
+The level represents a junction of underground sewers. This confined space offers multiple hiding spots and access points, ideal for Capture The Flag.
+The space consists of two water crosses. Players can walk along the walls, enter adjacent buildings for ambushes, or take risks by jumping over the water.
+Verticality is present with one-story buildings, allowing for surprise attacks from above.`,
         category: "games",
         year: "2018",
         tech: ["Unreal Engine", "Level Design", "Multiplayer"],
@@ -479,7 +479,7 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
     {
         id: 30,
         title: "Sleeping Pit",
-        description: "Puzzle game médiéval fantastique. Le joueur incarne un mage utilisant des slimes divisibles pour activer des mécanismes et résoudre des énigmes complexes dans un puits géant.",
+        description: "Medieval fantasy puzzle game. The player plays as a mage using divisible slimes to activate mechanisms and solve complex puzzles in a giant pit.",
         category: "games",
         year: "2018",
         tech: ["Game Design", "Unity", "Puzzle"],
@@ -501,14 +501,14 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
     },
     {
         id: 9,
-        title: "Déficience",
-        description: "Serious Game 2D sur le système immunitaire. Puzzle game éducatif pour comprendre l'action des virus (VIH) et le fonctionnement des défenses biologiques.",
+        title: "Deficiency",
+        description: "2D Serious Game about the immune system. Educational puzzle game to understand the action of viruses (HIV) and how biological defenses work.",
         category: "games",
         year: "2018",
         tech: ["JavaScript", "HTML5", "Serious Game"],
         icon: "fa-puzzle-piece",
         links: [
-            { label: "Jouer (Web)", url: "./EmericDosSantos.github.io-master/resources/Deficience_Web_V3/index.html" },
+            { label: "Play (Web)", url: "./EmericDosSantos.github.io-master/resources/Deficience_Web_V3/index.html" },
             { label: "Game Concept (PDF)", url: "./content/pdf/DEFICIENCE.pdf" }
         ],
         images: [
@@ -519,7 +519,7 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
     {
         id: 14,
         title: "Unity Prototypes",
-        description: "Collection de prototypes de Level Design sous Unity. Expérimentation sur les volumes, l'éclairage et les mécaniques de navigation.",
+        description: "Collection of Level Design prototypes in Unity. Experimentation with volumes, lighting, and navigation mechanics.",
         category: "games",
         year: "2018",
         tech: ["Unity", "Prototyping", "C#"],
@@ -534,13 +534,13 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
     {
         id: 17,
         title: "Tom Atom Rescue",
-        description: "Jeu de plateforme 2D futuriste / RPG. Incarnez Tom, un robot cherchant son créateur. Monde hostile, améliorations d'équipement, véhicules volants.",
+        description: "Futuristic 2D platformer / RPG. Play as Tom, a robot looking for his creator. Hostile world, equipment upgrades, flying vehicles.",
         category: "games",
         year: "2017",
         tech: ["Unity", "2D", "Platformer", "C#"],
         icon: "fa-robot",
         links: [
-            { label: "Jouer (Web)", url: "./EmericDosSantos.github.io-master/resources/Platform_Game_Prototype_1.4/index.html" }
+            { label: "Play (Web)", url: "./EmericDosSantos.github.io-master/resources/Platform_Game_Prototype_1.4/index.html" }
         ],
         images: [
             "./img/games/TomAtomRescu/platformGame1.webp",
@@ -557,7 +557,7 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
     {
         id: 31,
         title: "World Building",
-        description: "Terrains créés avec Gaea et intégrés dans Unity. Démonstration de création rapide d'environnements réalistes et variés.",
+        description: "Terrains created with Gaea and integrated into Unity. Demonstration of rapid creation of realistic and varied environments.",
         category: "design",
         year: "2019",
         tech: ["Gaea", "Unity", "Terrain", "World Building"],
@@ -571,7 +571,7 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
     {
         id: 18,
         title: "3D Portfolio",
-        description: "Galerie de modélisation 3D. Objets, environnements et rendus réalisés avec divers outils (Blender, 3ds Max, Photoshop).",
+        description: "3D modeling gallery. Objects, environments, and renders created with various tools (Blender, 3ds Max, Photoshop).",
         category: "design",
         year: "2017",
         tech: ["3D", "Modeling", "Texturing"],
@@ -600,33 +600,33 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
     {
         id: 22,
         title: "Simple Movements",
-        description: "Prototype d'apprentissage JavaScript. Développement d'un moteur de déplacement fluide et d'une IA comportementale basique.",
+        description: "JavaScript learning prototype. Development of a fluid movement engine and basic behavioral AI.",
         category: "games",
         year: "2017",
         tech: ["JavaScript", "HTML5", "Prototype"],
         icon: "fa-gamepad",
         links: [
-            { label: "Jouer", url: "./EmericDosSantos.github.io-master/resources/game/index.html" }
+            { label: "Play", url: "./EmericDosSantos.github.io-master/resources/game/index.html" }
         ],
         images: ["./img/games/Game1.webp"]
     },
     {
         id: 23,
         title: "2D Car Prototype",
-        description: "Prototype de jeu de course 2D en JavaScript. Test de gestion physique et de collisions véhiculaires.",
+        description: "2D racing game prototype in JavaScript. Testing physics management and vehicle collisions.",
         category: "games",
         year: "2017",
         tech: ["JavaScript", "HTML5", "Prototype"],
         icon: "fa-car-side",
         links: [
-            { label: "Jouer", url: "./EmericDosSantos.github.io-master/resources/CarTest/index.html" }
+            { label: "Play", url: "./EmericDosSantos.github.io-master/resources/CarTest/index.html" }
         ],
         images: ["./img/games/Game2.webp"]
     },
     {
         id: 21,
         title: "Claycity (Minecraft)",
-        description: "Ville massive inspirée de l'Amérique du Nord. Centre-ville dense, gratte-ciels, parcs et infrastructures de transport à grande échelle.",
+        description: "Massive city inspired by North America. Dense city center, skyscrapers, parks, and large-scale transport infrastructure.",
         category: "games",
         year: "2015",
         tech: ["Minecraft", "Voxel", "Level Design"],
@@ -675,19 +675,19 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
 
     {
         id: 28,
-        title: "Map Trackmania",
-        description: `Création de pistes pour Trackmania dans le cadre d'un cours de Level Design.
+        title: "Trackmania Map",
+        description: `Creation of tracks for Trackmania as part of a Level Design course.
         
-Trois pistes distinctes :
-- Verte (Facile/Technique) : Trajectoires précises.
-- Bleue (Moyenne/Vitesse) : Course d'un point A à B avec sauts et courbes rapides.
-- Verte (Compétitive) : Boucles, boosters et passages étroits pour le Time Attack.`,
+Three distinct tracks:
+- Green (Easy/Technical): Precise trajectories.
+- Blue (Medium/Speed): Race from point A to B with jumps and fast curves.
+- Green (Competitive): Loops, boosters, and narrow passages for Time Attack.`,
         category: "games",
         year: "2018",
         tech: ["Trackmania", "Racing", "Level Design"],
         icon: "fa-road",
         links: [
-            { label: "Télécharger Maps (PDF)", url: "./content/pdf/Trackmania.pdf" }
+            { label: "Download Maps (PDF)", url: "./content/pdf/Trackmania.pdf" }
         ],
         images: [
             "./img/games/Trackmania/track1.webp",
@@ -714,15 +714,15 @@ Trois pistes distinctes :
     {
         id: 29,
         title: "Perfect Angle",
-        description: `Jeu de puzzle 2D personnel. L'objectif est de déplacer le joueur dans la bonne direction pour atteindre la sortie.
+        description: `Personal 2D puzzle game. The goal is to move the player in the right direction to reach the exit.
         
-La difficulté est progressive avec des énigmes de plus en plus complexes demandant réflexion et anticipation.`,
+The difficulty is progressive with increasingly complex puzzles requiring reflection and anticipation.`,
         category: "games",
         year: "2019",
         tech: ["JavaScript", "Puzzle", "2D"],
         icon: "fa-shapes",
         links: [
-            { label: "Jouer (Web)", url: "./EmericDosSantos.github.io-master/resources/Perfect_Angle_Browser_Version/index.html" }
+            { label: "Play (Web)", url: "./EmericDosSantos.github.io-master/resources/Perfect_Angle_Browser_Version/index.html" }
         ],
         images: [
             "./img/games/PerfectAngle/pa1.webp",
@@ -735,7 +735,7 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
     {
         id: 101,
         title: "Tron (Prototype 3)",
-        description: "Jeu de Snake multijoueur local sur le thème de Tron. Vue de dessus 2D.",
+        description: "Local multiplayer Snake game on the theme of Tron. 2D top-down view.",
         category: "games",
         year: "2017",
         tech: ["JavaScript", "HTML5", "Local Multiplayer"],
@@ -749,7 +749,7 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
     {
         id: 103,
         title: "Online Store Design",
-        description: "Maquettes pour une boutique en ligne moderne. Présentation produits et interface utilisateur.",
+        description: "Mockups for a modern online store. Product presentation and user interface.",
         category: "web",
         year: "2017",
         tech: ["HTML", "CSS", "E-commerce"],
@@ -764,7 +764,7 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
     {
         id: 104,
         title: "FabLab Caldas da Rainha",
-        description: "Site web officiel du FabLab Caldas da Rainha. Plateforme interactive présentant les ressources, machines et projets de la communauté maker.",
+        description: "Official website of FabLab Caldas da Rainha. Interactive platform presenting the resources, machines, and projects of the maker community.",
         category: "web",
         year: "2017",
         tech: ["HTML", "Bootstrap", "Web Design"],
@@ -780,11 +780,11 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
     {
         id: 105,
         title: "EMOT.IO",
-        description: `Expérience cinématique interactive. Une narration visuelle qui évolue en temps réel selon les émotions du spectateur.
+        description: `Interactive cinematic experience. A visual narrative that evolves in real-time according to the viewer's emotions.
 
-**Biofeedback :** Utilisation de capteurs Bitalino (Rythme cardiaque, Température) pour analyser l'état émotionnel.
-**Traitement Temps Réel :** Transformation dynamique de l'image et du son via Processing selon les données biométriques.
-**Concept :** Comparer les données physiologiques réelles avec l'expérience subjective du spectateur.`,
+**Biofeedback:** Use of Bitalino sensors (Heart rate, Temperature) to analyze emotional state.
+**Real-Time Processing:** Dynamic transformation of image and sound via Processing according to biometric data.
+**Concept:** Compare real physiological data with the viewer's subjective experience.`,
         category: "other",
         year: "2017",
         tech: ["Arduino", "Processing", "Biofeedback", "Bitalino"],
@@ -801,7 +801,7 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
     {
         id: 106,
         title: "Graphic Design Portfolio",
-        description: "Travaux de design graphique incluant logos, mises en page et illustrations.",
+        description: "Graphic design work including logos, layouts, and illustrations.",
         category: "design",
         year: "2017",
         tech: ["Photoshop", "Illustrator", "InDesign"],
@@ -816,7 +816,7 @@ La difficulté est progressive avec des énigmes de plus en plus complexes deman
     {
         id: 107,
         title: "Satoshi Tajiri Info",
-        description: "Mise en page éditoriale sur le créateur de Pokémon, Satoshi Tajiri.",
+        description: "Editorial layout about the creator of Pokémon, Satoshi Tajiri.",
         category: "design",
         year: "2017",
         tech: ["InDesign", "Layout", "Editorial"],
@@ -841,7 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (emailLink) {
         const address = `${user}@${domain}`;
-        emailLink.textContent = "Me Contacter";
+        emailLink.textContent = "Contact Me";
         emailLink.href = `mailto:${address}`;
 
         if (emailBtn) {
@@ -926,11 +926,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filteredProjects.length === 0) {
             // Handle empty state
             const titleEl = scope.getElementById ? scope.getElementById('project-title') : scope.querySelector('#project-title');
-            if (titleEl) titleEl.textContent = 'Aucun projet pour le moment';
+            if (titleEl) titleEl.textContent = 'No projects at the moment';
 
             // Clear other elements
             const infoPanel = scope.getElementById ? scope.getElementById('dynamic-project-content') : scope.querySelector('#dynamic-project-content');
-            if (infoPanel) infoPanel.innerHTML = '<p class="current-project-desc">Sélectionnez une autre catégorie.</p>';
+            if (infoPanel) infoPanel.innerHTML = '<p class="current-project-desc">Please select another category.</p>';
 
             const techPanel = scope.getElementById ? scope.getElementById('static-project-tech') : scope.querySelector('#static-project-tech');
             if (techPanel) techPanel.innerHTML = '';
@@ -997,7 +997,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (techPanel) {
             techPanel.innerHTML = `
                 <div class="project-tech-stack">
-                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">Technologies :</h4>
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">Technologies:</h4>
                     <div class="tech-tags" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                         ${project.tech.map(t => `<span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; color: var(--text-muted); border: 1px solid var(--glass-border);">${t}</span>`).join('')}
                     </div>
@@ -1134,7 +1134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Error Handling
             newImg.onerror = function () {
                 this.onerror = null;
-                this.src = 'https://placehold.co/800x600/333/fff?text=Image+Introuvable';
+                this.src = 'https://placehold.co/800x600/333/fff?text=Image+Not+Found';
             };
 
             // Initial Draw (No animation or Project Switch)
@@ -1180,7 +1180,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             }
         } else {
-            panel.innerHTML = '<div style="color: var(--text-muted);">Aucune image</div>';
+            panel.innerHTML = '<div style="color: var(--text-muted);">No images</div>';
         }
     }
 

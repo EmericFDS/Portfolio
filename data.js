@@ -1,5 +1,5 @@
 export const categories = [
-    { id: 'all', name: 'Tous' },
+    { id: 'all', name: 'All' },
     { id: 'cv', name: 'Computer Vision' },
     { id: 'nlp', name: 'NLP' },
     { id: 'ml', name: 'Machine Learning' },
@@ -9,8 +9,8 @@ export const categories = [
 export const projects = [
     {
         id: 1,
-        title: "Système de Détection d'Anomalies",
-        description: "Un modèle de vision par ordinateur pour détecter les défauts de fabrication sur une chaîne de production en temps réel.",
+        title: "Anomaly Detection System",
+        description: "A computer vision model to detect manufacturing defects on a production line in real-time.",
         category: "cv",
         year: "2025",
         tech: ["Python", "TensorFlow", "OpenCV", "YOLOv8"],
@@ -18,8 +18,8 @@ export const projects = [
     },
     {
         id: 2,
-        title: "Assistant Juridique LLM",
-        description: "Agent conversationnel spécialisé entraîné sur le droit français, utilisant RAG pour des citations précises.",
+        title: "LLM Legal Assistant",
+        description: "Specialized conversational agent trained on French law, using RAG for precise citations.",
         category: "nlp",
         year: "2024",
         tech: ["LangChain", "OpenAI API", "Pinecone", "React"],
@@ -27,8 +27,8 @@ export const projects = [
     },
     {
         id: 3,
-        title: "Prédiction de Churn Client",
-        description: "Analyse prédictive des comportements clients pour une plateforme SaaS, augmentant la rétention de 15%.",
+        title: "Customer Churn Prediction",
+        description: "Predictive analysis of customer behavior for a SaaS platform, increasing retention by 15%.",
         category: "ml",
         year: "2024",
         tech: ["Scikit-learn", "Pandas", "XGBoost", "FastAPI"],
@@ -36,8 +36,8 @@ export const projects = [
     },
     {
         id: 4,
-        title: "Générateur d'Assets de Jeu",
-        description: "Application web permettant aux créateurs de jeux indépendants de générer des assets 2D cohérents via Stable Diffusion.",
+        title: "Game Asset Generator",
+        description: "Web application allowing indie game creators to generate consistent 2D assets via Stable Diffusion.",
         category: "web",
         year: "2023",
         tech: ["Next.js", "Stable Diffusion", "Node.js", "AWS"],
@@ -45,8 +45,8 @@ export const projects = [
     },
     {
         id: 5,
-        title: "Reconnaissance Faciale",
-        description: "Système de contrôle d'accès sécurisé basé sur l'analyse faciale 3D avec détection de vivacité.",
+        title: "Facial Recognition",
+        description: "Secure access control system based on 3D facial analysis with liveness detection.",
         category: "cv",
         year: "2023",
         tech: ["PyTorch", "FaceNet", "Docker"],
@@ -55,7 +55,7 @@ export const projects = [
     {
         id: 6,
         title: "Koda: Kiyomori's Guardian",
-        description: "Jeu d'aventure 3D onirique basé sur le folklore japonais. Incarnez un Tanuki purifiant une forêt corrompue.",
+        description: "Dreamy 3D adventure game based on Japanese folklore. Play as a Tanuki purifying a corrupted forest.",
         category: "games",
         year: "2018",
         tech: ["Unity", "C#", "Level Design"],
@@ -64,7 +64,7 @@ export const projects = [
     {
         id: 7,
         title: "Antivirus: Data City",
-        description: "Level Design d'une ville 'Tron-like' en voxels. Défense stratégique du noyau contre des virus informatiques.",
+        description: "Level Design of a 'Tron-like' city in voxels. Strategic defense of the core against computer viruses.",
         category: "games",
         year: "2018",
         tech: ["Unity", "Voxel", "Level Design"],
@@ -73,7 +73,7 @@ export const projects = [
     {
         id: 8,
         title: "Gravity Defy",
-        description: "Jeu mobile de parkour à moto low-poly. Conception de 14 niveaux avec obstacles et environnements variés.",
+        description: "Low-poly motorcycle parkour mobile game. Designed 14 levels with various obstacles and environments.",
         category: "games",
         year: "2021",
         tech: ["Unity", "Level Design", "Mobile"],
@@ -81,8 +81,8 @@ export const projects = [
     },
     {
         id: 9,
-        title: "Déficience",
-        description: "Serious Game 2D sur le système immunitaire. Puzzle game éducatif pour comprendre les virus.",
+        title: "Deficiency",
+        description: "2D Serious Game about the immune system. Educational puzzle game to understand viruses.",
         category: "games",
         year: "2018",
         tech: ["JavaScript", "HTML5", "Serious Game"],
@@ -91,7 +91,7 @@ export const projects = [
     {
         id: 10,
         title: "Pure Mahjong",
-        description: "Jeu de Mahjong photoréaliste avec plus de 1000 niveaux calendaires. Disponible sur Nintendo Switch.",
+        description: "Photorealistic Mahjong game with over 1000 calendar levels. Available on Nintendo Switch.",
         category: "games",
         year: "2020",
         tech: ["Level Design", "Nintendo Switch", "Unity"],
@@ -100,7 +100,7 @@ export const projects = [
     {
         id: 11,
         title: "Parkour Game",
-        description: "Jeu de parkour urbain à la 3ème personne. Conception de 5 niveaux avec verticalité et chemins multiples.",
+        description: "3rd person urban parkour game. Designed 5 levels with verticality and multiple paths.",
         category: "games",
         year: "2020",
         tech: ["Level Design", "Unity", "3D"],
@@ -109,7 +109,7 @@ export const projects = [
     {
         id: 12,
         title: "Sleeping Pit",
-        description: "Puzzle game médiéval fantastique. Mécanique de division de slimes pour résoudre des énigmes dans un puits géant.",
+        description: "Medieval fantasy puzzle game. Slime splitting mechanics to solve puzzles in a giant pit.",
         category: "games",
         year: "2018",
         tech: ["Game Design", "Unity", "Puzzle"],
@@ -117,8 +117,8 @@ export const projects = [
     },
     {
         id: 13,
-        title: "Map Trackmania",
-        description: "Série de circuits techniques pour Trackmania (Race, RPG, Trial). Gestion de la difficulté et du flow.",
+        title: "Trackmania Map",
+        description: "Series of technical tracks for Trackmania (Race, RPG, Trial). Difficulty and flow management.",
         category: "games",
         year: "2018",
         tech: ["Level Design", "Trackmania", "Racing"],
@@ -127,7 +127,7 @@ export const projects = [
     {
         id: 14,
         title: "Unity Prototypes",
-        description: "Collection de prototypes de Level Design explorant diverses mécaniques et ambiances sous Unity.",
+        description: "Collection of Level Design prototypes exploring various mechanics and atmospheres in Unity.",
         category: "games",
         year: "2019",
         tech: ["Unity", "Prototyping", "C#"],
@@ -136,7 +136,7 @@ export const projects = [
     {
         id: 15,
         title: "World Building (Gaea)",
-        description: "Création de terrains réalistes et environnements complexes générés via Gaea et intégrés dans Unity.",
+        description: "Creation of realistic terrains and complex environments generated via Gaea and integrated into Unity.",
         category: "games",
         year: "2019",
         tech: ["Gaea", "World Building", "Unity"],
@@ -145,7 +145,7 @@ export const projects = [
     {
         id: 16,
         title: "Hunting Game Map",
-        description: "Carte semi-réaliste vaste pour un jeu de chasse : forêts, lacs, marais. Focus sur l'immersion naturelle.",
+        description: "Vast semi-realistic map for a hunting game: forests, lakes, swamps. Focus on natural immersion.",
         category: "games",
         year: "2019",
         tech: ["Level Design", "Terrain", "Nature"],
