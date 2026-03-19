@@ -43,9 +43,6 @@ const projects = [
         year: "2025",
         tech: ["React", "Desktop App", "AI Utils", "Privacy"],
         icon: "fa-toolbox",
-        links: [
-            { label: "Official Site", url: "https://www.obvioustool.com" }
-        ],
         images: [
             "./img/ia/ObviousTool/ot1.png",
             "./img/ia/ObviousTool/ot2.png",
