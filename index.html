@@ -32,6 +32,9 @@
 
     <meta name="googlebot" content="notranslate">
     <link rel="canonical" href="https://emericfds.com/">
+    <link rel="alternate" hreflang="en" href="https://emericfds.com/">
+    <link rel="alternate" hreflang="fr" href="https://emericfds.com/?lang=fr">
+    <link rel="alternate" hreflang="x-default" href="https://emericfds.com/">
 
     <!-- Structured Data (JSON-LD) -->
     <!-- Structured Data (JSON-LD) -->
@@ -116,16 +119,16 @@
                         <span class="last-name text-gradient">FERREIRA<span class="mobile-name-break"></span>DOS
                             SANTOS</span>
                     </h1>
-                    <h2>Developer</h2>
-                    <p class="tagline">Engineering intelligent solutions and immersive worlds.</p>
+                    <h2 data-i18n="hero.subtitle">Developer</h2>
+                    <p class="tagline" data-i18n="hero.tagline">Engineering intelligent solutions and immersive worlds.</p>
                 </div>
                 <div class="hero-bg-anim"></div>
             </div>
 
             <!-- Row 1: About (Span 2) -->
             <div class="bento-card about-card">
-                <h3>About</h3>
-                <p>
+                <h3 data-i18n="about.title">About</h3>
+                <p data-i18n="about.content">
                     <strong>Versatile & Creative Developer.</strong>
                     <br><br>
                     My expertise ranges from orchestrating <strong>AI Agents</strong> (LLM, RAG) to developing immersive 
@@ -136,13 +139,13 @@
 
             <!-- Row 2: Projects (Span 3) -->
             <div class="bento-card domains-card">
-                <h3>Projects</h3>
+                <h3 data-i18n="projects.title">Projects</h3>
                 <div class="project-filters">
-                    <button class="filter-btn active" data-filter="ai">AI</button>
-                    <button class="filter-btn" data-filter="web">Web</button>
-                    <button class="filter-btn" data-filter="games">Games</button>
-                    <button class="filter-btn" data-filter="design">Design</button>
-                    <button class="filter-btn" data-filter="other">Other</button>
+                    <button class="filter-btn active" data-filter="ai" data-i18n="projects.filter.ai">AI</button>
+                    <button class="filter-btn" data-filter="web" data-i18n="projects.filter.web">Web</button>
+                    <button class="filter-btn" data-filter="games" data-i18n="projects.filter.games">Games</button>
+                    <button class="filter-btn" data-filter="design" data-i18n="projects.filter.design">Design</button>
+                    <button class="filter-btn" data-filter="other" data-i18n="projects.filter.other">Other</button>
                 </div>
 
                 <!-- Unified Carousel Container -->
@@ -176,14 +179,14 @@
                             <div class="project-nav-controls phantom-controls">
                                 <button class="nav-btn prev-proj"
                                     style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                    <i class="fas fa-chevron-left"></i> <span>Previous</span>
+                                    <i class="fas fa-chevron-left"></i> <span data-i18n="projects.nav.previous">Previous</span>
                                 </button>
 
                                 <span style="font-size: 0.9rem; min-width: 50px; text-align: center;">-- / --</span>
 
                                 <button class="nav-btn next-proj"
                                     style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                    <span>Next</span> <i class="fas fa-chevron-right"></i>
+                                    <span data-i18n="projects.nav.next">Next</span> <i class="fas fa-chevron-right"></i>
                                 </button>
                             </div>
                         </div>
@@ -258,7 +261,7 @@
                                 <button id="btn-prev-proj" class="nav-btn prev-proj" onclick="window.changeProject(-1)"
                                     aria-label="Previous Project"
                                     style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                    <i class="fas fa-chevron-left"></i> <span>Previous</span>
+                                    <i class="fas fa-chevron-left"></i> <span data-i18n="projects.nav.previous">Previous</span>
                                 </button>
 
                                 <span id="project-nav-counter"
@@ -268,7 +271,7 @@
                                 <button id="btn-next-proj" class="nav-btn next-proj" onclick="window.changeProject(1)"
                                     aria-label="Next Project"
                                     style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                    <span>Next</span> <i class="fas fa-chevron-right"></i>
+                                    <span data-i18n="projects.nav.next">Next</span> <i class="fas fa-chevron-right"></i>
                                 </button>
                             </div>
 
@@ -283,24 +286,24 @@
 
             <!-- Contact Section -->
             <div class="footer-section">
-                <h3>Contact</h3>
+                <h3 data-i18n="footer.contact">Contact</h3>
                 <div class="email-wrapper-enhanced">
-                    <a href="javascript:void(0)" class="email-link" id="secure-email">View Email</a>
+                    <a href="javascript:void(0)" class="email-link" id="secure-email" data-i18n="footer.email.label">View Email</a>
                 </div>
             </div>
 
             <!-- Location Section -->
             <div class="footer-section">
-                <h3>Location</h3>
+                <h3 data-i18n="footer.location">Location</h3>
                 <a href="https://www.google.com/maps/place/Geneva" target="_blank" class="location-wrapper">
                     <p class="location-text"><i class="fas fa-map-marker-alt"
-                            style="margin-right: 8px; color: var(--accent);"></i> Geneva, Switzerland</p>
+                            style="margin-right: 8px; color: var(--accent);"></i> <span data-i18n="footer.location.text">Geneva, Switzerland</span></p>
                 </a>
             </div>
 
             <!-- Socials -->
             <div class="footer-section">
-                <h3>Links</h3>
+                <h3 data-i18n="footer.links">Links</h3>
                 <div class="social-links-enhanced">
                     <a href="https://www.linkedin.com/in/emericfds/" target="_blank" class="social-btn linkedin"
                         aria-label="LinkedIn">
@@ -424,6 +427,8 @@
         </div>
     </div>
 
+    <script src="translations.js"></script>
+    <script src="i18n.js"></script>
     <script src="script.js" defer></script>
 
     <!-- Deferred Google Analytics -->
