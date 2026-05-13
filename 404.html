@@ -12,6 +12,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Deferred Google Analytics -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var gtmLoaded = false;
+            function loadGTM() {
+                if (gtmLoaded) return;
+                gtmLoaded = true;
+
+                var script = document.createElement("script");
+                script.src = "https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0";
+                script.async = true;
+                document.head.appendChild(script);
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-H7GJV51SW0');
+            }
+
+            // Load on interaction or after delay
+            window.addEventListener('scroll', loadGTM, { once: true });
+            window.addEventListener('mousemove', loadGTM, { once: true });
+            window.addEventListener('touchstart', loadGTM, { once: true });
+            setTimeout(loadGTM, 4000); // Fallback
+        });
+    </script>
+
     <style>
         .error-container {
             grid-column: span 10;
