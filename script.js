@@ -26,14 +26,14 @@ const projects = [
         tech: ["Tauri", "React", "Rust", "Image Processing"],
         icon: "fa-camera",
         images: [
-            "./img/other/PhotoLift/pl1.png",
-            "./img/other/PhotoLift/pl2.png",
-            "./img/other/PhotoLift/pl3.png",
-            "./img/other/PhotoLift/pl4.png",
-            "./img/other/PhotoLift/pl5.png",
-            "./img/other/PhotoLift/pl6.png",
-            "./img/other/PhotoLift/pl7.png",
-            "./img/other/PhotoLift/pl8.png"
+            "./img/other/PhotoLift/pl1.webp",
+            "./img/other/PhotoLift/pl2.webp",
+            "./img/other/PhotoLift/pl3.webp",
+            "./img/other/PhotoLift/pl4.webp",
+            "./img/other/PhotoLift/pl5.webp",
+            "./img/other/PhotoLift/pl6.webp",
+            "./img/other/PhotoLift/pl7.webp",
+            "./img/other/PhotoLift/pl8.webp"
         ]
     },
     {
@@ -54,17 +54,17 @@ const projects = [
         tech: ["React", "Desktop App", "AI Utils", "Privacy"],
         icon: "fa-toolbox",
         images: [
-            "./img/ia/ObviousTool/ot1.png",
-            "./img/ia/ObviousTool/ot2.png",
-            "./img/ia/ObviousTool/ot3.png",
-            "./img/ia/ObviousTool/ot4.png",
-            "./img/ia/ObviousTool/ot5.png",
-            "./img/ia/ObviousTool/ot6.png",
-            "./img/ia/ObviousTool/ot7.png",
-            "./img/ia/ObviousTool/ot8.png",
-            "./img/ia/ObviousTool/ot9.png",
-            "./img/ia/ObviousTool/ot10.png",
-            "./img/ia/ObviousTool/ot11.png"
+            "./img/ia/ObviousTool/ot1.webp",
+            "./img/ia/ObviousTool/ot2.webp",
+            "./img/ia/ObviousTool/ot3.webp",
+            "./img/ia/ObviousTool/ot4.webp",
+            "./img/ia/ObviousTool/ot5.webp",
+            "./img/ia/ObviousTool/ot6.webp",
+            "./img/ia/ObviousTool/ot7.webp",
+            "./img/ia/ObviousTool/ot8.webp",
+            "./img/ia/ObviousTool/ot9.webp",
+            "./img/ia/ObviousTool/ot10.webp",
+            "./img/ia/ObviousTool/ot11.webp"
         ]
     },
     {
@@ -86,18 +86,18 @@ const projects = [
         icon: "fa-file-alt",
 
         images: [
-            "./img/ia/CVite/cv1.png",
-            "./img/ia/CVite/cv2.png",
-            "./img/ia/CVite/cv3.png",
-            "./img/ia/CVite/cv4.png",
-            "./img/ia/CVite/cv5.png",
-            "./img/ia/CVite/cv6.png",
-            "./img/ia/CVite/cv7.png",
-            "./img/ia/CVite/cv8.png",
-            "./img/ia/CVite/cv9.png",
-            "./img/ia/CVite/cv10.png",
-            "./img/ia/CVite/cv11.png",
-            "./img/ia/CVite/cv12.png"
+            "./img/ia/CVite/cv1.webp",
+            "./img/ia/CVite/cv2.webp",
+            "./img/ia/CVite/cv3.webp",
+            "./img/ia/CVite/cv4.webp",
+            "./img/ia/CVite/cv5.webp",
+            "./img/ia/CVite/cv6.webp",
+            "./img/ia/CVite/cv7.webp",
+            "./img/ia/CVite/cv8.webp",
+            "./img/ia/CVite/cv9.webp",
+            "./img/ia/CVite/cv10.webp",
+            "./img/ia/CVite/cv11.webp",
+            "./img/ia/CVite/cv12.webp"
         ]
     },
     {
@@ -119,10 +119,10 @@ const projects = [
         icon: "fa-robot",
 
         images: [
-            "./img/ia/SmartBucket/sb1.png",
-            "./img/ia/SmartBucket/sb2.png",
-            "./img/ia/SmartBucket/sb3.png",
-            "./img/ia/SmartBucket/sb4.png"
+            "./img/ia/SmartBucket/sb1.webp",
+            "./img/ia/SmartBucket/sb2.webp",
+            "./img/ia/SmartBucket/sb3.webp",
+            "./img/ia/SmartBucket/sb4.webp"
         ]
     },
     {
@@ -144,10 +144,10 @@ const projects = [
         icon: "fa-user-secret",
 
         images: [
-            "./img/web/GhostLink/ghostlink_4.png",
-            "./img/web/GhostLink/ghostlink_3.png",
-            "./img/web/GhostLink/ghostlink_2.png",
-            "./img/web/GhostLink/ghostlink_1.png"
+            "./img/web/GhostLink/ghostlink_4.webp",
+            "./img/web/GhostLink/ghostlink_3.webp",
+            "./img/web/GhostLink/ghostlink_2.webp",
+            "./img/web/GhostLink/ghostlink_1.webp"
         ]
     },
 
@@ -829,8 +829,8 @@ La difficulté est progressive avec des puzzles de plus en plus complexes néces
         tech: ["JavaScript", "HTML5", "Local Multiplayer"],
         icon: "fa-gamepad",
         images: [
-            "./assets/images/legacy/tron1.png",
-            "./assets/images/legacy/tron2.png"
+            "./assets/images/legacy/tron1.webp",
+            "./assets/images/legacy/tron2.webp"
         ]
     },
 
@@ -861,10 +861,10 @@ La difficulté est progressive avec des puzzles de plus en plus complexes néces
         icon: "fa-tools",
 
         images: [
-            "./assets/images/legacy/html_css/WebPage1.png",
-            "./assets/images/legacy/html_css/WebPage2.png",
-            "./assets/images/legacy/html_css/WebPage3.png",
-            "./assets/images/legacy/html_css/WebPage4.png"
+            "./assets/images/legacy/html_css/WebPage1.webp",
+            "./assets/images/legacy/html_css/WebPage2.webp",
+            "./assets/images/legacy/html_css/WebPage3.webp",
+            "./assets/images/legacy/html_css/WebPage4.webp"
         ]
     },
     {
