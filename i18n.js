@@ -137,7 +137,10 @@ const I18N = (() => {
     function updateLangToggle() {
         const btn = document.getElementById('lang-toggle');
         if (btn) {
-            const flag = _locale === 'fr' ? '🇬🇧' : '🇫🇷';
+            const ukSvg = `<svg class="flag-icon" viewBox="0 0 640 480" width="18" height="13" aria-hidden="true" style="border-radius:2px; display:inline-block; vertical-align:middle; box-shadow:0 0 2px rgba(0,0,0,0.5);"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 245 180L565 0h75v60L435 240l205 180v60h-75L320 300 75 480H0v-60l205-180L0 60V0z"/><path fill="#C8102E" d="m424 288 216 156v36h-48L376 324zm-208-96L0 36V0h48l216 156zm184-48 240-180h-48L352 108zm-240 96L0 444v36h48l240-180z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M267 0h106v480H267zM0 187h640v106H0z"/></svg>`;
+            const frSvg = `<svg class="flag-icon" viewBox="0 0 640 480" width="18" height="13" aria-hidden="true" style="border-radius:2px; display:inline-block; vertical-align:middle; box-shadow:0 0 2px rgba(0,0,0,0.5);"><path fill="#002654" d="M0 0h213.3v480H0z"/><path fill="#FFF" d="M213.3 0h213.4v480H213.3z"/><path fill="#CE1126" d="M426.7 0H640v480H426.7z"/></svg>`;
+
+            const flag = _locale === 'fr' ? ukSvg : frSvg;
             const label = _locale === 'fr' ? 'EN' : 'FR';
             btn.innerHTML = `${flag} <span>${label}</span>`;
             btn.setAttribute('aria-label', _locale === 'fr' ? 'Switch to English' : 'Passer en français');

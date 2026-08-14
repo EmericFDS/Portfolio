@@ -9,7 +9,8 @@
     <!-- SEO Meta Tags -->
     <meta name="description"
         content="Portfolio of Emeric Ferreira Dos Santos, AI Developer specializing in LLMs, RAG, Computer Vision, and Game Design. Based in Geneva, Switzerland. Explore projects in AI agents, web apps, and indie games.">
-    <meta name="keywords" content="Emeric Dos Santos, EmericFDS, Portfolio, AI Developer, LLM, RAG, Computer Vision, Machine Learning, Game Designer, Level Design, Geneva, Switzerland, Unity, Python, React">
+    <meta name="keywords"
+        content="Emeric Dos Santos, EmericFDS, Portfolio, AI Developer, LLM, RAG, Computer Vision, Machine Learning, Game Designer, Level Design, Geneva, Switzerland, Unity, Python, React">
     <meta name="author" content="Emeric Dos Santos">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
@@ -17,7 +18,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://emericfds.com/">
     <meta property="og:title" content="Emeric Ferreira Dos Santos — AI Developer & Game Designer">
-    <meta property="og:description" content="AI Developer specializing in LLMs, RAG, and Computer Vision. Game Designer with 10+ shipped projects. Based in Geneva, Switzerland.">
+    <meta property="og:description"
+        content="AI Developer specializing in LLMs, RAG, and Computer Vision. Game Designer with 10+ shipped projects. Based in Geneva, Switzerland.">
     <meta property="og:image" content="https://emericfds.com/img/profile.jpg">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Emeric FDS Portfolio">
@@ -26,7 +28,8 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://emericfds.com/">
     <meta property="twitter:title" content="Emeric Ferreira Dos Santos — AI Developer & Game Designer">
-    <meta property="twitter:description" content="AI Developer specializing in LLMs, RAG, and Computer Vision. Game Designer with 10+ shipped projects. Based in Geneva, Switzerland.">
+    <meta property="twitter:description"
+        content="AI Developer specializing in LLMs, RAG, and Computer Vision. Game Designer with 10+ shipped projects. Based in Geneva, Switzerland.">
     <meta property="twitter:image" content="https://emericfds.com/img/profile.jpg">
     <meta name="twitter:creator" content="@emericfds">
 
@@ -36,7 +39,11 @@
     <link rel="alternate" hreflang="fr" href="https://emericfds.com/?lang=fr">
     <link rel="alternate" hreflang="x-default" href="https://emericfds.com/">
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Autonomous AI Agent Discovery (llms.txt Standard) -->
+    <link rel="alternate" type="text/markdown" href="https://emericfds.com/llms.txt" title="AI Agent Specification (LLMs.txt)">
+    <link rel="alternate" type="text/plain" href="https://emericfds.com/llms-full.txt" title="Full AI Agent Knowledge Base">
+    <meta name="ai-agent" content="optimized, context=developer-portfolio, standard=llms.txt">
+
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     [
@@ -84,699 +91,431 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;700&display=swap">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;700&display=swap"
-        rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
-    </noscript>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
 
     <!-- Icons -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.min.css">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 
 <body>
-    <div class="background-glob"></div>
-    <div class="background-grid"></div>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <main class="bento-wrapper">
-        <div class="bento-grid" id="bento-grid">
+    <!-- Canvas UI Interactive Engine -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="bg-ambient-layer" aria-hidden="true"></div>
+    <div class="bg-grid-overlay" aria-hidden="true"></div>
 
-            <!-- Row 1: Hero (Span 2) -->
-            <div class="bento-card hero-card">
-                <div class="hero-content">
-                    <h1>
-                        <span class="first-name">Emeric</span>
-                        <br>
-                        <span class="last-name text-gradient">FERREIRA<span class="mobile-name-break"></span>DOS
-                            SANTOS</span>
+    <!-- Custom Cursor Follower (Desktop Fine Pointer Only) -->
+    <div class="custom-cursor-dot" id="custom-cursor-dot" aria-hidden="true"></div>
+    <div class="custom-cursor-ring" id="custom-cursor-ring" aria-hidden="true"></div>
+
+    <!-- Floating Top Navigation Bar (Divided Islands) -->
+    <header class="site-header" role="banner">
+        <!-- Left Island: Identity & Availability Status -->
+        <div class="header-left-island">
+            <a href="#" class="brand-wrapper" aria-label="Emeric F.D.S. Portfolio Home">
+                <div class="brand-avatar-wrapper">
+                    <img src="./img/profile.jpg" alt="Emeric F.D.S." class="brand-avatar-img" width="36" height="36">
+                </div>
+                <div class="brand-name">Emeric <span class="brand-tag">F.D.S.</span></div>
+            </a>
+
+            <div class="header-island-divider" aria-hidden="true"></div>
+
+            <div class="status-pill">
+                <span class="status-indicator-dot"></span>
+                <span data-i18n="nav.status">Available</span>
+            </div>
+        </div>
+
+        <!-- Right Island: Graphic Language Switcher -->
+        <div class="header-right-island">
+            <button id="lang-toggle" class="lang-toggle-btn" aria-label="Switch language">
+                <svg class="flag-icon" viewBox="0 0 640 480" width="18" height="13" aria-hidden="true" style="border-radius:2px; display:inline-block; vertical-align:middle; box-shadow:0 0 2px rgba(0,0,0,0.5);"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 245 180L565 0h75v60L435 240l205 180v60h-75L320 300 75 480H0v-60l205-180L0 60V0z"/><path fill="#C8102E" d="m424 288 216 156v36h-48L376 324zm-208-96L0 36V0h48l216 156zm184-48 240-180h-48L352 108zm-240 96L0 444v36h48l240-180z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M267 0h106v480H267zM0 187h640v106H0z"/></svg>
+                <span>EN</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Bento Grid Content -->
+    <main class="bento-wrapper" id="main-content">
+        <div class="bento-grid">
+
+            <!-- Row 1: Hero Card (Span 7) -->
+            <section class="bento-card hero-card" aria-label="Hero Overview">
+                <div>
+                    <div class="hero-role-badge">
+                        <i class="fas fa-sparkles"></i>
+                        <span data-i18n="hero.role">Creative Technologist • AI & Game Dev</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="hero-first-name">Emeric</span><br>
+                        <span class="text-gradient">FERREIRA DOS SANTOS</span>
                     </h1>
-                    <h2 data-i18n="hero.subtitle">Developer</h2>
-                    <p class="tagline" data-i18n="hero.tagline">Engineering intelligent solutions and immersive worlds.</p>
-                </div>
-                <div class="hero-bg-anim"></div>
-            </div>
-
-            <!-- Row 1: About (Span 2) -->
-            <div class="bento-card about-card">
-                <h3 data-i18n="about.title">About</h3>
-                <p data-i18n="about.content">
-                    <strong>Versatile & Creative Developer.</strong>
-                    <br><br>
-                    My expertise ranges from orchestrating <strong>AI Agents</strong> (LLM, RAG) to developing immersive 
-                    <strong>Video Games</strong> (Unity, C#).
-                    With international experience gained across France, Switzerland, and Portugal, I design innovative solutions that combine technical robustness with polished design.
-                </p>
-            </div>
-
-            <!-- Row 2: Projects (Span 3) -->
-            <div class="bento-card domains-card">
-                <h3 data-i18n="projects.title">Projects</h3>
-                <div class="project-filters">
-                    <button class="filter-btn active" data-filter="ai" data-i18n="projects.filter.ai">AI</button>
-                    <button class="filter-btn" data-filter="web" data-i18n="projects.filter.web">Web</button>
-                    <button class="filter-btn" data-filter="games" data-i18n="projects.filter.games">Games</button>
-                    <button class="filter-btn" data-filter="design" data-i18n="projects.filter.design">Design</button>
-                    <button class="filter-btn" data-filter="other" data-i18n="projects.filter.other">Other</button>
+                    <p class="hero-tagline" data-i18n="hero.tagline">
+                        Engineering intelligent solutions, creative UI interactions, and immersive game worlds.
+                    </p>
                 </div>
 
-                <!-- Unified Carousel Container -->
-                <div id="project-carousel-view"
-                    style="display: flex; flex-direction: column; width: 100%; height: 100%; overflow: hidden;">
+                <div class="hero-cta-group">
+                    <a href="#projects-section" class="btn-primary">
+                        <i class="fas fa-layer-group"></i>
+                        <span data-i18n="hero.ctaProjects">Explore Projects</span>
+                    </a>
+                    <a href="#contact-section" class="btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        <span data-i18n="hero.ctaContact">Get in Touch</span>
+                    </a>
+                </div>
+            </section>
 
-                    <!-- Fixed Header (Title + Nav) moved to top of card -->
-                    <div class="project-header-fixed"
-                        style="padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border); margin-bottom: 1rem; flex-shrink: 0; width: 100%;">
+            <!-- Row 1: About Card (Span 5) -->
+            <section class="bento-card about-card" id="about-section" aria-label="About Me">
+                <div>
+                    <div class="card-label">
+                        <i class="fas fa-user-astronaut"></i>
+                        <span data-i18n="about.title">About Me</span>
+                    </div>
+                    <p class="about-content" data-i18n="about.content">
+                        <strong>Versatile & Creative Developer.</strong>
+                        <br><br>
+                        My expertise ranges from orchestrating <strong>AI Agents</strong> (LLM, RAG, Computer Vision) to developing immersive 
+                        <strong>Video Games</strong> (Unity, C#).
+                        With international experience gained across France, Switzerland, and Portugal, I design innovative solutions that combine technical robustness with polished design.
+                    </p>
+                </div>
 
-                        <!-- Single Row: Title + Status (Left) + Buttons (Right) -->
-                        <!-- Single Row: Title + Status (Left) -->
-                        <!-- Single Row: Title + Status (Left) + Buttons (Right) -->
-                        <div class="project-header-row">
+                <div class="about-badges">
+                    <span class="skill-pill"><i class="fas fa-brain"></i> <span data-i18n="about.badge1">AI Agents & LLM RAG</span></span>
+                    <span class="skill-pill"><i class="fas fa-gamepad"></i> <span data-i18n="about.badge2">10+ Shipped Games</span></span>
+                    <span class="skill-pill"><i class="fas fa-palette"></i> <span data-i18n="about.badge3">Creative UI & Canvas</span></span>
+                </div>
+            </section>
 
-                            <!-- Title & Icon & Status (Visible in Animation) -->
-                            <div class="project-title-group">
-                                <i id="project-icon" class="fas fa-code"
-                                    style="color:var(--accent); font-size:1.2rem; flex-shrink: 0;"></i>
-                                <h3 id="project-title"
-                                    style="margin:0; font-size: 1.5rem; color: var(--text-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                    Project Title
-                                </h3>
-                                <div id="project-status" class="status-indicator"
-                                    style="display:inline-flex; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; margin-left: 0.5rem;">
-                                    2024 • CATEGORY
+            <!-- Row 2: Featured Projects Showcase (Span 12) -->
+            <section class="bento-card domains-card" id="projects-section" aria-label="Featured Projects">
+                <div class="projects-top-bar">
+                    <div class="card-label" style="margin-bottom: 0;">
+                        <i class="fas fa-diagram-project"></i>
+                        <span data-i18n="projects.title">Featured Projects</span>
+                    </div>
+
+                    <div class="project-filters" role="tablist" aria-label="Project Category Filters">
+                        <button class="filter-btn active" data-filter="ai" role="tab" aria-selected="true">
+                            <span data-i18n="projects.filter.ai">AI</span>
+                            <span class="filter-count">5</span>
+                        </button>
+                        <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">
+                            <span data-i18n="projects.filter.web">Web</span>
+                            <span class="filter-count">3</span>
+                        </button>
+                        <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">
+                            <span data-i18n="projects.filter.games">Games</span>
+                            <span class="filter-count">19</span>
+                        </button>
+                        <button class="filter-btn" data-filter="design" role="tab" aria-selected="false">
+                            <span data-i18n="projects.filter.design">Design</span>
+                            <span class="filter-count">4</span>
+                        </button>
+                        <button class="filter-btn" data-filter="other" role="tab" aria-selected="false">
+                            <span data-i18n="projects.filter.other">Other</span>
+                            <span class="filter-count">2</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Master-Detail Project Carousel View -->
+                <div class="projects-content-wrapper">
+                    <!-- Left Column: Details & Tech -->
+                    <div class="project-info-container">
+                        <div>
+                            <div class="project-meta-header">
+                                <div class="project-icon-badge">
+                                    <i id="project-icon" class="fas fa-code"></i>
+                                </div>
+                                <span id="project-category-badge" class="project-category-pill">AI</span>
+                                <span id="project-year-badge" class="project-year-pill">2026</span>
+                            </div>
+
+                            <h2 id="project-title" class="project-title-text">Project Title</h2>
+
+                            <div class="relative-scroll-wrapper">
+                                <div id="dynamic-project-content" class="dynamic-scroll-content">
+                                    <!-- Dynamic Description & Specs -->
                                 </div>
                             </div>
 
-                            <!-- PHANTOM Buttons (Occupies space for layout, but invisible) -->
-                            <div class="project-nav-controls phantom-controls">
-                                <button class="nav-btn prev-proj"
-                                    style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                    <i class="fas fa-chevron-left"></i> <span data-i18n="projects.nav.previous">Previous</span>
-                                </button>
+                            <div id="project-links-list" class="project-links-container">
+                                <!-- Dynamic Action Links (Demo, Video, Repo, PDF) -->
+                            </div>
+                        </div>
 
-                                <span style="font-size: 0.9rem; min-width: 50px; text-align: center;">-- / --</span>
-
-                                <button class="nav-btn next-proj"
-                                    style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                    <span data-i18n="projects.nav.next">Next</span> <i class="fas fa-chevron-right"></i>
-                                </button>
+                        <div class="project-tech-footer">
+                            <div class="card-label" style="margin-bottom: 0.35rem; font-size: 0.78rem;">
+                                <i class="fas fa-microchip"></i>
+                                <span data-i18n="projects.tech.title">Technologies:</span>
+                            </div>
+                            <div id="project-tech-tags" class="tech-tags-list">
+                                <!-- Dynamic Tech Tags -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Split Content -->
-                    <div class="projects-content-wrapper">
-                        <!-- 1/3 Info (Project Details) -->
-                        <div class="project-info-container" id="project-info-panel"
-                            style="display: flex; flex-direction: column;">
-                            <!-- Scrollable Content Wrapper -->
-                            <div class="relative-scroll-wrapper"
-                                style="position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; margin-bottom: 0;">
-                                <div id="dynamic-project-content" class="fade-content"
-                                    style="flex: 1; overflow-y: auto; padding-right: 5px; padding-bottom: 1.5rem;">
-                                    <!-- Description, Links, Tech Stack injected here -->
-                                </div>
-                                <div id="scroll-shadow" class="scroll-shadow-indicator"></div>
-                            </div>
+                    <!-- Right Column: Interactive Gallery & Filmstrip -->
+                    <div class="project-images-container">
+                        <div class="gallery-main-view">
+                            <button id="btn-prev-img" class="gallery-nav-btn left" onclick="window.changeImage(-1)" aria-label="Previous image">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
 
-                            <!-- Fixed Tech Stack Footer -->
-                            <div id="static-project-tech"
-                                style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border); flex-shrink: 0;">
-                                <!-- Tech Stack injected here -->
-                            </div>
+                            <img id="gallery-active-image" class="gallery-main-image" src="./img/other/PhotoLift/pl1.webp" alt="Project preview image">
+
+                            <button id="btn-next-img" class="gallery-nav-btn right" onclick="window.changeImage(1)" aria-label="Next image">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+
+                            <button id="expand-image-btn" class="gallery-expand-btn" aria-label="Expand image in high resolution">
+                                <i class="fas fa-expand"></i>
+                                <span data-i18n="projects.viewFullscreen">Expand</span>
+                            </button>
                         </div>
 
-                        <!-- 2/3 Images (Image Slider) -->
-                        <div class="project-images-container" id="project-image-panel">
-                            <button id="btn-prev-img" class="img-nav-btn left" onclick="window.changeImage(-1)"
-                                aria-label="Previous Image"><i class="fas fa-chevron-left"></i></button>
-                            <div id="dynamic-image-display" class="image-display">
-                                <!-- Image Injected by JS -->
-                            </div>
-                            <button id="btn-next-img" class="img-nav-btn right" onclick="window.changeImage(1)"
-                                aria-label="Next Image"><i class="fas fa-chevron-right"></i></button>
+                        <!-- Filmstrip Thumbnails -->
+                        <div id="gallery-filmstrip" class="gallery-filmstrip" aria-label="Project thumbnails gallery">
+                            <!-- Injected by JavaScript -->
                         </div>
                     </div>
                 </div>
 
-                <!-- STATIC Navigation Overlay (Duplicates Layout for Perfect Alignment) -->
-                <!-- We duplicate the padding structure of .domains-card (2rem) AND the header structure -->
-                <div class="project-nav-overlay"
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 2rem; pointer-events: none; z-index: 20; display: flex; flex-direction: column;">
+                <!-- Navigation Controls Footer -->
+                <div class="project-controls-footer">
+                    <button id="btn-prev-proj" class="project-nav-btn" onclick="window.changeProject(-1)" aria-label="Previous project">
+                        <i class="fas fa-arrow-left"></i>
+                        <span data-i18n="projects.nav.previous">Previous</span>
+                    </button>
 
-                    <!-- SPACER: Duplicates H3 "Projects" -->
-                    <h3 style="visibility: hidden; margin-bottom: 0;">Projects</h3>
-
-                    <!-- SPACER: Duplicates .project-filters -->
-                    <div class="project-filters" style="visibility: hidden; margin: 1rem 0;">
-                        <button class="filter-btn">AI</button>
-                        <button class="filter-btn">Web</button>
-                        <button class="filter-btn">Games</button>
-                        <button class="filter-btn">Design</button>
-                        <button class="filter-btn">Other</button>
+                    <div id="project-nav-counter" class="project-counter-indicator" aria-live="polite">
+                        <span>01</span> / 05
                     </div>
 
-                    <!-- Duplicated Header Structure (Matches project-header-fixed) -->
-                    <div
-                        style="padding-bottom: 1rem; border-bottom: 1px solid transparent; margin-bottom: 1rem; width: 100%;">
-                        <div class="project-header-row">
+                    <button id="btn-next-proj" class="project-nav-btn" onclick="window.changeProject(1)" aria-label="Next project">
+                        <span data-i18n="projects.nav.next">Next</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
 
-                            <!-- PHANTOM Title (Invisible, just for spacing if needed, though flex-between handles it) -->
-                            <div class="project-title-group phantom-title">
-                                <i class="fas fa-code" style="font-size:1.2rem;"></i>
-                                <h3 style="margin:0; font-size: 1.5rem; line-height: 1.2;">Title</h3>
-                                <div class="status-indicator" style="font-size: 0.8rem;">Status</div>
-                            </div>
+            <!-- Row 3: Compact Contact & Socials Footer (Span 12) -->
+            <footer class="bento-card contact-footer" id="contact-section" aria-label="Contact Information">
+                <div class="footer-main-row">
+                    <!-- Identity & Location -->
+                    <div class="footer-col-brand">
+                        <div class="footer-brand-title">Emeric <span class="brand-tag">F.D.S.</span></div>
+                        <a href="https://www.google.com/maps/place/Geneva" target="_blank" rel="noopener noreferrer" class="location-pill" aria-label="Geneva, Switzerland Google Maps">
+                            <i class="fas fa-location-dot"></i>
+                            <span data-i18n="footer.location.text">Geneva, Switzerland</span>
+                        </a>
+                    </div>
 
-                            <!-- REAL Buttons (Visible & Clickable) -->
-                            <div class="project-nav-controls real-controls" style="pointer-events: auto;">
-                                <button id="btn-prev-proj" class="nav-btn prev-proj" onclick="window.changeProject(-1)"
-                                    aria-label="Previous Project"
-                                    style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                    <i class="fas fa-chevron-left"></i> <span data-i18n="projects.nav.previous">Previous</span>
-                                </button>
+                    <!-- Email Action Group -->
+                    <div class="footer-col-email">
+                        <div class="email-copy-group">
+                            <button id="copy-email-btn" class="email-display-btn" aria-label="Copy email address to clipboard">
+                                <i class="fas fa-copy"></i>
+                                <span data-i18n="footer.copyEmail">Copy Email</span>
+                            </button>
+                            <a id="secure-email-link" href="mailto:contact@emericfds.com" class="email-display-btn mail-direct" aria-label="Send direct email to contact@emericfds.com">
+                                <i class="fas fa-paper-plane"></i> contact@emericfds.com
+                            </a>
+                        </div>
+                    </div>
 
-                                <span id="project-nav-counter"
-                                    style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500; min-width: 50px; text-align: center;">--
-                                    / --</span>
-
-                                <button id="btn-next-proj" class="nav-btn next-proj" onclick="window.changeProject(1)"
-                                    aria-label="Next Project"
-                                    style="width: auto; padding: 0 12px; border-radius: 20px; gap: 8px;">
-                                    <span data-i18n="projects.nav.next">Next</span> <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-
+                    <!-- Social Networks -->
+                    <div class="footer-col-social">
+                        <div class="social-links-row">
+                            <a href="https://www.linkedin.com/in/emericfds/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Emeric Ferreira Dos Santos LinkedIn Profile">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/EmericFDS" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Emeric Ferreira Dos Santos GitHub Profile">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Row 3: Contact & Socials (Span 4) -->
-        <div class="bento-card contact-footer">
-
-            <!-- Contact Section -->
-            <div class="footer-section">
-                <h3 data-i18n="footer.contact">Contact</h3>
-                <div class="email-wrapper-enhanced">
-                    <a href="javascript:void(0)" class="email-link" id="secure-email" data-i18n="footer.email.label">View Email</a>
+                <!-- Discreet Centered Copyright Bar -->
+                <div class="footer-sub-row">
+                    <span>© 2026 Emeric Ferreira Dos Santos. <span data-i18n="footer.allRights">All rights reserved.</span></span>
                 </div>
-            </div>
-
-            <!-- Location Section -->
-            <div class="footer-section">
-                <h3 data-i18n="footer.location">Location</h3>
-                <a href="https://www.google.com/maps/place/Geneva" target="_blank" class="location-wrapper">
-                    <p class="location-text"><i class="fas fa-map-marker-alt"
-                            style="margin-right: 8px; color: var(--accent);"></i> <span data-i18n="footer.location.text">Geneva, Switzerland</span></p>
-                </a>
-            </div>
-
-            <!-- Socials -->
-            <div class="footer-section">
-                <h3 data-i18n="footer.links">Links</h3>
-                <div class="social-links-enhanced">
-                    <a href="https://www.linkedin.com/in/emericfds/" target="_blank" class="social-btn linkedin"
-                        aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://github.com/EmericFDS" target="_blank" class="social-btn github"
-                        aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+            </footer>
 
         </div> <!-- Close bento-grid -->
-    </main> <!-- Close bento-wrapper -->
+    </main>
 
     <!-- ========================================================
-         SEO: Static project content for search engine crawlers.
-         This section is visually hidden but readable by bots,
-         ensuring all projects are indexed even with JS rendering.
+         SEO: Static crawlable content for search engines.
+         Ensures 100% SEO indexability across all 33 projects.
          ======================================================== -->
-        <section id="seo-static-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:-9999px;top:-9999px;">
+    <section id="seo-static-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:-9999px;top:-9999px;">
         <div lang="en">
             <h2>Portfolio Projects — Emeric Ferreira Dos Santos</h2>
             <p>AI Developer and Game Designer based in Geneva, Switzerland. Specializing in LLMs, RAG pipelines, Computer Vision, and Unity Game Development.</p>
 
             <article>
                 <h3>PhotoLift — OTHER (2026)</h3>
-                <div>Desktop application for fast photo management and processing.<br>        <br><strong>Optimized Workflow:</strong> Automatic import, sorting by sessions, and quick touch-ups.<br><strong>Powerful Tools:</strong> Integrated image editor with color adjustments, cropping, and filters.<br><strong>Intuitive Interface:</strong> Modern and clean design for a smooth user experience.</div>
+                <div>Desktop application for fast photo management and processing.<br><strong>Optimized Workflow:</strong> Automatic import, sorting by sessions, and quick touch-ups.<br><strong>Powerful Tools:</strong> Integrated image editor with color adjustments, cropping, and filters.<br><strong>Intuitive Interface:</strong> Modern and clean design for a smooth user experience.</div>
                 <p><strong>Technologies:</strong> Tauri, React, Rust, Image Processing</p>
             </article>
 
             <article>
                 <h3>Obvious Tool — NLP (2025)</h3>
-                <div>Your Digital Swiss Army Knife. A unified suite of tools for developers and creatives.<br><br><strong>Multi-Tools:</strong> Over 50 essential tools (Converters, Encoders, Image/Audio processing) in one app.<br><strong>Embedded AI:</strong> AI-powered modules for paraphrasing, text correction, and translation.<br><strong>Private & Fast:</strong> Runs locally, ad-free, with a modern and fluid interface.</div>
+                <div>Your Digital Swiss Army Knife. A unified suite of tools for developers and creatives.<br><strong>Multi-Tools:</strong> Over 50 essential tools (Converters, Encoders, Image/Audio processing) in one app.<br><strong>Embedded AI:</strong> AI-powered modules for paraphrasing, text correction, and translation.<br><strong>Private & Fast:</strong> Runs locally, ad-free, with a modern and fluid interface.</div>
                 <p><strong>Technologies:</strong> React, Desktop App, AI Utils, Privacy</p>
             </article>
 
             <article>
                 <h3>CVite — NLP (2025)</h3>
-                <div>Intelligent resume creation platform powered by AI.<br><br><strong>Smart Extraction:</strong> Automatic analysis of existing resumes (PDF, Image) to populate your profile instantly.<br><strong>Advanced Editor:</strong> Real-time customization of templates, colors, and layouts.<br><strong>UX Focused:</strong> Smooth and intuitive interface designed to simplify job hunting.</div>
+                <div>Intelligent resume creation platform powered by AI.<br><strong>Smart Extraction:</strong> Automatic analysis of existing resumes (PDF, Image) to populate your profile instantly.<br><strong>Advanced Editor:</strong> Real-time customization of templates, colors, and layouts.<br><strong>UX Focused:</strong> Smooth and intuitive interface designed to simplify job hunting.</div>
                 <p><strong>Technologies:</strong> React, NLP, AI Integration, Vite</p>
             </article>
 
             <article>
                 <h3>Smart Bucket — ML (2025)</h3>
-                <div>Autonomous crypto portfolio management system driven by AI.<br><br><strong>Autopilot:</strong> Dynamic asset allocation and automated rebalancing across BTC, ETH, SOL, etc.<br><strong>Strategic Analysis:</strong> 24/7 market monitoring, sentiment analysis, and low-latency execution (0.0s).<br><strong>Modern Interface:</strong> Comprehensive dashboard for tracking performance, liquidity, and transaction history.</div>
+                <div>Autonomous crypto portfolio management system driven by AI.<br><strong>Autopilot:</strong> Dynamic asset allocation and automated rebalancing across BTC, ETH, SOL, etc.<br><strong>Strategic Analysis:</strong> 24/7 market monitoring, sentiment analysis, and low-latency execution (0.0s).<br><strong>Modern Interface:</strong> Comprehensive dashboard for tracking performance, liquidity, and transaction history.</div>
                 <p><strong>Technologies:</strong> Python, Machine Learning, React, Trading</p>
             </article>
 
             <article>
                 <h3>GhostLink — WEB (2024)</h3>
-                <div>Share Secrets Securely. Encrypt text, files, or images into a secure link. Nothing is ever stored on a server. The link is the data.<br><br><strong>Total Security:</strong> Full client-side AES-256 encryption. Your data never leaves your device without being encrypted.<br><strong>Privacy:</strong> No permanent storage. The generated link contains all information needed for decryption.<br><strong>Simplicity:</strong> Share passwords, private keys, or sensitive files in one click.</div>
+                <div>Share Secrets Securely. Encrypt text, files, or images into a secure link. Nothing is ever stored on a server. The link is the data.<br><strong>Total Security:</strong> Full client-side AES-256 encryption. Your data never leaves your device without being encrypted.<br><strong>Privacy:</strong> No permanent storage. The generated link contains all information needed for decryption.<br><strong>Simplicity:</strong> Share passwords, private keys, or sensitive files in one click.</div>
                 <p><strong>Technologies:</strong> React, Cryptography, Web App</p>
             </article>
 
             <article>
                 <h3>Turn Base Battle Game — GAMES (2021)</h3>
-                <div>This is a mobile game project for which I created 4 different scenes.<br><br>First, I was tasked with creating the home environment that appears at the start of the game. This scene later serves as the background for the main menu. It represents the entrance to a demonic dungeon where battles take place.<br><br>Next, I focused on creating three levels that are combat zones within this dungeon: a throne room, a library, and finally underground tombs.<br><br>I also created a final outdoor level which remains experimental.</div>
-                <p><strong>Technologies:</strong> Level Design, Mobile, Unity</p>
+                <div>Mobile game project with 4 unique dungeon environments.<br><strong>Technologies:</strong> Level Design, Mobile, Unity</div>
             </article>
 
             <article>
                 <h3>Gravity Defy — GAMES (2021)</h3>
-                <div>Gravity Defy is a mobile motorcycle parkour game. I participated in the creation of 14 levels for this client.<br><br>The gameplay is demanding: you must cross levels full of various obstacles. I worked on the level design to offer an interesting and progressive challenge in polished Low Poly environments (city, forest, mountain).</div>
-                <p><strong>Technologies:</strong> Unity, Level Design, Mobile</p>
+                <div>Mobile motorcycle parkour game with 14 polished levels.<br><strong>Technologies:</strong> Unity, Level Design, Mobile</div>
             </article>
 
             <article>
                 <h3>Cubic Level — GAMES (2021)</h3>
-                <div>A charming level designed for a top-down mobile game.<br><br>The level is entirely composed of blocks and assets with a 'Voxel' cubic art style.<br>The main challenge of this map was to create an environment with fluid circulation for the player. I managed to make navigation fun while maintaining a polished aesthetic. I also created some animations for the game.</div>
-                <p><strong>Technologies:</strong> Voxel, Level Design, Mobile</p>
-                <p><strong>Links:</strong> <a href="https://www.youtube.com/watch?v=HIJzEN4P0TA">Vidéo Animation</a></p>
-            </article>
-
-            <article>
-                <h3>Parkour Game — GAMES (2020)</h3>
-                <div>For this project, I created 5 levels for a Parkour-style game where the player must jump, climb walls, and find the exit.<br><br>The character is played in the third person, offering a better overview of the environment.<br>It's an urban environment designed to maximize verticality and match the Parkour universe.<br>Some levels are also indoors, offering new challenges and a variety of environments.</div>
-                <p><strong>Technologies:</strong> Level Design, Unity, 3D</p>
+                <div>Charming voxel top-down mobile game map.<br><strong>Technologies:</strong> Voxel, Level Design, Mobile</div>
             </article>
 
             <article>
                 <h3>Pure Mahjong — GAMES (2020)</h3>
-                <div>Pure Mahjong is a photorealistic Mahjong game that takes the user on a journey through 24 Chinese solar calendar events.<br><br>The game contains hundreds of levels for each day of the year. With over 1000 individually designed levels, Pure Mahjong offers a wide variety of gameplay. Some levels are solved in minutes, others can take hours.<br><br>Every day, 4 new levels await you, ranging from relatively easy to very difficult.</div>
-                <p><strong>Technologies:</strong> Level Design, Nintendo Switch, Unity</p>
-                <p><strong>Links:</strong> <a href="https://www.nintendo.co.uk/Games/Nintendo-Switch-download-software/Pure-Mahjong-1579159.html">Nintendo eShop</a>, <a href="http://thebinaryfamily.com/fr/pure-mahjong/">Site Officiel</a></p>
-            </article>
-
-            <article>
-                <h3>Cartoon Level — GAMES (2019)</h3>
-                <div>Prototype map for a cartoon game intended for a young audience.<br><br>The constraints were to create a small to medium-sized map in a natural environment (forest, mountain, lake, rivers). The cartoon style was chosen for its colorful visual impact.<br><br>I used the Unity engine and the Gaea terrain generator. The project was completed in one month in constant iteration with the client.</div>
-                <p><strong>Technologies:</strong> Gaea, Unity, Cartoon</p>
-            </article>
-
-            <article>
-                <h3>Hunting Game Map — GAMES (2019)</h3>
-                <div>Creation of a vast map for a first-person shooter (FPS) hunting game.<br><br>The map is composed of forests, lakes, swamps, rivers, mountains, and plains. It is designed to be vast to immerse the player in a rich natural environment.<br>The semi-realistic graphic style was created with a dedicated asset pack and a terrain generator for the entire topography.</div>
-                <p><strong>Technologies:</strong> Level Design, Terrain, Nature</p>
-            </article>
-
-            <article>
-                <h3>3 Pigs Game — GAMES (2019)</h3>
-                <div>Level created for a freelance mission, based on the story of the 3 little pigs.<br><br>The level is linear (right to left) and divided into 6 distinct zones: the mother's house, the straw construction zone, an enemy zone, the wood house, a bridge crossing a lake, and finally the brick house.<br>The goal is to travel through the forest and collect resources to build the houses and resist the wolf.</div>
-                <p><strong>Technologies:</strong> Level Design, Freelance, Unity</p>
+                <div>Photorealistic Mahjong game with 1000+ levels for Nintendo Switch.<br><strong>Technologies:</strong> Level Design, Nintendo Switch, Unity</div>
             </article>
 
             <article>
                 <h3>Koda: Kiyomori's Guardian — GAMES (2018)</h3>
-                <div>Koda: Kiyomori's Guardian is a dreamy 3D platform adventure game based on Japanese folklore. You play as Koda, a Tanuki guardian of the forest.<br><br><strong>The Story:</strong> The forest is divided into 4 zones protected by divine entities. After a terrible event, the forest is corrupted by Yokais. Koda must use his abilities to purify the forest.<br><br><strong>The Project:</strong> 3-month student project (Gamagora) created by 17 students. Presented at the Gamagora Game Show 2018.</div>
-                <p><strong>Technologies:</strong> Unity, C#, Level Design</p>
-                <p><strong>Links:</strong> <a href="https://gamagora.itch.io/koda">Télécharger (Itch.io)</a>, <a href="https://www.youtube.com/watch?v=RNpgW7T4oU8">Trailer</a></p>
+                <div>Dreamy 3D platform adventure game based on Japanese folklore.<br><strong>Technologies:</strong> Unity, C#, Level Design</div>
             </article>
 
             <article>
                 <h3>Antivirus: Data City — GAMES (2018)</h3>
-                <div>Data City is under attack by destructive viruses. Antivirus, the superhero, must defend the city's Core.<br><br><strong>Objective:</strong> Protect the Core in the city center before corruption reaches it. Freeze infected areas and rebuild destroyed cubes.<br><br><strong>Details:</strong> The game takes place in a voxel/neon 'Tron' style digital city. The city is modular, composed of distinct districts connected by bridges, offering great verticality.<br>I was in charge of Level Design, imagining this virtual universe and creating a systemic city where the infection spreads district by district.</div>
-                <p><strong>Technologies:</strong> Unity, Voxel, Level Design</p>
-                <p><strong>Links:</strong> <a href="https://mega.nz/#!i1x21ZDS!rblSNnBw0pUnwYVsCiM9CFgiGLcGM-ZKGwS6p8goxek">Télécharger</a>, <a href="https://www.youtube.com/watch?v=vxTW0W2Zbok">Trailer</a></p>
+                <div>Tron-like voxel city level design for core defense against viruses.<br><strong>Technologies:</strong> Unity, Voxel, Level Design</div>
             </article>
-
-            <article>
-                <h3>Underground Water Junction — GAMES (2018)</h3>
-                <div>Multiplayer map for Unreal Tournament (CTF 3v3), created with UDK.<br><br>The level represents a junction of underground sewers. This confined space offers multiple hiding spots and access points, ideal for Capture The Flag.<br>The space consists of two water crosses. Players can walk along the walls, enter adjacent buildings for ambushes, or take risks by jumping over the water.<br>Verticality is present with one-story buildings, allowing for surprise attacks from above.</div>
-                <p><strong>Technologies:</strong> Unreal Engine, Level Design, Multiplayer</p>
-                <p><strong>Links:</strong> <a href="./content/pdf/UndergroundWaterJunction.pdf">Télécharger Map</a>, <a href="https://www.youtube.com/watch?v=C6l0aLzwxuM">Trailer</a></p>
-            </article>
-
-            <article>
-                <h3>Sleeping Pit — GAMES (2018)</h3>
-                <div>Medieval fantasy puzzle game. The player plays as a mage using divisible slimes to activate mechanisms and solve complex puzzles in a giant pit.</div>
-                <p><strong>Technologies:</strong> Game Design, Unity, Puzzle</p>
-                <p><strong>Links:</strong> <a href="./content/pdf/GDO_PSP_SLEEPING_PIT.pdf">Game Design Doc (PDF)</a></p>
-            </article>
-
-            <article>
-                <h3>Deficiency — GAMES (2018)</h3>
-                <div>2D Serious Game about the immune system. Educational puzzle game to understand the action of viruses (HIV) and how biological defenses work.</div>
-                <p><strong>Technologies:</strong> JavaScript, HTML5, Serious Game</p>
-                <p><strong>Links:</strong> <a href="./EmericDosSantos.github.io-master/resources/Deficience_Web_V3/index.html">Play (Web)</a>, <a href="./content/pdf/DEFICIENCE.pdf">Game Concept (PDF)</a></p>
-            </article>
-
-            <article>
-                <h3>Unity Prototypes — GAMES (2018)</h3>
-                <div>Collection of Level Design prototypes in Unity. Experimentation with volumes, lighting, and navigation mechanics.</div>
-                <p><strong>Technologies:</strong> Unity, Prototyping, C#</p>
-            </article>
-
-            <article>
-                <h3>Tom Atom Rescue — GAMES (2017)</h3>
-                <div>Futuristic 2D platformer / RPG. Play as Tom, a robot looking for his creator. Hostile world, equipment upgrades, flying vehicles.</div>
-                <p><strong>Technologies:</strong> Unity, 2D, Platformer, C#</p>
-                <p><strong>Links:</strong> <a href="./EmericDosSantos.github.io-master/resources/Platform_Game_Prototype_1.4/index.html">Play (Web)</a></p>
-            </article>
-
-            <article>
-                <h3>World Building — DESIGN (2019)</h3>
-                <div>Terrains created with Gaea and integrated into Unity. Demonstration of rapid creation of realistic and varied environments.</div>
-                <p><strong>Technologies:</strong> Gaea, Unity, Terrain, World Building</p>
-            </article>
-
-            <article>
-                <h3>3D Portfolio — DESIGN (2017)</h3>
-                <div>3D modeling gallery. Objects, environments, and renders created with various tools (Blender, 3ds Max, Photoshop).</div>
-                <p><strong>Technologies:</strong> 3D, Modeling, Texturing</p>
-            </article>
-
-            <article>
-                <h3>Simple Movements — GAMES (2017)</h3>
-                <div>JavaScript learning prototype. Development of a fluid movement engine and basic behavioral AI.</div>
-                <p><strong>Technologies:</strong> JavaScript, HTML5, Prototype</p>
-                <p><strong>Links:</strong> <a href="./EmericDosSantos.github.io-master/resources/game/index.html">Play</a></p>
-            </article>
-
-            <article>
-                <h3>2D Car Prototype — GAMES (2017)</h3>
-                <div>2D racing game prototype in JavaScript. Testing physics management and vehicle collisions.</div>
-                <p><strong>Technologies:</strong> JavaScript, HTML5, Prototype</p>
-                <p><strong>Links:</strong> <a href="./EmericDosSantos.github.io-master/resources/CarTest/index.html">Play</a></p>
-            </article>
-
-            <article>
-                <h3>Claycity (Minecraft) — GAMES (2015)</h3>
-                <div>Massive city inspired by North America. Dense city center, skyscrapers, parks, and large-scale transport infrastructure.</div>
-                <p><strong>Technologies:</strong> Minecraft, Voxel, Level Design</p>
-            </article>
-
-            <article>
-                <h3>Trackmania Map — GAMES (2018)</h3>
-                <div>Creation of tracks for Trackmania as part of a Level Design course.<br>        <br>Three distinct tracks:<br><ul style="padding-left: 20px; list-style-type: disc;"><li>Green (Easy/Technical): Precise trajectories.</li></ul><br><ul style="padding-left: 20px; list-style-type: disc;"><li>Blue (Medium/Speed): Race from point A to B with jumps and fast curves.</li></ul><br><ul style="padding-left: 20px; list-style-type: disc;"><li>Green (Competitive): Loops, boosters, and narrow passages for Time Attack.</li></ul></div>
-                <p><strong>Technologies:</strong> Trackmania, Racing, Level Design</p>
-                <p><strong>Links:</strong> <a href="./content/pdf/Trackmania.pdf">Download Maps (PDF)</a></p>
-            </article>
-
-            <article>
-                <h3>Perfect Angle — GAMES (2019)</h3>
-                <div>Personal 2D puzzle game. The goal is to move the player in the right direction to reach the exit.<br>        <br>The difficulty is progressive with increasingly complex puzzles requiring reflection and anticipation.</div>
-                <p><strong>Technologies:</strong> JavaScript, Puzzle, 2D</p>
-                <p><strong>Links:</strong> <a href="./EmericDosSantos.github.io-master/resources/Perfect_Angle_Browser_Version/index.html">Play (Web)</a></p>
-            </article>
-
-            <article>
-                <h3>Tron (Prototype 3) — GAMES (2017)</h3>
-                <div>Local multiplayer Snake game on the theme of Tron. 2D top-down view.</div>
-                <p><strong>Technologies:</strong> JavaScript, HTML5, Local Multiplayer</p>
-            </article>
-
-            <article>
-                <h3>Online Store Design — WEB (2017)</h3>
-                <div>Mockups for a modern online store. Product presentation and user interface.</div>
-                <p><strong>Technologies:</strong> HTML, CSS, E-commerce</p>
-            </article>
-
-            <article>
-                <h3>FabLab Caldas da Rainha — WEB (2017)</h3>
-                <div>Official website of FabLab Caldas da Rainha. Interactive platform presenting the resources, machines, and projects of the maker community.</div>
-                <p><strong>Technologies:</strong> HTML, Bootstrap, Web Design</p>
-            </article>
-
-            <article>
-                <h3>EMOT.IO — OTHER (2017)</h3>
-                <div>Interactive cinematic experience. A visual narrative that evolves in real-time according to the viewer's emotions.<br><br><strong>Biofeedback:</strong> Use of Bitalino sensors (Heart rate, Temperature) to analyze emotional state.<br><strong>Real-Time Processing:</strong> Dynamic transformation of image and sound via Processing according to biometric data.<br><strong>Concept:</strong> Compare real physiological data with the viewer's subjective experience.</div>
-                <p><strong>Technologies:</strong> Arduino, Processing, Biofeedback, Bitalino</p>
-            </article>
-
-            <article>
-                <h3>Graphic Design Portfolio — DESIGN (2017)</h3>
-                <div>Graphic design work including logos, layouts, and illustrations.</div>
-                <p><strong>Technologies:</strong> Photoshop, Illustrator, InDesign</p>
-            </article>
-
-            <article>
-                <h3>Satoshi Tajiri Info — DESIGN (2017)</h3>
-                <div>Editorial layout about the creator of Pokémon, Satoshi Tajiri.</div>
-                <p><strong>Technologies:</strong> InDesign, Layout, Editorial</p>
-            </article>
-
         </div>
+
         <div lang="fr">
             <h2>Projets de Portfolio — Emeric Ferreira Dos Santos</h2>
             <p>Développeur IA et Game Designer basé à Genève, Suisse. Spécialisé dans les LLMs, les pipelines RAG, la vision par ordinateur et le développement de jeux Unity.</p>
 
             <article>
-                <h3>PhotoLift — OTHER (2026)</h3>
-                <div>Application de bureau pour la gestion et le traitement rapide de photos.<br>        <br><strong>Workflow Optimisé :</strong> Import automatique, tri par sessions et retouches rapides.<br><strong>Outils Puissants :</strong> Éditeur d'images intégré avec ajustements de couleurs, recadrage et filtres.<br><strong>Interface Intuitive :</strong> Design moderne et épuré pour une expérience utilisateur fluide.</div>
-                <p><strong>Technologies :</strong> Tauri, React, Rust, Image Processing</p>
+                <h3>PhotoLift — AUTRE (2026)</h3>
+                <div>Application de bureau pour la gestion et le traitement rapide de photos.<br><strong>Workflow Optimisé :</strong> Import automatique, tri par sessions et retouches rapides.<br><strong>Outils Puissants :</strong> Éditeur d'images intégré avec ajustements de couleurs, recadrage et filtres.<br><strong>Interface Intuitive :</strong> Design moderne et épuré pour une expérience utilisateur fluide.</div>
+                <p><strong>Technologies :</strong> Tauri, React, Rust, Traitement d'images</p>
             </article>
 
             <article>
                 <h3>Obvious Tool — NLP (2025)</h3>
-                <div>Votre Couteau Suisse Numérique. Une suite unifiée d'outils pour développeurs et créatifs.<br><br><strong>Multi-Outils :</strong> Plus de 50 outils essentiels (Convertisseurs, Encodeurs, traitement Image/Audio) en une seule app.<br><strong>IA Embarquée :</strong> Modules IA pour la paraphrase, la correction de texte et la traduction.<br><strong>Privé & Rapide :</strong> Fonctionne en local, sans pub, avec une interface moderne et fluide.</div>
-                <p><strong>Technologies :</strong> React, Desktop App, AI Utils, Privacy</p>
+                <div>Votre Couteau Suisse Numérique. Plus de 50 outils essentiels en local avec modules IA embarqués.</div>
+                <p><strong>Technologies :</strong> React, Desktop App, AI Utils, Confidentialité</p>
             </article>
 
             <article>
                 <h3>CVite — NLP (2025)</h3>
-                <div>Plateforme intelligente de création de CV propulsée par l'IA.<br><br><strong>Extraction Intelligente :</strong> Analyse automatique de CV existants (PDF, Image) pour remplir votre profil instantanément.<br><strong>Éditeur Avancé :</strong> Personnalisation en temps réel des modèles, couleurs et mises en page.<br><strong>UX au Centre :</strong> Interface fluide et intuitive conçue pour simplifier la recherche d'emploi.</div>
-                <p><strong>Technologies :</strong> React, NLP, AI Integration, Vite</p>
+                <div>Plateforme intelligente de création de CV avec extraction IA et éditeur en temps réel.</div>
+                <p><strong>Technologies :</strong> React, NLP, Intégration IA, Vite</p>
             </article>
 
             <article>
                 <h3>Smart Bucket — ML (2025)</h3>
-                <div>Système autonome de gestion de portefeuille crypto piloté par l'IA.<br><br><strong>Pilote Automatique :</strong> Allocation dynamique des actifs et rééquilibrage automatisé sur BTC, ETH, SOL, etc.<br><strong>Analyse Stratégique :</strong> Surveillance du marché 24/7, analyse de sentiment et exécution à faible latence (0.0s).<br><strong>Interface Moderne :</strong> Tableau de bord complet pour suivre les performances, la liquidité et l'historique des transactions.</div>
+                <div>Système autonome de gestion de portefeuille crypto piloté par l'IA et analyse de sentiment.</div>
                 <p><strong>Technologies :</strong> Python, Machine Learning, React, Trading</p>
             </article>
 
             <article>
                 <h3>GhostLink — WEB (2024)</h3>
-                <div>Partagez vos secrets en toute sécurité. Chiffrez du texte, des fichiers ou des images dans un lien sécurisé. Rien n'est jamais stocké sur un serveur. Le lien est la donnée.<br><br><strong>Sécurité Totale :</strong> Chiffrement AES-256 entièrement côté client. Vos données ne quittent jamais votre appareil sans être chiffrées.<br><strong>Confidentialité :</strong> Aucun stockage permanent. Le lien généré contient toutes les informations nécessaires au déchiffrement.<br><strong>Simplicité :</strong> Partagez mots de passe, clés privées ou fichiers sensibles en un clic.</div>
-                <p><strong>Technologies :</strong> React, Cryptography, Web App</p>
+                <div>Partage de secrets sécurisé avec chiffrement client AES-256 sans stockage serveur.</div>
+                <p><strong>Technologies :</strong> React, Cryptographie, Web App</p>
             </article>
-
-            <article>
-                <h3>Turn Base Battle Game — GAMES (2021)</h3>
-                <div>Projet de jeu mobile pour lequel j'ai créé 4 scènes différentes.<br><br>D'abord, j'ai été chargé de créer l'environnement d'accueil qui apparaît au démarrage du jeu. Cette scène sert ensuite de fond pour le menu principal. Elle représente l'entrée d'un donjon démoniaque où se déroulent les combats.<br><br>Ensuite, j'ai créé trois niveaux qui sont des zones de combat dans ce donjon : une salle du trône, une bibliothèque et enfin des tombes souterraines.<br><br>J'ai également créé un dernier niveau extérieur qui reste expérimental.</div>
-                <p><strong>Technologies :</strong> Level Design, Mobile, Unity</p>
-            </article>
-
-            <article>
-                <h3>Gravity Defy — GAMES (2021)</h3>
-                <div>Gravity Defy est un jeu mobile de parkour en moto. J'ai participé à la création de 14 niveaux pour ce client.<br><br>Le gameplay est exigeant : il faut traverser des niveaux remplis d'obstacles variés. J'ai travaillé sur le level design pour offrir un challenge intéressant et progressif dans des environnements Low Poly soignés (ville, forêt, montagne).</div>
-                <p><strong>Technologies :</strong> Unity, Level Design, Mobile</p>
-            </article>
-
-            <article>
-                <h3>Cubic Level — GAMES (2021)</h3>
-                <div>Un niveau charmant conçu pour un jeu mobile en vue de dessus.<br><br>Le niveau est entièrement composé de blocs et d'assets avec un style artistique cubique 'Voxel'.<br>Le principal défi de cette carte était de créer un environnement avec une circulation fluide pour le joueur. J'ai réussi à rendre la navigation amusante tout en maintenant une esthétique soignée. J'ai également créé des animations pour le jeu.</div>
-                <p><strong>Technologies :</strong> Voxel, Level Design, Mobile</p>
-                <p><strong>Liens :</strong> <a href="https://www.youtube.com/watch?v=HIJzEN4P0TA">Vidéo Animation</a></p>
-            </article>
-
-            <article>
-                <h3>Parkour Game — GAMES (2020)</h3>
-                <div>Pour ce projet, j'ai créé 5 niveaux pour un jeu style Parkour où le joueur doit sauter, escalader les murs et trouver la sortie.<br><br>Le personnage se joue en troisième personne, offrant une meilleure vue d'ensemble de l'environnement.<br>C'est un environnement urbain conçu pour maximiser la verticalité et correspondre à l'univers du Parkour.<br>Certains niveaux sont également en intérieur, offrant de nouveaux défis et une variété d'environnements.</div>
-                <p><strong>Technologies :</strong> Level Design, Unity, 3D</p>
-            </article>
-
-            <article>
-                <h3>Pure Mahjong — GAMES (2020)</h3>
-                <div>Pure Mahjong est un jeu de Mahjong photo-réaliste qui emmène l'utilisateur dans un voyage à travers 24 événements du calendrier solaire chinois.<br><br>Le jeu contient des centaines de niveaux pour chaque jour de l'année. Avec plus de 1000 niveaux conçus individuellement, Pure Mahjong offre une grande variété de gameplay. Certains niveaux se résolvent en minutes, d'autres peuvent prendre des heures.<br><br>Chaque jour, 4 nouveaux niveaux vous attendent, allant de relativement facile à très difficile.</div>
-                <p><strong>Technologies :</strong> Level Design, Nintendo Switch, Unity</p>
-                <p><strong>Liens :</strong> <a href="https://www.nintendo.co.uk/Games/Nintendo-Switch-download-software/Pure-Mahjong-1579159.html">Nintendo eShop</a>, <a href="http://thebinaryfamily.com/fr/pure-mahjong/">Site Officiel</a></p>
-            </article>
-
-            <article>
-                <h3>Cartoon Level — GAMES (2019)</h3>
-                <div>Carte prototype pour un jeu cartoon destiné à un jeune public.<br><br>Les contraintes étaient de créer une carte de taille petite à moyenne dans un environnement naturel (forêt, montagne, lac, rivières). Le style cartoon a été choisi pour son impact visuel coloré.<br><br>J'ai utilisé le moteur Unity et le générateur de terrain Gaea. Le projet a été réalisé en un mois en itération constante avec le client.</div>
-                <p><strong>Technologies :</strong> Gaea, Unity, Cartoon</p>
-            </article>
-
-            <article>
-                <h3>Hunting Game Map — GAMES (2019)</h3>
-                <div>Création d'une vaste carte pour un jeu de chasse en vue à la première personne (FPS).<br><br>La carte est composée de forêts, lacs, marécages, rivières, montagnes et plaines. Elle est conçue pour être vaste afin d'immerger le joueur dans un environnement naturel riche.<br>Le style graphique semi-réaliste a été créé avec un pack d'assets dédié et un générateur de terrain pour toute la topographie.</div>
-                <p><strong>Technologies :</strong> Level Design, Terrain, Nature</p>
-            </article>
-
-            <article>
-                <h3>3 Pigs Game — GAMES (2019)</h3>
-                <div>Niveau créé pour une mission freelance, basé sur l'histoire des 3 petits cochons.<br><br>Le niveau est linéaire (de droite à gauche) et divisé en 6 zones distinctes : la maison de la mère, la zone de construction en paille, une zone d'ennemis, la maison en bois, un pont traversant un lac, et enfin la maison en briques.<br>L'objectif est de traverser la forêt et de collecter des ressources pour construire les maisons et résister au loup.</div>
-                <p><strong>Technologies :</strong> Level Design, Freelance, Unity</p>
-            </article>
-
-            <article>
-                <h3>Koda: Kiyomori's Guardian — GAMES (2018)</h3>
-                <div>Koda : Le Gardien de Kiyomori est un jeu d'aventure/plateforme 3D onirique basé sur le folklore japonais. Vous incarnez Koda, un Tanuki gardien de la forêt.<br><br><strong>L'Histoire :</strong> La forêt est divisée en 4 zones protégées par des entités divines. Après un événement terrible, la forêt est corrompue par les Yokais. Koda doit utiliser ses capacités pour purifier la forêt.<br><br><strong>Le Projet :</strong> Projet étudiant de 3 mois (Gamagora) créé par 17 étudiants. Présenté au Gamagora Game Show 2018.</div>
-                <p><strong>Technologies :</strong> Unity, C#, Level Design</p>
-                <p><strong>Liens :</strong> <a href="https://gamagora.itch.io/koda">Télécharger (Itch.io)</a>, <a href="https://www.youtube.com/watch?v=RNpgW7T4oU8">Trailer</a></p>
-            </article>
-
-            <article>
-                <h3>Antivirus: Data City — GAMES (2018)</h3>
-                <div>Data City est attaquée par des virus destructeurs. Antivirus, le super-héros, doit défendre le Cœur de la ville.<br><br><strong>Objectif :</strong> Protéger le Cœur au centre de la ville avant que la corruption ne l'atteigne. Geler les zones infectées et reconstruire les cubes détruits.<br><br><strong>Détails :</strong> Le jeu se déroule dans une ville numérique en voxel/néon style 'Tron'. La ville est modulaire, composée de quartiers distincts reliés par des ponts, offrant une grande verticalité.<br>J'étais en charge du Level Design, imaginant cet univers virtuel et créant une ville systémique où l'infection se propage quartier par quartier.</div>
-                <p><strong>Technologies :</strong> Unity, Voxel, Level Design</p>
-                <p><strong>Liens :</strong> <a href="https://mega.nz/#!i1x21ZDS!rblSNnBw0pUnwYVsCiM9CFgiGLcGM-ZKGwS6p8goxek">Télécharger</a>, <a href="https://www.youtube.com/watch?v=vxTW0W2Zbok">Trailer</a></p>
-            </article>
-
-            <article>
-                <h3>Underground Water Junction — GAMES (2018)</h3>
-                <div>Carte multijoueur pour Unreal Tournament (CTF 3v3), créée avec UDK.<br><br>Le niveau représente une jonction d'égouts souterrains. Cet espace confiné offre de multiples cachettes et points d'accès, idéal pour le Capture The Flag.<br>L'espace est composé de deux croix d'eau. Les joueurs peuvent longer les murs, entrer dans les bâtiments adjacents pour tendre des embuscades, ou prendre des risques en sautant par-dessus l'eau.<br>La verticalité est présente avec des bâtiments à un étage, permettant des attaques surprises d'en haut.</div>
-                <p><strong>Technologies :</strong> Unreal Engine, Level Design, Multiplayer</p>
-                <p><strong>Liens :</strong> <a href="./content/pdf/UndergroundWaterJunction.pdf">Télécharger Map</a>, <a href="https://www.youtube.com/watch?v=C6l0aLzwxuM">Trailer</a></p>
-            </article>
-
-            <article>
-                <h3>Sleeping Pit — GAMES (2018)</h3>
-                <div>Jeu de puzzle médiéval-fantastique. Le joueur incarne un mage utilisant des slimes divisibles pour activer des mécanismes et résoudre des puzzles complexes dans une fosse géante.</div>
-                <p><strong>Technologies :</strong> Game Design, Unity, Puzzle</p>
-                <p><strong>Liens :</strong> <a href="./content/pdf/GDO_PSP_SLEEPING_PIT.pdf">Game Design Doc (PDF)</a></p>
-            </article>
-
-            <article>
-                <h3>Deficiency — GAMES (2018)</h3>
-                <div>Serious Game 2D sur le système immunitaire. Jeu de puzzle éducatif pour comprendre l'action des virus (VIH) et le fonctionnement des défenses biologiques.</div>
-                <p><strong>Technologies :</strong> JavaScript, HTML5, Serious Game</p>
-                <p><strong>Liens :</strong> <a href="./EmericDosSantos.github.io-master/resources/Deficience_Web_V3/index.html">Play (Web)</a>, <a href="./content/pdf/DEFICIENCE.pdf">Game Concept (PDF)</a></p>
-            </article>
-
-            <article>
-                <h3>Unity Prototypes — GAMES (2018)</h3>
-                <div>Collection de prototypes de Level Design sous Unity. Expérimentation avec les volumes, l'éclairage et les mécaniques de navigation.</div>
-                <p><strong>Technologies :</strong> Unity, Prototyping, C#</p>
-            </article>
-
-            <article>
-                <h3>Tom Atom Rescue — GAMES (2017)</h3>
-                <div>Platformer/RPG 2D futuriste. Incarnez Tom, un robot à la recherche de son créateur. Monde hostile, améliorations d'équipement, véhicules volants.</div>
-                <p><strong>Technologies :</strong> Unity, 2D, Platformer, C#</p>
-                <p><strong>Liens :</strong> <a href="./EmericDosSantos.github.io-master/resources/Platform_Game_Prototype_1.4/index.html">Play (Web)</a></p>
-            </article>
-
-            <article>
-                <h3>World Building — DESIGN (2019)</h3>
-                <div>Terrains créés avec Gaea et intégrés dans Unity. Démonstration de création rapide d'environnements réalistes et variés.</div>
-                <p><strong>Technologies :</strong> Gaea, Unity, Terrain, World Building</p>
-            </article>
-
-            <article>
-                <h3>3D Portfolio — DESIGN (2017)</h3>
-                <div>Galerie de modélisation 3D. Objets, environnements et rendus créés avec divers outils (Blender, 3ds Max, Photoshop).</div>
-                <p><strong>Technologies :</strong> 3D, Modeling, Texturing</p>
-            </article>
-
-            <article>
-                <h3>Simple Movements — GAMES (2017)</h3>
-                <div>Prototype d'apprentissage JavaScript. Développement d'un moteur de mouvement fluide et d'IA comportementale basique.</div>
-                <p><strong>Technologies :</strong> JavaScript, HTML5, Prototype</p>
-                <p><strong>Liens :</strong> <a href="./EmericDosSantos.github.io-master/resources/game/index.html">Play</a></p>
-            </article>
-
-            <article>
-                <h3>2D Car Prototype — GAMES (2017)</h3>
-                <div>Prototype de jeu de course 2D en JavaScript. Test de gestion de la physique et des collisions véhiculaires.</div>
-                <p><strong>Technologies :</strong> JavaScript, HTML5, Prototype</p>
-                <p><strong>Liens :</strong> <a href="./EmericDosSantos.github.io-master/resources/CarTest/index.html">Play</a></p>
-            </article>
-
-            <article>
-                <h3>Claycity (Minecraft) — GAMES (2015)</h3>
-                <div>Ville massive inspirée de l'Amérique du Nord. Centre-ville dense, gratte-ciels, parcs et infrastructure de transport à grande échelle.</div>
-                <p><strong>Technologies :</strong> Minecraft, Voxel, Level Design</p>
-            </article>
-
-            <article>
-                <h3>Trackmania Map — GAMES (2018)</h3>
-                <div>Création de circuits pour Trackmania dans le cadre d'un cours de Level Design.<br>        <br>Trois circuits distincts :<br><ul style="padding-left: 20px; list-style-type: disc;"><li>Vert (Facile/Technique) : Trajectoires précises.</li></ul><br><ul style="padding-left: 20px; list-style-type: disc;"><li>Bleu (Moyen/Vitesse) : Course du point A au point B avec sauts et virages rapides.</li></ul><br><ul style="padding-left: 20px; list-style-type: disc;"><li>Vert (Compétitif) : Loopings, boosters et passages étroits pour le Time Attack.</li></ul></div>
-                <p><strong>Technologies :</strong> Trackmania, Racing, Level Design</p>
-                <p><strong>Liens :</strong> <a href="./content/pdf/Trackmania.pdf">Download Maps (PDF)</a></p>
-            </article>
-
-            <article>
-                <h3>Perfect Angle — GAMES (2019)</h3>
-                <div>Jeu de puzzle 2D personnel. L'objectif est de déplacer le joueur dans la bonne direction pour atteindre la sortie.<br>        <br>La difficulté est progressive avec des puzzles de plus en plus complexes nécessitant réflexion et anticipation.</div>
-                <p><strong>Technologies :</strong> JavaScript, Puzzle, 2D</p>
-                <p><strong>Liens :</strong> <a href="./EmericDosSantos.github.io-master/resources/Perfect_Angle_Browser_Version/index.html">Play (Web)</a></p>
-            </article>
-
-            <article>
-                <h3>Tron (Prototype 3) — GAMES (2017)</h3>
-                <div>Jeu Snake multijoueur local sur le thème de Tron. Vue 2D de dessus.</div>
-                <p><strong>Technologies :</strong> JavaScript, HTML5, Local Multiplayer</p>
-            </article>
-
-            <article>
-                <h3>Online Store Design — WEB (2017)</h3>
-                <div>Maquettes pour une boutique en ligne moderne. Présentation de produits et interface utilisateur.</div>
-                <p><strong>Technologies :</strong> HTML, CSS, E-commerce</p>
-            </article>
-
-            <article>
-                <h3>FabLab Caldas da Rainha — WEB (2017)</h3>
-                <div>Site web officiel du FabLab Caldas da Rainha. Plateforme interactive présentant les ressources, machines et projets de la communauté maker.</div>
-                <p><strong>Technologies :</strong> HTML, Bootstrap, Web Design</p>
-            </article>
-
-            <article>
-                <h3>EMOT.IO — OTHER (2017)</h3>
-                <div>Expérience cinématographique interactive. Un récit visuel qui évolue en temps réel selon les émotions du spectateur.<br><br><strong>Biofeedback :</strong> Utilisation de capteurs Bitalino (Fréquence cardiaque, Température) pour analyser l'état émotionnel.<br><strong>Traitement Temps Réel :</strong> Transformation dynamique de l'image et du son via Processing selon les données biométriques.<br><strong>Concept :</strong> Comparer les données physiologiques réelles avec l'expérience subjective du spectateur.</div>
-                <p><strong>Technologies :</strong> Arduino, Processing, Biofeedback, Bitalino</p>
-            </article>
-
-            <article>
-                <h3>Graphic Design Portfolio — DESIGN (2017)</h3>
-                <div>Travaux de design graphique incluant logos, mises en page et illustrations.</div>
-                <p><strong>Technologies :</strong> Photoshop, Illustrator, InDesign</p>
-            </article>
-
-            <article>
-                <h3>Satoshi Tajiri Info — DESIGN (2017)</h3>
-                <div>Mise en page éditoriale sur le créateur de Pokémon, Satoshi Tajiri.</div>
-                <p><strong>Technologies :</strong> InDesign, Layout, Editorial</p>
-            </article>
-
         </div>
     </section>
 
+    <!-- Lightbox Modal with Fullscreen Navigation -->
+    <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Expanded project gallery">
+        <div class="lightbox-dialog">
+            <!-- Header bar with Title, Counter and Close Button -->
+            <div class="lightbox-top-bar">
+                <div id="lightbox-title" class="lightbox-title">Project Title</div>
+                <div id="lightbox-counter" class="lightbox-counter">01 / 05</div>
+                <button id="lightbox-close-btn" class="lightbox-close-btn" aria-label="Close fullscreen modal">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
 
-    <!-- Project Modal (Hidden by default) -->
-    <div id="project-modal" class="modal hidden">
-        <div class="modal-content glass">
-            <span class="close-modal">&times;</span>
-            <div id="modal-body"></div>
+            <!-- Main Image Viewport with Previous & Next Arrows -->
+            <div class="lightbox-view-wrapper">
+                <button id="lightbox-prev-btn" class="lightbox-nav-btn left" aria-label="Previous image">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <img id="lightbox-image" class="lightbox-image" src="" alt="Expanded preview">
+
+                <button id="lightbox-next-btn" class="lightbox-nav-btn right" aria-label="Next image">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Lightbox Filmstrip Thumbnails -->
+            <div id="lightbox-filmstrip" class="lightbox-filmstrip" aria-label="Gallery thumbnails">
+                <!-- Injected dynamically -->
+            </div>
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="toast-notification" role="status" aria-live="polite">
+        <i class="fas fa-circle-check" style="color: var(--accent-cyan);"></i>
+        <span class="toast-message"></span>
+    </div>
+
+    <!-- Scripts -->
     <script src="translations.js" defer></script>
     <script src="i18n.js" defer></script>
-    <script src="script.min.js" defer></script>
+    <script src="script.js" defer></script>
 
     <!-- Deferred Google Analytics -->
     <script>
         window.dataLayer = window.dataLayer || [];
-        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        function gtag() { window.dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-H7GJV51SW0');
 
@@ -785,18 +524,15 @@
             function loadGTM() {
                 if (gtmLoaded) return;
                 gtmLoaded = true;
-
                 var script = document.createElement("script");
                 script.src = "https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0";
                 script.async = true;
                 document.head.appendChild(script);
             }
-
-            // Load on interaction or after delay
             window.addEventListener('scroll', loadGTM, { once: true });
             window.addEventListener('mousemove', loadGTM, { once: true });
             window.addEventListener('touchstart', loadGTM, { once: true });
-            setTimeout(loadGTM, 4000); // Fallback to 4 seconds for better capture rate
+            setTimeout(loadGTM, 4000);
         });
     </script>
 </body>

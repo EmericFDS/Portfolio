@@ -1,3 +1,8 @@
+// ============================================================
+// PORTFOLIO JAVASCRIPT — Emeric Ferreira Dos Santos
+// Creative Technologist / Canvas UI Engine / Bento Experience
+// ============================================================
+
 // Data directly inlined to ensure strictly local functionality without server
 const categories = [
     { id: 'all', name: 'All' },
@@ -84,7 +89,6 @@ const projects = [
         year: "2025",
         tech: ["React", "NLP", "AI Integration", "Vite"],
         icon: "fa-file-alt",
-
         images: [
             "./img/ia/CVite/cv1.webp",
             "./img/ia/CVite/cv2.webp",
@@ -117,7 +121,6 @@ const projects = [
         year: "2025",
         tech: ["Python", "Machine Learning", "React", "Trading"],
         icon: "fa-robot",
-
         images: [
             "./img/ia/SmartBucket/sb1.webp",
             "./img/ia/SmartBucket/sb2.webp",
@@ -142,7 +145,6 @@ const projects = [
         year: "2024",
         tech: ["React", "Cryptography", "Web App"],
         icon: "fa-user-secret",
-
         images: [
             "./img/web/GhostLink/ghostlink_4.webp",
             "./img/web/GhostLink/ghostlink_3.webp",
@@ -150,7 +152,6 @@ const projects = [
             "./img/web/GhostLink/ghostlink_1.webp"
         ]
     },
-
     {
         id: 24,
         title: "Turn Base Battle Game",
@@ -544,7 +545,6 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
             "./img/games/UWJ/UWJmap.webp"
         ]
     },
-
     {
         id: 30,
         title: "Sleeping Pit",
@@ -750,7 +750,6 @@ La verticalité est présente avec des bâtiments à un étage, permettant des a
             "./img/games/minecraft/38.webp"
         ]
     },
-
     {
         id: 28,
         title: "Trackmania Map",
@@ -829,11 +828,10 @@ La difficulté est progressive avec des puzzles de plus en plus complexes néces
         tech: ["JavaScript", "HTML5", "Local Multiplayer"],
         icon: "fa-gamepad",
         images: [
-            "./assets/images/legacy/tron1.webp",
-            "./assets/images/legacy/tron2.webp"
+            "./img/games/tron1.webp",
+            "./img/games/tron2.webp"
         ]
     },
-
     {
         id: 103,
         title: "Online Store Design",
@@ -859,12 +857,11 @@ La difficulté est progressive avec des puzzles de plus en plus complexes néces
         year: "2017",
         tech: ["HTML", "Bootstrap", "Web Design"],
         icon: "fa-tools",
-
         images: [
-            "./assets/images/legacy/html_css/WebPage1.webp",
-            "./assets/images/legacy/html_css/WebPage2.webp",
-            "./assets/images/legacy/html_css/WebPage3.webp",
-            "./assets/images/legacy/html_css/WebPage4.webp"
+            "./assets/images/legacy/html_css/WebPage1.png",
+            "./assets/images/legacy/html_css/WebPage2.png",
+            "./assets/images/legacy/html_css/WebPage3.png",
+            "./assets/images/legacy/html_css/WebPage4.png"
         ]
     },
     {
@@ -884,7 +881,6 @@ La difficulté est progressive avec des puzzles de plus en plus complexes néces
         year: "2017",
         tech: ["Arduino", "Processing", "Biofeedback", "Bitalino"],
         icon: "fa-heartbeat",
-
         images: [
             "./assets/images/legacy/arduino/projeto1.jpg",
             "./assets/images/legacy/arduino/projeto2.jpg",
@@ -928,597 +924,727 @@ La difficulté est progressive avec des puzzles de plus en plus complexes néces
     }
 ];
 
-// Main Logic
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Internationalization
-    if (typeof I18N !== 'undefined' && typeof TRANSLATIONS !== 'undefined') {
-        I18N.init(TRANSLATIONS);
+// Tech Icon Mapping
+const TECH_ICON_MAP = {
+    "Python": "fab fa-python",
+    "TensorFlow": "fas fa-brain",
+    "OpenCV": "fas fa-eye",
+    "YOLOv8": "fas fa-object-group",
+    "LangChain": "fas fa-link",
+    "OpenAI API": "fas fa-robot",
+    "Pinecone": "fas fa-database",
+    "React": "fab fa-react",
+    "Scikit-learn": "fas fa-cogs",
+    "Pandas": "fas fa-table",
+    "XGBoost": "fas fa-chart-line",
+    "FastAPI": "fas fa-bolt",
+    "Next.js": "fab fa-react",
+    "Vite": "fas fa-bolt",
+    "Stable Diffusion": "fas fa-wand-magic-sparkles",
+    "Node.js": "fab fa-node-js",
+    "AWS": "fab fa-aws",
+    "PyTorch": "fas fa-fire",
+    "FaceNet": "fas fa-id-badge",
+    "Docker": "fab fa-docker",
+    "Git": "fab fa-git-alt",
+    "Rust": "fas fa-gear",
+    "Tauri": "fas fa-shield-halved",
+    "Unity": "fab fa-unity",
+    "C#": "fas fa-code",
+    "Level Design": "fas fa-layer-group",
+    "Mobile": "fas fa-mobile-screen-button",
+    "Voxel": "fas fa-cube",
+    "HTML5": "fab fa-html5",
+    "HTML": "fab fa-html5",
+    "CSS": "fab fa-css3-alt",
+    "JavaScript": "fab fa-js",
+    "Bootstrap": "fab fa-bootstrap",
+    "Serious Game": "fas fa-graduation-cap",
+    "Nintendo Switch": "fas fa-gamepad",
+    "3D": "fas fa-cube",
+    "Puzzle": "fas fa-puzzle-piece",
+    "Trackmania": "fas fa-flag-checkered",
+    "Racing": "fas fa-gauge-high",
+    "Prototyping": "fas fa-compass-drafting",
+    "Gaea": "fas fa-mountain",
+    "World Building": "fas fa-earth-europe",
+    "Terrain": "fas fa-leaf",
+    "Nature": "fas fa-tree",
+    "Arduino": "fas fa-microchip",
+    "Processing": "fas fa-wave-square",
+    "Photoshop": "fas fa-palette",
+    "Illustrator": "fas fa-pen-nib",
+    "InDesign": "fas fa-newspaper",
+    "NLP": "fas fa-comments",
+    "Trading": "fas fa-chart-candlestick",
+    "Cryptography": "fas fa-lock",
+    "Web App": "fas fa-globe",
+    "Unreal Engine": "fas fa-gamepad",
+    "Multiplayer": "fas fa-users",
+    "Minecraft": "fas fa-cubes",
+    "2D": "fas fa-square",
+    "Platformer": "fas fa-person-running",
+    "Modeling": "fas fa-shapes",
+    "Texturing": "fas fa-brush",
+    "Image Processing": "fas fa-sliders",
+    "Desktop App": "fas fa-desktop",
+    "AI Utils": "fas fa-microchip",
+    "Privacy": "fas fa-user-shield",
+    "AI Integration": "fas fa-brain"
+};
+
+// ============================================================
+// 1. CANVAS UI & GENERATIVE PARTICLES ENGINE
+// ============================================================
+class CanvasParticleEngine {
+    constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) return;
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.ripples = [];
+        this.numParticles = 48;
+        this.maxDistance = 140;
+        this.mouse = { x: -1000, y: -1000, radius: 160 };
+        this.animationFrameId = null;
+        this.isRunning = false;
+        this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        this.init();
     }
 
-    // Secure Email Injection
-    const user = 'contact';
-    const domain = 'emericfds.com';
-    const emailLink = document.getElementById('secure-email');
-    const emailBtn = document.getElementById('email-btn');
+    init() {
+        this.resize();
+        window.addEventListener('resize', () => this.resize(), { passive: true });
+        
+        // Mouse / Touch tracking on canvas
+        window.addEventListener('mousemove', (e) => {
+            this.mouse.x = e.clientX;
+            this.mouse.y = e.clientY;
+        }, { passive: true });
 
-    if (emailLink) {
-        const address = `${user}@${domain}`;
-        emailLink.textContent = (typeof I18N !== 'undefined') ? I18N.t('footer.email.label') : "Contact Me";
-        emailLink.href = `mailto:${address}`;
+        window.addEventListener('mouseleave', () => {
+            this.mouse.x = -1000;
+            this.mouse.y = -1000;
+        }, { passive: true });
 
-        if (emailBtn) {
-            emailBtn.addEventListener('click', () => {
-                window.location.href = `mailto:${address}`;
+        // Ripple burst on click
+        window.addEventListener('pointerdown', (e) => {
+            this.addRipple(e.clientX, e.clientY);
+        }, { passive: true });
+
+        // Visibility API to save battery/CPU
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.stop();
+            } else {
+                this.start();
+            }
+        });
+
+        this.createParticles();
+        this.start();
+    }
+
+    resize() {
+        if (!this.canvas) return;
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.canvas.width = this.width * this.dpr;
+        this.canvas.height = this.height * this.dpr;
+        this.ctx.scale(this.dpr, this.dpr);
+        this.numParticles = Math.min(Math.floor((this.width * this.height) / 22000), 55);
+        if (this.particles.length < this.numParticles) {
+            this.createParticles();
+        }
+    }
+
+    createParticles() {
+        this.particles = [];
+        for (let i = 0; i < this.numParticles; i++) {
+            this.particles.push({
+                x: Math.random() * this.width,
+                y: Math.random() * this.height,
+                vx: (Math.random() - 0.5) * 0.45,
+                vy: (Math.random() - 0.5) * 0.45,
+                radius: Math.random() * 1.8 + 1.0,
+                baseAlpha: Math.random() * 0.5 + 0.3,
+                color: Math.random() > 0.4 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
             });
         }
     }
 
-    // Filter Logic
-    // Filter Logic
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    addRipple(x, y) {
+        if (this.prefersReducedMotion) return;
+        this.ripples.push({
+            x,
+            y,
+            radius: 5,
+            maxRadius: 120,
+            alpha: 0.6,
+            speed: 3.5
+        });
+    }
 
-    // Tech Icon Mapping
-    const techIconMap = {
-        "Python": "fab fa-python",
-        "TensorFlow": "fas fa-brain", // Generic AI
-        "OpenCV": "fas fa-eye",
-        "YOLOv8": "fas fa-object-group",
-        "LangChain": "fas fa-link",
-        "OpenAI API": "fas fa-robot",
-        "Pinecone": "fas fa-database",
-        "React": "fab fa-react",
-        "Scikit-learn": "fas fa-cogs",
-        "Pandas": "fas fa-table",
-        "XGBoost": "fas fa-chart-line",
-        "FastAPI": "fas fa-bolt",
-        "Next.js": "fab fa-react", // Closest
-        "Stable Diffusion": "fas fa-image",
-        "Node.js": "fab fa-node",
-        "AWS": "fab fa-aws",
-        "PyTorch": "fas fa-fire",
-        "FaceNet": "fas fa-id-badge",
-        "Docker": "fab fa-docker",
-        "Git": "fab fa-git-alt",
-        "Unity": "fab fa-unity",
-        "C#": "fab fa-cuttlefish", // or code
-        "Level Design": "fas fa-layer-group",
-        "Mobile": "fas fa-mobile-alt",
-        "Voxel": "fas fa-cube",
-        "HTML5": "fab fa-html5",
-        "Serious Game": "fas fa-graduation-cap",
-        "Nintendo Switch": "fas fa-gamepad",
-        "3D": "fas fa-cube",
-        "Puzzle": "fas fa-puzzle-piece",
-        "Trackmania": "fas fa-flag-checkered",
-        "Racing": "fas fa-tachometer-alt",
-        "Prototyping": "fas fa-drafting-compass",
-        "Gaea": "fas fa-mountain",
-        "World Building": "fas fa-globe-europe",
-        "Terrain": "fas fa-leaf",
-        "Nature": "fas fa-tree"
+    start() {
+        if (this.isRunning) return;
+        this.isRunning = true;
+        this.loop();
+    }
+
+    stop() {
+        this.isRunning = false;
+        if (this.animationFrameId) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
+    }
+
+    loop() {
+        if (!this.isRunning) return;
+        this.render();
+        this.animationFrameId = requestAnimationFrame(() => this.loop());
+    }
+
+    render() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        // Render Ripples
+        for (let r = this.ripples.length - 1; r >= 0; r--) {
+            const rip = this.ripples[r];
+            rip.radius += rip.speed;
+            rip.alpha -= 0.015;
+
+            if (rip.alpha <= 0 || rip.radius >= rip.maxRadius) {
+                this.ripples.splice(r, 1);
+                continue;
+            }
+
+            this.ctx.beginPath();
+            this.ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
+            this.ctx.strokeStyle = `rgba(0, 240, 255, ${rip.alpha * 0.4})`;
+            this.ctx.lineWidth = 1.5;
+            this.ctx.stroke();
+        }
+
+        // Render Particles & Constellation Links
+        for (let i = 0; i < this.particles.length; i++) {
+            const p = this.particles[i];
+
+            if (!this.prefersReducedMotion) {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Bounce at edges
+                if (p.x < 0 || p.x > this.width) p.vx *= -1;
+                if (p.y < 0 || p.y > this.height) p.vy *= -1;
+
+                // Mouse interactivity (gentle push)
+                const dx = this.mouse.x - p.x;
+                const dy = this.mouse.y - p.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < this.mouse.radius && dist > 0) {
+                    const force = (this.mouse.radius - dist) / this.mouse.radius;
+                    p.x -= (dx / dist) * force * 1.2;
+                    p.y -= (dy / dist) * force * 1.2;
+                }
+            }
+
+            // Draw particle dot
+            this.ctx.beginPath();
+            this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
+            this.ctx.fill();
+
+            // Connect nearby particles
+            for (let j = i + 1; j < this.particles.length; j++) {
+                const p2 = this.particles[j];
+                const dX = p.x - p2.x;
+                const dY = p.y - p2.y;
+                const dist2 = Math.sqrt(dX * dX + dY * dY);
+
+                if (dist2 < this.maxDistance) {
+                    const lineAlpha = (1 - dist2 / this.maxDistance) * 0.18;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(p.x, p.y);
+                    this.ctx.lineTo(p2.x, p2.y);
+                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
+                    this.ctx.lineWidth = 0.75;
+                    this.ctx.stroke();
+                }
+            }
+        }
+    }
+}
+
+// ============================================================
+// 2. SPOTLIGHT & CUSTOM CURSOR INTERACTION
+// ============================================================
+function initSpotlightAndCursor() {
+    const cards = document.querySelectorAll('.bento-card');
+    
+    // Update CSS custom properties for radial spotlight on card hover
+    window.addEventListener('mousemove', (e) => {
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    }, { passive: true });
+
+    // Custom Magnetic Cursor (Desktop only)
+    const cursorDot = document.getElementById('custom-cursor-dot');
+    const cursorRing = document.getElementById('custom-cursor-ring');
+
+    if (cursorDot && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
+        }, { passive: true });
+
+        // Smooth Lerp for ring
+        function renderCursor() {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            cursorRing.style.left = `${ringX}px`;
+            cursorRing.style.top = `${ringY}px`;
+            requestAnimationFrame(renderCursor);
+        }
+        requestAnimationFrame(renderCursor);
+
+        // Hover scale over interactive targets
+        const interactives = 'a, button, .filter-btn, .thumb-item, .bento-card, .project-nav-btn, .social-icon-btn';
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest(interactives)) {
+                document.body.classList.add('cursor-hovering');
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest(interactives)) {
+                document.body.classList.remove('cursor-hovering');
+            }
+        });
+    }
+}
+
+// ============================================================
+// 3. MAIN CAROUSEL & PROJECT SHOWCASE ENGINE
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize Canvas UI
+    new CanvasParticleEngine('bg-canvas');
+
+    // 2. Initialize Spotlight & Cursor
+    initSpotlightAndCursor();
+
+    // 3. Initialize Internationalization
+    if (typeof I18N !== 'undefined' && typeof TRANSLATIONS !== 'undefined') {
+        I18N.init(TRANSLATIONS);
+    }
+
+    // Sort projects anti-chronologically (Newest first)
+    projects.sort((a, b) => parseInt(b.year) - parseInt(a.year));
+
+    // Compute category counts
+    const categoryCounts = {
+        'all': projects.length,
+        'ai': projects.filter(p => ['cv', 'nlp', 'ml'].includes(p.category)).length,
+        'web': projects.filter(p => p.category === 'web').length,
+        'games': projects.filter(p => p.category === 'games').length,
+        'design': projects.filter(p => p.category === 'design').length,
+        'other': projects.filter(p => p.category === 'other').length
     };
 
-    // State management for Carousel
-    // --- Carousel Logic ---
+    // Update filter buttons badge count
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+        const filter = btn.getAttribute('data-filter');
+        const count = categoryCounts[filter] || 0;
+        const countSpan = btn.querySelector('.filter-count');
+        if (countSpan) countSpan.textContent = count;
+    });
+
+    // State Management
     let filteredProjects = [];
     let currentProjectIndex = 0;
     let currentImageIndex = 0;
+    let autoScrollTimer = null;
 
-    // Carousel Elements
-    const projectInfoPanel = document.getElementById('dynamic-project-content');
-    const projectImagesPanel = document.getElementById('dynamic-image-display'); // Renamed from imageDisplay
-    const projectCounter = document.getElementById('project-counter');
+    // DOM Elements
+    const projectTitleEl = document.getElementById('project-title');
+    const projectIconEl = document.getElementById('project-icon');
+    const projectCategoryEl = document.getElementById('project-category-badge');
+    const projectYearEl = document.getElementById('project-year-badge');
+    const projectDescEl = document.getElementById('dynamic-project-content');
+    const projectTechEl = document.getElementById('project-tech-tags');
+    const projectLinksEl = document.getElementById('project-links-list');
+    const projectCounterEl = document.getElementById('project-nav-counter');
+    const btnPrevProj = document.getElementById('btn-prev-proj');
+    const btnNextProj = document.getElementById('btn-next-proj');
+    const btnPrevImg = document.getElementById('btn-prev-img');
+    const btnNextImg = document.getElementById('btn-next-img');
+    const mainGalleryImg = document.getElementById('gallery-active-image');
+    const filmstripEl = document.getElementById('gallery-filmstrip');
+    const expandImageBtn = document.getElementById('expand-image-btn');
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-image');
+    const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
+    const lightboxNextBtn = document.getElementById('lightbox-next-btn');
+    const lightboxFilmstrip = document.getElementById('lightbox-filmstrip');
 
-    // Add placeholder images if missing (Mocking data for now)
-    projects.forEach(p => {
-        if (!p.images) {
-            p.images = [
-                `https://placehold.co/600x400/1e293b/06b6d4?text=${encodeURIComponent(p.title)}+1`,
-                `https://placehold.co/600x400/1e293b/06b6d4?text=${encodeURIComponent(p.title)}+2`,
-                `https://placehold.co/600x400/1e293b/06b6d4?text=${encodeURIComponent(p.title)}+3`
-            ];
+    // Email Copy & Toast Logic
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const toast = document.getElementById('toast-notification');
+    const secureEmailLink = document.getElementById('secure-email-link');
+
+    if (secureEmailLink) {
+        secureEmailLink.href = 'mailto:contact@emericfds.com';
+    }
+
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', () => {
+            const email = 'contact@emericfds.com';
+            navigator.clipboard.writeText(email).then(() => {
+                showToast(typeof I18N !== 'undefined' ? I18N.t('footer.copiedToast') : 'Email copied to clipboard! ✨');
+            }).catch(() => {
+                window.location.href = `mailto:${email}`;
+            });
+        });
+    }
+
+    function showToast(msg) {
+        if (!toast) return;
+        toast.querySelector('.toast-message').textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // Markdown Description Formatter
+    function formatMarkdown(text) {
+        if (!text) return '';
+        let formatted = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
+            .replace(/\n\n/g, '<br><br>')
+            .replace(/\n/g, '<br>');
+
+        if (formatted.includes('<li>')) {
+            formatted = formatted.replace(/(<li>.*?<\/li>)+/g, '<ul style="padding-left: 20px; list-style-type: disc;">$&</ul>');
         }
-    });
+        return formatted;
+    }
 
-    // Sort Projects Anti-Chronologically (Newest First)
-    projects.sort((a, b) => parseInt(b.year) - parseInt(a.year));
-
-    // Update the Project View (Left Panel + Stack)
-    function updateProjectView(scope = document) {
+    // Render Project Details
+    function updateProjectView() {
         if (filteredProjects.length === 0) {
-            // Handle empty state
-            const titleEl = scope.getElementById ? scope.getElementById('project-title') : scope.querySelector('#project-title');
-            if (titleEl) titleEl.textContent = (typeof I18N !== 'undefined') ? I18N.t('projects.empty.title') : 'No projects at the moment';
-
-            // Clear other elements
-            const infoPanel = scope.getElementById ? scope.getElementById('dynamic-project-content') : scope.querySelector('#dynamic-project-content');
-            const emptyMsg = (typeof I18N !== 'undefined') ? I18N.t('projects.empty.desc') : 'Please select another category.';
-            if (infoPanel) infoPanel.innerHTML = `<p class="current-project-desc">${emptyMsg}</p>`;
-
-            const techPanel = scope.getElementById ? scope.getElementById('static-project-tech') : scope.querySelector('#static-project-tech');
-            if (techPanel) techPanel.innerHTML = '';
-
-            const imagePanel = scope.getElementById ? scope.getElementById('dynamic-image-display') : scope.querySelector('#dynamic-image-display');
-            if (imagePanel) imagePanel.innerHTML = '';
-
-            const counterEl = scope.getElementById ? scope.getElementById('project-nav-counter') : scope.querySelector('#project-nav-counter');
-            if (counterEl) counterEl.textContent = '0 / 0';
-
-            const statusEl = scope.getElementById ? scope.getElementById('project-status') : scope.querySelector('#project-status');
-            if (statusEl) statusEl.textContent = '';
-
+            if (projectTitleEl) projectTitleEl.textContent = (typeof I18N !== 'undefined') ? I18N.t('projects.empty.title') : 'No projects';
+            if (projectDescEl) projectDescEl.innerHTML = `<p class="current-project-desc">${(typeof I18N !== 'undefined') ? I18N.t('projects.empty.desc') : 'Please select another category.'}</p>`;
+            if (projectTechEl) projectTechEl.innerHTML = '';
+            if (projectLinksEl) projectLinksEl.innerHTML = '';
+            if (mainGalleryImg) mainGalleryImg.src = '';
+            if (filmstripEl) filmstripEl.innerHTML = '';
+            if (projectCounterEl) projectCounterEl.innerHTML = '0 / 0';
             return;
         }
 
         const project = filteredProjects[currentProjectIndex];
+        const currentLang = (typeof I18N !== 'undefined') ? I18N.getLocale() : 'en';
 
-        // Helper for scoped selection
-        const getEl = (id) => scope.getElementById ? scope.getElementById(id) : scope.querySelector(`#${id}`);
+        // 1. Header Meta
+        if (projectTitleEl) projectTitleEl.textContent = project.title;
+        if (projectIconEl) projectIconEl.className = `fas ${project.icon || 'fa-code'}`;
+        if (projectCategoryEl) projectCategoryEl.textContent = (project.category || 'PROJECT').toUpperCase();
+        if (projectYearEl) projectYearEl.textContent = project.year;
 
-        // 1. Update Static Header
-        const titleEl = getEl('project-title');
-        const iconEl = getEl('project-icon');
-        const statusEl = getEl('project-status');
-
-        if (titleEl) titleEl.textContent = project.title;
-        if (iconEl) iconEl.className = `fas ${project.icon || 'fa-code'}`;
-        if (statusEl) statusEl.textContent = project.year;
-
-        // 2. Update Scrollable Content
-        const infoPanel = getEl('dynamic-project-content'); // Used to be projectInfoPanel global var, but safer to query
-        // Note: global projectInfoPanel might be cached. Best to query.
-        if (infoPanel) {
-            // Basic Markdown Parser
-            const currentLang = (typeof I18N !== 'undefined') ? I18N.getLocale() : 'en';
+        // 2. Formatted Description
+        if (projectDescEl) {
             const rawDesc = (currentLang === 'fr' && project.descriptionFr) ? project.descriptionFr : project.description;
-            let formattedDesc = rawDesc
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
-                .replace(/\n\n/g, '<br><br>')
-                .replace(/\n/g, '<br>');
+            projectDescEl.innerHTML = `<div class="current-project-desc">${formatMarkdown(rawDesc)}</div>`;
+        }
 
-            if (formattedDesc.includes('<li>')) {
-                formattedDesc = formattedDesc.replace(/(<li>.*?<\/li>)+/g, '<ul style="padding-left: 20px; list-style-type: disc;">$&</ul>');
+        // 3. Links
+        if (projectLinksEl) {
+            if (project.links && project.links.length > 0) {
+                projectLinksEl.innerHTML = project.links.map(link => `
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                        <i class="fas fa-arrow-up-right-from-square"></i> ${link.label}
+                    </a>
+                `).join('');
+            } else {
+                projectLinksEl.innerHTML = '';
             }
-
-            infoPanel.innerHTML = `
-                <div class="current-project-desc" style="white-space: normal;">${formattedDesc}</div>
-                
-                ${project.links && project.links.length > 0 ? `
-                    <div class="project-links" style="margin-top: 1.5rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
-                        ${project.links.map(link => `
-                            <a href="${link.url}" target="_blank" style="text-decoration: none; color: white; background: var(--accent); padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s;">
-                                <i class="fas fa-external-link-alt"></i> ${link.label}
-                            </a>
-                        `).join('')}
-                    </div>
-                ` : ''}
-            `;
         }
 
-
-        // 3. Update Fixed Tech Stack Footer
-        const techPanel = getEl('static-project-tech');
-        if (techPanel) {
-            techPanel.innerHTML = `
-                <div class="project-tech-stack">
-                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">${(typeof I18N !== 'undefined') ? I18N.t('projects.tech.title') : 'Technologies:'}</h4>
-                    <div class="tech-tags" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        ${project.tech.map(t => `<span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; color: var(--text-muted); border: 1px solid var(--glass-border);">${t}</span>`).join('')}
-                    </div>
-                </div>
-            `;
+        // 4. Tech Tags
+        if (projectTechEl) {
+            projectTechEl.innerHTML = project.tech.map(t => {
+                const iconClass = TECH_ICON_MAP[t] || 'fas fa-code';
+                return `<span class="tech-tag-pill"><i class="${iconClass}"></i> ${t}</span>`;
+            }).join('');
         }
 
-        // Update Counter
-        const counterEl = getEl('project-nav-counter');
-        if (counterEl) counterEl.textContent = `${currentProjectIndex + 1} / ${filteredProjects.length}`;
-
-        // Update Project Button Visibility
-        const btnPrevParams = getEl('btn-prev-proj');
-        const btnNextParams = getEl('btn-next-proj');
-
-        if (btnPrevParams) {
-            btnPrevParams.style.visibility = (currentProjectIndex > 0) ? 'visible' : 'hidden';
-            btnPrevParams.disabled = (currentProjectIndex === 0);
-        }
-        if (btnNextParams) {
-            btnNextParams.style.visibility = (currentProjectIndex < filteredProjects.length - 1) ? 'visible' : 'hidden';
-            btnNextParams.disabled = (currentProjectIndex === filteredProjects.length - 1);
+        // 5. Counter & Navigation Button States
+        if (projectCounterEl) {
+            projectCounterEl.innerHTML = `<span>${String(currentProjectIndex + 1).padStart(2, '0')}</span> / ${String(filteredProjects.length).padStart(2, '0')}`;
         }
 
-        // Update Image (Right Panel)
+        if (btnPrevProj) btnPrevProj.disabled = (filteredProjects.length <= 1);
+        if (btnNextProj) btnNextProj.disabled = (filteredProjects.length <= 1);
+
+        // 6. Reset & Render Gallery Images
         currentImageIndex = 0;
-        updateImageDisplay(false, 1, scope);
-
-        // --- Scroll Shadow Logic ---
-        // We need to wait for layout to settle (or at least content injection)
-        setTimeout(() => {
-            updateScrollShadow(scope);
-        }, 0);
+        updateGalleryDisplay();
     }
 
-    // Scroll Shadow Update Function
-    function updateScrollShadow(scope = document) {
-        const content = scope.getElementById ? scope.getElementById('dynamic-project-content') : scope.querySelector('#dynamic-project-content');
-        const shadow = scope.getElementById ? scope.getElementById('scroll-shadow') : scope.querySelector('#scroll-shadow'); // Using ID now
-
-        if (!content || !shadow) return;
-
-        // Determine if scrolling is possible
-        const isScrollable = content.scrollHeight > content.clientHeight;
-
-        // Determine if we are at the bottom
-        // Tolerance of 5px
-        const isAtBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 5;
-
-        // Verify if we need to show shadow
-        // Show if scrollable AND NOT at bottom
-        if (isScrollable && !isAtBottom) {
-            shadow.style.opacity = '1';
-        } else {
-            shadow.style.opacity = '0';
-        }
-    }
-
-    // Initialize Scroll Listener once
-    const contentPanel = document.getElementById('dynamic-project-content');
-    if (contentPanel) {
-        contentPanel.addEventListener('scroll', () => {
-            updateScrollShadow();
-        });
-    }
-
-    // Global Window Resize Listener for shadow update
-    window.addEventListener('resize', () => {
-        updateScrollShadow();
-    });
-
-    // Update Image View with Animation Support
-    function updateImageDisplay(animate = true, direction = 1, scope = document) {
-        // Safety checks
+    // Render Gallery Active Image & Filmstrip
+    function updateGalleryDisplay() {
         if (!filteredProjects || filteredProjects.length === 0) return;
         const project = filteredProjects[currentProjectIndex];
-        if (!project) return;
         const images = project.images || [];
 
-        // Image Button Visibility Logic (Safe Check)
-        const btnPrevImg = document.getElementById('btn-prev-img');
-        const btnNextImg = document.getElementById('btn-next-img');
-
-        if (btnPrevImg) {
-            btnPrevImg.style.visibility = (images.length > 1) ? 'visible' : 'hidden'; // Always visible if > 1 image (circular)
-            btnPrevImg.disabled = (images.length <= 1);
-        }
-        if (btnNextImg) {
-            btnNextImg.style.visibility = (images.length > 1) ? 'visible' : 'hidden'; // Always visible if > 1 image (circular)
-            btnNextImg.disabled = (images.length <= 1);
+        if (images.length === 0) {
+            if (mainGalleryImg) {
+                mainGalleryImg.src = 'https://placehold.co/800x600/0d121e/94a3b8?text=No+Image';
+                mainGalleryImg.alt = project.title;
+            }
+            if (filmstripEl) filmstripEl.innerHTML = '';
+            if (btnPrevImg) btnPrevImg.style.display = 'none';
+            if (btnNextImg) btnNextImg.style.display = 'none';
+            return;
         }
 
-        const panel = scope.getElementById ? scope.getElementById('dynamic-image-display') : scope.querySelector('#dynamic-image-display');
-        if (!panel) return;
+        // Bounds validation
+        if (currentImageIndex >= images.length) currentImageIndex = 0;
+        if (currentImageIndex < 0) currentImageIndex = images.length - 1;
 
-        // Container for image to handle overflow/centering
-        // We reuse the existing one or create it if empty
-        let imgContainer = panel.querySelector('.img-container-inner');
-        if (!imgContainer) {
-            panel.innerHTML = ''; // Clear panel
-            imgContainer = document.createElement('div');
-            imgContainer.className = 'img-container-inner';
-            imgContainer.style.width = '100%';
-            imgContainer.style.height = '100%';
-            imgContainer.style.position = 'relative'; // Crucial for absolute positioning of slides
-            imgContainer.style.display = 'flex';
-            imgContainer.style.alignItems = 'center';
-            imgContainer.style.justifyContent = 'center';
-            imgContainer.style.overflow = 'hidden';
-            panel.appendChild(imgContainer);
-        }
-
-        if (images.length > 0) {
-            // Bounds Check
-            if (currentImageIndex >= images.length) currentImageIndex = 0;
-            if (currentImageIndex < 0) currentImageIndex = images.length - 1;
-
-            const newImg = document.createElement('img');
-            newImg.src = images[currentImageIndex];
-            newImg.alt = `${project.title} image`;
-            newImg.decoding = 'async';
-
-            // Common Styles
-            newImg.style.maxWidth = '100%';
-            newImg.style.maxHeight = '100%';
-            newImg.style.objectFit = 'contain';
-            newImg.style.borderRadius = '8px';
-            newImg.style.display = 'block';
-            newImg.style.position = 'absolute'; // Absolute for overlapping animations
-            newImg.style.top = '50%';
-            newImg.style.left = '50%';
-            newImg.style.transform = 'translate(-50%, -50%)'; // Center it
-
-            // Error Handling
-            newImg.onerror = function () {
+        // Set Main Image
+        if (mainGalleryImg) {
+            mainGalleryImg.src = images[currentImageIndex];
+            mainGalleryImg.alt = `${project.title} - Preview ${currentImageIndex + 1}`;
+            mainGalleryImg.onerror = function() {
                 this.onerror = null;
-                this.src = 'https://placehold.co/800x600/333/fff?text=Image+Not+Found';
+                this.src = 'https://placehold.co/800x600/0d121e/00f0ff?text=' + encodeURIComponent(project.title);
             };
+        }
 
-            // Initial Draw (No animation or Project Switch)
-            if (!animate) {
-                imgContainer.innerHTML = ''; // Clear old
-                imgContainer.appendChild(newImg);
-                updateCounter(imgContainer, currentImageIndex, images.length);
-                return;
-            }
+        // Image Nav Button Visibility
+        const hasMultipleImages = images.length > 1;
+        if (btnPrevImg) btnPrevImg.style.display = hasMultipleImages ? 'flex' : 'none';
+        if (btnNextImg) btnNextImg.style.display = hasMultipleImages ? 'flex' : 'none';
 
-            // --- Animation Logic ---
-            const oldImg = imgContainer.querySelector('img:not(.img-slide-out-left):not(.img-slide-out-right)');
+        // Render Filmstrip
+        if (filmstripEl) {
+            if (hasMultipleImages) {
+                filmstripEl.style.display = 'flex';
+                filmstripEl.innerHTML = images.map((imgSrc, idx) => `
+                    <div class="thumb-item ${idx === currentImageIndex ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="View slide ${idx + 1}" tabindex="0">
+                        <img src="${imgSrc}" alt="${project.title} thumb ${idx + 1}" loading="lazy">
+                    </div>
+                `).join('');
 
-            if (oldImg) {
-                // Prepare OLD image for exit
-                const exitClass = direction === 1 ? 'img-slide-out-left' : 'img-slide-out-right';
-                // Reset standard display to ensure it processes the transform correctly if needed
-                oldImg.style.display = 'block';
-                oldImg.classList.add(exitClass);
-
-                // Prepare NEW image for enter
-                const enterClass = direction === 1 ? 'img-slide-in-right' : 'img-slide-in-left';
-                newImg.classList.add(enterClass);
-
-                // Append NEW image using absolute positioning
-                imgContainer.appendChild(newImg);
-
-                // Update Counter immediately
-                updateCounter(imgContainer, currentImageIndex, images.length);
-
-                // Cleanup after animation
-                setTimeout(() => {
-                    if (oldImg.parentNode === imgContainer) {
-                        imgContainer.removeChild(oldImg);
-                    }
-                    newImg.classList.remove(enterClass);
-                }, 500); // 500ms match CSS
+                // Filmstrip click / keyboard listener
+                filmstripEl.querySelectorAll('.thumb-item').forEach(thumb => {
+                    thumb.addEventListener('click', () => {
+                        currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
+                        updateGalleryDisplay();
+                    });
+                    thumb.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
+                            updateGalleryDisplay();
+                        }
+                    });
+                });
             } else {
-                // Fallback if no old image found
-                imgContainer.innerHTML = '';
-                imgContainer.appendChild(newImg);
-                updateCounter(imgContainer, currentImageIndex, images.length);
-
+                filmstripEl.style.display = 'none';
+                filmstripEl.innerHTML = '';
             }
-        } else {
-            const noImgText = (typeof I18N !== 'undefined') ? I18N.t('projects.no.images') : 'No images';
-            panel.innerHTML = `<div style="color: var(--text-muted);">${noImgText}</div>`;
         }
-    }
 
-    function updateCounter(container, index, total) {
-        if (total <= 1) return;
+        // Update Lightbox Modal if currently open
+        if (lightboxModal && lightboxModal.classList.contains('active')) {
+            if (lightboxImg) {
+                lightboxImg.src = images[currentImageIndex];
+                lightboxImg.alt = `${project.title} - Fullscreen ${currentImageIndex + 1}`;
+            }
+            if (lightboxTitle) lightboxTitle.textContent = project.title;
+            if (lightboxCounter) {
+                lightboxCounter.textContent = `${String(currentImageIndex + 1).padStart(2, '0')} / ${String(images.length).padStart(2, '0')}`;
+            }
+            if (lightboxPrevBtn) lightboxPrevBtn.style.display = hasMultipleImages ? 'flex' : 'none';
+            if (lightboxNextBtn) lightboxNextBtn.style.display = hasMultipleImages ? 'flex' : 'none';
 
-        let indicator = container.querySelector('.img-indicator');
-        if (!indicator) {
-            indicator = document.createElement('div');
-            indicator.className = 'img-indicator';
-            indicator.style.position = 'absolute';
-            indicator.style.bottom = '10px';
-            indicator.style.left = '50%';
-            indicator.style.transform = 'translateX(-50%)';
-            indicator.style.background = 'rgba(0,0,0,0.6)';
-            indicator.style.color = 'white';
-            indicator.style.padding = '4px 10px';
-            indicator.style.borderRadius = '12px';
-            indicator.style.fontSize = '0.8rem';
-            indicator.style.zIndex = '5';
-            container.appendChild(indicator);
+            if (lightboxFilmstrip) {
+                if (hasMultipleImages) {
+                    lightboxFilmstrip.style.display = 'flex';
+                    lightboxFilmstrip.innerHTML = images.map((imgSrc, idx) => `
+                        <div class="thumb-item ${idx === currentImageIndex ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="View fullscreen slide ${idx + 1}" tabindex="0">
+                            <img src="${imgSrc}" alt="${project.title} thumb ${idx + 1}" loading="lazy">
+                        </div>
+                    `).join('');
+
+                    lightboxFilmstrip.querySelectorAll('.thumb-item').forEach(thumb => {
+                        thumb.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
+                            updateGalleryDisplay();
+                        });
+                        thumb.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
+                                updateGalleryDisplay();
+                            }
+                        });
+                    });
+                } else {
+                    lightboxFilmstrip.style.display = 'none';
+                    lightboxFilmstrip.innerHTML = '';
+                }
+            }
         }
-        indicator.textContent = `${index + 1} / ${total}`;
     }
 
     // Global Navigation functions
-    // --- Auto Scroll Logic ---
-    let autoScrollTimer = null;
-
-    function startAutoScroll() {
-        if (autoScrollTimer) clearInterval(autoScrollTimer);
-        autoScrollTimer = setInterval(handleAutoScroll, 3000); // 3 seconds per image
-    }
-
-    function stopAutoScroll() {
-        if (autoScrollTimer) {
-            clearInterval(autoScrollTimer);
-            autoScrollTimer = null;
-        }
-    }
-
-    function resetAutoScroll() {
-        stopAutoScroll();
-        startAutoScroll();
-    }
-
-    function handleAutoScroll() {
-        // Safety Check
-        if (!filteredProjects || filteredProjects.length === 0) return;
-
-        const project = filteredProjects[currentProjectIndex];
-        const images = project.images || [];
-
-        // 1. Advance Image
-        // Check if we are at the last image
-        if (currentImageIndex < images.length - 1) {
-            // Next Image
-            window.changeImage(1);
-        } else {
-            // 2. End of Images -> Next Project
-            if (currentProjectIndex < filteredProjects.length - 1) {
-                window.changeProject(1);
-            } else {
-                // 3. End of Projects -> Next Category
-                switchCategory();
-            }
-        }
-    }
-
-    function switchCategory() {
-        const btns = Array.from(document.querySelectorAll('.filter-btn[data-filter]'));
-        const activeBtn = document.querySelector('.filter-btn.active');
-        if (!activeBtn) return;
-
-        let index = btns.indexOf(activeBtn);
-
-        // Next Category (Looping)
-        const nextIndex = (index + 1) % btns.length;
-
-        // Trigger Click (handles update and reset)
-        btns[nextIndex].click();
-    }
-
-    // Global Navigation functions
-    window.changeProject = function (direction) {
-        resetAutoScroll(); // User interaction resets timer
-
+    window.changeProject = function(direction) {
         if (filteredProjects.length === 0) return;
-
-        const wrapper = document.getElementById('project-carousel-view');
-        if (!wrapper) return;
-        const parent = wrapper.parentElement;
-
-        // Ensure parent context for absolute positioning
-        if (getComputedStyle(parent).position === 'static') {
-            parent.style.position = 'relative';
-        }
-        parent.style.overflow = 'hidden';
-
-        // 1. Create Clone (Old Content)
-        const clone = wrapper.cloneNode(true);
-        clone.classList.add('clone-overlay');
-        // Remove IDs to prevent duplicates
-        clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
-
-        // Position Clone Absolutely over the Parent (Respecting Padding)
-        clone.style.position = 'absolute';
-        clone.style.top = `${wrapper.offsetTop}px`;
-        clone.style.left = `${wrapper.offsetLeft}px`;
-        clone.style.width = `${wrapper.offsetWidth}px`;
-        clone.style.height = `${wrapper.offsetHeight}px`;
-        clone.style.zIndex = '10';
-        clone.style.pointerEvents = 'none'; // Click-through
-
-        parent.appendChild(clone);
-
-        // 2. Animate Clone OUT
-        const exitClass = direction === 1 ? 'proj-slide-out-left' : 'proj-slide-out-right';
-        clone.classList.add(exitClass);
-
-        // 3. Update Real Wrapper (New Content) Immediately
         const count = filteredProjects.length;
         currentProjectIndex = (currentProjectIndex + direction + count) % count;
-
-        updateProjectView(); // Global scope update for Title/Counter
-
-        // 4. Animate Real Wrapper IN
-        const enterClass = direction === 1 ? 'proj-slide-in-right' : 'proj-slide-in-left';
-
-        // Clean previous classes
-        wrapper.classList.remove('proj-slide-out-left', 'proj-slide-out-right', 'proj-slide-in-left', 'proj-slide-in-right');
-
-        // Force Reflow
-        void wrapper.offsetWidth;
-
-        wrapper.classList.add(enterClass);
-
-        // 5. Cleanup
-        setTimeout(() => {
-            if (clone.parentNode === parent) parent.removeChild(clone);
-            wrapper.classList.remove(enterClass);
-        }, 300);
+        updateProjectView();
     };
 
-    window.changeImage = function (direction) {
-        // Note: handleAutoScroll calls this too, so it resets its own timer, which is fine.
-        resetAutoScroll();
-
+    window.changeImage = function(direction) {
         if (filteredProjects.length === 0) return;
         const project = filteredProjects[currentProjectIndex];
         if (!project.images || project.images.length === 0) return;
-
         const count = project.images.length;
-        // Circular Check
-        const newIndex = (currentImageIndex + direction + count) % count;
-
-        /*
-        // Animation is now handled entirely inside updateImageDisplay relative to the Container
-        */
-
-        currentImageIndex = newIndex;
-        updateImageDisplay(true, direction);
+        currentImageIndex = (currentImageIndex + direction + count) % count;
+        updateGalleryDisplay();
     };
 
     // Filter Logic
     function filterProjects(filterId) {
-        // currentFilter = filterId; // We can track this if needed
-
-        // Filter logic handling 'ia' group
         if (filterId === 'all') {
-            filteredProjects = projects;
+            filteredProjects = [...projects];
         } else if (filterId === 'ai') {
             filteredProjects = projects.filter(p => ['cv', 'nlp', 'ml'].includes(p.category));
         } else {
             filteredProjects = projects.filter(p => p.category === filterId);
         }
 
-        // Reset indices
         currentProjectIndex = 0;
         currentImageIndex = 0;
-
-        // Animate container
-        const wrapper = document.querySelector('.projects-content-wrapper');
-        if (wrapper) {
-            wrapper.classList.remove('project-enter');
-            void wrapper.offsetWidth;
-            wrapper.classList.add('project-enter');
-        }
-
         updateProjectView();
     }
 
-    // Filter Buttons
+    // Filter Button Clicks
+    const filterBtns = document.querySelectorAll('.filter-btn');
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            resetAutoScroll();
-
-            // Remove active class from all
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active to clicked
             btn.classList.add('active');
-
             const filter = btn.getAttribute('data-filter');
             filterProjects(filter);
         });
     });
 
-    // Initial Render
+    // Lightbox Modal Handling
+    if (expandImageBtn && mainGalleryImg) {
+        expandImageBtn.addEventListener('click', () => {
+            openLightbox();
+        });
+
+        mainGalleryImg.addEventListener('click', () => {
+            openLightbox();
+        });
+    }
+
+    function openLightbox() {
+        if (!lightboxModal || !lightboxImg || filteredProjects.length === 0) return;
+        const project = filteredProjects[currentProjectIndex];
+        const images = project.images || [];
+        if (images.length === 0) return;
+
+        lightboxModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        updateGalleryDisplay();
+    }
+
+    function closeLightbox() {
+        if (!lightboxModal) return;
+        lightboxModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (lightboxCloseBtn) {
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+    }
+
+    if (lightboxPrevBtn) {
+        lightboxPrevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.changeImage(-1);
+        });
+    }
+
+    if (lightboxNextBtn) {
+        lightboxNextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.changeImage(1);
+        });
+    }
+
+    if (lightboxModal) {
+        lightboxModal.addEventListener('click', (e) => {
+            // Close if clicking outside the dialog content
+            if (e.target === lightboxModal) closeLightbox();
+        });
+    }
+
+    // Keyboard Navigation (Arrow keys for projects/images, Escape for Lightbox)
+    window.addEventListener('keydown', (e) => {
+        if (lightboxModal && lightboxModal.classList.contains('active')) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') window.changeImage(-1);
+            if (e.key === 'ArrowRight') window.changeImage(1);
+            return;
+        }
+
+        if (e.key === 'ArrowLeft') {
+            window.changeProject(-1);
+        } else if (e.key === 'ArrowRight') {
+            window.changeProject(1);
+        }
+    });
+
+    // Language Toggle Click Event
+    const langBtn = document.getElementById('lang-toggle');
+    if (langBtn) {
+        langBtn.addEventListener('click', () => {
+            if (typeof I18N !== 'undefined') {
+                I18N.toggle();
+                updateProjectView();
+            }
+        });
+    }
+
+    // Initial Filter Activation
     filterProjects('ai');
-    startAutoScroll();
 });
-
-function openModal(project) {
-    const modal = document.getElementById('project-modal');
-    const body = document.getElementById('modal-body');
-
-    body.innerHTML = `
-        <h2>${project.title}</h2>
-        <div class="status-indicator" style="display:inline-flex; margin: 1rem 0;">${project.year}</div>
-        <p>${project.description}</p>
-        <div class="stack-icons" style="margin-top: 1.5rem; font-size: 1.5rem;">
-            ${project.tech.map(t => `<span class="tech-tag" style="font-size: 0.8rem; border:1px solid #333; padding:4px 8px; border-radius:4px;">${t}</span>`).join('')}
-        </div>
-    `;
-
-    modal.classList.add('visible');
-
-    modal.querySelector('.close-modal').onclick = () => {
-        modal.classList.remove('visible');
-    };
-
-    modal.onclick = (e) => {
-        if (e.target === modal) modal.classList.remove('visible');
-    };
-}

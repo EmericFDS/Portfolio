@@ -1,23 +1,62 @@
+# ==============================================================================
+# Robots.txt — Emeric Ferreira Dos Santos (Emeric F.D.S.) Portfolio
+# Optimized for Web Crawlers, Search Engines & Autonomous AI Agents
+# ==============================================================================
+
+# 1. Autonomous AI Agents & LLM Search Crawlers (Explicitly Allowed & Welcomed)
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
-User-agent: CCBot
-Disallow: /
+User-agent: ChatGPT-User
+Allow: /
 
-User-agent: Google-Extended
-Disallow: /
+User-agent: ClaudeBot
+Allow: /
 
 User-agent: anthropic-ai
-Disallow: /
+Allow: /
 
-User-agent: Omgilibot
-Disallow: /
+User-agent: Claude-Web
+Allow: /
 
-User-agent: FacebookBot
-Disallow: /
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# 2. General Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
 
 User-agent: *
 Disallow: /private/
+Disallow: /scratch/
 Allow: /
 
+# 3. Sitemaps and AI Agent Specifications
 Sitemap: https://emericfds.com/sitemap.xml
+# LLMs.txt specification for AI Agents: https://llmstxt.org/
+# Knowledge Base: https://emericfds.com/llms.txt
+# Full Knowledge Base: https://emericfds.com/llms-full.txt

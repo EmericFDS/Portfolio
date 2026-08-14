@@ -1,0 +1,44 @@
+# Emeric Ferreira Dos Santos (Emeric F.D.S.) — AI Developer & Game Designer
+
+> AI Developer specializing in Autonomous AI Agents, LLMs, RAG, and Computer Vision. Game Designer & Creative Technologist with 10+ shipped games and web applications. Based in Geneva, Switzerland. Available for hire and innovative projects.
+
+## Developer Profile
+- **Full Name**: Emeric Ferreira Dos Santos
+- **Professional Name**: Emeric F.D.S.
+- **Role**: AI Developer, Creative Technologist & Game Designer
+- **Location**: Geneva, Switzerland
+- **Status**: Available for new opportunities / Freelance
+- **Website**: https://emericfds.com/
+- **Email**: contact@emericfds.com
+- **LinkedIn**: https://www.linkedin.com/in/emericfds/
+- **GitHub**: https://github.com/EmericFDS
+
+## Core Competencies & Tech Stack
+- **Artificial Intelligence**: Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Autonomous AI Agents, Prompt Engineering, NLP, Computer Vision (YOLO, OpenCV), PyTorch, TensorFlow, Hugging Face.
+- **Software & Web Development**: Python, TypeScript, JavaScript (ES6+), React, Vite, Node.js, Next.js, HTML5/CSS3, Tailwind CSS, Canvas UI, REST APIs, WebSockets.
+- **Game Development & 3D**: Unity 3D/2D, C#, Level Design, Game Feel & Mechanics, Gameplay Programming, Blender, Shader Graph, VR/AR (Gear VR, Oculus).
+- **Design & Creative Direction**: UI/UX Design, Figma, Adobe Photoshop, Adobe Illustrator, Visual Storytelling, Responsive Systems.
+
+## Featured Projects
+
+### Artificial Intelligence & Machine Learning
+- **[PhotoLift](https://github.com/EmericFDS/PhotoLift)**: High-performance desktop application for batch photo management, AI-assisted sorting, and instant touch-ups.
+- **[CVite](https://cvite.emericfds.com/)**: Intelligent resume builder platform powered by AI document extraction, NLP, and real-time layout customizer.
+- **[Smart Bucket](https://smartbucket.emericfds.com/)**: Autonomous crypto portfolio management system with real-time sentiment analysis, automated rebalancing, and low-latency execution.
+- **[Autonomous RAG Agent](https://github.com/EmericFDS)**: Enterprise document retrieval and multi-step reasoning agent with vector similarity search.
+- **[Real-time Object Detection](https://github.com/EmericFDS)**: High-throughput video stream analysis pipeline utilizing YOLOv8 and OpenCV.
+
+### Web Applications & Creative Tools
+- **[GhostLink](https://ghostlink.emericfds.com/)**: Zero-knowledge secret sharing utility with client-side AES-256 encryption. The link is the key; zero server-side storage.
+- **[Portfolio Canvas UI](https://emericfds.com/)**: High-performance interactive portfolio featuring 60 FPS generative constellation canvas, spotlight bento cards, and 100% Lighthouse audit compliance.
+
+### Game Design & Interactive Media
+- **[Pure Mahjong](https://www.nintendo.com/fr-fr/Jeux/Jeux-a-telecharger-sur-Nintendo-Switch/Pure-Mahjong-1859582.html)**: Shipped photorealistic Mahjong game for Nintendo Switch featuring 1,000+ levels and custom engine optimizations.
+- **[Turn Base Battle Game](https://github.com/EmericFDS)**: Tactical turn-based mobile RPG featuring 4 handcrafted dungeon environments built with Unity & C#.
+- **[Gravity Defy](https://github.com/EmericFDS)**: Physics-based motorcycle parkour mobile game with 14 challenging levels.
+- **[Cubic Level](https://github.com/EmericFDS)**: Voxel-art top-down adventure level design for mobile.
+- **[Koda: Kiyomori's Guardian](https://github.com/EmericFDS)**: Atmospheric 3D platformer inspired by Japanese mythology.
+
+## Documentation & AI Knowledge Base
+- **Full Project Catalog**: [llms-full.txt](https://emericfds.com/llms-full.txt)
+- **JSON-LD Schema**: [Schema.org ProfilePage](https://emericfds.com/)

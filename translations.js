@@ -13,20 +13,33 @@ const TRANSLATIONS = {
             ldDescription: "Versatile & Creative AI Developer. Expert in AI Agents, LLMs, RAG, Computer Vision, and Game Design. Based in Geneva, Switzerland."
         },
 
+        // --- Header / Nav ---
+        "nav.status": "Available",
+        "nav.projects": "Projects",
+        "nav.about": "About",
+        "nav.contact": "Contact",
+
         // --- Hero ---
+        "hero.role": "Creative Technologist • AI & Game Dev",
         "hero.subtitle": "Developer",
-        "hero.tagline": "Engineering intelligent solutions and immersive worlds.",
+        "hero.tagline": "Engineering intelligent solutions, creative UI interactions, and immersive game worlds.",
+        "hero.ctaProjects": "Explore Projects",
+        "hero.ctaContact": "Get in Touch",
+        "hero.badgeLocation": "Geneva, Switzerland",
 
         // --- About ---
-        "about.title": "About",
+        "about.title": "About Me",
         "about.content": `<strong>Versatile & Creative Developer.</strong>
             <br><br>
-            My expertise ranges from orchestrating <strong>AI Agents</strong> (LLM, RAG) to developing immersive 
+            My expertise ranges from orchestrating <strong>AI Agents</strong> (LLM, RAG, Computer Vision) to developing immersive 
             <strong>Video Games</strong> (Unity, C#).
             With international experience gained across France, Switzerland, and Portugal, I design innovative solutions that combine technical robustness with polished design.`,
+        "about.badge1": "AI Agents & LLM RAG",
+        "about.badge2": "10+ Shipped Games",
+        "about.badge3": "Creative UI & Canvas",
 
         // --- Projects ---
-        "projects.title": "Projects",
+        "projects.title": "Featured Projects",
         "projects.filter.ai": "AI",
         "projects.filter.web": "Web",
         "projects.filter.games": "Games",
@@ -37,16 +50,23 @@ const TRANSLATIONS = {
         "projects.empty.title": "No projects at the moment",
         "projects.empty.desc": "Please select another category.",
         "projects.tech.title": "Technologies:",
-        "projects.no.images": "No images",
+        "projects.no.images": "No preview images",
+        "projects.viewFullscreen": "Expand image",
+        "projects.closeModal": "Close modal",
+        "projects.keyboardHint": "← → to navigate",
 
         // --- Footer ---
-        "footer.contact": "Contact",
+        "footer.contact": "Get in Touch",
         "footer.email.label": "Contact Me",
+        "footer.copyEmail": "Copy Email",
+        "footer.copiedToast": "Email copied to clipboard! ✨",
         "footer.location": "Location",
         "footer.location.text": "Geneva, Switzerland",
-        "footer.links": "Links",
+        "footer.links": "Connect",
+        "footer.builtWith": "Built with Canvas UI & Modern Web Standards",
+        "footer.allRights": "All rights reserved.",
 
-        // --- 404 (if needed) ---
+        // --- 404 ---
         "404.title": "Page Not Found",
         "404.desc": "Sorry, the page you're looking for doesn't exist."
     },
@@ -61,20 +81,33 @@ const TRANSLATIONS = {
             ldDescription: "Développeur IA polyvalent et créatif. Expert en Agents IA, LLMs, RAG, Vision par Ordinateur et Game Design. Basé à Genève, Suisse."
         },
 
+        // --- Header / Nav ---
+        "nav.status": "Disponible",
+        "nav.projects": "Projets",
+        "nav.about": "À Propos",
+        "nav.contact": "Contact",
+
         // --- Hero ---
+        "hero.role": "Creative Technologist • IA & Jeux Vidéo",
         "hero.subtitle": "Développeur",
-        "hero.tagline": "Concevoir des solutions intelligentes et des mondes immersifs.",
+        "hero.tagline": "Concevoir des solutions intelligentes, des interactions UI créatives et des mondes immersifs.",
+        "hero.ctaProjects": "Explorer les projets",
+        "hero.ctaContact": "Me contacter",
+        "hero.badgeLocation": "Genève, Suisse",
 
         // --- About ---
         "about.title": "À propos",
         "about.content": `<strong>Développeur polyvalent & créatif.</strong>
             <br><br>
-            Mon expertise va de l'orchestration d'<strong>Agents IA</strong> (LLM, RAG) au développement de 
+            Mon expertise va de l'orchestration d'<strong>Agents IA</strong> (LLM, RAG, Vision par Ordinateur) au développement de 
             <strong>Jeux Vidéo</strong> immersifs (Unity, C#).
             Avec une expérience internationale acquise en France, en Suisse et au Portugal, je conçois des solutions innovantes alliant robustesse technique et design soigné.`,
+        "about.badge1": "Agents IA & LLM RAG",
+        "about.badge2": "10+ Jeux Livrés",
+        "about.badge3": "UI Créative & Canvas",
 
         // --- Projects ---
-        "projects.title": "Projets",
+        "projects.title": "Projets Réalisés",
         "projects.filter.ai": "IA",
         "projects.filter.web": "Web",
         "projects.filter.games": "Jeux",
@@ -85,14 +118,21 @@ const TRANSLATIONS = {
         "projects.empty.title": "Aucun projet pour le moment",
         "projects.empty.desc": "Veuillez sélectionner une autre catégorie.",
         "projects.tech.title": "Technologies :",
-        "projects.no.images": "Pas d'images",
+        "projects.no.images": "Aucune image d'aperçu",
+        "projects.viewFullscreen": "Agrandir l'image",
+        "projects.closeModal": "Fermer la modal",
+        "projects.keyboardHint": "Touches ← → pour naviguer",
 
         // --- Footer ---
-        "footer.contact": "Contact",
+        "footer.contact": "Me contacter",
         "footer.email.label": "Me contacter",
+        "footer.copyEmail": "Copier l'email",
+        "footer.copiedToast": "Email copié dans le presse-papier ! ✨",
         "footer.location": "Localisation",
         "footer.location.text": "Genève, Suisse",
-        "footer.links": "Liens",
+        "footer.links": "Réseaux",
+        "footer.builtWith": "Conçu avec Canvas UI & Standards Web Modernes",
+        "footer.allRights": "Tous droits réservés.",
 
         // --- 404 ---
         "404.title": "Page introuvable",
