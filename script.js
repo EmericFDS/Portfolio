@@ -994,6 +994,7 @@ const TECH_ICON_MAP = {
 };
 
 // ============================================================
+// ============================================================
 // 1. CANVAS UI & GENERATIVE PARTICLES ENGINE
 // ============================================================
 class CanvasParticleEngine {
@@ -1003,9 +1004,12 @@ class CanvasParticleEngine {
         this.ctx = this.canvas.getContext('2d');
         this.particles = [];
         this.ripples = [];
-        this.numParticles = 48;
+        this.numParticles = 52;
         this.maxDistance = 140;
         this.mouse = { x: -1000, y: -1000, radius: 160 };
+        this.lastScrollY = window.scrollY;
+        this.scrollVelocity = 0;
+        this.targetScrollVelocity = 0;
         this.animationFrameId = null;
         this.isRunning = false;
         this.dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1034,6 +1038,15 @@ class CanvasParticleEngine {
             this.addRipple(e.clientX, e.clientY);
         }, { passive: true });
 
+        // Scroll reactive tracking for canvas fluid/parallax effect
+        window.addEventListener('scroll', () => {
+            if (this.prefersReducedMotion) return;
+            const currentY = window.scrollY;
+            const delta = currentY - this.lastScrollY;
+            this.lastScrollY = currentY;
+            this.targetScrollVelocity = Math.max(-45, Math.min(45, delta));
+        }, { passive: true });
+
         // Visibility API to save battery/CPU
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
@@ -1054,7 +1067,7 @@ class CanvasParticleEngine {
         this.canvas.width = this.width * this.dpr;
         this.canvas.height = this.height * this.dpr;
         this.ctx.scale(this.dpr, this.dpr);
-        this.numParticles = Math.min(Math.floor((this.width * this.height) / 22000), 55);
+        this.numParticles = Math.min(Math.floor((this.width * this.height) / 20000), 58);
         if (this.particles.length < this.numParticles) {
             this.createParticles();
         }
@@ -1069,22 +1082,33 @@ class CanvasParticleEngine {
                 vx: (Math.random() - 0.5) * 0.45,
                 vy: (Math.random() - 0.5) * 0.45,
                 radius: Math.random() * 1.8 + 1.0,
+                depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
                 baseAlpha: Math.random() * 0.5 + 0.3,
                 color: Math.random() > 0.4 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
             });
         }
     }
 
-    addRipple(x, y) {
+    addRipple(x, y, customRadius = 120, customColor = '0, 240, 255') {
         if (this.prefersReducedMotion) return;
         this.ripples.push({
             x,
             y,
             radius: 5,
-            maxRadius: 120,
-            alpha: 0.6,
-            speed: 3.5
+            maxRadius: customRadius,
+            alpha: 0.65,
+            speed: 3.5,
+            color: customColor
         });
+    }
+
+    // Soft energy wave centered on an element
+    pulseElement(element) {
+        if (!element || this.prefersReducedMotion) return;
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        this.addRipple(centerX, centerY, Math.max(rect.width, rect.height) * 0.6, '0, 240, 255');
     }
 
     start() {
@@ -1110,6 +1134,10 @@ class CanvasParticleEngine {
     render() {
         this.ctx.clearRect(0, 0, this.width, this.height);
 
+        // Smooth scroll velocity damping
+        this.scrollVelocity += (this.targetScrollVelocity - this.scrollVelocity) * 0.18;
+        this.targetScrollVelocity *= 0.88;
+
         // Render Ripples
         for (let r = this.ripples.length - 1; r >= 0; r--) {
             const rip = this.ripples[r];
@@ -1123,7 +1151,7 @@ class CanvasParticleEngine {
 
             this.ctx.beginPath();
             this.ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
-            this.ctx.strokeStyle = `rgba(0, 240, 255, ${rip.alpha * 0.4})`;
+            this.ctx.strokeStyle = `rgba(${rip.color || '0, 240, 255'}, ${rip.alpha * 0.45})`;
             this.ctx.lineWidth = 1.5;
             this.ctx.stroke();
         }
@@ -1136,9 +1164,17 @@ class CanvasParticleEngine {
                 p.x += p.vx;
                 p.y += p.vy;
 
-                // Bounce at edges
-                if (p.x < 0 || p.x > this.width) p.vx *= -1;
-                if (p.y < 0 || p.y > this.height) p.vy *= -1;
+                // Parallax scroll stream drift
+                if (Math.abs(this.scrollVelocity) > 0.05) {
+                    p.y -= this.scrollVelocity * p.depth * 0.35;
+                }
+
+                // Wrap around edges smoothly
+                if (p.x < -10) p.x = this.width + 10;
+                else if (p.x > this.width + 10) p.x = -10;
+
+                if (p.y < -10) p.y = this.height + 10;
+                else if (p.y > this.height + 10) p.y = -10;
 
                 // Mouse interactivity (gentle push)
                 const dx = this.mouse.x - p.x;
@@ -1151,9 +1187,14 @@ class CanvasParticleEngine {
                 }
             }
 
-            // Draw particle dot
+            // Draw particle dot or slight streak on fast scroll
+            const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
             this.ctx.beginPath();
-            this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            if (stretch > 0.6 && !this.prefersReducedMotion) {
+                this.ctx.ellipse(p.x, p.y, p.radius, p.radius + stretch, 0, 0, Math.PI * 2);
+            } else {
+                this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            }
             this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
             this.ctx.fill();
 
@@ -1243,7 +1284,8 @@ function initSpotlightAndCursor() {
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Canvas UI
-    new CanvasParticleEngine('bg-canvas');
+    const canvasEngine = new CanvasParticleEngine('bg-canvas');
+    window.canvasEngine = canvasEngine;
 
     // 2. Initialize Spotlight & Cursor
     initSpotlightAndCursor();
@@ -1289,6 +1331,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectTechEl = document.getElementById('project-tech-tags');
     const projectLinksEl = document.getElementById('project-links-list');
     const projectCounterEl = document.getElementById('project-nav-counter');
+    const topShadowEl = document.getElementById('scroll-shadow-top');
+    const bottomShadowEl = document.getElementById('scroll-shadow-bottom');
     const btnPrevProj = document.getElementById('btn-prev-proj');
     const btnNextProj = document.getElementById('btn-next-proj');
     const btnPrevImg = document.getElementById('btn-prev-img');
@@ -1304,6 +1348,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
     const lightboxNextBtn = document.getElementById('lightbox-next-btn');
     const lightboxFilmstrip = document.getElementById('lightbox-filmstrip');
+
+    // Dynamic Scroll Shadow Indicators
+    function updateScrollShadows() {
+        if (!projectDescEl) return;
+        const hasOverflow = projectDescEl.scrollHeight > projectDescEl.clientHeight + 4;
+        const isScrolledFromTop = projectDescEl.scrollTop > 6;
+        const isScrolledToBottom = (projectDescEl.scrollTop + projectDescEl.clientHeight) >= (projectDescEl.scrollHeight - 6);
+
+        if (topShadowEl) {
+            if (hasOverflow && isScrolledFromTop) {
+                topShadowEl.classList.add('visible');
+            } else {
+                topShadowEl.classList.remove('visible');
+            }
+        }
+
+        if (bottomShadowEl) {
+            if (hasOverflow && !isScrolledToBottom) {
+                bottomShadowEl.classList.add('visible');
+            } else {
+                bottomShadowEl.classList.remove('visible');
+            }
+        }
+    }
+
+    if (projectDescEl) {
+        projectDescEl.addEventListener('scroll', () => {
+            updateScrollShadows();
+            if (window.canvasEngine && Math.random() < 0.25) {
+                window.canvasEngine.targetScrollVelocity += (Math.random() - 0.5) * 1.5;
+            }
+        }, { passive: true });
+    }
+
+    window.addEventListener('resize', updateScrollShadows, { passive: true });
 
     // Email Copy & Toast Logic
     const copyEmailBtn = document.getElementById('copy-email-btn');
@@ -1353,7 +1432,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateProjectView() {
         if (filteredProjects.length === 0) {
             if (projectTitleEl) projectTitleEl.textContent = (typeof I18N !== 'undefined') ? I18N.t('projects.empty.title') : 'No projects';
-            if (projectDescEl) projectDescEl.innerHTML = `<p class="current-project-desc">${(typeof I18N !== 'undefined') ? I18N.t('projects.empty.desc') : 'Please select another category.'}</p>`;
+            if (projectDescEl) {
+                projectDescEl.innerHTML = `<p class="current-project-desc">${(typeof I18N !== 'undefined') ? I18N.t('projects.empty.desc') : 'Please select another category.'}</p>`;
+                projectDescEl.scrollTop = 0;
+                requestAnimationFrame(updateScrollShadows);
+            }
             if (projectTechEl) projectTechEl.innerHTML = '';
             if (projectLinksEl) projectLinksEl.innerHTML = '';
             if (mainGalleryImg) mainGalleryImg.src = '';
@@ -1371,10 +1454,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (projectCategoryEl) projectCategoryEl.textContent = (project.category || 'PROJECT').toUpperCase();
         if (projectYearEl) projectYearEl.textContent = project.year;
 
-        // 2. Formatted Description
+        // 2. Formatted Description & Scroll Reset
         if (projectDescEl) {
             const rawDesc = (currentLang === 'fr' && project.descriptionFr) ? project.descriptionFr : project.description;
             projectDescEl.innerHTML = `<div class="current-project-desc">${formatMarkdown(rawDesc)}</div>`;
+            projectDescEl.scrollTop = 0;
+            requestAnimationFrame(updateScrollShadows);
         }
 
         // 3. Links
@@ -1409,6 +1494,68 @@ document.addEventListener('DOMContentLoaded', () => {
         // 6. Reset & Render Gallery Images
         currentImageIndex = 0;
         updateGalleryDisplay();
+
+        // 7. Pulse Canvas UI on Project Change
+        if (window.canvasEngine) {
+            const card = document.getElementById('projects-section');
+            if (card) window.canvasEngine.pulseElement(card);
+        }
+    }
+
+    // High-Definition Asset Map (Lossless PNG/JPG for main view & fullscreen lightbox)
+    const HD_IMAGE_MAP = {
+        "./img/games/Koda/Koda01.webp": "./assets/images/legacy/Koda/Koda01.jpg",
+        "./img/games/Koda/Koda02.webp": "./assets/images/legacy/Koda/Koda02.jpg",
+        "./img/games/Koda/Koda03.webp": "./assets/images/legacy/Koda/Koda03.jpg",
+        "./img/games/Koda/Koda04.webp": "./assets/images/legacy/Koda/Koda04.jpg",
+        "./img/games/Koda/Koda05.webp": "./assets/images/legacy/Koda/Koda05.jpg",
+        "./img/games/Koda/Koda06.webp": "./assets/images/legacy/Koda/Koda06.jpg",
+        "./img/games/Koda/Koda07.webp": "./assets/images/legacy/Koda/Koda07.jpg",
+        "./img/games/Koda/Koda08.webp": "./assets/images/legacy/Koda/Koda08.jpg",
+        "./img/games/Koda/Koda09.webp": "./assets/images/legacy/Koda/Koda09.jpg",
+        "./img/games/Koda/Koda10.webp": "./assets/images/legacy/Koda/Koda10.jpg",
+        "./img/games/UWJ/UWJ01.webp": "./assets/images/legacy/UWJ/UWJ01.jpg",
+        "./img/games/UWJ/UWJ02.webp": "./assets/images/legacy/UWJ/UWJ02.jpg",
+        "./img/games/UWJ/UWJ03.webp": "./assets/images/legacy/UWJ/UWJ03.jpg",
+        "./img/games/UWJ/UWJ04.webp": "./assets/images/legacy/UWJ/UWJ04.jpg",
+        "./img/games/UWJ/UWJ05.webp": "./assets/images/legacy/UWJ/UWJ05.jpg",
+        "./img/games/UWJ/UWJ06.webp": "./assets/images/legacy/UWJ/UWJ06.jpg",
+        "./img/games/UWJ/UWJ07.webp": "./assets/images/legacy/UWJ/UWJ07.jpg",
+        "./img/games/UWJ/UWJ08.webp": "./assets/images/legacy/UWJ/UWJ08.jpg",
+        "./img/games/Deficience.webp": "./assets/images/legacy/Deficience.jpg",
+        "./img/games/Trackmania/track1.webp": "./assets/images/legacy/Trackmania/track1.jpg",
+        "./img/games/Trackmania/track2.webp": "./assets/images/legacy/Trackmania/track2.jpg",
+        "./img/games/Trackmania/track3.webp": "./assets/images/legacy/Trackmania/track3.jpg",
+        "./img/games/Trackmania/track4.webp": "./assets/images/legacy/Trackmania/track4.jpg",
+        "./img/games/Trackmania/track5.webp": "./assets/images/legacy/Trackmania/track5.jpg",
+        "./img/games/Trackmania/track8.webp": "./assets/images/legacy/Trackmania/track8.jpg",
+        "./img/games/Trackmania/track9.webp": "./assets/images/legacy/Trackmania/track9.jpg",
+        "./img/games/Trackmania/track11.webp": "./assets/images/legacy/Trackmania/track11.jpg",
+        "./img/games/Trackmania/track12.webp": "./assets/images/legacy/Trackmania/track12.jpg",
+        "./img/games/Trackmania/track13.webp": "./assets/images/legacy/Trackmania/track13.jpg",
+        "./img/games/Trackmania/track14.webp": "./assets/images/legacy/Trackmania/track14.jpg",
+        "./img/games/Trackmania/track16.webp": "./assets/images/legacy/Trackmania/track16.jpg",
+        "./img/games/Trackmania/track17.webp": "./assets/images/legacy/Trackmania/track17.jpg",
+        "./img/games/Trackmania/track19.webp": "./assets/images/legacy/Trackmania/track19.jpg",
+        "./img/games/Trackmania/track20.webp": "./assets/images/legacy/Trackmania/track20.jpg",
+        "./img/games/Trackmania/track21.webp": "./assets/images/legacy/Trackmania/track21.jpg",
+        "./img/games/Trackmania/track22.webp": "./assets/images/legacy/Trackmania/track22.jpg",
+        "./img/games/Trackmania/track23.webp": "./assets/images/legacy/Trackmania/track23.jpg",
+        "./img/games/Trackmania/track24.webp": "./assets/images/legacy/Trackmania/track24.jpg",
+        "./img/games/tron1.webp": "./assets/images/legacy/tron1.png",
+        "./img/games/tron2.webp": "./assets/images/legacy/tron2.png",
+        "./img/games/Game1.webp": "./assets/images/legacy/Game1.png",
+        "./img/games/Game2.webp": "./assets/images/legacy/Game2.png",
+        "./img/games/Tom Atom printsc.webp": "./assets/images/legacy/Tom Atom printsc.png",
+        "./img/games/PlatformGame/platform game1.webp": "./assets/images/legacy/platform game1.png",
+        "./img/games/PlatformGame/platform game2.webp": "./assets/images/legacy/platform game2.png",
+        "./img/games/PlatformGame/platform game3.webp": "./assets/images/legacy/platform game3.png",
+        "./img/games/PlatformGame/platform game4.webp": "./assets/images/legacy/platform game4.png",
+        "./img/games/PlatformGame/platform game5.webp": "./assets/images/legacy/platform game5.png"
+    };
+
+    function getHighResImage(src) {
+        return HD_IMAGE_MAP[src] || src;
     }
 
     // Render Gallery Active Image & Filmstrip
@@ -1432,13 +1579,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentImageIndex >= images.length) currentImageIndex = 0;
         if (currentImageIndex < 0) currentImageIndex = images.length - 1;
 
-        // Set Main Image
+        const currentWebp = images[currentImageIndex];
+        const currentHd = getHighResImage(currentWebp);
+
+        // Set Main Image (High-Def with fallback)
         if (mainGalleryImg) {
-            mainGalleryImg.src = images[currentImageIndex];
+            mainGalleryImg.src = currentHd;
             mainGalleryImg.alt = `${project.title} - Preview ${currentImageIndex + 1}`;
             mainGalleryImg.onerror = function() {
                 this.onerror = null;
-                this.src = 'https://placehold.co/800x600/0d121e/00f0ff?text=' + encodeURIComponent(project.title);
+                this.src = currentWebp;
             };
         }
 
@@ -1447,7 +1597,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnPrevImg) btnPrevImg.style.display = hasMultipleImages ? 'flex' : 'none';
         if (btnNextImg) btnNextImg.style.display = hasMultipleImages ? 'flex' : 'none';
 
-        // Render Filmstrip
+        // Render Filmstrip (Fast WebP thumbnails)
         if (filmstripEl) {
             if (hasMultipleImages) {
                 filmstripEl.style.display = 'flex';
@@ -1477,11 +1627,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Update Lightbox Modal if currently open
+        // Update Lightbox Modal if currently open (High-Def)
         if (lightboxModal && lightboxModal.classList.contains('active')) {
             if (lightboxImg) {
-                lightboxImg.src = images[currentImageIndex];
+                lightboxImg.src = currentHd;
                 lightboxImg.alt = `${project.title} - Fullscreen ${currentImageIndex + 1}`;
+                lightboxImg.onerror = function() {
+                    this.onerror = null;
+                    this.src = currentWebp;
+                };
             }
             if (lightboxTitle) lightboxTitle.textContent = project.title;
             if (lightboxCounter) {

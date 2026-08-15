@@ -249,7 +249,8 @@
                 <div class="projects-content-wrapper">
                     <!-- Left Column: Details & Tech -->
                     <div class="project-info-container">
-                        <div>
+                        <!-- Top Header Block: Meta, Title, and Action Links -->
+                        <div class="project-info-header">
                             <div class="project-meta-header">
                                 <div class="project-icon-badge">
                                     <i id="project-icon" class="fas fa-code"></i>
@@ -260,14 +261,19 @@
 
                             <h2 id="project-title" class="project-title-text">Project Title</h2>
 
-                            <div class="relative-scroll-wrapper">
-                                <div id="dynamic-project-content" class="dynamic-scroll-content">
-                                    <!-- Dynamic Description & Specs -->
-                                </div>
-                            </div>
-
                             <div id="project-links-list" class="project-links-container">
                                 <!-- Dynamic Action Links (Demo, Video, Repo, PDF) -->
+                            </div>
+                        </div>
+
+                        <!-- Scrollable Middle Block: Directly bounded by top & bottom borders -->
+                        <div class="relative-scroll-wrapper">
+                            <div class="scroll-indicator-shadow top" id="scroll-shadow-top" aria-hidden="true"></div>
+                            <div id="dynamic-project-content" class="dynamic-scroll-content" tabindex="0" role="region" aria-label="Project description">
+                                <!-- Dynamic Description & Specs -->
+                            </div>
+                            <div class="scroll-indicator-shadow bottom" id="scroll-shadow-bottom" aria-hidden="true">
+                                <span class="scroll-hint-icon"><i class="fas fa-chevron-down"></i></span>
                             </div>
                         </div>
 
