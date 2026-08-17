@@ -1067,7 +1067,7 @@ class CanvasParticleEngine {
         this.canvas.width = this.width * this.dpr;
         this.canvas.height = this.height * this.dpr;
         this.ctx.scale(this.dpr, this.dpr);
-        this.numParticles = Math.min(Math.floor((this.width * this.height) / 20000), 58);
+        this.numParticles = Math.min(Math.floor((this.width * this.height) / 14000), 75);
         if (this.particles.length < this.numParticles) {
             this.createParticles();
         }
@@ -1081,23 +1081,23 @@ class CanvasParticleEngine {
                 y: Math.random() * this.height,
                 vx: (Math.random() - 0.5) * 0.45,
                 vy: (Math.random() - 0.5) * 0.45,
-                radius: Math.random() * 1.8 + 1.0,
+                radius: Math.random() * 2.0 + 1.2,
                 depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
-                baseAlpha: Math.random() * 0.5 + 0.3,
-                color: Math.random() > 0.4 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
+                baseAlpha: Math.random() * 0.35 + 0.55,
+                color: Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
             });
         }
     }
 
-    addRipple(x, y, customRadius = 120, customColor = '0, 240, 255') {
+    addRipple(x, y, customRadius = 130, customColor = '0, 240, 255') {
         if (this.prefersReducedMotion) return;
         this.ripples.push({
             x,
             y,
             radius: 5,
             maxRadius: customRadius,
-            alpha: 0.65,
-            speed: 3.5,
+            alpha: 0.75,
+            speed: 3.8,
             color: customColor
         });
     }
@@ -1108,7 +1108,7 @@ class CanvasParticleEngine {
         const rect = element.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        this.addRipple(centerX, centerY, Math.max(rect.width, rect.height) * 0.6, '0, 240, 255');
+        this.addRipple(centerX, centerY, Math.max(rect.width, rect.height) * 0.65, '0, 240, 255');
     }
 
     start() {
@@ -1151,12 +1151,12 @@ class CanvasParticleEngine {
 
             this.ctx.beginPath();
             this.ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
-            this.ctx.strokeStyle = `rgba(${rip.color || '0, 240, 255'}, ${rip.alpha * 0.45})`;
-            this.ctx.lineWidth = 1.5;
+            this.ctx.strokeStyle = `rgba(${rip.color || '0, 240, 255'}, ${rip.alpha * 0.65})`;
+            this.ctx.lineWidth = 1.8;
             this.ctx.stroke();
         }
 
-        // Render Particles & Constellation Links
+        // Render Constellation Links First (to prevent line overlapping on dots)
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
@@ -1187,17 +1187,6 @@ class CanvasParticleEngine {
                 }
             }
 
-            // Draw particle dot or slight streak on fast scroll
-            const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
-            this.ctx.beginPath();
-            if (stretch > 0.6 && !this.prefersReducedMotion) {
-                this.ctx.ellipse(p.x, p.y, p.radius, p.radius + stretch, 0, 0, Math.PI * 2);
-            } else {
-                this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            }
-            this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
-            this.ctx.fill();
-
             // Connect nearby particles
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
@@ -1206,16 +1195,35 @@ class CanvasParticleEngine {
                 const dist2 = Math.sqrt(dX * dX + dY * dY);
 
                 if (dist2 < this.maxDistance) {
-                    const lineAlpha = (1 - dist2 / this.maxDistance) * 0.18;
+                    const lineAlpha = (1 - dist2 / this.maxDistance) * 0.28;
                     this.ctx.beginPath();
                     this.ctx.moveTo(p.x, p.y);
                     this.ctx.lineTo(p2.x, p2.y);
                     this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.lineWidth = 0.75;
+                    this.ctx.lineWidth = 0.85;
                     this.ctx.stroke();
                 }
             }
         }
+
+        // Render Particle Dots with Soft Glow
+        for (let i = 0; i < this.particles.length; i++) {
+            const p = this.particles[i];
+            const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
+
+            this.ctx.shadowBlur = 6;
+            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
+
+            this.ctx.beginPath();
+            if (stretch > 0.6 && !this.prefersReducedMotion) {
+                this.ctx.ellipse(p.x, p.y, p.radius, p.radius + stretch, 0, 0, Math.PI * 2);
+            } else {
+                this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            }
+            this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
+            this.ctx.fill();
+        }
+        this.ctx.shadowBlur = 0;
     }
 }
 
@@ -1504,6 +1512,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // High-Definition Asset Map (Lossless PNG/JPG for main view & fullscreen lightbox)
     const HD_IMAGE_MAP = {
+        // Koda: Kiyomori's Guardian
         "./img/games/Koda/Koda01.webp": "./assets/images/legacy/Koda/Koda01.jpg",
         "./img/games/Koda/Koda02.webp": "./assets/images/legacy/Koda/Koda02.jpg",
         "./img/games/Koda/Koda03.webp": "./assets/images/legacy/Koda/Koda03.jpg",
@@ -1514,6 +1523,22 @@ document.addEventListener('DOMContentLoaded', () => {
         "./img/games/Koda/Koda08.webp": "./assets/images/legacy/Koda/Koda08.jpg",
         "./img/games/Koda/Koda09.webp": "./assets/images/legacy/Koda/Koda09.jpg",
         "./img/games/Koda/Koda10.webp": "./assets/images/legacy/Koda/Koda10.jpg",
+
+        // Antivirus: Data City
+        "./img/games/Antivirus/AntiVirus1.webp": "./assets/images/legacy/Antivirus/AntiVirus1.jpg",
+        "./img/games/Antivirus/AntiVirus2.webp": "./assets/images/legacy/Antivirus/AntiVirus2.jpg",
+        "./img/games/Antivirus/AntiVirus3.webp": "./assets/images/legacy/Antivirus/AntiVirus3.jpg",
+        "./img/games/Antivirus/AntiVirus4.webp": "./assets/images/legacy/Antivirus/AntiVirus4.jpg",
+        "./img/games/Antivirus/AntiVirus5.webp": "./assets/images/legacy/Antivirus/AntiVirus5.jpg",
+        "./img/games/Antivirus/AntiVirus6.webp": "./assets/images/legacy/Antivirus/AntiVirus6.jpg",
+        "./img/games/Antivirus/AntiVirus8.webp": "./assets/images/legacy/Antivirus/AntiVirus8.jpg",
+        "./img/games/Antivirus/AntiVirus9.webp": "./assets/images/legacy/Antivirus/AntiVirus9.jpg",
+        "./img/games/Antivirus/AntiVirus10.webp": "./assets/images/legacy/Antivirus/AntiVirus10.jpg",
+        "./img/games/Antivirus/AntiVirus11.webp": "./assets/images/legacy/Antivirus/AntiVirus11.jpg",
+        "./img/games/Antivirus/AntiVirus12.webp": "./assets/images/legacy/Antivirus/AntiVirus12.jpg",
+        "./img/games/Antivirus/AntiVirus20.webp": "./assets/images/legacy/Antivirus/AntiVirus20.jpg",
+
+        // Underground Water Junction
         "./img/games/UWJ/UWJ01.webp": "./assets/images/legacy/UWJ/UWJ01.jpg",
         "./img/games/UWJ/UWJ02.webp": "./assets/images/legacy/UWJ/UWJ02.jpg",
         "./img/games/UWJ/UWJ03.webp": "./assets/images/legacy/UWJ/UWJ03.jpg",
@@ -1522,7 +1547,60 @@ document.addEventListener('DOMContentLoaded', () => {
         "./img/games/UWJ/UWJ06.webp": "./assets/images/legacy/UWJ/UWJ06.jpg",
         "./img/games/UWJ/UWJ07.webp": "./assets/images/legacy/UWJ/UWJ07.jpg",
         "./img/games/UWJ/UWJ08.webp": "./assets/images/legacy/UWJ/UWJ08.jpg",
+
+        // Deficiency
         "./img/games/Deficience.webp": "./assets/images/legacy/Deficience.jpg",
+        "./img/games/deficienceNew.webp": "./assets/images/legacy/Deficience.jpg",
+        "./assets/images/legacy/Deficience.jpg": "./assets/images/legacy/Deficience.jpg",
+
+        // Tom Atom Rescue
+        "./img/games/TomAtomRescu/platformGame1.webp": "./assets/images/legacy/platform game1.png",
+        "./img/games/TomAtomRescu/platformGame2.webp": "./assets/images/legacy/platform game2.png",
+        "./img/games/TomAtomRescu/platformGame3.webp": "./assets/images/legacy/platform game3.png",
+        "./img/games/TomAtomRescu/platformGame4.webp": "./assets/images/legacy/platform game4.png",
+        "./img/games/TomAtomRescu/platformGame5.webp": "./assets/images/legacy/platform game5.png",
+        "./img/games/TomAtomRescu/Tom Atom printsc.webp": "./assets/images/legacy/Tom Atom printsc.png",
+        "./img/games/TomAtomRescu/badrobot printsc.webp": "./assets/images/legacy/badrobot printsc.png",
+        "./img/games/TomAtomRescu/perso.webp": "./assets/images/legacy/perso.png",
+        "./img/games/TomAtomRescu/player printsc.webp": "./assets/images/legacy/player printsc.png",
+        "./img/games/Tom Atom printsc.webp": "./assets/images/legacy/Tom Atom printsc.png",
+        "./img/games/PlatformGame/platform game1.webp": "./assets/images/legacy/platform game1.png",
+        "./img/games/PlatformGame/platform game2.webp": "./assets/images/legacy/platform game2.png",
+        "./img/games/PlatformGame/platform game3.webp": "./assets/images/legacy/platform game3.png",
+        "./img/games/PlatformGame/platform game4.webp": "./assets/images/legacy/platform game4.png",
+        "./img/games/PlatformGame/platform game5.webp": "./assets/images/legacy/platform game5.png",
+
+        // Simple Movements & 2D Car Prototype
+        "./img/games/Game1.webp": "./assets/images/legacy/Game1.png",
+        "./img/games/Game2.webp": "./assets/images/legacy/Game2.png",
+
+        // Claycity (Minecraft)
+        "./img/games/minecraft/1.webp": "./assets/images/legacy/Claycity/claycity01.jpg",
+        "./img/games/minecraft/2.webp": "./assets/images/legacy/Claycity/claycity02.jpg",
+        "./img/games/minecraft/3.webp": "./assets/images/legacy/Claycity/claycity03.jpg",
+        "./img/games/minecraft/4.webp": "./assets/images/legacy/Claycity/claycity04.jpg",
+        "./img/games/minecraft/5.webp": "./assets/images/legacy/Claycity/claycity05.jpg",
+        "./img/games/minecraft/6.webp": "./assets/images/legacy/Claycity/claycity06.jpg",
+        "./img/games/minecraft/7.webp": "./assets/images/legacy/Claycity/claycity07.jpg",
+        "./img/games/minecraft/8.webp": "./assets/images/legacy/Claycity/claycity08.jpg",
+        "./img/games/minecraft/9.webp": "./assets/images/legacy/Claycity/claycity09.jpg",
+        "./img/games/minecraft/10.webp": "./assets/images/legacy/Claycity/claycity10.jpg",
+        "./img/games/minecraft/11.webp": "./assets/images/legacy/Claycity/claycity11.jpg",
+        "./img/games/minecraft/12.webp": "./assets/images/legacy/Claycity/claycity12.jpg",
+        "./img/games/minecraft/13.webp": "./assets/images/legacy/Claycity/claycity13.jpg",
+        "./img/games/minecraft/14.webp": "./assets/images/legacy/Claycity/claycity14.jpg",
+        "./img/games/minecraft/15.webp": "./assets/images/legacy/Claycity/claycity15.jpg",
+        "./img/games/minecraft/16.webp": "./assets/images/legacy/Claycity/claycity16.jpg",
+        "./img/games/minecraft/17.webp": "./assets/images/legacy/Claycity/claycity17.jpg",
+        "./img/games/minecraft/18.webp": "./assets/images/legacy/Claycity/claycity18.jpg",
+        "./img/games/minecraft/19.webp": "./assets/images/legacy/Claycity/claycity19.jpg",
+        "./img/games/minecraft/20.webp": "./assets/images/legacy/Claycity/claycity20.jpg",
+        "./img/games/minecraft/21.webp": "./assets/images/legacy/Claycity/claycity21.jpg",
+        "./img/games/minecraft/22.webp": "./assets/images/legacy/Claycity/claycity22.jpg",
+        "./img/games/minecraft/23.webp": "./assets/images/legacy/Claycity/claycity23.jpg",
+        "./img/games/minecraft/24.webp": "./assets/images/legacy/Claycity/claycity24.jpg",
+
+        // Trackmania Map
         "./img/games/Trackmania/track1.webp": "./assets/images/legacy/Trackmania/track1.jpg",
         "./img/games/Trackmania/track2.webp": "./assets/images/legacy/Trackmania/track2.jpg",
         "./img/games/Trackmania/track3.webp": "./assets/images/legacy/Trackmania/track3.jpg",
@@ -1542,16 +1620,34 @@ document.addEventListener('DOMContentLoaded', () => {
         "./img/games/Trackmania/track22.webp": "./assets/images/legacy/Trackmania/track22.jpg",
         "./img/games/Trackmania/track23.webp": "./assets/images/legacy/Trackmania/track23.jpg",
         "./img/games/Trackmania/track24.webp": "./assets/images/legacy/Trackmania/track24.jpg",
+
+        // Tron (Prototype 3)
         "./img/games/tron1.webp": "./assets/images/legacy/tron1.png",
         "./img/games/tron2.webp": "./assets/images/legacy/tron2.png",
-        "./img/games/Game1.webp": "./assets/images/legacy/Game1.png",
-        "./img/games/Game2.webp": "./assets/images/legacy/Game2.png",
-        "./img/games/Tom Atom printsc.webp": "./assets/images/legacy/Tom Atom printsc.png",
-        "./img/games/PlatformGame/platform game1.webp": "./assets/images/legacy/platform game1.png",
-        "./img/games/PlatformGame/platform game2.webp": "./assets/images/legacy/platform game2.png",
-        "./img/games/PlatformGame/platform game3.webp": "./assets/images/legacy/platform game3.png",
-        "./img/games/PlatformGame/platform game4.webp": "./assets/images/legacy/platform game4.png",
-        "./img/games/PlatformGame/platform game5.webp": "./assets/images/legacy/platform game5.png"
+
+        // Web & Design Projects
+        "./assets/images/legacy/html_css/OnlineStore-01.jpg": "./assets/images/legacy/html_css/OnlineStore-01.jpg",
+        "./assets/images/legacy/html_css/OnlineStore-02.jpg": "./assets/images/legacy/html_css/OnlineStore-02.jpg",
+        "./assets/images/legacy/html_css/OnlineStore-03.jpg": "./assets/images/legacy/html_css/OnlineStore-03.jpg",
+        "./assets/images/legacy/html_css/OnlineStore-04.jpg": "./assets/images/legacy/html_css/OnlineStore-04.jpg",
+        "./assets/images/legacy/html_css/WebPage1.png": "./assets/images/legacy/html_css/WebPage1.png",
+        "./assets/images/legacy/html_css/WebPage2.png": "./assets/images/legacy/html_css/WebPage2.png",
+        "./assets/images/legacy/html_css/WebPage3.png": "./assets/images/legacy/html_css/WebPage3.png",
+        "./assets/images/legacy/html_css/WebPage4.png": "./assets/images/legacy/html_css/WebPage4.png",
+        "./assets/images/legacy/arduino/projeto1.jpg": "./assets/images/legacy/arduino/projeto1.jpg",
+        "./assets/images/legacy/arduino/projeto2.jpg": "./assets/images/legacy/arduino/projeto2.jpg",
+        "./assets/images/legacy/arduino/projeto3.jpg": "./assets/images/legacy/arduino/projeto3.jpg",
+        "./assets/images/legacy/arduino/projeto4.jpg": "./assets/images/legacy/arduino/projeto4.jpg",
+        "./assets/images/legacy/arduino/projeto5.jpg": "./assets/images/legacy/arduino/projeto5.jpg",
+        "./assets/images/legacy/design_grafic/Final_Lego-page-001.jpg": "./assets/images/legacy/design_grafic/Final_Lego-page-001.jpg",
+        "./assets/images/legacy/design_grafic/Final_Lego-page-002.jpg": "./assets/images/legacy/design_grafic/Final_Lego-page-002.jpg",
+        "./assets/images/legacy/design_grafic/Hand_Emeric.jpg": "./assets/images/legacy/design_grafic/Hand_Emeric.jpg",
+        "./assets/images/legacy/design_grafic/Logo.jpg": "./assets/images/legacy/design_grafic/Logo.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-001.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-001.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-002.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-002.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-003.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-003.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-004.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-004.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-005.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-005.jpg"
     };
 
     function getHighResImage(src) {
