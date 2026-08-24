@@ -11,7 +11,27 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-H7GJV51SW0');
+
+        (function () {
+            var storageKey = 'ga_user_id';
+            var userId = null;
+            try {
+                userId = localStorage.getItem(storageKey);
+                if (!userId) {
+                    userId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+                        ? crypto.randomUUID()
+                        : 'usr_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 11);
+                    localStorage.setItem(storageKey, userId);
+                }
+            } catch (e) {
+                userId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+                    ? crypto.randomUUID()
+                    : 'usr_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 11);
+            }
+            gtag('config', 'G-H7GJV51SW0', {
+                'user_id': userId
+            });
+        })();
     </script>
 
     <title>Emeric Ferreira Dos Santos — AI Developer & Game Designer | Geneva, Switzerland</title>
