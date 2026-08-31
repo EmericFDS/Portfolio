@@ -1006,6 +1006,7 @@ class CanvasParticleEngine {
         this.ripples = [];
         this.numParticles = 52;
         this.maxDistance = 140;
+        this.maxDistanceSq = 140 * 140;
         this.mouse = { x: -1000, y: -1000, radius: 160 };
         this.lastScrollY = window.scrollY;
         this.scrollVelocity = 0;
@@ -1076,6 +1077,7 @@ class CanvasParticleEngine {
     createParticles() {
         this.particles = [];
         for (let i = 0; i < this.numParticles; i++) {
+            const isCyan = Math.random() > 0.45;
             this.particles.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
@@ -1084,7 +1086,8 @@ class CanvasParticleEngine {
                 radius: Math.random() * 2.0 + 1.2,
                 depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
                 baseAlpha: Math.random() * 0.35 + 0.55,
-                color: Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
+                color: isCyan ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,',
+                shadowColor: isCyan ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)'
             });
         }
     }
@@ -1179,22 +1182,25 @@ class CanvasParticleEngine {
                 // Mouse interactivity (gentle push)
                 const dx = this.mouse.x - p.x;
                 const dy = this.mouse.y - p.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < this.mouse.radius && dist > 0) {
+                const distSq = dx * dx + dy * dy;
+                const mouseRadiusSq = this.mouse.radius * this.mouse.radius;
+                if (distSq < mouseRadiusSq && distSq > 0) {
+                    const dist = Math.sqrt(distSq);
                     const force = (this.mouse.radius - dist) / this.mouse.radius;
                     p.x -= (dx / dist) * force * 1.2;
                     p.y -= (dy / dist) * force * 1.2;
                 }
             }
 
-            // Connect nearby particles
+            // Connect nearby particles (using squared distances to skip Math.sqrt for distant pairs)
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
                 const dY = p.y - p2.y;
-                const dist2 = Math.sqrt(dX * dX + dY * dY);
+                const distSq = dX * dX + dY * dY;
 
-                if (dist2 < this.maxDistance) {
+                if (distSq < this.maxDistanceSq) {
+                    const dist2 = Math.sqrt(distSq);
                     const lineAlpha = (1 - dist2 / this.maxDistance) * 0.28;
                     this.ctx.beginPath();
                     this.ctx.moveTo(p.x, p.y);
@@ -1212,7 +1218,7 @@ class CanvasParticleEngine {
             const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
 
             this.ctx.shadowBlur = 6;
-            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
+            this.ctx.shadowColor = p.shadowColor;
 
             this.ctx.beginPath();
             if (stretch > 0.6 && !this.prefersReducedMotion) {
@@ -1233,16 +1239,43 @@ class CanvasParticleEngine {
 function initSpotlightAndCursor() {
     const cards = document.querySelectorAll('.bento-card');
     
-    // Update CSS custom properties for radial spotlight on card hover
-    window.addEventListener('mousemove', (e) => {
-        cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    }, { passive: true });
+    // Bolt Optimization: Eliminate forced reflows and layout thrashing.
+    // Instead of iterating through all cards on every global mousemove event,
+    // listen on individual cards, cache bounding rects, and throttle CSS updates via rAF.
+    cards.forEach(card => {
+        let rect = null;
+        let rafId = null;
+
+        const invalidateRect = () => { rect = null; };
+        window.addEventListener('scroll', invalidateRect, { passive: true });
+        window.addEventListener('resize', invalidateRect, { passive: true });
+
+        card.addEventListener('mouseenter', () => {
+            rect = card.getBoundingClientRect();
+        }, { passive: true });
+
+        card.addEventListener('mousemove', (e) => {
+            if (rafId) return;
+            const clientX = e.clientX;
+            const clientY = e.clientY;
+            rafId = requestAnimationFrame(() => {
+                if (!rect) rect = card.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+                rafId = null;
+            });
+        }, { passive: true });
+
+        card.addEventListener('mouseleave', () => {
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+            rect = null;
+        }, { passive: true });
+    });
 
     // Custom Magnetic Cursor (Desktop only)
     const cursorDot = document.getElementById('custom-cursor-dot');
