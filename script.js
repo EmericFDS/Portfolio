@@ -1487,10 +1487,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 4. Tech Tags
         if (projectTechEl) {
-            projectTechEl.innerHTML = project.tech.map(t => {
+            projectTechEl.textContent = '';
+            (project.tech || []).forEach(t => {
                 const iconClass = TECH_ICON_MAP[t] || 'fas fa-code';
-                return `<span class="tech-tag-pill"><i class="${iconClass}"></i> ${t}</span>`;
-            }).join('');
+                const pill = document.createElement('span');
+                pill.className = 'tech-tag-pill';
+                const icon = document.createElement('i');
+                icon.className = iconClass;
+                pill.appendChild(icon);
+                pill.appendChild(document.createTextNode(' ' + t));
+                projectTechEl.appendChild(pill);
+            });
         }
 
         // 5. Counter & Navigation Button States
