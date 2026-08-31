@@ -139,3 +139,7 @@ const TRANSLATIONS = {
         "404.desc": "Désolé, la page que vous recherchez n'existe pas."
     }
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = TRANSLATIONS;
+}
