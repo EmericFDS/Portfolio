@@ -149,3 +149,7 @@ const I18N = (() => {
 
     return { init, getLocale, setLocale, toggle, t, applyAll };
 })();
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = I18N;
+}
