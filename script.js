@@ -4,14 +4,6 @@
 // ============================================================
 
 // Data directly inlined to ensure strictly local functionality without server
-const categories = [
-    { id: 'all', name: 'All' },
-    { id: 'cv', name: 'Computer Vision' },
-    { id: 'nlp', name: 'NLP' },
-    { id: 'ml', name: 'Machine Learning' },
-    { id: 'web', name: 'AI Web Apps' }
-];
-
 const projects = [
     {
         id: 112,
