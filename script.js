@@ -1180,13 +1180,15 @@ class CanvasParticleEngine {
             }
 
             // Connect nearby particles
+            const maxDistSq = this.maxDistance * this.maxDistance;
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
                 const dY = p.y - p2.y;
-                const dist2 = Math.sqrt(dX * dX + dY * dY);
+                const distSq = dX * dX + dY * dY;
 
-                if (dist2 < this.maxDistance) {
+                if (distSq < maxDistSq) {
+                    const dist2 = Math.sqrt(distSq);
                     const lineAlpha = (1 - dist2 / this.maxDistance) * 0.28;
                     this.ctx.beginPath();
                     this.ctx.moveTo(p.x, p.y);
