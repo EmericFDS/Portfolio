@@ -1401,6 +1401,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (secureEmailLink) {
         secureEmailLink.href = 'mailto:contact@emericfds.com';
+        secureEmailLink.addEventListener('click', () => {
+            if (typeof PortfolioAnalytics !== 'undefined') {
+                PortfolioAnalytics.trackContactAction('mailto_click', 'contact@emericfds.com');
+            }
+        });
     }
 
     if (copyEmailBtn) {
@@ -1408,6 +1413,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = 'contact@emericfds.com';
             navigator.clipboard.writeText(email).then(() => {
                 showToast(typeof I18N !== 'undefined' ? I18N.t('footer.copiedToast') : 'Email copied to clipboard! ✨');
+                if (typeof PortfolioAnalytics !== 'undefined') {
+                    PortfolioAnalytics.trackContactAction('copy_clipboard', email);
+                }
             }).catch(() => {
                 window.location.href = `mailto:${email}`;
             });
@@ -1509,6 +1517,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.canvasEngine) {
             const card = document.getElementById('projects-section');
             if (card) window.canvasEngine.pulseElement(card);
+        }
+
+        // 8. Analytics Telemetry for Viewed Project
+        if (typeof PortfolioAnalytics !== 'undefined' && project) {
+            PortfolioAnalytics.trackProjectView(project, currentProjectIndex, filteredProjects.length);
         }
     }
 
@@ -1814,6 +1827,10 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('active');
             const filter = btn.getAttribute('data-filter');
             filterProjects(filter);
+
+            if (typeof PortfolioAnalytics !== 'undefined') {
+                PortfolioAnalytics.trackCategoryFilter(filter, filteredProjects.length);
+            }
         });
     });
 
@@ -1837,6 +1854,10 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxModal.classList.add('active');
         document.body.style.overflow = 'hidden';
         updateGalleryDisplay();
+
+        if (typeof PortfolioAnalytics !== 'undefined' && project) {
+            PortfolioAnalytics.trackLightboxOpen(project.title, currentImageIndex);
+        }
     }
 
     function closeLightbox() {
@@ -1893,6 +1914,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof I18N !== 'undefined') {
                 I18N.toggle();
                 updateProjectView();
+
+                if (typeof PortfolioAnalytics !== 'undefined') {
+                    PortfolioAnalytics.trackLanguageChange(I18N.getLocale());
+                }
             }
         });
     }

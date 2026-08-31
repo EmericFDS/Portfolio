@@ -13,30 +13,29 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-    <!-- Deferred Google Analytics -->
+    <!-- Google tag (gtag.js) - 404 Error Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-H7GJV51SW0');
 
-        document.addEventListener("DOMContentLoaded", function () {
-            var gtmLoaded = false;
-            function loadGTM() {
-                if (gtmLoaded) return;
-                gtmLoaded = true;
+        gtag('consent', 'default', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
 
-                var script = document.createElement("script");
-                script.src = "https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0";
-                script.async = true;
-                document.head.appendChild(script);
-            }
+        gtag('config', 'G-H7GJV51SW0', {
+            'page_title': '404 - Page Introuvable',
+            'page_location': window.location.href
+        });
 
-            // Load on interaction or after delay
-            window.addEventListener('scroll', loadGTM, { once: true });
-            window.addEventListener('mousemove', loadGTM, { once: true });
-            window.addEventListener('touchstart', loadGTM, { once: true });
-            setTimeout(loadGTM, 4000); // Fallback
+        gtag('event', 'page_not_found', {
+            'invalid_url': window.location.href,
+            'referrer': document.referrer || 'direct'
         });
     </script>
 

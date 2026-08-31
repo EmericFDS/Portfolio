@@ -5,15 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google tag (gtag.js) -->
+    <!-- DNS Preconnect for High-Speed Analytics -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://region1.google-analytics.com">
+
+    <!-- Google tag (gtag.js) - Google Analytics 4 with Consent Mode v2 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-H7GJV51SW0');
+        // Default Consent Mode v2 (Swiss nLPD & GDPR compliant)
+        gtag('consent', 'default', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+
+        gtag('config', 'G-H7GJV51SW0', {
+            'send_page_view': true,
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
     </script>
+
 
     <title>Emeric Ferreira Dos Santos — AI Developer & Game Designer | Geneva, Switzerland</title>
 
@@ -520,6 +538,7 @@
     <!-- Scripts -->
     <script src="translations.js" defer></script>
     <script src="i18n.js" defer></script>
+    <script src="analytics.js" defer></script>
     <script src="script.js" defer></script>
 </body>
 
