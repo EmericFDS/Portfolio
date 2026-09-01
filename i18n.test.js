@@ -7,14 +7,6 @@ const TRANSLATIONS = require('./translations');
 
 describe('I18N.setLocale()', () => {
     let langToggle;
-    let titleEl;
-    let descMeta;
-    let ogTitleMeta;
-    let ogDescMeta;
-    let ogLocaleMeta;
-    let twTitleMeta;
-    let twDescMeta;
-    let ldScript;
     let textEl;
     let attrEl;
 
@@ -161,6 +153,37 @@ describe('I18N.setLocale()', () => {
     });
 });
 
+describe('I18N.toggle()', () => {
+    beforeEach(() => {
+        localStorage.clear();
+        document.documentElement.lang = '';
+        document.head.innerHTML = '';
+        document.body.innerHTML = '<button id="lang-toggle"></button>';
+        I18N.init(TRANSLATIONS);
+    });
+
+    test('should toggle locale from "en" to "fr"', () => {
+        expect(I18N.getLocale()).toBe('en');
+
+        I18N.toggle();
+
+        expect(I18N.getLocale()).toBe('fr');
+        expect(localStorage.getItem('portfolio-lang')).toBe('fr');
+        expect(document.documentElement.lang).toBe('fr');
+    });
+
+    test('should toggle locale back from "fr" to "en"', () => {
+        I18N.setLocale('fr');
+        expect(I18N.getLocale()).toBe('fr');
+
+        I18N.toggle();
+
+        expect(I18N.getLocale()).toBe('en');
+        expect(localStorage.getItem('portfolio-lang')).toBe('en');
+        expect(document.documentElement.lang).toBe('en');
+    });
+});
+
 describe('I18N.t()', () => {
     beforeEach(() => {
         localStorage.clear();
@@ -185,14 +208,12 @@ describe('I18N.t()', () => {
     });
 
     test('should fallback to default locale when current locale translation dictionary is not found', () => {
-        // Force internal _locale to an unsupported value or pass custom translations missing current locale
         const customTranslations = {
             en: {
                 'hello': 'Hello'
             }
         };
         I18N.init(customTranslations);
-        // Default locale is 'en'
         expect(I18N.t('hello')).toBe('Hello');
     });
 
@@ -204,6 +225,67 @@ describe('I18N.t()', () => {
         };
         I18N.init(customTranslations);
         expect(I18N.t('empty.key')).toBe('');
+    });
+});
+
+describe('I18N.applyAll()', () => {
+    beforeEach(() => {
+        localStorage.clear();
+        document.documentElement.lang = '';
+        document.head.innerHTML = '';
+        document.body.innerHTML = `
+            <div id="text-node" data-i18n="nav.projects">Original Text</div>
+            <input id="attr-node" data-i18n="hero.ctaProjects" data-i18n-attr="placeholder" placeholder="Original Placeholder" />
+            <div id="untranslated-node" data-i18n="unknown.key">Original Untranslated Text</div>
+        `;
+        I18N.init(TRANSLATIONS);
+    });
+
+    test('should update element innerHTML if key exists in translations', () => {
+        const el = document.getElementById('text-node');
+        expect(el.innerHTML).toBe(TRANSLATIONS.en['nav.projects']);
+    });
+
+    test('should update element attribute if data-i18n-attr is provided', () => {
+        const el = document.getElementById('attr-node');
+        expect(el.getAttribute('placeholder')).toBe(TRANSLATIONS.en['hero.ctaProjects']);
+    });
+
+    test('should leave element unchanged if translation key equals translated value (untranslated key)', () => {
+        const el = document.getElementById('untranslated-node');
+        expect(el.innerHTML).toBe('Original Untranslated Text');
+    });
+});
+
+describe('I18N.updateMeta()', () => {
+    beforeEach(() => {
+        localStorage.clear();
+        document.documentElement.lang = '';
+    });
+
+    test('should handle invalid JSON in script[type="application/ld+json"] gracefully without error', () => {
+        document.head.innerHTML = `
+            <script type="application/ld+json">invalid json{{{</script>
+        `;
+        document.body.innerHTML = '';
+
+        expect(() => {
+            I18N.init(TRANSLATIONS);
+        }).not.toThrow();
+    });
+
+    test('should handle JSON-LD script without mainEntity array or object gracefully', () => {
+        document.head.innerHTML = `
+            <script type="application/ld+json">[{"otherKey": "value"}]</script>
+        `;
+        document.body.innerHTML = '';
+
+        expect(() => {
+            I18N.init(TRANSLATIONS);
+        }).not.toThrow();
+
+        const scriptContent = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent);
+        expect(scriptContent[0].otherKey).toBe('value');
     });
 });
 
