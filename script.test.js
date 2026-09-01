@@ -259,16 +259,39 @@ describe('Markdown Formatter (formatMarkdown)', () => {
 
     test('should format bold markdown syntax into strong HTML tags', () => {
         expect(formatMarkdown('**Bold Text**')).toBe('<strong>Bold Text</strong>');
+        expect(formatMarkdown('This is **bold** and this is **also bold**.')).toBe('This is <strong>bold</strong> and this is <strong>also bold</strong>.');
     });
 
-    test('should format bullet list items into li and wrapping ul elements', () => {
+    test('should format single bullet list items into li and wrapping ul elements', () => {
         const input = '- Item 1';
         const expected = '<ul style="padding-left: 20px; list-style-type: disc;"><li>Item 1</li></ul>';
+        expect(formatMarkdown(input)).toBe(expected);
+    });
+
+    test('should format bullet list items into wrapping ul elements', () => {
+        const input = '- Item 1\n- Item 2\n- Item 3';
+        const expected = '<ul style="padding-left: 20px; list-style-type: disc;"><li>Item 1</li></ul><br><ul style="padding-left: 20px; list-style-type: disc;"><li>Item 2</li></ul><br><ul style="padding-left: 20px; list-style-type: disc;"><li>Item 3</li></ul>';
         expect(formatMarkdown(input)).toBe(expected);
     });
 
     test('should format single and double newlines into br tags', () => {
         expect(formatMarkdown('Line 1\nLine 2')).toBe('Line 1<br>Line 2');
         expect(formatMarkdown('Para 1\n\nPara 2')).toBe('Para 1<br><br>Para 2');
+    });
+
+    test('should correctly format complex multi-line project descriptions with bold headings and bullet lists', () => {
+        const input = `Desktop application for fast photo management and processing.
+
+**Optimized Workflow:** Automatic import, sorting by sessions, and quick touch-ups.
+**Powerful Tools:** Integrated image editor with color adjustments.
+- Feature A
+- Feature B`;
+
+        const expected = `Desktop application for fast photo management and processing.<br><br><strong>Optimized Workflow:</strong> Automatic import, sorting by sessions, and quick touch-ups.<br><strong>Powerful Tools:</strong> Integrated image editor with color adjustments.<br><ul style="padding-left: 20px; list-style-type: disc;"><li>Feature A</li></ul><br><ul style="padding-left: 20px; list-style-type: disc;"><li>Feature B</li></ul>`;
+        expect(formatMarkdown(input)).toBe(expected);
+    });
+
+    test('should return plain text unchanged if no markdown syntax is present', () => {
+        expect(formatMarkdown('Plain text without markdown')).toBe('Plain text without markdown');
     });
 });
