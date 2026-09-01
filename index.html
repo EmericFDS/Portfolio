@@ -16,9 +16,13 @@
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        // Default Consent Mode v2 (Swiss nLPD & GDPR compliant)
+        // Default Consent Mode v2 with stored consent detection
+        var _storedConsent = null;
+        try { _storedConsent = localStorage.getItem('portfolio_cookie_consent'); } catch (e) {}
+        var _analyticsConsent = _storedConsent === 'granted' ? 'granted' : 'denied';
+
         gtag('consent', 'default', {
-            'analytics_storage': 'granted',
+            'analytics_storage': _analyticsConsent,
             'ad_storage': 'denied',
             'ad_user_data': 'denied',
             'ad_personalization': 'denied',
@@ -534,6 +538,18 @@
         <i class="fas fa-circle-check" style="color: var(--accent-cyan);"></i>
         <span class="toast-message"></span>
     </div>
+
+    <!-- Cookie Consent Banner (Google Consent Mode v2 & GDPR/nLPD) -->
+    <aside id="cookie-banner" class="cookie-banner" role="region" aria-label="Cookie consent">
+        <div class="cookie-content">
+            <i class="fas fa-cookie-bite cookie-icon" aria-hidden="true"></i>
+            <p class="cookie-text" data-i18n="cookie.message">Ce site utilise des cookies de statistiques anonymes pour améliorer votre expérience.</p>
+        </div>
+        <div class="cookie-actions">
+            <button id="cookie-decline-btn" class="cookie-btn cookie-btn-decline" data-i18n="cookie.decline">Refuser</button>
+            <button id="cookie-accept-btn" class="cookie-btn cookie-btn-accept" data-i18n="cookie.accept">Accepter</button>
+        </div>
+    </aside>
 
     <!-- Scripts -->
     <script src="translations.js" defer></script>

@@ -49,6 +49,7 @@ const PortfolioAnalytics = (function () {
          * Initialize automatic interaction listeners
          */
         init() {
+            this.initConsentBanner();
             this.trackScrollMilestones();
             this.trackOutboundLinks();
         },
@@ -160,6 +161,55 @@ const PortfolioAnalytics = (function () {
                     }
                 });
             }, { passive: true });
+        },
+
+        /**
+         * Initialize Cookie Consent Banner & Google Consent Mode v2 listeners
+         */
+        initConsentBanner() {
+            const banner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('cookie-accept-btn');
+            const declineBtn = document.getElementById('cookie-decline-btn');
+
+            if (!banner || !acceptBtn || !declineBtn) return;
+
+            let storedConsent = null;
+            try {
+                storedConsent = localStorage.getItem('portfolio_cookie_consent');
+            } catch (e) {}
+
+            // If user hasn't made a choice yet, display the banner smoothly
+            if (!storedConsent) {
+                setTimeout(() => {
+                    banner.classList.add('show');
+                }, 800);
+            }
+
+            acceptBtn.addEventListener('click', () => {
+                try {
+                    localStorage.setItem('portfolio_cookie_consent', 'granted');
+                } catch (e) {}
+
+                if (typeof window.gtag === 'function') {
+                    window.gtag('consent', 'update', {
+                        'analytics_storage': 'granted'
+                    });
+                }
+                banner.classList.remove('show');
+            });
+
+            declineBtn.addEventListener('click', () => {
+                try {
+                    localStorage.setItem('portfolio_cookie_consent', 'denied');
+                } catch (e) {}
+
+                if (typeof window.gtag === 'function') {
+                    window.gtag('consent', 'update', {
+                        'analytics_storage': 'denied'
+                    });
+                }
+                banner.classList.remove('show');
+            });
         }
     };
 })();

@@ -66,6 +66,11 @@ const TRANSLATIONS = {
         "footer.builtWith": "Built with Canvas UI & Modern Web Standards",
         "footer.allRights": "All rights reserved.",
 
+        // --- Cookie Banner ---
+        "cookie.message": "This site uses anonymous analytics to improve your experience.",
+        "cookie.accept": "Accept",
+        "cookie.decline": "Decline",
+
         // --- 404 ---
         "404.title": "Page Not Found",
         "404.desc": "Sorry, the page you're looking for doesn't exist."
@@ -133,6 +138,11 @@ const TRANSLATIONS = {
         "footer.links": "Réseaux",
         "footer.builtWith": "Conçu avec Canvas UI & Standards Web Modernes",
         "footer.allRights": "Tous droits réservés.",
+
+        // --- Cookie Banner ---
+        "cookie.message": "Ce site utilise des cookies de statistiques anonymes pour améliorer votre expérience.",
+        "cookie.accept": "Accepter",
+        "cookie.decline": "Refuser",
 
         // --- 404 ---
         "404.title": "Page introuvable",
