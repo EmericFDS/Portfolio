@@ -159,3 +159,73 @@ describe("Copy Email Button Clipboard Logic", () => {
         expect(mockLocation.href).toBe("mailto:contact@emericfds.com");
     });
 });
+
+describe('Filmstrip XSS Security', () => {
+    let filmstripEl;
+    let lightboxFilmstrip;
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <div id="gallery-filmstrip"></div>
+            <div id="lightbox-filmstrip"></div>
+        `;
+        filmstripEl = document.getElementById('gallery-filmstrip');
+        lightboxFilmstrip = document.getElementById('lightbox-filmstrip');
+    });
+
+    test('should safely escape project title and imgSrc in gallery filmstrip rendering', () => {
+        const project = { title: 'Test "<script>alert(1)</script>" Project' };
+        const images = [
+            'https://example.com/img1.webp',
+            '" onerror="alert(1)" src="x'
+        ];
+        const currentImageIndex = 0;
+
+        filmstripEl.innerHTML = images.map((imgSrc, idx) => `
+            <div class="thumb-item ${idx === currentImageIndex ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="View slide ${idx + 1}" tabindex="0">
+                <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(project.title)} thumb ${idx + 1}" loading="lazy">
+            </div>
+        `).join('');
+
+        expect(filmstripEl.getElementsByTagName('script').length).toBe(0);
+        const imgs = filmstripEl.querySelectorAll('img');
+        expect(imgs.length).toBe(2);
+
+        expect(imgs[1].getAttribute('src')).toBe('" onerror="alert(1)" src="x');
+        expect(imgs[0].getAttribute('alt')).toBe('Test "<script>alert(1)</script>" Project thumb 1');
+
+        expect(filmstripEl.innerHTML).toContain('&quot; onerror=&quot;alert(1)&quot; src=&quot;x');
+    });
+
+    test('should safely escape project title and imgSrc in lightbox filmstrip rendering', () => {
+        const project = { title: 'Lightbox "<img src=x onerror=alert(1)>" Title' };
+        const images = [
+            'img1.png',
+            'img2.png" onerror="alert(1)'
+        ];
+        const currentImageIndex = 1;
+
+        lightboxFilmstrip.innerHTML = images.map((imgSrc, idx) => `
+            <div class="thumb-item ${idx === currentImageIndex ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="View fullscreen slide ${idx + 1}" tabindex="0">
+                <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(project.title)} thumb ${idx + 1}" loading="lazy">
+            </div>
+        `).join('');
+
+        expect(lightboxFilmstrip.getElementsByTagName('script').length).toBe(0);
+        const imgs = lightboxFilmstrip.querySelectorAll('img');
+        expect(imgs.length).toBe(2);
+
+        expect(imgs[1].getAttribute('src')).toBe('img2.png" onerror="alert(1)');
+        expect(lightboxFilmstrip.innerHTML).toContain('img2.png&quot; onerror=&quot;alert(1)');
+    });
+});
