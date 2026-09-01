@@ -206,3 +206,86 @@ describe('I18N.t()', () => {
         expect(I18N.t('empty.key')).toBe('');
     });
 });
+
+describe('I18N.detectLocale()', () => {
+    const originalNavigator = window.navigator;
+
+    beforeEach(() => {
+        localStorage.clear();
+        window.history.pushState({}, '', '/');
+    });
+
+    afterAll(() => {
+        window.history.pushState({}, '', '/');
+        Object.defineProperty(window, 'navigator', {
+            value: originalNavigator,
+            writable: true,
+            configurable: true
+        });
+    });
+
+    test('1. Check localStorage override - supported locale returns stored value', () => {
+        localStorage.setItem('portfolio-lang', 'fr');
+        expect(I18N.detectLocale()).toBe('fr');
+    });
+
+    test('1. Check localStorage override - unsupported locale falls through', () => {
+        localStorage.setItem('portfolio-lang', 'de');
+        expect(I18N.detectLocale()).toBe('en');
+    });
+
+    test('2. Check URL parameter - ?lang=fr returns "fr"', () => {
+        window.history.pushState({}, '', '/?lang=fr');
+        expect(I18N.detectLocale()).toBe('fr');
+    });
+
+    test('2. Check URL parameter - unsupported ?lang=es falls through', () => {
+        window.history.pushState({}, '', '/?lang=es');
+        expect(I18N.detectLocale()).toBe('en');
+    });
+
+    test('3. Check browser language - navigator.languages with exact matching prefix (fr-FR)', () => {
+        Object.defineProperty(window, 'navigator', {
+            value: { languages: ['fr-FR', 'en-US'] },
+            writable: true,
+            configurable: true
+        });
+        expect(I18N.detectLocale()).toBe('fr');
+    });
+
+    test('3. Check browser language - navigator.languages with unsupported leading language falls back to second supported language', () => {
+        Object.defineProperty(window, 'navigator', {
+            value: { languages: ['es-ES', 'fr-CA'] },
+            writable: true,
+            configurable: true
+        });
+        expect(I18N.detectLocale()).toBe('fr');
+    });
+
+    test('3. Check browser language - fallback to navigator.language when navigator.languages is undefined', () => {
+        Object.defineProperty(window, 'navigator', {
+            value: { languages: undefined, language: 'fr-FR' },
+            writable: true,
+            configurable: true
+        });
+        expect(I18N.detectLocale()).toBe('fr');
+    });
+
+    test('3. Check browser language - fallback to navigator.userLanguage when languages and language are undefined', () => {
+        Object.defineProperty(window, 'navigator', {
+            value: { languages: undefined, language: undefined, userLanguage: 'fr-FR' },
+            writable: true,
+            configurable: true
+        });
+        expect(I18N.detectLocale()).toBe('fr');
+    });
+
+    test('4. Fallback to DEFAULT ("en") when no stored, url, or browser matching language', () => {
+        Object.defineProperty(window, 'navigator', {
+            value: { languages: ['de-DE', 'it-IT'] },
+            writable: true,
+            configurable: true
+        });
+        expect(I18N.detectLocale()).toBe('en');
+    });
+});

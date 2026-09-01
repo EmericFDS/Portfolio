@@ -147,7 +147,7 @@ const I18N = (() => {
         }
     }
 
-    return { init, getLocale, setLocale, toggle, t, applyAll };
+    return { init, getLocale, setLocale, toggle, t, applyAll, detectLocale };
 })();
 
 if (typeof module !== 'undefined' && module.exports) {
