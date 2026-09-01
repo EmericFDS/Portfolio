@@ -160,3 +160,49 @@ describe('I18N.setLocale()', () => {
         expect(I18N.getLocale()).toBe('fr');
     });
 });
+
+describe('I18N.t()', () => {
+    beforeEach(() => {
+        localStorage.clear();
+        document.documentElement.lang = '';
+        document.head.innerHTML = '';
+        document.body.innerHTML = '';
+        I18N.init(TRANSLATIONS);
+    });
+
+    test('should return translated string for existing key in default locale ("en")', () => {
+        expect(I18N.t('nav.projects')).toBe(TRANSLATIONS.en['nav.projects']);
+    });
+
+    test('should return translated string for existing key after changing locale to "fr"', () => {
+        I18N.setLocale('fr');
+        expect(I18N.t('nav.projects')).toBe(TRANSLATIONS.fr['nav.projects']);
+    });
+
+    test('should return the key itself if translation is missing in the current locale', () => {
+        const missingKey = 'non.existent.key';
+        expect(I18N.t(missingKey)).toBe(missingKey);
+    });
+
+    test('should fallback to default locale when current locale translation dictionary is not found', () => {
+        // Force internal _locale to an unsupported value or pass custom translations missing current locale
+        const customTranslations = {
+            en: {
+                'hello': 'Hello'
+            }
+        };
+        I18N.init(customTranslations);
+        // Default locale is 'en'
+        expect(I18N.t('hello')).toBe('Hello');
+    });
+
+    test('should return empty string or non-undefined falsy value if key exists with empty string', () => {
+        const customTranslations = {
+            en: {
+                'empty.key': ''
+            }
+        };
+        I18N.init(customTranslations);
+        expect(I18N.t('empty.key')).toBe('');
+    });
+});
