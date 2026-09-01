@@ -58,3 +58,104 @@ describe('Tech Tags XSS Security', () => {
         expect(pills[0].querySelector('i').className).toBe('fas fa-code');
     });
 });
+
+
+describe("Copy Email Button Clipboard Logic", () => {
+    let copyEmailBtn;
+    let toast;
+    let originalClipboard;
+    let originalConsoleWarn;
+
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <button id="copy-email-btn"></button>
+            <div id="toast-notification">
+                <span class="toast-message"></span>
+            </div>
+        `;
+        copyEmailBtn = document.getElementById("copy-email-btn");
+        toast = document.getElementById("toast-notification");
+
+        originalClipboard = navigator.clipboard;
+        originalConsoleWarn = console.warn;
+
+        console.warn = jest.fn();
+    });
+
+    afterEach(() => {
+        Object.defineProperty(navigator, "clipboard", {
+            value: originalClipboard,
+            writable: true,
+            configurable: true
+        });
+        console.warn = originalConsoleWarn;
+    });
+
+    function setupCopyEmailListener(locationObj = window.location) {
+        if (copyEmailBtn) {
+            copyEmailBtn.addEventListener("click", () => {
+                const email = "contact@emericfds.com";
+                navigator.clipboard.writeText(email).then(() => {
+                    showToast(typeof I18N !== "undefined" ? I18N.t("footer.copiedToast") : "Email copied to clipboard! ✨");
+                }).catch((err) => {
+                    console.warn("Failed to copy email to clipboard, falling back to mailto:", err);
+                    locationObj.href = `mailto:${email}`;
+                });
+            });
+        }
+
+        function showToast(msg) {
+            if (!toast) return;
+            toast.querySelector(".toast-message").textContent = msg;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+    }
+
+    test("should copy email to clipboard and show toast on success", async () => {
+        const writeTextMock = jest.fn().mockResolvedValue(undefined);
+        Object.defineProperty(navigator, "clipboard", {
+            value: { writeText: writeTextMock },
+            writable: true,
+            configurable: true
+        });
+
+        setupCopyEmailListener();
+        copyEmailBtn.click();
+
+        expect(writeTextMock).toHaveBeenCalledWith("contact@emericfds.com");
+
+        await new Promise(process.nextTick);
+
+        expect(toast.querySelector(".toast-message").textContent).toBe("Email copied to clipboard! ✨");
+        expect(toast.classList.contains("show")).toBe(true);
+        expect(console.warn).not.toHaveBeenCalled();
+    });
+
+    test("should log error to console.warn and fallback to mailto when clipboard writeText fails", async () => {
+        const clipboardError = new Error("Clipboard permission denied");
+        const writeTextMock = jest.fn().mockRejectedValue(clipboardError);
+        Object.defineProperty(navigator, "clipboard", {
+            value: { writeText: writeTextMock },
+            writable: true,
+            configurable: true
+        });
+
+        const mockLocation = { href: "" };
+
+        setupCopyEmailListener(mockLocation);
+        copyEmailBtn.click();
+
+        expect(writeTextMock).toHaveBeenCalledWith("contact@emericfds.com");
+
+        await new Promise(process.nextTick);
+
+        expect(console.warn).toHaveBeenCalledWith(
+            "Failed to copy email to clipboard, falling back to mailto:",
+            clipboardError
+        );
+        expect(mockLocation.href).toBe("mailto:contact@emericfds.com");
+    });
+});

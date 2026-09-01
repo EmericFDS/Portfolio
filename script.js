@@ -1416,7 +1416,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof PortfolioAnalytics !== 'undefined') {
                     PortfolioAnalytics.trackContactAction('copy_clipboard', email);
                 }
-            }).catch(() => {
+            }).catch((err) => {
+                console.warn('Failed to copy email to clipboard, falling back to mailto:', err);
                 window.location.href = `mailto:${email}`;
             });
         });
