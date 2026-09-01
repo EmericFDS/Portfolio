@@ -325,3 +325,59 @@ describe('getHighResImage Fallback and Mapping (Integration with script.js)', ()
         expect(getHighResImage(undefined)).toBeUndefined();
     });
 });
+
+describe("Project Links XSS Security", () => {
+    let projectLinksEl;
+
+    function escapeHtml(str) {
+        if (!str) return "";
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
+    beforeEach(() => {
+        document.body.innerHTML = `<div id="project-links-list"></div>`;
+        projectLinksEl = document.getElementById("project-links-list");
+    });
+
+    test("should safely render project links with HTML/script injection in label or url", () => {
+        const renderProjectLinks = (project) => {
+            if (projectLinksEl) {
+                if (project.links && project.links.length > 0) {
+                    projectLinksEl.innerHTML = project.links.map(link => `
+                        <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <i class="fas fa-arrow-up-right-from-square"></i> ${escapeHtml(link.label)}
+                        </a>
+                    `).join("");
+                } else {
+                    projectLinksEl.innerHTML = "";
+                }
+            }
+        };
+
+        const project = {
+            links: [
+                {
+                    label: "<script>alert(1)</script>",
+                    url: "https://example.com/\" onerror=\"alert(1)"
+                }
+            ]
+        };
+
+        renderProjectLinks(project);
+
+        expect(projectLinksEl.getElementsByTagName("script").length).toBe(0);
+
+        const links = projectLinksEl.querySelectorAll("a");
+        expect(links.length).toBe(1);
+
+        expect(links[0].getAttribute("href")).toBe("https://example.com/\" onerror=\"alert(1)");
+        expect(links[0].textContent).toContain("<script>alert(1)</script>");
+        expect(projectLinksEl.innerHTML).toContain("&lt;script&gt;alert(1)&lt;/script&gt;");
+        expect(projectLinksEl.innerHTML).toContain("&quot; onerror=&quot;alert(1)");
+    });
+});
