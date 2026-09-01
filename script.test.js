@@ -295,3 +295,33 @@ describe('Markdown Formatter (formatMarkdown)', () => {
         expect(formatMarkdown('Plain text without markdown')).toBe('Plain text without markdown');
     });
 });
+
+describe('getHighResImage Fallback and Mapping (Integration with script.js)', () => {
+    test('should correctly map high res image and fallback for unmapped/empty/null/undefined inputs', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract HD_IMAGE_MAP definition and getHighResImage function from script.js
+        const mapMatch = scriptCode.match(/const HD_IMAGE_MAP = \{[\s\S]*?\n    \};/);
+        const funcMatch = scriptCode.match(/function getHighResImage\(src\) \{[\s\S]*?\n    \}/);
+
+        expect(mapMatch).not.toBeNull();
+        expect(funcMatch).not.toBeNull();
+
+        const evalContext = `${mapMatch[0]}\n${funcMatch[0]}\nreturn { HD_IMAGE_MAP, getHighResImage };`;
+        const { getHighResImage } = new Function(evalContext)();
+
+        // Mapped key explicitly provided in issue/code
+        const mappedKey = "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-004.jpg";
+        expect(getHighResImage(mappedKey)).toBe("./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-004.jpg");
+
+        // Unmapped key fallback
+        const unmappedKey = "./assets/images/unmapped-image.jpg";
+        expect(getHighResImage(unmappedKey)).toBe(unmappedKey);
+
+        // Edge cases
+        expect(getHighResImage('')).toBe('');
+        expect(getHighResImage(null)).toBeNull();
+        expect(getHighResImage(undefined)).toBeUndefined();
+    });
+});
