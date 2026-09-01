@@ -381,3 +381,59 @@ describe("Project Links XSS Security", () => {
         expect(projectLinksEl.innerHTML).toContain("&quot; onerror=&quot;alert(1)");
     });
 });
+
+describe('initSpotlightAndCursor Optimization', () => {
+    let card1, card2;
+
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <div class="bento-card" id="card1">Card 1</div>
+            <div class="bento-card" id="card2">Card 2</div>
+        `;
+        card1 = document.getElementById('card1');
+        card2 = document.getElementById('card2');
+
+        card1.getBoundingClientRect = jest.fn(() => ({ left: 10, top: 10, width: 100, height: 100 }));
+        card2.getBoundingClientRect = jest.fn(() => ({ left: 200, top: 10, width: 100, height: 100 }));
+    });
+
+    test('should only update CSS custom properties for hovered card and cache getBoundingClientRect', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract initSpotlightAndCursor function
+        const funcMatch = scriptCode.match(/function initSpotlightAndCursor\(\) \{[\s\S]*?\n\}/);
+        expect(funcMatch).not.toBeNull();
+
+        const initSpotlightAndCursor = new Function(`
+            ${funcMatch[0]}
+            return initSpotlightAndCursor;
+        `)();
+
+        initSpotlightAndCursor();
+
+        // Simulate mouse movement over window (outside card) - should NOT call getBoundingClientRect on cards
+        window.dispatchEvent(new MouseEvent('mousemove', { clientX: 50, clientY: 50 }));
+        expect(card1.getBoundingClientRect).not.toHaveBeenCalled();
+        expect(card2.getBoundingClientRect).not.toHaveBeenCalled();
+
+        // Simulate mouse enter on card1
+        card1.dispatchEvent(new MouseEvent('mouseenter'));
+        expect(card1.getBoundingClientRect).toHaveBeenCalledTimes(1);
+
+        // Simulate mouse move over card1
+        card1.dispatchEvent(new MouseEvent('mousemove', { clientX: 30, clientY: 40 }));
+        expect(card1.style.getPropertyValue('--mouse-x')).toBe('20px');
+        expect(card1.style.getPropertyValue('--mouse-y')).toBe('30px');
+
+        // Second mouse move on card1 should use cached rect without re-calling getBoundingClientRect
+        card1.dispatchEvent(new MouseEvent('mousemove', { clientX: 40, clientY: 50 }));
+        expect(card1.style.getPropertyValue('--mouse-x')).toBe('30px');
+        expect(card1.style.getPropertyValue('--mouse-y')).toBe('40px');
+        expect(card1.getBoundingClientRect).toHaveBeenCalledTimes(1);
+
+        // Unhovered card2 should remain uncalculated and unaffected
+        expect(card2.style.getPropertyValue('--mouse-x')).toBe('');
+        expect(card2.getBoundingClientRect).not.toHaveBeenCalled();
+    });
+});
