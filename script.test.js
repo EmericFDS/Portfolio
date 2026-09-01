@@ -229,3 +229,46 @@ describe('Filmstrip XSS Security', () => {
         expect(lightboxFilmstrip.innerHTML).toContain('img2.png&quot; onerror=&quot;alert(1)');
     });
 });
+
+describe('Markdown Formatter (formatMarkdown)', () => {
+    function formatMarkdown(text) {
+        if (!text) return '';
+        let formatted = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
+            .replace(/\n\n/g, '<br><br>')
+            .replace(/\n/g, '<br>');
+
+        if (formatted.includes('<li>')) {
+            formatted = formatted.replace(/(<li>.*?<\/li>)+/g, '<ul style="padding-left: 20px; list-style-type: disc;">$&</ul>');
+        }
+        return formatted;
+    }
+
+    test('should return empty string when input is null', () => {
+        expect(formatMarkdown(null)).toBe('');
+    });
+
+    test('should return empty string when input is undefined', () => {
+        expect(formatMarkdown(undefined)).toBe('');
+    });
+
+    test('should return empty string when input is an empty string', () => {
+        expect(formatMarkdown('')).toBe('');
+    });
+
+    test('should format bold markdown syntax into strong HTML tags', () => {
+        expect(formatMarkdown('**Bold Text**')).toBe('<strong>Bold Text</strong>');
+    });
+
+    test('should format bullet list items into li and wrapping ul elements', () => {
+        const input = '- Item 1';
+        const expected = '<ul style="padding-left: 20px; list-style-type: disc;"><li>Item 1</li></ul>';
+        expect(formatMarkdown(input)).toBe(expected);
+    });
+
+    test('should format single and double newlines into br tags', () => {
+        expect(formatMarkdown('Line 1\nLine 2')).toBe('Line 1<br>Line 2');
+        expect(formatMarkdown('Para 1\n\nPara 2')).toBe('Para 1<br><br>Para 2');
+    });
+});
