@@ -1068,6 +1068,9 @@ class CanvasParticleEngine {
     createParticles() {
         this.particles = [];
         for (let i = 0; i < this.numParticles; i++) {
+            const isCyan = Math.random() > 0.45;
+            const colorPrefix = isCyan ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,';
+            const baseAlpha = Math.random() * 0.35 + 0.55;
             this.particles.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
@@ -1075,8 +1078,11 @@ class CanvasParticleEngine {
                 vy: (Math.random() - 0.5) * 0.45,
                 radius: Math.random() * 2.0 + 1.2,
                 depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
-                baseAlpha: Math.random() * 0.35 + 0.55,
-                color: Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
+                baseAlpha: baseAlpha,
+                color: colorPrefix,
+                // Pre-calculated fillStyle and shadowColor to avoid string formatting and string searching during 60 FPS render loop
+                fillStyle: `${colorPrefix}${baseAlpha})`,
+                shadowColor: isCyan ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)'
             });
         }
     }
@@ -1148,6 +1154,11 @@ class CanvasParticleEngine {
             this.ctx.stroke();
         }
 
+        // Precompute values outside animation loop to avoid redundant math per particle
+        const maxDistSq = this.maxDistance * this.maxDistance;
+        const mouseRadiusSq = this.mouse.radius * this.mouse.radius;
+        const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
+
         // Render Constellation Links First (to prevent line overlapping on dots)
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
@@ -1168,11 +1179,12 @@ class CanvasParticleEngine {
                 if (p.y < -10) p.y = this.height + 10;
                 else if (p.y > this.height + 10) p.y = -10;
 
-                // Mouse interactivity (gentle push)
+                // Mouse interactivity (gentle push) - check distSq before calling Math.sqrt
                 const dx = this.mouse.x - p.x;
                 const dy = this.mouse.y - p.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < this.mouse.radius && dist > 0) {
+                const distSq = dx * dx + dy * dy;
+                if (distSq < mouseRadiusSq && distSq > 0) {
+                    const dist = Math.sqrt(distSq);
                     const force = (this.mouse.radius - dist) / this.mouse.radius;
                     p.x -= (dx / dist) * force * 1.2;
                     p.y -= (dy / dist) * force * 1.2;
@@ -1180,7 +1192,6 @@ class CanvasParticleEngine {
             }
 
             // Connect nearby particles
-            const maxDistSq = this.maxDistance * this.maxDistance;
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1200,13 +1211,12 @@ class CanvasParticleEngine {
             }
         }
 
-        // Render Particle Dots with Soft Glow
+        // Render Particle Dots with Soft Glow using precomputed properties
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
-            const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
 
             this.ctx.shadowBlur = 6;
-            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
+            this.ctx.shadowColor = p.shadowColor;
 
             this.ctx.beginPath();
             if (stretch > 0.6 && !this.prefersReducedMotion) {
@@ -1214,7 +1224,7 @@ class CanvasParticleEngine {
             } else {
                 this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             }
-            this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
+            this.ctx.fillStyle = p.fillStyle;
             this.ctx.fill();
         }
         this.ctx.shadowBlur = 0;
