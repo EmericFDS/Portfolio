@@ -1225,17 +1225,15 @@ class CanvasParticleEngine {
 // 2. SPOTLIGHT & CUSTOM CURSOR INTERACTION
 // ============================================================
 function initSpotlightAndCursor() {
-    const cards = document.querySelectorAll('.bento-card');
-    
-    // Update CSS custom properties for radial spotlight on card hover
+    // Bolt Optimization: Update radial spotlight position ONLY for the hovered card
+    // Avoids layout thrashing & batch DOM updates across unhovered cards on every mouse move
     window.addEventListener('mousemove', (e) => {
-        cards.forEach(card => {
+        const card = e.target.closest('.bento-card');
+        if (card) {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        }
     }, { passive: true });
 
     // Custom Magnetic Cursor (Desktop only)
