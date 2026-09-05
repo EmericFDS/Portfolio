@@ -326,6 +326,83 @@ describe('getHighResImage Fallback and Mapping (Integration with script.js)', ()
     });
 });
 
+describe('Spotlight Interaction Performance & Logic', () => {
+    let card1, card2;
+
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <div class="bento-card" id="card1"></div>
+            <div class="bento-card" id="card2"></div>
+            <div id="custom-cursor-dot"></div>
+            <div id="custom-cursor-ring"></div>
+        `;
+        card1 = document.getElementById('card1');
+        card2 = document.getElementById('card2');
+
+        card1.getBoundingClientRect = jest.fn(() => ({ left: 100, top: 100, width: 200, height: 200 }));
+        card2.getBoundingClientRect = jest.fn(() => ({ left: 400, top: 100, width: 200, height: 200 }));
+
+        window.matchMedia = jest.fn().mockImplementation(query => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: jest.fn(),
+            removeListener: jest.fn(),
+            addEventListener: jest.fn(),
+            removeEventListener: jest.fn(),
+            dispatchEvent: jest.fn(),
+        }));
+    });
+
+    test('should only update hovered card and cache getBoundingClientRect on mouseenter', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract initSpotlightAndCursor function body
+        const funcMatch = scriptCode.match(/function initSpotlightAndCursor\(\) \{[\s\S]*?\n\}/);
+        expect(funcMatch).not.toBeNull();
+
+        const initSpotlightAndCursor = new Function(`
+            ${funcMatch[0]}
+            return initSpotlightAndCursor;
+        `)();
+
+        initSpotlightAndCursor();
+
+        // Initially no getBoundingClientRect calls
+        expect(card1.getBoundingClientRect).toHaveBeenCalledTimes(0);
+        expect(card2.getBoundingClientRect).toHaveBeenCalledTimes(0);
+
+        // Mousemove on window outside cards should NOT trigger getBoundingClientRect or set inline styles
+        window.dispatchEvent(new MouseEvent('mousemove', { clientX: 50, clientY: 50 }));
+        expect(card1.getBoundingClientRect).toHaveBeenCalledTimes(0);
+        expect(card2.getBoundingClientRect).toHaveBeenCalledTimes(0);
+        expect(card1.style.getPropertyValue('--mouse-x')).toBe('');
+
+        // Hover over card1
+        card1.dispatchEvent(new MouseEvent('mouseenter', { clientX: 110, clientY: 110 }));
+        expect(card1.getBoundingClientRect).toHaveBeenCalledTimes(1);
+
+        // Move inside card1
+        card1.dispatchEvent(new MouseEvent('mousemove', { clientX: 120, clientY: 130 }));
+        // Should NOT call getBoundingClientRect again because rect is cached
+        expect(card1.getBoundingClientRect).toHaveBeenCalledTimes(1);
+        expect(card1.style.getPropertyValue('--mouse-x')).toBe('20px');
+        expect(card1.style.getPropertyValue('--mouse-y')).toBe('30px');
+
+        // card2 should remain unaffected
+        expect(card2.getBoundingClientRect).toHaveBeenCalledTimes(0);
+        expect(card2.style.getPropertyValue('--mouse-x')).toBe('');
+
+        // Leave card1
+        card1.dispatchEvent(new MouseEvent('mouseleave'));
+
+        // Next mouseenter on card1 should recalculate rect
+        card1.dispatchEvent(new MouseEvent('mouseenter', { clientX: 110, clientY: 110 }));
+        expect(card1.getBoundingClientRect).toHaveBeenCalledTimes(2);
+    });
+});
+
 describe("Project Links XSS Security", () => {
     let projectLinksEl;
 

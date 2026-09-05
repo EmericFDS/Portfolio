@@ -1228,15 +1228,34 @@ function initSpotlightAndCursor() {
     const cards = document.querySelectorAll('.bento-card');
     
     // Update CSS custom properties for radial spotlight on card hover
-    window.addEventListener('mousemove', (e) => {
+    const updateCardRects = () => {
         cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            card._cachedRect = null;
+        });
+    };
+
+    window.addEventListener('resize', updateCardRects, { passive: true });
+    window.addEventListener('scroll', updateCardRects, { passive: true });
+
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card._cachedRect = card.getBoundingClientRect();
+        }, { passive: true });
+
+        card.addEventListener('mouseleave', () => {
+            card._cachedRect = null;
+        }, { passive: true });
+
+        card.addEventListener('mousemove', (e) => {
+            if (!card._cachedRect) {
+                card._cachedRect = card.getBoundingClientRect();
+            }
+            const x = e.clientX - card._cachedRect.left;
+            const y = e.clientY - card._cachedRect.top;
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    }, { passive: true });
+        }, { passive: true });
+    });
 
     // Custom Magnetic Cursor (Desktop only)
     const cursorDot = document.getElementById('custom-cursor-dot');

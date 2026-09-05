@@ -1,0 +1,3 @@
+## 2026-03-22 - Avoid Forced Synchronous Reflows in Global Mouse Tracking
+**Learning:** Attaching a global `window.mousemove` listener that queries `getBoundingClientRect()` on all UI cards forces continuous layout recalculation (layout thrashing) and redundant DOM style mutations on unhovered elements at 60-144Hz.
+**Action:** Attach `mouseenter`, `mousemove`, and `mouseleave` listeners directly to interactive card elements. Cache bounding rectangles on hover enter (invalidating on scroll/resize) to achieve O(1) rect reads per hover and eliminate unnecessary reflows. Keep `script.js` and `script.min.js` synchronized.
