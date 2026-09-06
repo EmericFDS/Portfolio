@@ -1225,17 +1225,18 @@ class CanvasParticleEngine {
 // 2. SPOTLIGHT & CUSTOM CURSOR INTERACTION
 // ============================================================
 function initSpotlightAndCursor() {
-    const cards = document.querySelectorAll('.bento-card');
-    
-    // Update CSS custom properties for radial spotlight on card hover
+    // Bolt Optimization: Avoid layout thrashing on mousemove.
+    // Instead of looping through all cards and invoking getBoundingClientRect() N times on every single mousemove pixel,
+    // target only the hovered card via event delegation (e.target.closest('.bento-card')).
     window.addEventListener('mousemove', (e) => {
-        cards.forEach(card => {
+        const card = e.target ? e.target.closest('.bento-card') : null;
+        if (card) {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
-        });
+        }
     }, { passive: true });
 
     // Custom Magnetic Cursor (Desktop only)
@@ -1251,12 +1252,13 @@ function initSpotlightAndCursor() {
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
         }, { passive: true });
 
-        // Smooth Lerp for ring
+        // Bolt Optimization: Batch cursorDot position updates inside the RAF loop with cursorRing
+        // to avoid unbatched DOM style mutations inside the mousemove listener.
         function renderCursor() {
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
             ringX += (mouseX - ringX) * 0.15;
             ringY += (mouseY - ringY) * 0.15;
             cursorRing.style.left = `${ringX}px`;

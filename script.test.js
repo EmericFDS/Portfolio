@@ -381,3 +381,73 @@ describe("Project Links XSS Security", () => {
         expect(projectLinksEl.innerHTML).toContain("&quot; onerror=&quot;alert(1)");
     });
 });
+
+describe('Spotlight and Custom Cursor Performance Optimization', () => {
+    let card1, card2;
+
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <div id="card1" class="bento-card">Card 1</div>
+            <div id="card2" class="bento-card">Card 2</div>
+            <div id="custom-cursor-dot"></div>
+            <div id="custom-cursor-ring"></div>
+        `;
+        card1 = document.getElementById('card1');
+        card2 = document.getElementById('card2');
+
+        // Mock getBoundingClientRect
+        card1.getBoundingClientRect = jest.fn(() => ({
+            left: 10,
+            top: 20,
+            width: 100,
+            height: 100
+        }));
+        card2.getBoundingClientRect = jest.fn(() => ({
+            left: 200,
+            top: 200,
+            width: 100,
+            height: 100
+        }));
+
+        window.matchMedia = jest.fn().mockImplementation(query => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: jest.fn(),
+            removeListener: jest.fn(),
+            addEventListener: jest.fn(),
+            removeEventListener: jest.fn(),
+            dispatchEvent: jest.fn(),
+        }));
+    });
+
+    test('should set CSS custom properties only on the hovered card during mousemove', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract initSpotlightAndCursor definition
+        const funcMatch = scriptCode.match(/function initSpotlightAndCursor\(\) \{[\s\S]*?\n\}/);
+        expect(funcMatch).not.toBeNull();
+
+        const evalFunc = new Function(`${funcMatch[0]}\nreturn initSpotlightAndCursor;`);
+        const initSpotlightAndCursor = evalFunc();
+
+        initSpotlightAndCursor();
+
+        // Dispatch mousemove over card1
+        const mouseMoveEvent = new MouseEvent('mousemove', {
+            bubbles: true,
+            cancelable: true,
+            clientX: 50,
+            clientY: 60
+        });
+        card1.dispatchEvent(mouseMoveEvent);
+
+        expect(card1.getBoundingClientRect).toHaveBeenCalled();
+        expect(card2.getBoundingClientRect).not.toHaveBeenCalled();
+
+        expect(card1.style.getPropertyValue('--mouse-x')).toBe('40px'); // clientX (50) - left (10)
+        expect(card1.style.getPropertyValue('--mouse-y')).toBe('40px'); // clientY (60) - top (20)
+        expect(card2.style.getPropertyValue('--mouse-x')).toBe('');
+    });
+});
