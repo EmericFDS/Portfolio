@@ -381,3 +381,58 @@ describe("Project Links XSS Security", () => {
         expect(projectLinksEl.innerHTML).toContain("&quot; onerror=&quot;alert(1)");
     });
 });
+
+describe("showToast Function Direct Integration", () => {
+    let showToastFn;
+    let toastEl;
+
+    beforeEach(() => {
+        jest.useFakeTimers();
+        document.body.innerHTML = `
+            <div id="toast-notification">
+                <span class="toast-message"></span>
+            </div>
+        `;
+        toastEl = document.getElementById("toast-notification");
+
+        const fs = require("fs");
+        const scriptCode = fs.readFileSync("./script.js", "utf8");
+        const funcMatch = scriptCode.match(/function showToast\(msg\) \{[\s\S]*?\n    \}/);
+        expect(funcMatch).not.toBeNull();
+
+        showToastFn = new Function("toast", "setTimeout", `
+            ${funcMatch[0]}
+            return showToast;
+        `)(toastEl, setTimeout);
+    });
+
+    afterEach(() => {
+        jest.useRealTimers();
+    });
+
+    test('should update toast message text and add "show" class, then remove "show" class after 3000ms', () => {
+        showToastFn("Test notification message");
+
+        expect(toastEl.querySelector(".toast-message").textContent).toBe("Test notification message");
+        expect(toastEl.classList.contains("show")).toBe(true);
+
+        jest.advanceTimersByTime(2999);
+        expect(toastEl.classList.contains("show")).toBe(true);
+
+        jest.advanceTimersByTime(1);
+        expect(toastEl.classList.contains("show")).toBe(false);
+    });
+
+    test("should do nothing and return safely when toast element is null or undefined", () => {
+        const fs = require("fs");
+        const scriptCode = fs.readFileSync("./script.js", "utf8");
+        const funcMatch = scriptCode.match(/function showToast\(msg\) \{[\s\S]*?\n    \}/);
+
+        const showToastNull = new Function("toast", "setTimeout", `
+            ${funcMatch[0]}
+            return showToast;
+        `)(null, setTimeout);
+
+        expect(() => showToastNull("Will not crash")).not.toThrow();
+    });
+});
