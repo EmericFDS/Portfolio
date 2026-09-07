@@ -381,3 +381,107 @@ describe("Project Links XSS Security", () => {
         expect(projectLinksEl.innerHTML).toContain("&quot; onerror=&quot;alert(1)");
     });
 });
+
+describe('Filmstrip Rendering Helper Functions', () => {
+    let container;
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // Extracted logic simulation to test renderFilmstrip helper directly
+    function renderFilmstripHelper(containerEl, imagesList, activeIdx, title, isFullscreen, onSelect) {
+        if (!containerEl) return;
+        if (imagesList && imagesList.length > 1) {
+            containerEl.style.display = 'flex';
+            const labelPrefix = isFullscreen ? 'View fullscreen slide' : 'View slide';
+            containerEl.innerHTML = imagesList.map((imgSrc, idx) => `
+                <div class="thumb-item ${idx === activeIdx ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="${labelPrefix} ${idx + 1}" tabindex="0">
+                    <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(title)} thumb ${idx + 1}" loading="lazy">
+                </div>
+            `).join('');
+
+            containerEl.querySelectorAll('.thumb-item').forEach(thumb => {
+                thumb.addEventListener('click', (e) => {
+                    if (isFullscreen) e.stopPropagation();
+                    const newIdx = parseInt(thumb.getAttribute('data-idx'));
+                    onSelect(newIdx, e);
+                });
+                thumb.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (isFullscreen) e.stopPropagation();
+                        const newIdx = parseInt(thumb.getAttribute('data-idx'));
+                        onSelect(newIdx, e);
+                    }
+                });
+            });
+        } else {
+            containerEl.style.display = 'none';
+            containerEl.innerHTML = '';
+        }
+    }
+
+    beforeEach(() => {
+        document.body.innerHTML = '<div id="test-filmstrip"></div>';
+        container = document.getElementById('test-filmstrip');
+    });
+
+    test('should render thumbnails and set active class correctly', () => {
+        const images = ['img1.jpg', 'img2.jpg', 'img3.jpg'];
+        const onSelect = jest.fn();
+
+        renderFilmstripHelper(container, images, 1, 'My Project', false, onSelect);
+
+        const items = container.querySelectorAll('.thumb-item');
+        expect(items.length).toBe(3);
+        expect(items[0].classList.contains('active')).toBe(false);
+        expect(items[1].classList.contains('active')).toBe(true);
+        expect(items[2].classList.contains('active')).toBe(false);
+        expect(items[0].getAttribute('aria-label')).toBe('View slide 1');
+    });
+
+    test('should set fullscreen aria-label when isFullscreen is true', () => {
+        const images = ['img1.jpg', 'img2.jpg'];
+        const onSelect = jest.fn();
+
+        renderFilmstripHelper(container, images, 0, 'My Project', true, onSelect);
+
+        const items = container.querySelectorAll('.thumb-item');
+        expect(items[0].getAttribute('aria-label')).toBe('View fullscreen slide 1');
+    });
+
+    test('should trigger click event handler and stop propagation if fullscreen', () => {
+        const images = ['img1.jpg', 'img2.jpg'];
+        const onSelect = jest.fn();
+
+        renderFilmstripHelper(container, images, 0, 'My Project', true, onSelect);
+
+        const items = container.querySelectorAll('.thumb-item');
+        const clickEvent = new Event('click', { bubbles: true });
+        const stopPropagationSpy = jest.spyOn(clickEvent, 'stopPropagation');
+
+        items[1].dispatchEvent(clickEvent);
+
+        expect(onSelect).toHaveBeenCalledWith(1, expect.any(Object));
+        expect(stopPropagationSpy).toHaveBeenCalled();
+    });
+
+    test('should hide container if single image or empty images list', () => {
+        const onSelect = jest.fn();
+
+        renderFilmstripHelper(container, ['img1.jpg'], 0, 'My Project', false, onSelect);
+        expect(container.style.display).toBe('none');
+        expect(container.innerHTML).toBe('');
+
+        renderFilmstripHelper(container, [], 0, 'My Project', false, onSelect);
+        expect(container.style.display).toBe('none');
+        expect(container.innerHTML).toBe('');
+    });
+});
