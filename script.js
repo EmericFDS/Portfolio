@@ -1149,6 +1149,8 @@ class CanvasParticleEngine {
         }
 
         // Render Constellation Links First (to prevent line overlapping on dots)
+        // Optimization: Hoist maxDistSq calculation outside particle rendering loop to avoid re-computing (140*140) every frame per particle
+        const maxDistSq = this.maxDistance * this.maxDistance;
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
@@ -1182,7 +1184,6 @@ class CanvasParticleEngine {
             }
 
             // Connect nearby particles
-            const maxDistSq = this.maxDistance * this.maxDistance;
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
