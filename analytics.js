@@ -220,3 +220,7 @@ if (document.readyState === 'loading') {
 } else {
     PortfolioAnalytics.init();
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = PortfolioAnalytics;
+}
