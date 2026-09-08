@@ -1733,35 +1733,41 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnPrevImg) btnPrevImg.style.display = hasMultipleImages ? 'flex' : 'none';
         if (btnNextImg) btnNextImg.style.display = hasMultipleImages ? 'flex' : 'none';
 
-        // Render Filmstrip (Fast WebP thumbnails)
-        if (filmstripEl) {
-            if (hasMultipleImages) {
-                filmstripEl.style.display = 'flex';
-                filmstripEl.innerHTML = images.map((imgSrc, idx) => `
-                    <div class="thumb-item ${idx === currentImageIndex ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="View slide ${idx + 1}" tabindex="0">
-                        <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(project.title)} thumb ${idx + 1}" loading="lazy">
+        // Helper function to render filmstrip thumbnail list and attach click/keyboard events
+        function renderFilmstrip(container, imagesList, activeIdx, title, isFullscreen) {
+            if (!container) return;
+            if (imagesList && imagesList.length > 1) {
+                container.style.display = 'flex';
+                const labelPrefix = isFullscreen ? 'View fullscreen slide' : 'View slide';
+                container.innerHTML = imagesList.map((imgSrc, idx) => `
+                    <div class="thumb-item ${idx === activeIdx ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="${labelPrefix} ${idx + 1}" tabindex="0">
+                        <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(title)} thumb ${idx + 1}" loading="lazy">
                     </div>
                 `).join('');
 
-                // Filmstrip click / keyboard listener
-                filmstripEl.querySelectorAll('.thumb-item').forEach(thumb => {
-                    thumb.addEventListener('click', () => {
+                container.querySelectorAll('.thumb-item').forEach(thumb => {
+                    thumb.addEventListener('click', (e) => {
+                        if (isFullscreen) e.stopPropagation();
                         currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
                         updateGalleryDisplay();
                     });
                     thumb.addEventListener('keydown', (e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
+                            if (isFullscreen) e.stopPropagation();
                             currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
                             updateGalleryDisplay();
                         }
                     });
                 });
             } else {
-                filmstripEl.style.display = 'none';
-                filmstripEl.innerHTML = '';
+                container.style.display = 'none';
+                container.innerHTML = '';
             }
         }
+
+        // Render Filmstrip (Fast WebP thumbnails)
+        renderFilmstrip(filmstripEl, images, currentImageIndex, project.title, false);
 
         // Update Lightbox Modal if currently open (High-Def)
         if (lightboxModal && lightboxModal.classList.contains('active')) {
@@ -1780,35 +1786,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (lightboxPrevBtn) lightboxPrevBtn.style.display = hasMultipleImages ? 'flex' : 'none';
             if (lightboxNextBtn) lightboxNextBtn.style.display = hasMultipleImages ? 'flex' : 'none';
 
-            if (lightboxFilmstrip) {
-                if (hasMultipleImages) {
-                    lightboxFilmstrip.style.display = 'flex';
-                    lightboxFilmstrip.innerHTML = images.map((imgSrc, idx) => `
-                        <div class="thumb-item ${idx === currentImageIndex ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="View fullscreen slide ${idx + 1}" tabindex="0">
-                            <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(project.title)} thumb ${idx + 1}" loading="lazy">
-                        </div>
-                    `).join('');
-
-                    lightboxFilmstrip.querySelectorAll('.thumb-item').forEach(thumb => {
-                        thumb.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
-                            updateGalleryDisplay();
-                        });
-                        thumb.addEventListener('keydown', (e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
-                                updateGalleryDisplay();
-                            }
-                        });
-                    });
-                } else {
-                    lightboxFilmstrip.style.display = 'none';
-                    lightboxFilmstrip.innerHTML = '';
-                }
-            }
+            renderFilmstrip(lightboxFilmstrip, images, currentImageIndex, project.title, true);
         }
     }
 
