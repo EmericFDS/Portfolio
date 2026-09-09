@@ -485,3 +485,69 @@ describe('Filmstrip Rendering Helper Functions', () => {
         expect(container.innerHTML).toBe('');
     });
 });
+
+describe('CanvasParticleEngine Render Loop and Interaction Tests', () => {
+    let canvas;
+
+    beforeEach(() => {
+        document.body.innerHTML = '<canvas id="bg-canvas"></canvas>';
+        canvas = document.getElementById('bg-canvas');
+
+        // Mock CanvasRenderingContext2D methods and properties
+        const mockCtx = {
+            scale: jest.fn(),
+            clearRect: jest.fn(),
+            beginPath: jest.fn(),
+            arc: jest.fn(),
+            ellipse: jest.fn(),
+            moveTo: jest.fn(),
+            lineTo: jest.fn(),
+            stroke: jest.fn(),
+            fill: jest.fn(),
+            lineWidth: 1,
+            strokeStyle: '',
+            fillStyle: '',
+            shadowBlur: 0,
+            shadowColor: ''
+        };
+        canvas.getContext = jest.fn().mockReturnValue(mockCtx);
+
+        // Mock window properties/methods
+        window.matchMedia = jest.fn().mockReturnValue({ matches: false });
+        window.requestAnimationFrame = jest.fn(cb => setTimeout(cb, 16));
+        window.cancelAnimationFrame = jest.fn(id => clearTimeout(id));
+    });
+
+    test('should initialize particles and render frame correctly with hoisted math constants', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract CanvasParticleEngine class definition
+        const engineClassMatch = scriptCode.match(/class CanvasParticleEngine \{[\s\S]*?\n\}/);
+        expect(engineClassMatch).not.toBeNull();
+
+        const CanvasParticleEngine = new Function(`${engineClassMatch[0]}; return CanvasParticleEngine;`)();
+
+        const engine = new CanvasParticleEngine('bg-canvas');
+        expect(engine.particles.length).toBeGreaterThan(0);
+
+        // Set up custom particles to test particle constellation linking and mouse push
+        engine.particles = [
+            { x: 50, y: 50, vx: 0.1, vy: 0.1, radius: 2, depth: 0.5, baseAlpha: 0.5, color: 'rgba(0, 240, 255,' },
+            { x: 60, y: 60, vx: -0.1, vy: -0.1, radius: 2, depth: 0.5, baseAlpha: 0.5, color: 'rgba(99, 102, 241,' }
+        ];
+        engine.mouse = { x: 52, y: 52, radius: 160 };
+
+        // Execute render loop frame
+        expect(() => engine.render()).not.toThrow();
+
+        // Verify context clear, drawing strokes and fills occurred
+        const ctx = engine.ctx;
+        expect(ctx.clearRect).toHaveBeenCalledWith(0, 0, engine.width, engine.height);
+        expect(ctx.stroke).toHaveBeenCalled();
+        expect(ctx.fill).toHaveBeenCalled();
+        expect(ctx.lineWidth).toBe(0.85);
+
+        engine.stop();
+    });
+});
