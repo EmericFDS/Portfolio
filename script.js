@@ -1149,6 +1149,13 @@ class CanvasParticleEngine {
         }
 
         // Render Constellation Links First (to prevent line overlapping on dots)
+        // Performance optimization: Hoist constants out of inner particle loops to eliminate
+        // redundant per-particle squared boundary recalculations and repeated canvas state changes every frame.
+        const radiusSq = this.mouse.radius * this.mouse.radius;
+        const maxDistSq = this.maxDistance * this.maxDistance;
+        const invMaxDistance = 1 / this.maxDistance;
+        this.ctx.lineWidth = 0.85;
+
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
@@ -1168,11 +1175,10 @@ class CanvasParticleEngine {
                 if (p.y < -10) p.y = this.height + 10;
                 else if (p.y > this.height + 10) p.y = -10;
 
-                // Mouse interactivity (gentle push) - check squared distance first to avoid expensive Math.sqrt calls
+                // Mouse interactivity (gentle push) - check precalculated squared distance
                 const dx = this.mouse.x - p.x;
                 const dy = this.mouse.y - p.y;
                 const distSq = dx * dx + dy * dy;
-                const radiusSq = this.mouse.radius * this.mouse.radius;
                 if (distSq < radiusSq && distSq > 0) {
                     const dist = Math.sqrt(distSq);
                     const force = (this.mouse.radius - dist) / this.mouse.radius;
@@ -1182,7 +1188,6 @@ class CanvasParticleEngine {
             }
 
             // Connect nearby particles
-            const maxDistSq = this.maxDistance * this.maxDistance;
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1191,12 +1196,11 @@ class CanvasParticleEngine {
 
                 if (distSq < maxDistSq) {
                     const dist2 = Math.sqrt(distSq);
-                    const lineAlpha = (1 - dist2 / this.maxDistance) * 0.28;
+                    const lineAlpha = (1 - dist2 * invMaxDistance) * 0.28;
                     this.ctx.beginPath();
                     this.ctx.moveTo(p.x, p.y);
                     this.ctx.lineTo(p2.x, p2.y);
                     this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.lineWidth = 0.85;
                     this.ctx.stroke();
                 }
             }
