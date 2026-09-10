@@ -1149,6 +1149,10 @@ class CanvasParticleEngine {
         }
 
         // Render Constellation Links First (to prevent line overlapping on dots)
+        // Optimization: Hoist constant squared distance calculations outside particle loop to avoid redundant Math ops on every frame
+        const radiusSq = this.mouse.radius * this.mouse.radius;
+        const maxDistSq = this.maxDistance * this.maxDistance;
+
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
@@ -1172,7 +1176,6 @@ class CanvasParticleEngine {
                 const dx = this.mouse.x - p.x;
                 const dy = this.mouse.y - p.y;
                 const distSq = dx * dx + dy * dy;
-                const radiusSq = this.mouse.radius * this.mouse.radius;
                 if (distSq < radiusSq && distSq > 0) {
                     const dist = Math.sqrt(distSq);
                     const force = (this.mouse.radius - dist) / this.mouse.radius;
@@ -1182,7 +1185,6 @@ class CanvasParticleEngine {
             }
 
             // Connect nearby particles
-            const maxDistSq = this.maxDistance * this.maxDistance;
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
