@@ -1007,6 +1007,10 @@ class CanvasParticleEngine {
         this.dpr = Math.min(window.devicePixelRatio || 1, 2);
         this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        // Bolt: Pre-allocate opacity bins and precomputed color strings for batched constellation line rendering
+        this.lineBins = Array.from({ length: 8 }, () => []);
+        this.binColors = Array.from({ length: 8 }, (_, b) => `rgba(0, 240, 255, ${(((b + 0.5) / 8) * 0.28).toFixed(3)})`);
+
         this.init();
     }
 
@@ -1068,6 +1072,8 @@ class CanvasParticleEngine {
     createParticles() {
         this.particles = [];
         for (let i = 0; i < this.numParticles; i++) {
+            const colorPrefix = Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,';
+            const baseAlpha = Math.random() * 0.35 + 0.55;
             this.particles.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
@@ -1075,8 +1081,11 @@ class CanvasParticleEngine {
                 vy: (Math.random() - 0.5) * 0.45,
                 radius: Math.random() * 2.0 + 1.2,
                 depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
-                baseAlpha: Math.random() * 0.35 + 0.55,
-                color: Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
+                baseAlpha: baseAlpha,
+                color: colorPrefix,
+                // Bolt: Precompute fillStyle and shadowColor to eliminate per-frame string allocations
+                fillStyle: `${colorPrefix}${baseAlpha.toFixed(2)})`,
+                shadowColor: colorPrefix.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)'
             });
         }
     }
@@ -1148,6 +1157,11 @@ class CanvasParticleEngine {
             this.ctx.stroke();
         }
 
+        // Bolt: Clear line bins for batched rendering
+        for (let b = 0; b < 8; b++) {
+            this.lineBins[b].length = 0;
+        }
+
         // Render Constellation Links First (to prevent line overlapping on dots)
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
@@ -1191,15 +1205,26 @@ class CanvasParticleEngine {
 
                 if (distSq < maxDistSq) {
                     const dist2 = Math.sqrt(distSq);
-                    const lineAlpha = (1 - dist2 / this.maxDistance) * 0.28;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p.x, p.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.lineWidth = 0.85;
-                    this.ctx.stroke();
+                    // Bolt: Quantize line opacity into 8 bins to batch stroke() draw calls
+                    const ratio = 1 - dist2 / this.maxDistance;
+                    const binIdx = Math.min(7, Math.floor(ratio * 8));
+                    this.lineBins[binIdx].push(p.x, p.y, p2.x, p2.y);
                 }
             }
+        }
+
+        // Bolt: Batch render constellation lines per opacity bin (1 stroke call per active bin vs 100+ unbatched calls)
+        this.ctx.lineWidth = 0.85;
+        for (let b = 0; b < 8; b++) {
+            const bin = this.lineBins[b];
+            if (bin.length === 0) continue;
+            this.ctx.beginPath();
+            for (let k = 0; k < bin.length; k += 4) {
+                this.ctx.moveTo(bin[k], bin[k + 1]);
+                this.ctx.lineTo(bin[k + 2], bin[k + 3]);
+            }
+            this.ctx.strokeStyle = this.binColors[b];
+            this.ctx.stroke();
         }
 
         // Render Particle Dots with Soft Glow
@@ -1207,8 +1232,9 @@ class CanvasParticleEngine {
             const p = this.particles[i];
             const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
 
+            // Bolt: Use precomputed shadowColor and fillStyle to eliminate string searches and allocations
             this.ctx.shadowBlur = 6;
-            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
+            this.ctx.shadowColor = p.shadowColor;
 
             this.ctx.beginPath();
             if (stretch > 0.6 && !this.prefersReducedMotion) {
@@ -1216,7 +1242,7 @@ class CanvasParticleEngine {
             } else {
                 this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             }
-            this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
+            this.ctx.fillStyle = p.fillStyle;
             this.ctx.fill();
         }
         this.ctx.shadowBlur = 0;

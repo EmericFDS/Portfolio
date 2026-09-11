@@ -485,3 +485,86 @@ describe('Filmstrip Rendering Helper Functions', () => {
         expect(container.innerHTML).toBe('');
     });
 });
+
+describe('CanvasParticleEngine Optimizations', () => {
+    let canvas;
+    let engine;
+
+    beforeEach(() => {
+        document.body.innerHTML = '<canvas id="bg-canvas"></canvas>';
+        canvas = document.getElementById('bg-canvas');
+
+        // Mock canvas 2D context methods
+        canvas.getContext = jest.fn().mockReturnValue({
+            clearRect: jest.fn(),
+            beginPath: jest.fn(),
+            arc: jest.fn(),
+            ellipse: jest.fn(),
+            moveTo: jest.fn(),
+            lineTo: jest.fn(),
+            stroke: jest.fn(),
+            fill: jest.fn(),
+            scale: jest.fn(),
+            setProperty: jest.fn()
+        });
+
+        // Mock window properties needed by CanvasParticleEngine
+        window.innerWidth = 1024;
+        window.innerHeight = 768;
+        window.matchMedia = jest.fn().mockReturnValue({ matches: false });
+    });
+
+    test('should pre-allocate 8 opacity lineBins and binColors', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract CanvasParticleEngine class from script.js and execute in test context
+        const engineMatch = scriptCode.match(/class CanvasParticleEngine \{[\s\S]*?\n\}/);
+        expect(engineMatch).not.toBeNull();
+
+        const createEngine = new Function(`${engineMatch[0]}; return new CanvasParticleEngine('bg-canvas');`);
+        engine = createEngine();
+
+        expect(engine.lineBins.length).toBe(8);
+        expect(engine.binColors.length).toBe(8);
+        expect(engine.binColors[0]).toContain('rgba(0, 240, 255,');
+    });
+
+    test('should precompute fillStyle and shadowColor on particle creation', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        const engineMatch = scriptCode.match(/class CanvasParticleEngine \{[\s\S]*?\n\}/);
+        const createEngine = new Function(`${engineMatch[0]}; return new CanvasParticleEngine('bg-canvas');`);
+        engine = createEngine();
+
+        expect(engine.particles.length).toBeGreaterThan(0);
+        engine.particles.forEach(p => {
+            expect(p.fillStyle).toBeDefined();
+            expect(p.shadowColor).toBeDefined();
+            expect(p.fillStyle).toMatch(/^rgba\((0, 240, 255|99, 102, 241),\s*\d+\.\d+\)$/);
+            expect(p.shadowColor).toMatch(/^rgba\((0, 240, 255|99, 102, 241),\s*0\.6\)$/);
+        });
+    });
+
+    test('should render frame and clear lineBins without errors', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        const engineMatch = scriptCode.match(/class CanvasParticleEngine \{[\s\S]*?\n\}/);
+        const createEngine = new Function(`${engineMatch[0]}; return new CanvasParticleEngine('bg-canvas');`);
+        engine = createEngine();
+
+        // Add 2 particles close to each other to trigger connection line binning
+        engine.particles = [
+            { x: 10, y: 10, vx: 0, vy: 0, radius: 2, depth: 1, baseAlpha: 0.8, fillStyle: 'rgba(0, 240, 255, 0.8)', shadowColor: 'rgba(0, 240, 255, 0.6)' },
+            { x: 20, y: 20, vx: 0, vy: 0, radius: 2, depth: 1, baseAlpha: 0.8, fillStyle: 'rgba(0, 240, 255, 0.8)', shadowColor: 'rgba(0, 240, 255, 0.6)' }
+        ];
+
+        expect(() => engine.render()).not.toThrow();
+
+        // Check lineBins were populated and stroked during render
+        const totalLineCoordinates = engine.lineBins.reduce((sum, bin) => sum + bin.length, 0);
+        expect(totalLineCoordinates).toBe(4); // 1 line segment = 4 numbers (x1, y1, x2, y2)
+    });
+});
