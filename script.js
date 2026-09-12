@@ -1068,6 +1068,9 @@ class CanvasParticleEngine {
     createParticles() {
         this.particles = [];
         for (let i = 0; i < this.numParticles; i++) {
+            const colorPrefix = Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,';
+            const baseAlpha = Math.random() * 0.35 + 0.55;
+            const isCyan = colorPrefix.includes('0, 240, 255');
             this.particles.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
@@ -1075,8 +1078,11 @@ class CanvasParticleEngine {
                 vy: (Math.random() - 0.5) * 0.45,
                 radius: Math.random() * 2.0 + 1.2,
                 depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
-                baseAlpha: Math.random() * 0.35 + 0.55,
-                color: Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
+                baseAlpha: baseAlpha,
+                color: colorPrefix,
+                // Precomputed fillStyle and shadowColor eliminate string allocations and substring search in 60fps loop
+                fillStyle: `${colorPrefix}${baseAlpha})`,
+                shadowColor: isCyan ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)'
             });
         }
     }
@@ -1148,6 +1154,9 @@ class CanvasParticleEngine {
             this.ctx.stroke();
         }
 
+        // Lift fixed lineWidth assignment outside the loop to avoid ~100 redundant context state writes per frame
+        this.ctx.lineWidth = 0.85;
+
         // Render Constellation Links First (to prevent line overlapping on dots)
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
@@ -1196,19 +1205,20 @@ class CanvasParticleEngine {
                     this.ctx.moveTo(p.x, p.y);
                     this.ctx.lineTo(p2.x, p2.y);
                     this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.lineWidth = 0.85;
                     this.ctx.stroke();
                 }
             }
         }
 
-        // Render Particle Dots with Soft Glow
+        // Lift constant shadowBlur assignment outside particle rendering loop to save ~75 state updates/frame
+        this.ctx.shadowBlur = 6;
+
+        // Render Particle Dots with Soft Glow using precomputed fillStyle and shadowColor
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
             const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
 
-            this.ctx.shadowBlur = 6;
-            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
+            this.ctx.shadowColor = p.shadowColor;
 
             this.ctx.beginPath();
             if (stretch > 0.6 && !this.prefersReducedMotion) {
@@ -1216,7 +1226,7 @@ class CanvasParticleEngine {
             } else {
                 this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             }
-            this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
+            this.ctx.fillStyle = p.fillStyle;
             this.ctx.fill();
         }
         this.ctx.shadowBlur = 0;

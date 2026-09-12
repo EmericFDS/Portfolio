@@ -485,3 +485,59 @@ describe('Filmstrip Rendering Helper Functions', () => {
         expect(container.innerHTML).toBe('');
     });
 });
+
+describe('CanvasParticleEngine Precomputed Particle Styles Optimization', () => {
+    test('should precompute fillStyle and shadowColor on particle creation', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Mock window.matchMedia and canvas context for JSDOM
+        window.matchMedia = window.matchMedia || function() {
+            return {
+                matches: false,
+                addListener: jest.fn(),
+                removeListener: jest.fn(),
+                addEventListener: jest.fn(),
+                removeEventListener: jest.fn(),
+            };
+        };
+
+        HTMLCanvasElement.prototype.getContext = jest.fn().mockReturnValue({
+            scale: jest.fn(),
+            clearRect: jest.fn(),
+            beginPath: jest.fn(),
+            arc: jest.fn(),
+            ellipse: jest.fn(),
+            moveTo: jest.fn(),
+            lineTo: jest.fn(),
+            stroke: jest.fn(),
+            fill: jest.fn()
+        });
+
+        // Extract CanvasParticleEngine class definition from script.js
+        const classMatch = scriptCode.match(/class CanvasParticleEngine \{[\s\S]*?\n\}/);
+        expect(classMatch).not.toBeNull();
+
+        // Create canvas element in DOM
+        document.body.innerHTML = '<canvas id="bg-canvas"></canvas>';
+
+        // Evaluate extracted class definition
+        const createEngine = new Function(`${classMatch[0]}\nreturn CanvasParticleEngine;`);
+        const EngineClass = createEngine();
+
+        // Instantiate CanvasParticleEngine
+        const engine = new EngineClass('bg-canvas');
+        expect(engine.particles.length).toBeGreaterThan(0);
+
+        // Verify precomputed properties on all created particles
+        engine.particles.forEach(p => {
+            expect(p.fillStyle).toBeDefined();
+            expect(typeof p.fillStyle).toBe('string');
+            expect(p.fillStyle).toMatch(/^rgba\(\d+,\s*\d+,\s*\d+,\s*[\d.]+\)$/);
+
+            expect(p.shadowColor).toBeDefined();
+            expect(typeof p.shadowColor).toBe('string');
+            expect(p.shadowColor).toMatch(/^rgba\(\d+,\s*\d+,\s*\d+,\s*0\.6\)$/);
+        });
+    });
+});
