@@ -485,3 +485,50 @@ describe('Filmstrip Rendering Helper Functions', () => {
         expect(container.innerHTML).toBe('');
     });
 });
+
+describe('CanvasParticleEngine Particle Precomputed Properties', () => {
+    let canvasEl;
+
+    beforeEach(() => {
+        document.body.innerHTML = '<canvas id="bg-canvas"></canvas>';
+        canvasEl = document.getElementById('bg-canvas');
+        canvasEl.getContext = jest.fn().mockReturnValue({
+            scale: jest.fn(),
+            clearRect: jest.fn(),
+            beginPath: jest.fn(),
+            arc: jest.fn(),
+            ellipse: jest.fn(),
+            fill: jest.fn(),
+            stroke: jest.fn(),
+            moveTo: jest.fn(),
+            lineTo: jest.fn()
+        });
+        window.matchMedia = jest.fn().mockReturnValue({
+            matches: false,
+            addEventListener: jest.fn(),
+            removeEventListener: jest.fn()
+        });
+    });
+
+    test('should precompute shadowColor and fillStyle on each particle upon createParticles', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract CanvasParticleEngine class
+        const classMatch = scriptCode.match(/class CanvasParticleEngine \{[\s\S]*?\n\}/);
+        expect(classMatch).not.toBeNull();
+
+        const evalContext = `${classMatch[0]}\nreturn CanvasParticleEngine;`;
+        const CanvasParticleEngineClass = new Function(evalContext)();
+
+        const engine = new CanvasParticleEngineClass('bg-canvas');
+        expect(engine.particles.length).toBeGreaterThan(0);
+
+        engine.particles.forEach(p => {
+            expect(p.shadowColor).toBeDefined();
+            expect(p.fillStyle).toBeDefined();
+            expect(p.shadowColor).toMatch(/^rgba\((0, 240, 255|99, 102, 241), 0\.6\)$/);
+            expect(p.fillStyle).toMatch(/^rgba\((0, 240, 255|99, 102, 241), ?\d+(\.\d+)?\)$/);
+        });
+    });
+});
