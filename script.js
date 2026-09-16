@@ -1068,6 +1068,8 @@ class CanvasParticleEngine {
     createParticles() {
         this.particles = [];
         for (let i = 0; i < this.numParticles; i++) {
+            const isCyan = Math.random() > 0.45;
+            const baseAlpha = Math.random() * 0.35 + 0.55;
             this.particles.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
@@ -1075,8 +1077,10 @@ class CanvasParticleEngine {
                 vy: (Math.random() - 0.5) * 0.45,
                 radius: Math.random() * 2.0 + 1.2,
                 depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
-                baseAlpha: Math.random() * 0.35 + 0.55,
-                color: Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
+                baseAlpha: baseAlpha,
+                // Pre-compute full fillStyle string to eliminate string concatenation per frame
+                fillStyle: isCyan ? `rgba(0, 240, 255, ${baseAlpha})` : `rgba(99, 102, 241, ${baseAlpha})`,
+                shadowColor: isCyan ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)'
             });
         }
     }
@@ -1130,14 +1134,17 @@ class CanvasParticleEngine {
         this.scrollVelocity += (this.targetScrollVelocity - this.scrollVelocity) * 0.18;
         this.targetScrollVelocity *= 0.88;
 
-        // Render Ripples
+        // Render Ripples (Optimized swap-and-pop removal eliminates Array.splice shifts & GC pauses)
         for (let r = this.ripples.length - 1; r >= 0; r--) {
             const rip = this.ripples[r];
             rip.radius += rip.speed;
             rip.alpha -= 0.015;
 
             if (rip.alpha <= 0 || rip.radius >= rip.maxRadius) {
-                this.ripples.splice(r, 1);
+                const lastRip = this.ripples.pop();
+                if (r < this.ripples.length) {
+                    this.ripples[r] = lastRip;
+                }
                 continue;
             }
 
@@ -1202,13 +1209,13 @@ class CanvasParticleEngine {
             }
         }
 
-        // Render Particle Dots with Soft Glow
+        // Render Particle Dots with Soft Glow (using pre-computed fillStyle and shadowColor)
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
             const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
 
             this.ctx.shadowBlur = 6;
-            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
+            this.ctx.shadowColor = p.shadowColor;
 
             this.ctx.beginPath();
             if (stretch > 0.6 && !this.prefersReducedMotion) {
@@ -1216,7 +1223,7 @@ class CanvasParticleEngine {
             } else {
                 this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             }
-            this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
+            this.ctx.fillStyle = p.fillStyle;
             this.ctx.fill();
         }
         this.ctx.shadowBlur = 0;
