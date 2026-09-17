@@ -1148,6 +1148,12 @@ class CanvasParticleEngine {
             this.ctx.stroke();
         }
 
+        // Group line segments into alpha buckets to batch stroke calls and eliminate draw-call overhead
+        const ALPHA_BUCKETS = 5;
+        const bucketPaths = Array.from({ length: ALPHA_BUCKETS }, () => []);
+
+        this.ctx.lineWidth = 0.85;
+
         // Render Constellation Links First (to prevent line overlapping on dots)
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
@@ -1191,24 +1197,32 @@ class CanvasParticleEngine {
 
                 if (distSq < maxDistSq) {
                     const dist2 = Math.sqrt(distSq);
-                    const lineAlpha = (1 - dist2 / this.maxDistance) * 0.28;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p.x, p.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.lineWidth = 0.85;
-                    this.ctx.stroke();
+                    const normalizedRatio = 1 - dist2 / this.maxDistance; // 0 to 1
+                    const bucketIndex = Math.min(Math.floor(normalizedRatio * ALPHA_BUCKETS), ALPHA_BUCKETS - 1);
+                    bucketPaths[bucketIndex].push(p.x, p.y, p2.x, p2.y);
                 }
             }
         }
 
-        // Render Particle Dots with Soft Glow
+        // Batch stroke calls per alpha bucket
+        for (let b = 0; b < ALPHA_BUCKETS; b++) {
+            const coords = bucketPaths[b];
+            if (coords.length === 0) continue;
+
+            const bucketAlpha = ((b + 0.5) / ALPHA_BUCKETS) * 0.28;
+            this.ctx.strokeStyle = `rgba(0, 240, 255, ${bucketAlpha.toFixed(2)})`;
+            this.ctx.beginPath();
+            for (let k = 0; k < coords.length; k += 4) {
+                this.ctx.moveTo(coords[k], coords[k + 1]);
+                this.ctx.lineTo(coords[k + 2], coords[k + 3]);
+            }
+            this.ctx.stroke();
+        }
+
+        // Render Particle Dots
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
             const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
-
-            this.ctx.shadowBlur = 6;
-            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
 
             this.ctx.beginPath();
             if (stretch > 0.6 && !this.prefersReducedMotion) {
@@ -1219,7 +1233,6 @@ class CanvasParticleEngine {
             this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
             this.ctx.fill();
         }
-        this.ctx.shadowBlur = 0;
     }
 }
 
