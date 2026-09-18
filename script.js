@@ -1254,20 +1254,41 @@ function initSpotlightAndCursor() {
         let mouseY = window.innerHeight / 2;
         let ringX = mouseX;
         let ringY = mouseY;
+        let lastDotX = -1, lastDotY = -1;
+        let lastRingX = -1, lastRingY = -1;
 
+        // Optimized mouse position tracking: decoupled from DOM mutations to avoid layout thrashing
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
         }, { passive: true });
 
-        // Smooth Lerp for ring
+        // Smooth Lerp & hardware-accelerated transform updates synced with rAF + idle guard
         function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            cursorRing.style.left = `${ringX}px`;
-            cursorRing.style.top = `${ringY}px`;
+            // Update cursor dot position in rAF frame using GPU hardware-accelerated transform
+            if (mouseX !== lastDotX || mouseY !== lastDotY) {
+                cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+                lastDotX = mouseX;
+                lastDotY = mouseY;
+            }
+
+            // Smooth Lerp & idle guard for ring using GPU hardware-accelerated transform
+            const dx = mouseX - ringX;
+            const dy = mouseY - ringY;
+            if (Math.abs(dx) > 0.05 || Math.abs(dy) > 0.05) {
+                ringX += dx * 0.15;
+                ringY += dy * 0.15;
+                cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+                lastRingX = ringX;
+                lastRingY = ringY;
+            } else if (ringX !== lastRingX || ringY !== lastRingY) {
+                ringX = mouseX;
+                ringY = mouseY;
+                cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+                lastRingX = ringX;
+                lastRingY = ringY;
+            }
+
             requestAnimationFrame(renderCursor);
         }
         requestAnimationFrame(renderCursor);

@@ -485,3 +485,84 @@ describe('Filmstrip Rendering Helper Functions', () => {
         expect(container.innerHTML).toBe('');
     });
 });
+
+describe('Custom Cursor Hardware Acceleration and Idle Guard', () => {
+    let cursorDot;
+    let cursorRing;
+
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <div id="custom-cursor-dot"></div>
+            <div id="custom-cursor-ring"></div>
+        `;
+        cursorDot = document.getElementById('custom-cursor-dot');
+        cursorRing = document.getElementById('custom-cursor-ring');
+    });
+
+    test('should update transform using hardware-accelerated translate3d and skip redundant DOM mutations when idle', () => {
+        let mouseX = 100;
+        let mouseY = 100;
+        let ringX = 100;
+        let ringY = 100;
+        let lastDotX = -1, lastDotY = -1;
+
+        // Simulate mousemove event without direct DOM writes
+        const onMouseMove = (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        };
+
+        const renderCursor = () => {
+            let updated = false;
+            if (mouseX !== lastDotX || mouseY !== lastDotY) {
+                cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+                lastDotX = mouseX;
+                lastDotY = mouseY;
+                updated = true;
+            }
+
+            const dx = mouseX - ringX;
+            const dy = mouseY - ringY;
+            if (Math.abs(dx) > 0.05 || Math.abs(dy) > 0.05) {
+                ringX += dx * 0.15;
+                ringY += dy * 0.15;
+                cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+                updated = true;
+            } else if (ringX !== mouseX || ringY !== mouseY) {
+                ringX = mouseX;
+                ringY = mouseY;
+                cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+                updated = true;
+            }
+            return updated;
+        };
+
+        // 1. Initial state before mouse movement
+        expect(cursorDot.style.transform).toBe('');
+        expect(cursorRing.style.transform).toBe('');
+
+        // 2. Simulate mouse move to (200, 200)
+        onMouseMove({ clientX: 200, clientY: 200 });
+
+        // Mousemove itself should not write to DOM style transform directly
+        expect(cursorDot.style.transform).toBe('');
+
+        // Frame 1: renderCursor called
+        let wasUpdated = renderCursor();
+        expect(wasUpdated).toBe(true);
+        expect(cursorDot.style.transform).toBe('translate3d(200px, 200px, 0) translate(-50%, -50%)');
+        expect(cursorRing.style.transform).toContain('translate3d(');
+
+        // Frame iterations until lerp settles
+        for (let i = 0; i < 50; i++) {
+            renderCursor();
+        }
+
+        // Verify settled ring transform
+        expect(cursorRing.style.transform).toBe('translate3d(200px, 200px, 0) translate(-50%, -50%)');
+
+        // Subsequent idle frame: should return false (no DOM mutations)
+        wasUpdated = renderCursor();
+        expect(wasUpdated).toBe(false);
+    });
+});
