@@ -1255,22 +1255,60 @@ function initSpotlightAndCursor() {
         let ringX = mouseX;
         let ringY = mouseY;
 
+        // Optimization: Use GPU-accelerated CSS transform translate3d instead of left/top style updates
+        // to avoid triggering browser layout reflows/recalculations on every frame.
+        // Also pause requestAnimationFrame when the mouse is idle/offscreen or tab is hidden.
+        let cursorRaf = null;
+        let isCursorActive = false;
+
+        function startCursorLoop() {
+            if (isCursorActive) return;
+            isCursorActive = true;
+            renderCursor();
+        }
+
+        function stopCursorLoop() {
+            isCursorActive = false;
+            if (cursorRaf) {
+                cancelAnimationFrame(cursorRaf);
+                cursorRaf = null;
+            }
+        }
+
+        function renderCursor() {
+            if (!isCursorActive) return;
+
+            const dx = mouseX - ringX;
+            const dy = mouseY - ringY;
+            ringX += dx * 0.15;
+            ringY += dy * 0.15;
+
+            // GPU hardware accelerated positioning
+            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            cursorRing.style.transform = `translate3d(${ringX.toFixed(2)}px, ${ringY.toFixed(2)}px, 0) translate(-50%, -50%)`;
+
+            // Pause animation loop when cursor position converges to save CPU/GPU cycles
+            if (Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) {
+                stopCursorLoop();
+            } else {
+                cursorRaf = requestAnimationFrame(renderCursor);
+            }
+        }
+
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
+            startCursorLoop();
         }, { passive: true });
 
-        // Smooth Lerp for ring
-        function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            cursorRing.style.left = `${ringX}px`;
-            cursorRing.style.top = `${ringY}px`;
-            requestAnimationFrame(renderCursor);
-        }
-        requestAnimationFrame(renderCursor);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) stopCursorLoop();
+            else startCursorLoop();
+        });
+
+        window.addEventListener('mouseleave', stopCursorLoop, { passive: true });
+
+        startCursorLoop();
 
         // Hover scale over interactive targets
         const interactives = 'a, button, .filter-btn, .thumb-item, .bento-card, .project-nav-btn, .social-icon-btn';
