@@ -1068,6 +1068,9 @@ class CanvasParticleEngine {
     createParticles() {
         this.particles = [];
         for (let i = 0; i < this.numParticles; i++) {
+            const isCyan = Math.random() > 0.45;
+            const baseAlpha = Math.random() * 0.35 + 0.55;
+            const colorPrefix = isCyan ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,';
             this.particles.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
@@ -1075,8 +1078,11 @@ class CanvasParticleEngine {
                 vy: (Math.random() - 0.5) * 0.45,
                 radius: Math.random() * 2.0 + 1.2,
                 depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
-                baseAlpha: Math.random() * 0.35 + 0.55,
-                color: Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
+                baseAlpha: baseAlpha,
+                color: colorPrefix,
+                // Bolt Perf Optimization: Pre-compute fillStyle and shadowColor to avoid per-frame string concatenation and searching in animation loop (60fps)
+                fillStyle: `${colorPrefix}${baseAlpha})`,
+                shadowColor: isCyan ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)'
             });
         }
     }
@@ -1149,6 +1155,10 @@ class CanvasParticleEngine {
         }
 
         // Render Constellation Links First (to prevent line overlapping on dots)
+        // Bolt Perf Optimization: Lift loop invariants outside of particle rendering loops
+        const maxDistSq = this.maxDistance * this.maxDistance;
+        const radiusSq = this.mouse.radius * this.mouse.radius;
+
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
@@ -1172,7 +1182,6 @@ class CanvasParticleEngine {
                 const dx = this.mouse.x - p.x;
                 const dy = this.mouse.y - p.y;
                 const distSq = dx * dx + dy * dy;
-                const radiusSq = this.mouse.radius * this.mouse.radius;
                 if (distSq < radiusSq && distSq > 0) {
                     const dist = Math.sqrt(distSq);
                     const force = (this.mouse.radius - dist) / this.mouse.radius;
@@ -1182,7 +1191,6 @@ class CanvasParticleEngine {
             }
 
             // Connect nearby particles
-            const maxDistSq = this.maxDistance * this.maxDistance;
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1203,20 +1211,22 @@ class CanvasParticleEngine {
         }
 
         // Render Particle Dots with Soft Glow
+        const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
+        const isStretched = stretch > 0.6 && !this.prefersReducedMotion;
+
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
-            const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
 
             this.ctx.shadowBlur = 6;
-            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
+            this.ctx.shadowColor = p.shadowColor;
 
             this.ctx.beginPath();
-            if (stretch > 0.6 && !this.prefersReducedMotion) {
+            if (isStretched) {
                 this.ctx.ellipse(p.x, p.y, p.radius, p.radius + stretch, 0, 0, Math.PI * 2);
             } else {
                 this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             }
-            this.ctx.fillStyle = `${p.color}${p.baseAlpha})`;
+            this.ctx.fillStyle = p.fillStyle;
             this.ctx.fill();
         }
         this.ctx.shadowBlur = 0;
