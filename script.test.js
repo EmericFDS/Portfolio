@@ -485,3 +485,58 @@ describe('Filmstrip Rendering Helper Functions', () => {
         expect(container.innerHTML).toBe('');
     });
 });
+
+describe('CanvasParticleEngine Optimization', () => {
+    let canvas;
+
+    beforeEach(() => {
+        document.body.innerHTML = `<canvas id="bg-canvas"></canvas>`;
+        canvas = document.getElementById('bg-canvas');
+        canvas.getContext = jest.fn().mockReturnValue({
+            scale: jest.fn(),
+            clearRect: jest.fn(),
+            beginPath: jest.fn(),
+            arc: jest.fn(),
+            ellipse: jest.fn(),
+            moveTo: jest.fn(),
+            lineTo: jest.fn(),
+            stroke: jest.fn(),
+            fill: jest.fn(),
+            shadowBlur: 0,
+            shadowColor: '',
+            fillStyle: '',
+            strokeStyle: '',
+            lineWidth: 1
+        });
+        window.matchMedia = jest.fn().mockReturnValue({
+            matches: false,
+            addListener: jest.fn(),
+            removeListener: jest.fn()
+        });
+    });
+
+    test('should initialize particles with pre-computed fillStyle and shadowColor and render without errors', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract CanvasParticleEngine class code block
+        const classMatch = scriptCode.match(/class CanvasParticleEngine \{[\s\S]*?\n\}/);
+        expect(classMatch).not.toBeNull();
+
+        const evalContext = `${classMatch[0]}\nreturn CanvasParticleEngine;`;
+        const CanvasParticleEngine = new Function(evalContext)();
+
+        const engine = new CanvasParticleEngine('bg-canvas');
+        expect(engine.particles.length).toBeGreaterThan(0);
+
+        engine.particles.forEach(p => {
+            expect(p.fillStyle).toBeDefined();
+            expect(p.shadowColor).toBeDefined();
+            expect(p.fillStyle).toMatch(/^rgba\((0, 240, 255|99, 102, 241),\s*[\d.]+\)$/);
+            expect(p.shadowColor).toMatch(/^rgba\((0, 240, 255|99, 102, 241),\s*0\.6\)$/);
+        });
+
+        // Test render loop execution without errors
+        expect(() => engine.render()).not.toThrow();
+    });
+});
