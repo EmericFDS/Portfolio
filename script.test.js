@@ -485,3 +485,58 @@ describe('Filmstrip Rendering Helper Functions', () => {
         expect(container.innerHTML).toBe('');
     });
 });
+
+describe('CanvasParticleEngine Optimization Verification', () => {
+    beforeEach(() => {
+        window.matchMedia = jest.fn().mockImplementation(query => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: jest.fn(),
+            removeListener: jest.fn(),
+            addEventListener: jest.fn(),
+            removeEventListener: jest.fn(),
+            dispatchEvent: jest.fn(),
+        }));
+        HTMLCanvasElement.prototype.getContext = jest.fn().mockReturnValue({
+            scale: jest.fn(),
+            clearRect: jest.fn(),
+            beginPath: jest.fn(),
+            arc: jest.fn(),
+            stroke: jest.fn(),
+            moveTo: jest.fn(),
+            lineTo: jest.fn(),
+            ellipse: jest.fn(),
+            fill: jest.fn()
+        });
+    });
+
+    test('should initialize particles with pre-computed shadowColor matching particle color', () => {
+        const fs = require('fs');
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+
+        // Extract CanvasParticleEngine class from script.js
+        const classMatch = scriptCode.match(/class CanvasParticleEngine \{[\s\S]*?\n\}/);
+        expect(classMatch).not.toBeNull();
+
+        const canvas = document.createElement('canvas');
+        canvas.id = 'bg-canvas';
+        document.body.appendChild(canvas);
+
+        const evalContext = `${classMatch[0]}\nreturn CanvasParticleEngine;`;
+        const CanvasParticleEngineClass = new Function(evalContext)();
+
+        const engine = new CanvasParticleEngineClass('bg-canvas');
+        engine.createParticles();
+
+        expect(engine.particles.length).toBeGreaterThan(0);
+        engine.particles.forEach(p => {
+            expect(p.shadowColor).toBeDefined();
+            if (p.color.includes('0, 240, 255')) {
+                expect(p.shadowColor).toBe('rgba(0, 240, 255, 0.6)');
+            } else {
+                expect(p.shadowColor).toBe('rgba(99, 102, 241, 0.6)');
+            }
+        });
+    });
+});

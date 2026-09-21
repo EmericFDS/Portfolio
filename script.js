@@ -1068,6 +1068,7 @@ class CanvasParticleEngine {
     createParticles() {
         this.particles = [];
         for (let i = 0; i < this.numParticles; i++) {
+            const isCyan = Math.random() > 0.45;
             this.particles.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
@@ -1076,7 +1077,9 @@ class CanvasParticleEngine {
                 radius: Math.random() * 2.0 + 1.2,
                 depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
                 baseAlpha: Math.random() * 0.35 + 0.55,
-                color: Math.random() > 0.45 ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,'
+                color: isCyan ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,',
+                // Bolt optimization: Pre-compute shadowColor to avoid string matching in animation loop
+                shadowColor: isCyan ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)'
             });
         }
     }
@@ -1148,6 +1151,10 @@ class CanvasParticleEngine {
             this.ctx.stroke();
         }
 
+        // Bolt optimization: Hoist loop-invariant radiusSq and maxDistSq out of particle loop
+        const radiusSq = this.mouse.radius * this.mouse.radius;
+        const maxDistSq = this.maxDistance * this.maxDistance;
+
         // Render Constellation Links First (to prevent line overlapping on dots)
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
@@ -1172,7 +1179,6 @@ class CanvasParticleEngine {
                 const dx = this.mouse.x - p.x;
                 const dy = this.mouse.y - p.y;
                 const distSq = dx * dx + dy * dy;
-                const radiusSq = this.mouse.radius * this.mouse.radius;
                 if (distSq < radiusSq && distSq > 0) {
                     const dist = Math.sqrt(distSq);
                     const force = (this.mouse.radius - dist) / this.mouse.radius;
@@ -1182,7 +1188,6 @@ class CanvasParticleEngine {
             }
 
             // Connect nearby particles
-            const maxDistSq = this.maxDistance * this.maxDistance;
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1202,16 +1207,19 @@ class CanvasParticleEngine {
             }
         }
 
+        // Bolt optimization: Hoist stretch and drawStretch calculation outside particle loop, use pre-computed p.shadowColor
+        const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
+        const drawStretch = stretch > 0.6 && !this.prefersReducedMotion;
+
         // Render Particle Dots with Soft Glow
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
-            const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
 
             this.ctx.shadowBlur = 6;
-            this.ctx.shadowColor = p.color.includes('0, 240, 255') ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)';
+            this.ctx.shadowColor = p.shadowColor;
 
             this.ctx.beginPath();
-            if (stretch > 0.6 && !this.prefersReducedMotion) {
+            if (drawStretch) {
                 this.ctx.ellipse(p.x, p.y, p.radius, p.radius + stretch, 0, 0, Math.PI * 2);
             } else {
                 this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
