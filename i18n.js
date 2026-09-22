@@ -73,21 +73,27 @@ const I18N = (() => {
         return langData[key] !== undefined ? langData[key] : key;
     }
 
-    // Apply translations to all [data-i18n] elements
+    // Apply translations to all [data-i18n] elements (avoids redundant DOM writes)
     function applyAll() {
-        document.querySelectorAll('[data-i18n]').forEach(el => {
+        const elements = document.querySelectorAll('[data-i18n]');
+        for (let i = 0; i < elements.length; i++) {
+            const el = elements[i];
             const key = el.getAttribute('data-i18n');
             const translated = t(key);
             if (translated !== key) {
                 // Check for data-i18n-attr (for attributes like placeholder, aria-label)
                 const attr = el.getAttribute('data-i18n-attr');
                 if (attr) {
-                    el.setAttribute(attr, translated);
+                    if (el.getAttribute(attr) !== translated) {
+                        el.setAttribute(attr, translated);
+                    }
                 } else {
-                    el.innerHTML = translated;
+                    if (el.innerHTML !== translated) {
+                        el.innerHTML = translated;
+                    }
                 }
             }
-        });
+        }
     }
 
     // Update <meta> tags, <title>, and JSON-LD for SEO

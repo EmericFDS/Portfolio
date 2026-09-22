@@ -255,6 +255,23 @@ describe('I18N.applyAll()', () => {
         const el = document.getElementById('untranslated-node');
         expect(el.innerHTML).toBe('Original Untranslated Text');
     });
+
+    test('should avoid redundant innerHTML and setAttribute assignments when values match', () => {
+        const textNode = document.getElementById('text-node');
+        const attrNode = document.getElementById('attr-node');
+
+        const innerHTMLSpy = jest.spyOn(textNode, 'innerHTML', 'set');
+        const setAttributeSpy = jest.spyOn(attrNode, 'setAttribute');
+
+        // Call applyAll when values are already set
+        I18N.applyAll();
+
+        expect(innerHTMLSpy).not.toHaveBeenCalled();
+        expect(setAttributeSpy).not.toHaveBeenCalled();
+
+        innerHTMLSpy.mockRestore();
+        setAttributeSpy.mockRestore();
+    });
 });
 
 describe('I18N.updateMeta()', () => {
