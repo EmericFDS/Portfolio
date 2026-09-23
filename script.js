@@ -1529,16 +1529,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4. Tech Tags
         if (projectTechEl) {
             projectTechEl.textContent = '';
-            (project.tech || []).forEach(t => {
-                const iconClass = TECH_ICON_MAP[t] || 'fas fa-code';
-                const pill = document.createElement('span');
-                pill.className = 'tech-tag-pill';
-                const icon = document.createElement('i');
-                icon.className = iconClass;
-                pill.appendChild(icon);
-                pill.appendChild(document.createTextNode(' ' + t));
-                projectTechEl.appendChild(pill);
-            });
+            const techList = project.tech || [];
+            if (techList.length > 0) {
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < techList.length; i++) {
+                    const t = techList[i];
+                    const iconClass = TECH_ICON_MAP[t] || 'fas fa-code';
+                    const pill = document.createElement('span');
+                    pill.className = 'tech-tag-pill';
+                    const icon = document.createElement('i');
+                    icon.className = iconClass;
+                    pill.appendChild(icon);
+                    pill.appendChild(document.createTextNode(' ' + t));
+                    fragment.appendChild(pill);
+                }
+                projectTechEl.appendChild(fragment);
+            }
         }
 
         // 5. Counter & Navigation Button States
@@ -1754,6 +1760,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (imagesList && imagesList.length > 1) {
                 container.style.display = 'flex';
                 const labelPrefix = isFullscreen ? 'View fullscreen slide' : 'View slide';
+
+                // Check if the filmstrip already matches the current project image list
+                const datasetKey = `${title}_${imagesList.length}`;
+                const items = container.querySelectorAll('.thumb-item');
+                if (container.dataset.renderedKey === datasetKey && items.length === imagesList.length) {
+                    // Fast-path: Only update the active class on existing DOM elements without rebuilding innerHTML or re-binding listeners
+                    for (let i = 0; i < items.length; i++) {
+                        if (i === activeIdx) {
+                            if (!items[i].classList.contains('active')) items[i].classList.add('active');
+                        } else {
+                            if (items[i].classList.contains('active')) items[i].classList.remove('active');
+                        }
+                    }
+                    return;
+                }
+
+                container.dataset.renderedKey = datasetKey;
                 container.innerHTML = imagesList.map((imgSrc, idx) => `
                     <div class="thumb-item ${idx === activeIdx ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="${labelPrefix} ${idx + 1}" tabindex="0">
                         <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(title)} thumb ${idx + 1}" loading="lazy">
@@ -1776,6 +1799,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
             } else {
+                container.dataset.renderedKey = '';
                 container.style.display = 'none';
                 container.innerHTML = '';
             }

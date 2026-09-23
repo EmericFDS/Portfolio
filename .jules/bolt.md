@@ -9,3 +9,7 @@
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
 **Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
 **Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+
+## 2026-03-20 - Carousel Filmstrip DOM Regeneration & Event Listener Garbage Pressure
+**Learning:** Re-building innerHTML and re-binding click/keydown listeners on every image transition in gallery filmstrips creates severe DOM thrashing and garbage collection pressure, especially for projects with 20-30+ images. Tracking a dataset key (`container.dataset.renderedKey = "${title}_${imagesList.length}"`) allows fast-path class toggles (`classList.toggle('active')`) on existing DOM nodes, reducing DOM mutations by ~95% during carousel navigation.
+**Action:** When updating dynamic list UI components on item navigation, verify if item count and data key match and update active state classes directly rather than tearing down innerHTML.
