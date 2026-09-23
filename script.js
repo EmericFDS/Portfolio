@@ -1398,10 +1398,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (projectDescEl) {
+        let isScrollShadowTicking = false;
         projectDescEl.addEventListener('scroll', () => {
-            updateScrollShadows();
-            if (window.canvasEngine && Math.random() < 0.25) {
-                window.canvasEngine.targetScrollVelocity += (Math.random() - 0.5) * 1.5;
+            if (!isScrollShadowTicking) {
+                isScrollShadowTicking = true;
+                requestAnimationFrame(() => {
+                    updateScrollShadows();
+                    if (window.canvasEngine && Math.random() < 0.25) {
+                        window.canvasEngine.targetScrollVelocity += (Math.random() - 0.5) * 1.5;
+                    }
+                    isScrollShadowTicking = false;
+                });
             }
         }, { passive: true });
     }
