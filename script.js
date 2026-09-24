@@ -1315,7 +1315,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sort projects anti-chronologically (Newest first)
     projects.sort((a, b) => parseInt(b.year) - parseInt(a.year));
 
-    // Compute category counts in a single pass
+    // Pre-build category project map and category counts in a single pass
+    // This turns filter switching into an O(1) constant-time lookup and eliminates GC allocations on tab changes
+    const projectsByCategory = {
+        'all': projects,
+        'ai': [],
+        'web': [],
+        'games': [],
+        'design': [],
+        'other': []
+    };
     const categoryCounts = {
         'all': projects.length,
         'ai': 0,
@@ -1324,11 +1333,15 @@ document.addEventListener('DOMContentLoaded', () => {
         'design': 0,
         'other': 0
     };
+
     for (let i = 0; i < projects.length; i++) {
-        const cat = projects[i].category;
+        const p = projects[i];
+        const cat = p.category;
         if (cat === 'cv' || cat === 'nlp' || cat === 'ml') {
+            projectsByCategory.ai.push(p);
             categoryCounts.ai++;
-        } else if (categoryCounts[cat] !== undefined) {
+        } else if (projectsByCategory[cat]) {
+            projectsByCategory[cat].push(p);
             categoryCounts[cat]++;
         }
     }
@@ -1822,15 +1835,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateGalleryDisplay();
     };
 
-    // Filter Logic
+    // Filter Logic: O(1) constant-time pre-computed list lookup
     function filterProjects(filterId) {
-        if (filterId === 'all') {
-            filteredProjects = [...projects];
-        } else if (filterId === 'ai') {
-            filteredProjects = projects.filter(p => ['cv', 'nlp', 'ml'].includes(p.category));
-        } else {
-            filteredProjects = projects.filter(p => p.category === filterId);
-        }
+        filteredProjects = projectsByCategory[filterId] || [];
 
         currentProjectIndex = 0;
         currentImageIndex = 0;
