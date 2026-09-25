@@ -986,6 +986,12 @@ const TECH_ICON_MAP = {
 };
 
 // ============================================================
+// Pre-calculated array of rgba strings for constellation link stroke styles to eliminate per-frame allocations
+const LINE_ALPHA_STRINGS = Array.from({ length: 32 }, (_, i) => {
+    const alpha = ((i / 31) * 0.28).toFixed(4);
+    return `rgba(0, 240, 255, ${alpha})`;
+});
+
 // ============================================================
 // 1. CANVAS UI & GENERATIVE PARTICLES ENGINE
 // ============================================================
@@ -1200,11 +1206,12 @@ class CanvasParticleEngine {
                 const distSq = dX * dX + dY * dY;
 
                 if (distSq < maxDistSq) {
-                    const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
+                    const normRatio = 1 - Math.sqrt(distSq) * invMaxDistance;
+                    const index = (normRatio * 31) | 0;
                     this.ctx.beginPath();
                     this.ctx.moveTo(p.x, p.y);
                     this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
+                    this.ctx.strokeStyle = LINE_ALPHA_STRINGS[index];
                     this.ctx.stroke();
                 }
             }
