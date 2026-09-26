@@ -1155,11 +1155,27 @@ class CanvasParticleEngine {
         }
 
         // Render Constellation Links First (to prevent line overlapping on dots)
-        // Hoist loop invariants and line width setting outside animation loop
+        // Zero-allocation Spatial Grid partitioning (O(n) speed with zero GC churn)
+        const cellSize = this.maxDistance;
+        const invCellSize = 1 / cellSize;
+        const cols = Math.ceil(this.width * invCellSize) + 1;
+        const rows = Math.ceil(this.height * invCellSize) + 1;
+        const totalCells = cols * rows;
+
+        if (!this.gridHead || this.gridHead.length < totalCells) {
+            this.gridHead = new Int32Array(Math.max(1024, totalCells));
+        }
+        if (!this.gridNext || this.gridNext.length < this.particles.length) {
+            this.gridNext = new Int32Array(Math.max(128, this.particles.length));
+        }
+
+        this.gridHead.fill(-1, 0, totalCells);
+
         const maxDistSq = this.maxDistance * this.maxDistance;
         const invMaxDistance = 1 / this.maxDistance;
         this.ctx.lineWidth = 0.85;
 
+        // 1. Update particle positions and bin them into Spatial Grid cells O(n)
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
@@ -1192,20 +1208,65 @@ class CanvasParticleEngine {
                 }
             }
 
-            // Connect nearby particles using cached inverse distance for fast multiplication
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const p2 = this.particles[j];
-                const dX = p.x - p2.x;
-                const dY = p.y - p2.y;
-                const distSq = dX * dX + dY * dY;
+            // Bin particle into 1D integer cell index (zero allocations)
+            const col = Math.floor(p.x * invCellSize);
+            const row = Math.floor(p.y * invCellSize);
 
-                if (distSq < maxDistSq) {
-                    const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p.x, p.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.stroke();
+            if (col >= 0 && col < cols && row >= 0 && row < rows) {
+                const cellIndex = col + row * cols;
+                this.gridNext[i] = this.gridHead[cellIndex];
+                this.gridHead[cellIndex] = i;
+            } else {
+                this.gridNext[i] = -1;
+            }
+        }
+
+        // Relative neighbor cell 1D offsets: [0,0] (same), [1,0] (right), [-1,1] (down-left), [0,1] (down), [1,1] (down-right)
+        const neighborOffsets = [0, 1, cols - 1, cols, cols + 1];
+
+        // 2. Query spatial grid neighbors without creating any objects/strings O(n)
+        for (let cell = 0; cell < totalCells; cell++) {
+            if (this.gridHead[cell] === -1) continue;
+
+            const cellCol = cell % cols;
+
+            for (let o = 0; o < 5; o++) {
+                const offset = neighborOffsets[o];
+                const neighborCell = cell + offset;
+
+                if (neighborCell < 0 || neighborCell >= totalCells) continue;
+
+                // Boundary guards for column wrap
+                if (o === 1 && cellCol + 1 >= cols) continue;
+                if (o === 2 && cellCol - 1 < 0) continue;
+                if (o === 4 && cellCol + 1 >= cols) continue;
+
+                if (this.gridHead[neighborCell] === -1) continue;
+
+                const isSameCell = (o === 0);
+                let p1Idx = this.gridHead[cell];
+
+                while (p1Idx !== -1) {
+                    const p = this.particles[p1Idx];
+                    let p2Idx = isSameCell ? this.gridNext[p1Idx] : this.gridHead[neighborCell];
+
+                    while (p2Idx !== -1) {
+                        const p2 = this.particles[p2Idx];
+                        const dX = p.x - p2.x;
+                        const dY = p.y - p2.y;
+                        const distSq = dX * dX + dY * dY;
+
+                        if (distSq < maxDistSq) {
+                            const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
+                            this.ctx.beginPath();
+                            this.ctx.moveTo(p.x, p.y);
+                            this.ctx.lineTo(p2.x, p2.y);
+                            this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
+                            this.ctx.stroke();
+                        }
+                        p2Idx = this.gridNext[p2Idx];
+                    }
+                    p1Idx = this.gridNext[p1Idx];
                 }
             }
         }
