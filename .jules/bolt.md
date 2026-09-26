@@ -9,3 +9,7 @@
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
 **Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
 **Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+
+## 2026-09-26 - Zero-Allocation Spatial Grid for Particle Constellation Rendering
+**Learning:** Naive spatial grid partitioning inside 60 FPS animation loops that allocates `Map` instances, array buckets, or string keys (`${col},${row}`) introduces significant Garbage Collection (GC) pressure and micro-stutters. Using pre-allocated typed arrays (`Int32Array` head/next linked lists) eliminates per-frame heap allocations while reducing spatial distance check complexity from $O(n^2)$ to $O(n)$.
+**Action:** Implement flat array head/next indices for spatial partitioning algorithms in hot animation render loops to achieve $O(n)$ performance with zero GC churn.
