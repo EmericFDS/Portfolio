@@ -1263,21 +1263,44 @@ function initSpotlightAndCursor() {
         let ringX = mouseX;
         let ringY = mouseY;
 
+        let isCursorAnimating = false;
+
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             cursorDot.style.left = `${mouseX}px`;
             cursorDot.style.top = `${mouseY}px`;
+
+            // Re-start smooth ring animation loop when mouse moves
+            if (!isCursorAnimating) {
+                isCursorAnimating = true;
+                requestAnimationFrame(renderCursor);
+            }
         }, { passive: true });
 
-        // Smooth Lerp for ring
+        // Smooth Lerp for ring (throttled when converged to eliminate idle 60 FPS DOM writes)
         function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
+            const dx = mouseX - ringX;
+            const dy = mouseY - ringY;
+
+            // Stop animation loop when cursor ring has visually converged (distance < 0.05px)
+            if (Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) {
+                ringX = mouseX;
+                ringY = mouseY;
+                cursorRing.style.left = `${ringX}px`;
+                cursorRing.style.top = `${ringY}px`;
+                isCursorAnimating = false;
+                return;
+            }
+
+            ringX += dx * 0.15;
+            ringY += dy * 0.15;
             cursorRing.style.left = `${ringX}px`;
             cursorRing.style.top = `${ringY}px`;
             requestAnimationFrame(renderCursor);
         }
+
+        isCursorAnimating = true;
         requestAnimationFrame(renderCursor);
 
         // Hover scale over interactive targets
