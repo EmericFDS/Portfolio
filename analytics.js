@@ -141,12 +141,18 @@ const PortfolioAnalytics = (function () {
 
         /**
          * Track scroll depth milestones (25%, 50%, 75%, 90%)
+         * Optimized with automatic scroll listener cleanup upon tracking all milestones.
          */
         trackScrollMilestones() {
             const milestones = [25, 50, 75, 90];
             const reached = new Set();
 
-            window.addEventListener('scroll', () => {
+            const onScroll = () => {
+                if (reached.size === milestones.length) {
+                    window.removeEventListener('scroll', onScroll);
+                    return;
+                }
+
                 const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
                 if (scrollHeight <= 0) return;
 
@@ -160,7 +166,13 @@ const PortfolioAnalytics = (function () {
                         });
                     }
                 });
-            }, { passive: true });
+
+                if (reached.size === milestones.length) {
+                    window.removeEventListener('scroll', onScroll);
+                }
+            };
+
+            window.addEventListener('scroll', onScroll, { passive: true });
         },
 
         /**

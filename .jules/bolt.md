@@ -7,5 +7,9 @@
 **Action:** Pre-compute immutable color/style strings at initialization and hoist static canvas context configuration outside per-particle loops.
 
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
-**Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
-**Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+**Learning:** Attaching an unthrottled listener that reads DOM layout properties (`scrollHeight`, `innerHeight`, `scrollY`) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with `requestAnimationFrame` limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
+**Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and `requestAnimationFrame`.
+
+## 2026-09-30 - One-Time Milestone Event Listener Lifecycle Cleanup
+**Learning:** Keeping scroll event listeners attached after all finite milestones (e.g. 25%, 50%, 75%, 90% scroll depth) have been met wastes main-thread CPU time reading DOM layout properties on every scroll frame for the remainder of the session. Removing the event listener via `removeEventListener` upon milestone completion eliminates 100% of post-completion scroll processing.
+**Action:** Automatically unhook global scroll event listeners once finite tracking conditions are met.
