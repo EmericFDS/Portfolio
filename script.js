@@ -1007,6 +1007,17 @@ class CanvasParticleEngine {
         this.dpr = Math.min(window.devicePixelRatio || 1, 2);
         this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        // Pre-computed quantized alpha buckets for batched constellation link rendering
+        // Eliminates per-frame string allocations and reduces canvas draw calls by ~85-90%
+        this.numAlphaBuckets = 10;
+        this.alphaStyles = [];
+        this.lineBuckets = [];
+        for (let b = 0; b < this.numAlphaBuckets; b++) {
+            const alpha = ((b + 0.5) / this.numAlphaBuckets) * 0.28;
+            this.alphaStyles.push(`rgba(0, 240, 255, ${alpha.toFixed(3)})`);
+            this.lineBuckets.push([]);
+        }
+
         this.init();
     }
 
@@ -1160,6 +1171,11 @@ class CanvasParticleEngine {
         const invMaxDistance = 1 / this.maxDistance;
         this.ctx.lineWidth = 0.85;
 
+        // Reset line buckets for current frame
+        for (let b = 0; b < this.numAlphaBuckets; b++) {
+            this.lineBuckets[b].length = 0;
+        }
+
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
@@ -1192,7 +1208,7 @@ class CanvasParticleEngine {
                 }
             }
 
-            // Connect nearby particles using cached inverse distance for fast multiplication
+            // Group nearby particle links into quantized alpha buckets to batch draw calls and avoid string allocations
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1200,13 +1216,28 @@ class CanvasParticleEngine {
                 const distSq = dX * dX + dY * dY;
 
                 if (distSq < maxDistSq) {
-                    const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p.x, p.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.stroke();
+                    const bucketIdx = Math.min(
+                        this.numAlphaBuckets - 1,
+                        Math.floor((1 - Math.sqrt(distSq) * invMaxDistance) * this.numAlphaBuckets)
+                    );
+                    if (bucketIdx >= 0) {
+                        this.lineBuckets[bucketIdx].push(p.x, p.y, p2.x, p2.y);
+                    }
                 }
+            }
+        }
+
+        // Draw batched constellation line paths (at most 10 stroke calls per frame instead of ~100-200)
+        for (let b = 0; b < this.numAlphaBuckets; b++) {
+            const lines = this.lineBuckets[b];
+            if (lines.length > 0) {
+                this.ctx.strokeStyle = this.alphaStyles[b];
+                this.ctx.beginPath();
+                for (let k = 0; k < lines.length; k += 4) {
+                    this.ctx.moveTo(lines[k], lines[k + 1]);
+                    this.ctx.lineTo(lines[k + 2], lines[k + 3]);
+                }
+                this.ctx.stroke();
             }
         }
 
