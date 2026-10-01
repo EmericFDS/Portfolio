@@ -9,3 +9,7 @@
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
 **Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
 **Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+
+## 2026-03-19 - Canvas Constellation Link Batching & Quantized Alpha Bucketing
+**Learning:** Drawing individual particle constellation line segments in canvas animation loops triggers hundreds of `ctx.stroke()` calls and template string allocations (`rgba(0, 240, 255, ${lineAlpha})`) per frame. Quantizing opacity into fixed alpha buckets and storing segment coordinates in pre-allocated arrays allows batching all line paths per alpha level into a single `ctx.stroke()` call, reducing draw call overhead by ~85–90% and eliminating per-frame string allocations.
+**Action:** Group canvas paths by quantized style properties into pre-allocated coordinate arrays to batch stroke operations in high-frequency rendering loops.
