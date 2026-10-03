@@ -1254,6 +1254,7 @@ function initSpotlightAndCursor() {
     }, { passive: true });
 
     // Custom Magnetic Cursor (Desktop only)
+    // Optimized with GPU translate3d transforms and idle pause to eliminate unnecessary rAF calls and layout recalcs
     const cursorDot = document.getElementById('custom-cursor-dot');
     const cursorRing = document.getElementById('custom-cursor-ring');
 
@@ -1262,23 +1263,45 @@ function initSpotlightAndCursor() {
         let mouseY = window.innerHeight / 2;
         let ringX = mouseX;
         let ringY = mouseY;
+        let isCursorAnimating = false;
+
+        function startCursorAnimation() {
+            if (!isCursorAnimating) {
+                isCursorAnimating = true;
+                requestAnimationFrame(renderCursor);
+            }
+        }
 
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
+            // Use translate3d for hardware-accelerated GPU positioning
+            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            startCursorAnimation();
         }, { passive: true });
 
-        // Smooth Lerp for ring
+        // Smooth Lerp for ring using translate3d and idle pause when converged
         function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            cursorRing.style.left = `${ringX}px`;
-            cursorRing.style.top = `${ringY}px`;
+            const dx = mouseX - ringX;
+            const dy = mouseY - ringY;
+
+            ringX += dx * 0.15;
+            ringY += dy * 0.15;
+
+            cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+
+            // Pause animation loop if cursor ring has converged (distance < 0.05px)
+            if (Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) {
+                ringX = mouseX;
+                ringY = mouseY;
+                cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+                isCursorAnimating = false;
+                return;
+            }
+
             requestAnimationFrame(renderCursor);
         }
-        requestAnimationFrame(renderCursor);
+        startCursorAnimation();
 
         // Hover scale over interactive targets
         const interactives = 'a, button, .filter-btn, .thumb-item, .bento-card, .project-nav-btn, .social-icon-btn';
