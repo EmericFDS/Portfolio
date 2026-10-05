@@ -1007,6 +1007,14 @@ class CanvasParticleEngine {
         this.dpr = Math.min(window.devicePixelRatio || 1, 2);
         this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        // Pre-calculate discrete line alpha styles and preallocate bucket arrays to eliminate string allocations
+        // and batch path drawing operations in the 60 FPS particle rendering loop
+        this.lineAlphaStyles = Array.from({ length: 10 }, (_, k) => {
+            const alpha = ((k + 1) / 10) * 0.28;
+            return `rgba(0, 240, 255, ${alpha.toFixed(3)})`;
+        });
+        this.lineBuckets = Array.from({ length: 10 }, () => []);
+
         this.init();
     }
 
@@ -1160,6 +1168,11 @@ class CanvasParticleEngine {
         const invMaxDistance = 1 / this.maxDistance;
         this.ctx.lineWidth = 0.85;
 
+        // Reset pre-allocated line bucket lengths to avoid allocations per frame
+        for (let k = 0; k < 10; k++) {
+            this.lineBuckets[k].length = 0;
+        }
+
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
@@ -1192,7 +1205,7 @@ class CanvasParticleEngine {
                 }
             }
 
-            // Connect nearby particles using cached inverse distance for fast multiplication
+            // Collect nearby particle connection line coordinates into quantized alpha buckets
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1200,14 +1213,24 @@ class CanvasParticleEngine {
                 const distSq = dX * dX + dY * dY;
 
                 if (distSq < maxDistSq) {
-                    const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p.x, p.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.stroke();
+                    const norm = 1 - Math.sqrt(distSq) * invMaxDistance;
+                    const bucketIdx = Math.min(9, Math.floor(norm * 10));
+                    this.lineBuckets[bucketIdx].push(p.x, p.y, p2.x, p2.y);
                 }
             }
+        }
+
+        // Batch draw constellation lines by quantized alpha bucket to reduce draw calls and state changes
+        for (let b = 0; b < 10; b++) {
+            const coords = this.lineBuckets[b];
+            if (coords.length === 0) continue;
+            this.ctx.strokeStyle = this.lineAlphaStyles[b];
+            this.ctx.beginPath();
+            for (let k = 0; k < coords.length; k += 4) {
+                this.ctx.moveTo(coords[k], coords[k + 1]);
+                this.ctx.lineTo(coords[k + 2], coords[k + 3]);
+            }
+            this.ctx.stroke();
         }
 
         // Render Particle Dots with Soft Glow (shadowBlur set once outside loop)
