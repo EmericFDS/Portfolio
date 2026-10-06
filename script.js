@@ -1262,23 +1262,46 @@ function initSpotlightAndCursor() {
         let mouseY = window.innerHeight / 2;
         let ringX = mouseX;
         let ringY = mouseY;
+        let isAnimating = false;
+
+        // Position initial cursor elements using GPU composite transform
+        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+
+        function startCursorAnimation() {
+            if (!isAnimating) {
+                isAnimating = true;
+                requestAnimationFrame(renderCursor);
+            }
+        }
 
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
+            // Use translate3d for GPU hardware acceleration without triggering layout/reflow
+            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            startCursorAnimation();
         }, { passive: true });
 
-        // Smooth Lerp for ring
+        // Smooth Lerp for ring; automatically pauses when cursor is idle to save CPU/GPU resources
         function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            cursorRing.style.left = `${ringX}px`;
-            cursorRing.style.top = `${ringY}px`;
+            const dx = mouseX - ringX;
+            const dy = mouseY - ringY;
+
+            // Stop loop when ring has converged on target position
+            if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+                ringX = mouseX;
+                ringY = mouseY;
+                cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+                isAnimating = false;
+                return;
+            }
+
+            ringX += dx * 0.15;
+            ringY += dy * 0.15;
+            cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(renderCursor);
         }
-        requestAnimationFrame(renderCursor);
 
         // Hover scale over interactive targets
         const interactives = 'a, button, .filter-btn, .thumb-item, .bento-card, .project-nav-btn, .social-icon-btn';
