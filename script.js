@@ -1529,6 +1529,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4. Tech Tags
         if (projectTechEl) {
             projectTechEl.textContent = '';
+            const fragment = document.createDocumentFragment();
             (project.tech || []).forEach(t => {
                 const iconClass = TECH_ICON_MAP[t] || 'fas fa-code';
                 const pill = document.createElement('span');
@@ -1537,8 +1538,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.className = iconClass;
                 pill.appendChild(icon);
                 pill.appendChild(document.createTextNode(' ' + t));
-                projectTechEl.appendChild(pill);
+                fragment.appendChild(pill);
             });
+            projectTechEl.appendChild(fragment);
         }
 
         // 5. Counter & Navigation Button States
