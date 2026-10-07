@@ -9,3 +9,7 @@
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
 **Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
 **Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+
+## 2026-09-23 - DOM Node Batching via DocumentFragment
+**Learning:** Appending DOM nodes individually in a loop (`parent.appendChild(node)`) triggers multiple layout recalculations and DOM mutations on live elements. Batching child elements using `document.createDocumentFragment()` aggregates node creation off-screen in memory and inserts them into the DOM tree in a single operation, avoiding multiple browser reflows.
+**Action:** When creating and appending multiple DOM child nodes in a loop, populate a `DocumentFragment` first and perform a single `appendChild` call on the target element.
