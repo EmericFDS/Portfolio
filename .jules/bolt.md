@@ -9,3 +9,7 @@
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
 **Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
 **Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+
+## 2026-03-20 - Custom Cursor lerp Animation Loop Idle Pausing
+**Learning:** Continuous lerp loops running via `requestAnimationFrame` on every single frame (~60–120 FPS) mutate inline DOM style properties (`style.left`, `style.top`) indefinitely, even when the cursor is completely static. Checking convergence delta (`Math.abs(dx) <= 0.05 && Math.abs(dy) <= 0.05`) and pausing the animation loop until the next `mousemove` event eliminates continuous CPU/GPU work and layout style writes when idle.
+**Action:** Pause lerp animation frame requests once target threshold is reached and re-trigger on user input events.
