@@ -1262,22 +1262,36 @@ function initSpotlightAndCursor() {
         let mouseY = window.innerHeight / 2;
         let ringX = mouseX;
         let ringY = mouseY;
+        let isCursorActive = false;
 
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             cursorDot.style.left = `${mouseX}px`;
             cursorDot.style.top = `${mouseY}px`;
+            // Re-activate cursor ring animation loop on mouse movement if idle
+            if (!isCursorActive) {
+                isCursorActive = true;
+                requestAnimationFrame(renderCursor);
+            }
         }, { passive: true });
 
-        // Smooth Lerp for ring
+        // Smooth Lerp for ring: pause animation loop when cursor is stationary to save CPU/GPU cycles
         function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
+            const dx = mouseX - ringX;
+            const dy = mouseY - ringY;
+            ringX += dx * 0.15;
+            ringY += dy * 0.15;
             cursorRing.style.left = `${ringX}px`;
             cursorRing.style.top = `${ringY}px`;
-            requestAnimationFrame(renderCursor);
+
+            if (Math.abs(dx) > 0.05 || Math.abs(dy) > 0.05) {
+                requestAnimationFrame(renderCursor);
+            } else {
+                isCursorActive = false;
+            }
         }
+        isCursorActive = true;
         requestAnimationFrame(renderCursor);
 
         // Hover scale over interactive targets
