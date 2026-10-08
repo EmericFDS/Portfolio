@@ -333,6 +333,7 @@ describe('PortfolioAnalytics', () => {
             // Scroll to 50% (250px / 500px available scroll)
             Object.defineProperty(window, 'scrollY', { value: 250, configurable: true });
             window.dispatchEvent(new Event('scroll'));
+            jest.advanceTimersByTime(16);
 
             expect(mockGtag).toHaveBeenCalledWith(
                 'event',
@@ -349,11 +350,13 @@ describe('PortfolioAnalytics', () => {
 
             // Scrolling to same depth should not trigger duplicate events
             window.dispatchEvent(new Event('scroll'));
+            jest.advanceTimersByTime(16);
             expect(mockGtag).not.toHaveBeenCalled();
 
             // Scroll to 100% (500px / 500px)
             Object.defineProperty(window, 'scrollY', { value: 500, configurable: true });
             window.dispatchEvent(new Event('scroll'));
+            jest.advanceTimersByTime(16);
 
             expect(mockGtag).toHaveBeenCalledWith(
                 'event',
@@ -373,8 +376,23 @@ describe('PortfolioAnalytics', () => {
             Object.defineProperty(window, 'scrollY', { value: 100, configurable: true });
 
             window.dispatchEvent(new Event('scroll'));
+            jest.advanceTimersByTime(16);
 
             expect(mockGtag).not.toHaveBeenCalled();
+        });
+
+        test('should remove scroll listener after all milestones are reached', () => {
+            const removeSpy = jest.spyOn(window, 'removeEventListener');
+
+            Object.defineProperty(document.documentElement, 'scrollHeight', { value: 1000, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: 500, configurable: true });
+            Object.defineProperty(window, 'scrollY', { value: 500, configurable: true });
+
+            window.dispatchEvent(new Event('scroll'));
+            jest.advanceTimersByTime(16);
+
+            expect(removeSpy).toHaveBeenCalledWith('scroll', expect.any(Function));
+            removeSpy.mockRestore();
         });
     });
 
