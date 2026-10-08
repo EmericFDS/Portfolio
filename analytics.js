@@ -141,26 +141,57 @@ const PortfolioAnalytics = (function () {
 
         /**
          * Track scroll depth milestones (25%, 50%, 75%, 90%)
+         * Optimized with rAF throttling & event listener auto-cleanup to prevent layout thrashing
          */
         trackScrollMilestones() {
             const milestones = [25, 50, 75, 90];
             const reached = new Set();
+            let ticking = false;
 
-            window.addEventListener('scroll', () => {
+            const checkScroll = () => {
+                ticking = false;
+                if (reached.size === milestones.length) {
+                    window.removeEventListener('scroll', onScroll);
+                    return;
+                }
+
                 const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
                 if (scrollHeight <= 0) return;
 
                 const currentPercent = Math.round((window.scrollY / scrollHeight) * 100);
 
-                milestones.forEach(m => {
+                for (let i = 0; i < milestones.length; i++) {
+                    const m = milestones[i];
                     if (currentPercent >= m && !reached.has(m)) {
                         reached.add(m);
                         sendEvent('scroll_depth', {
                             percent_scrolled: m
                         });
                     }
-                });
-            }, { passive: true });
+                }
+
+                if (reached.size === milestones.length) {
+                    window.removeEventListener('scroll', onScroll);
+                }
+            };
+
+            const onScroll = () => {
+                if (reached.size === milestones.length) {
+                    window.removeEventListener('scroll', onScroll);
+                    return;
+                }
+
+                if (!ticking) {
+                    ticking = true;
+                    if (typeof requestAnimationFrame === 'function') {
+                        requestAnimationFrame(checkScroll);
+                    } else {
+                        checkScroll();
+                    }
+                }
+            };
+
+            window.addEventListener('scroll', onScroll, { passive: true });
         },
 
         /**
