@@ -1155,6 +1155,14 @@ class CanvasParticleEngine {
         }
 
         // Render Constellation Links First (to prevent line overlapping on dots)
+        // Pre-computed lookup table for line opacity strings to prevent string creation per link per frame (~1500 allocations/sec at 60 FPS)
+        if (!this.linkAlphaStrings) {
+            this.linkAlphaStrings = new Array(29);
+            for (let a = 0; a <= 28; a++) {
+                this.linkAlphaStrings[a] = `rgba(0, 240, 255, ${(a / 100).toFixed(2)})`;
+            }
+        }
+
         // Hoist loop invariants and line width setting outside animation loop
         const maxDistSq = this.maxDistance * this.maxDistance;
         const invMaxDistance = 1 / this.maxDistance;
@@ -1201,10 +1209,11 @@ class CanvasParticleEngine {
 
                 if (distSq < maxDistSq) {
                     const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
+                    const alphaIdx = Math.min(28, Math.max(0, (lineAlpha * 100) | 0));
                     this.ctx.beginPath();
                     this.ctx.moveTo(p.x, p.y);
                     this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
+                    this.ctx.strokeStyle = this.linkAlphaStrings[alphaIdx];
                     this.ctx.stroke();
                 }
             }
