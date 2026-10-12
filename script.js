@@ -1007,6 +1007,13 @@ class CanvasParticleEngine {
         this.dpr = Math.min(window.devicePixelRatio || 1, 2);
         this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        // Pre-computed line stroke style strings to eliminate string allocations in 60fps render loop
+        this.lineStyles = [];
+        for (let k = 0; k <= 31; k++) {
+            const alpha = (k / 31) * 0.28;
+            this.lineStyles.push(`rgba(0, 240, 255, ${alpha.toFixed(3)})`);
+        }
+
         this.init();
     }
 
@@ -1200,11 +1207,12 @@ class CanvasParticleEngine {
                 const distSq = dX * dX + dY * dY;
 
                 if (distSq < maxDistSq) {
-                    const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
+                    const normAlpha = 1 - Math.sqrt(distSq) * invMaxDistance;
+                    const styleIdx = (normAlpha * 31) | 0;
                     this.ctx.beginPath();
                     this.ctx.moveTo(p.x, p.y);
                     this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
+                    this.ctx.strokeStyle = this.lineStyles[styleIdx];
                     this.ctx.stroke();
                 }
             }
