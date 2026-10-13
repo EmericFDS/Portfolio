@@ -1263,19 +1263,20 @@ function initSpotlightAndCursor() {
         let ringX = mouseX;
         let ringY = mouseY;
 
+        // Performance Optimization: Use GPU-accelerated translate3d transforms instead of left/top style updates.
+        // Changing left/top on every mousemove and animation frame triggers synchronous layout and recalculate style.
+        // translate3d offloads composition entirely to the GPU thread, maintaining a fluid 60 FPS without layout thrashing.
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
+            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         }, { passive: true });
 
         // Smooth Lerp for ring
         function renderCursor() {
             ringX += (mouseX - ringX) * 0.15;
             ringY += (mouseY - ringY) * 0.15;
-            cursorRing.style.left = `${ringX}px`;
-            cursorRing.style.top = `${ringY}px`;
+            cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
             requestAnimationFrame(renderCursor);
         }
         requestAnimationFrame(renderCursor);

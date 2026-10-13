@@ -9,3 +9,7 @@
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
 **Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
 **Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+
+## 2026-03-31 - GPU-Accelerated Custom Cursor Transforms
+**Learning:** Updating `element.style.left` and `element.style.top` in high-frequency `mousemove` events and 60 FPS `requestAnimationFrame` lerp loops causes continuous layout recalculations (reflows) on the CPU main thread. Switching positioning to `element.style.transform = translate3d(x, y, 0) translate(-50%, -50%)` bypasses the DOM layout phase completely, offloading visual composition to GPU compositing layers for steady frame rates.
+**Action:** Always prefer CSS `transform: translate3d()` over layout-triggering properties like `top`/`left` when animating cursor followers or floating UI elements on mousemove or rAF loops.
