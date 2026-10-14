@@ -9,3 +9,7 @@
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
 **Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
 **Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+
+## 2026-10-14 - Batched Canvas Line Drawing via Pre-Allocated Alpha Buckets
+**Learning:** Calling `beginPath()`, `moveTo()`, `lineTo()`, `strokeStyle = ...`, and `stroke()` for individual line segments in 60 FPS Canvas animation loops creates heavy draw call overhead (~50-100 draw calls/frame) and string allocation garbage collection pressure. Quantizing opacities into discrete pre-computed alpha buckets and storing endpoints in flat arrays allows batching line segments into at most N draw calls per frame with zero string allocations.
+**Action:** Group line segments into pre-allocated alpha buckets during proximity loops and execute a single `beginPath() ... stroke()` call per bucket.
