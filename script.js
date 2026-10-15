@@ -1192,7 +1192,8 @@ class CanvasParticleEngine {
                 }
             }
 
-            // Connect nearby particles using cached inverse distance for fast multiplication
+            // Connect nearby particles using batched path drawing to minimize canvas context draw calls
+            let hasLinks = false;
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1200,13 +1201,18 @@ class CanvasParticleEngine {
                 const distSq = dX * dX + dY * dY;
 
                 if (distSq < maxDistSq) {
-                    const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
-                    this.ctx.beginPath();
+                    if (!hasLinks) {
+                        this.ctx.beginPath();
+                        hasLinks = true;
+                    }
                     this.ctx.moveTo(p.x, p.y);
                     this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.stroke();
                 }
+            }
+            if (hasLinks) {
+                // Single batched stroke per particle cluster reduces draw calls and state changes at 60 FPS
+                this.ctx.strokeStyle = 'rgba(0, 240, 255, 0.15)';
+                this.ctx.stroke();
             }
         }
 
