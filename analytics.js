@@ -141,25 +141,33 @@ const PortfolioAnalytics = (function () {
 
         /**
          * Track scroll depth milestones (25%, 50%, 75%, 90%)
+         * Throttled with requestAnimationFrame to prevent DOM layout thrashing on fast scrolls
          */
         trackScrollMilestones() {
             const milestones = [25, 50, 75, 90];
             const reached = new Set();
+            let ticking = false;
 
             window.addEventListener('scroll', () => {
-                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-                if (scrollHeight <= 0) return;
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(() => {
+                        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                        if (scrollHeight > 0) {
+                            const currentPercent = Math.round((window.scrollY / scrollHeight) * 100);
 
-                const currentPercent = Math.round((window.scrollY / scrollHeight) * 100);
-
-                milestones.forEach(m => {
-                    if (currentPercent >= m && !reached.has(m)) {
-                        reached.add(m);
-                        sendEvent('scroll_depth', {
-                            percent_scrolled: m
-                        });
-                    }
-                });
+                            milestones.forEach(m => {
+                                if (currentPercent >= m && !reached.has(m)) {
+                                    reached.add(m);
+                                    sendEvent('scroll_depth', {
+                                        percent_scrolled: m
+                                    });
+                                }
+                            });
+                        }
+                        ticking = false;
+                    });
+                }
             }, { passive: true });
         },
 
