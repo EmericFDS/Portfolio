@@ -1453,28 +1453,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
+    // Cached regex patterns for string escape and markdown formatting to eliminate re-compilation overhead on repeated calls
+    const HTML_ESCAPE_AMP_REGEX = /&/g;
+    const HTML_ESCAPE_LT_REGEX = /</g;
+    const HTML_ESCAPE_GT_REGEX = />/g;
+    const HTML_ESCAPE_QUOT_REGEX = /"/g;
+    const HTML_ESCAPE_APOS_REGEX = /'/g;
+
+    const MD_BOLD_REGEX = /\*\*(.*?)\*\*/g;
+    const MD_LIST_ITEM_REGEX = /- (.*?)(?=\n|$)/g;
+    const MD_PARAGRAPH_BREAK_REGEX = /\n\n/g;
+    const MD_LINE_BREAK_REGEX = /\n/g;
+    const MD_UL_GROUP_REGEX = /(<li>.*?<\/li>)+/g;
+
     // Helper function to escape HTML special characters for XSS prevention
     function escapeHtml(str) {
         if (!str) return '';
         return String(str)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
+            .replace(HTML_ESCAPE_AMP_REGEX, '&amp;')
+            .replace(HTML_ESCAPE_LT_REGEX, '&lt;')
+            .replace(HTML_ESCAPE_GT_REGEX, '&gt;')
+            .replace(HTML_ESCAPE_QUOT_REGEX, '&quot;')
+            .replace(HTML_ESCAPE_APOS_REGEX, '&#39;');
     }
 
     // Markdown Description Formatter
     function formatMarkdown(text) {
         if (!text) return '';
         let formatted = text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
-            .replace(/\n\n/g, '<br><br>')
-            .replace(/\n/g, '<br>');
+            .replace(MD_BOLD_REGEX, '<strong>$1</strong>')
+            .replace(MD_LIST_ITEM_REGEX, '<li>$1</li>')
+            .replace(MD_PARAGRAPH_BREAK_REGEX, '<br><br>')
+            .replace(MD_LINE_BREAK_REGEX, '<br>');
 
         if (formatted.includes('<li>')) {
-            formatted = formatted.replace(/(<li>.*?<\/li>)+/g, '<ul style="padding-left: 20px; list-style-type: disc;">$&</ul>');
+            formatted = formatted.replace(MD_UL_GROUP_REGEX, '<ul style="padding-left: 20px; list-style-type: disc;">$&</ul>');
         }
         return formatted;
     }
