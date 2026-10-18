@@ -1262,20 +1262,30 @@ function initSpotlightAndCursor() {
         let mouseY = window.innerHeight / 2;
         let ringX = mouseX;
         let ringY = mouseY;
+        let dotX = mouseX;
+        let dotY = mouseY;
 
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
         }, { passive: true });
 
-        // Smooth Lerp for ring
+        // Smooth Lerp for ring with transform3d and convergence check to avoid layout thrashing and redundant style writes while idle
         function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            cursorRing.style.left = `${ringX}px`;
-            cursorRing.style.top = `${ringY}px`;
+            if (Math.abs(mouseX - dotX) > 0.1 || Math.abs(mouseY - dotY) > 0.1) {
+                dotX = mouseX;
+                dotY = mouseY;
+                cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+            }
+
+            const nextRingX = ringX + (mouseX - ringX) * 0.15;
+            const nextRingY = ringY + (mouseY - ringY) * 0.15;
+            if (Math.abs(nextRingX - ringX) > 0.05 || Math.abs(nextRingY - ringY) > 0.05) {
+                ringX = nextRingX;
+                ringY = nextRingY;
+                cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+            }
+
             requestAnimationFrame(renderCursor);
         }
         requestAnimationFrame(renderCursor);
