@@ -1464,9 +1464,13 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/'/g, '&#39;');
     }
 
-    // Markdown Description Formatter
+    // Markdown Description Formatter - Memoized to prevent redundant regex string operations on UI project switches
+    const markdownCache = new Map();
     function formatMarkdown(text) {
         if (!text) return '';
+        if (markdownCache.has(text)) {
+            return markdownCache.get(text);
+        }
         let formatted = text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
@@ -1476,6 +1480,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (formatted.includes('<li>')) {
             formatted = formatted.replace(/(<li>.*?<\/li>)+/g, '<ul style="padding-left: 20px; list-style-type: disc;">$&</ul>');
         }
+        markdownCache.set(text, formatted);
         return formatted;
     }
 
