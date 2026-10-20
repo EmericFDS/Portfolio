@@ -1464,13 +1464,17 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/'/g, '&#39;');
     }
 
-    // Markdown Description Formatter
+    // Markdown Description Formatter (Optimized fast-path and string replacements)
     function formatMarkdown(text) {
         if (!text) return '';
+        // Fast path for plain text strings without markdown or newline tokens
+        if (!text.includes('*') && !text.includes('-') && !text.includes('\n')) {
+            return text;
+        }
+
         let formatted = text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
-            .replace(/\n\n/g, '<br><br>')
             .replace(/\n/g, '<br>');
 
         if (formatted.includes('<li>')) {

@@ -233,10 +233,13 @@ describe('Filmstrip XSS Security', () => {
 describe('Markdown Formatter (formatMarkdown)', () => {
     function formatMarkdown(text) {
         if (!text) return '';
+        if (!text.includes('*') && !text.includes('-') && !text.includes('\n')) {
+            return text;
+        }
+
         let formatted = text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
-            .replace(/\n\n/g, '<br><br>')
             .replace(/\n/g, '<br>');
 
         if (formatted.includes('<li>')) {
