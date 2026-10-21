@@ -1007,6 +1007,14 @@ class CanvasParticleEngine {
         this.dpr = Math.min(window.devicePixelRatio || 1, 2);
         this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        // Pre-computed stroke style lookup table for constellation links to eliminate dynamic string allocations in 60 FPS animation loop
+        this.lineStrokeStyles = [];
+        const numLineSteps = 32;
+        for (let s = 0; s < numLineSteps; s++) {
+            const alpha = ((s / (numLineSteps - 1)) * 0.28).toFixed(3);
+            this.lineStrokeStyles.push(`rgba(0, 240, 255, ${alpha})`);
+        }
+
         this.init();
     }
 
@@ -1192,7 +1200,7 @@ class CanvasParticleEngine {
                 }
             }
 
-            // Connect nearby particles using cached inverse distance for fast multiplication
+            // Connect nearby particles using cached inverse distance for fast multiplication and lookup table for stroke style
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1200,11 +1208,12 @@ class CanvasParticleEngine {
                 const distSq = dX * dX + dY * dY;
 
                 if (distSq < maxDistSq) {
-                    const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
+                    const opacityRatio = 1 - Math.sqrt(distSq) * invMaxDistance;
+                    const styleIndex = (opacityRatio * 31) | 0;
                     this.ctx.beginPath();
                     this.ctx.moveTo(p.x, p.y);
                     this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
+                    this.ctx.strokeStyle = this.lineStrokeStyles[styleIndex];
                     this.ctx.stroke();
                 }
             }
