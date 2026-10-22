@@ -1007,6 +1007,17 @@ class CanvasParticleEngine {
         this.dpr = Math.min(window.devicePixelRatio || 1, 2);
         this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        // Pre-allocated opacity bucket styles and reusable coordinate buckets
+        // to eliminate per-line string allocations and batch stroke calls in render loop
+        this.lineStyles = [
+            'rgba(0, 240, 255, 0.05)',
+            'rgba(0, 240, 255, 0.10)',
+            'rgba(0, 240, 255, 0.15)',
+            'rgba(0, 240, 255, 0.20)',
+            'rgba(0, 240, 255, 0.25)'
+        ];
+        this.lineBuckets = [[], [], [], [], []];
+
         this.init();
     }
 
@@ -1154,11 +1165,15 @@ class CanvasParticleEngine {
             this.ctx.stroke();
         }
 
+        // Reset line coordinate buckets for batch rendering
+        for (let b = 0; b < 5; b++) {
+            this.lineBuckets[b].length = 0;
+        }
+
         // Render Constellation Links First (to prevent line overlapping on dots)
-        // Hoist loop invariants and line width setting outside animation loop
+        // Hoist loop invariants outside animation loop
         const maxDistSq = this.maxDistance * this.maxDistance;
         const invMaxDistance = 1 / this.maxDistance;
-        this.ctx.lineWidth = 0.85;
 
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
@@ -1192,7 +1207,7 @@ class CanvasParticleEngine {
                 }
             }
 
-            // Connect nearby particles using cached inverse distance for fast multiplication
+            // Connect nearby particles using opacity bucket batching
             for (let j = i + 1; j < this.particles.length; j++) {
                 const p2 = this.particles[j];
                 const dX = p.x - p2.x;
@@ -1201,13 +1216,25 @@ class CanvasParticleEngine {
 
                 if (distSq < maxDistSq) {
                     const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p.x, p.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.stroke();
+                    const bucketIdx = Math.min(4, Math.max(0, Math.floor((lineAlpha / 0.28) * 5)));
+                    this.lineBuckets[bucketIdx].push(p.x, p.y, p2.x, p2.y);
                 }
             }
+        }
+
+        // Render batched constellation lines per opacity bucket (at most 5 stroke calls per frame)
+        this.ctx.lineWidth = 0.85;
+        for (let b = 0; b < 5; b++) {
+            const coords = this.lineBuckets[b];
+            const len = coords.length;
+            if (len === 0) continue;
+            this.ctx.strokeStyle = this.lineStyles[b];
+            this.ctx.beginPath();
+            for (let k = 0; k < len; k += 4) {
+                this.ctx.moveTo(coords[k], coords[k + 1]);
+                this.ctx.lineTo(coords[k + 2], coords[k + 3]);
+            }
+            this.ctx.stroke();
         }
 
         // Render Particle Dots with Soft Glow (shadowBlur set once outside loop)
