@@ -1749,10 +1749,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnNextImg) btnNextImg.style.display = hasMultipleImages ? 'flex' : 'none';
 
         // Helper function to render filmstrip thumbnail list and attach click/keyboard events
+        // Optimized: Caches DOM thumbnails and toggles active classes during slide navigation
+        // to avoid expensive innerHTML re-parsing and listener re-binding on every slide transition.
         function renderFilmstrip(container, imagesList, activeIdx, title, isFullscreen) {
             if (!container) return;
             if (imagesList && imagesList.length > 1) {
                 container.style.display = 'flex';
+                const key = `${title}_${isFullscreen}_${imagesList.length}_${imagesList[0]}`;
+                const existingThumbs = container.querySelectorAll('.thumb-item');
+
+                // Fast path: If thumbnails are already rendered for this image set, toggle active classes in O(N)
+                if (container.dataset.renderedKey === key && existingThumbs.length === imagesList.length) {
+                    for (let idx = 0; idx < existingThumbs.length; idx++) {
+                        existingThumbs[idx].classList.toggle('active', idx === activeIdx);
+                    }
+                    return;
+                }
+
+                container.dataset.renderedKey = key;
                 const labelPrefix = isFullscreen ? 'View fullscreen slide' : 'View slide';
                 container.innerHTML = imagesList.map((imgSrc, idx) => `
                     <div class="thumb-item ${idx === activeIdx ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="${labelPrefix} ${idx + 1}" tabindex="0">
@@ -1778,6 +1792,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 container.style.display = 'none';
                 container.innerHTML = '';
+                delete container.dataset.renderedKey;
             }
         }
 

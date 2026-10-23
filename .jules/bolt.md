@@ -9,3 +9,7 @@
 ## 2026-09-22 - Scroll Listener Layout Thrashing & rAF Throttling
 **Learning:** Attaching an unthrottled  listener that reads DOM layout properties (, , ) on every scroll event causes layout thrashing during fast scroll sequences. Guarding the handler with  () limits execution to at most once per animation frame (~60 FPS), drastically reducing redundant DOM read/write cycles.
 **Action:** Wrap DOM layout query logic inside scroll handlers with a boolean flag check and .
+
+## 2026-03-24 - Filmstrip Gallery DOM Re-rendering & Class Toggling Optimization
+**Learning:** Destroying and re-parsing HTML string templates with `innerHTML` on every gallery image slide change causes unnecessary DOM destruction, garbage collection, and listener re-binding overhead. Storing a composite key (`dataset.renderedKey`) for the current image set allows toggling the `active` CSS class directly on existing thumbnail elements in $O(N)$ without destroying DOM nodes.
+**Action:** Cache rendered dataset state keys on gallery containers and mutate element classLists in-place when switching slides within the same item set.

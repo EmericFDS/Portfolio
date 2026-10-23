@@ -395,11 +395,22 @@ describe('Filmstrip Rendering Helper Functions', () => {
             .replace(/'/g, '&#39;');
     }
 
-    // Extracted logic simulation to test renderFilmstrip helper directly
+    // Extracted logic simulation matching script.js renderFilmstrip optimization
     function renderFilmstripHelper(containerEl, imagesList, activeIdx, title, isFullscreen, onSelect) {
         if (!containerEl) return;
         if (imagesList && imagesList.length > 1) {
             containerEl.style.display = 'flex';
+            const key = `${title}_${isFullscreen}_${imagesList.length}_${imagesList[0]}`;
+            const existingThumbs = containerEl.querySelectorAll('.thumb-item');
+
+            if (containerEl.dataset.renderedKey === key && existingThumbs.length === imagesList.length) {
+                for (let idx = 0; idx < existingThumbs.length; idx++) {
+                    existingThumbs[idx].classList.toggle('active', idx === activeIdx);
+                }
+                return;
+            }
+
+            containerEl.dataset.renderedKey = key;
             const labelPrefix = isFullscreen ? 'View fullscreen slide' : 'View slide';
             containerEl.innerHTML = imagesList.map((imgSrc, idx) => `
                 <div class="thumb-item ${idx === activeIdx ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="${labelPrefix} ${idx + 1}" tabindex="0">
@@ -425,6 +436,7 @@ describe('Filmstrip Rendering Helper Functions', () => {
         } else {
             containerEl.style.display = 'none';
             containerEl.innerHTML = '';
+            delete containerEl.dataset.renderedKey;
         }
     }
 
@@ -483,5 +495,27 @@ describe('Filmstrip Rendering Helper Functions', () => {
         renderFilmstripHelper(container, [], 0, 'My Project', false, onSelect);
         expect(container.style.display).toBe('none');
         expect(container.innerHTML).toBe('');
+    });
+
+    test('should reuse existing DOM nodes when switching active index without re-parsing innerHTML', () => {
+        const images = ['img1.jpg', 'img2.jpg', 'img3.jpg'];
+        const onSelect = jest.fn();
+
+        renderFilmstripHelper(container, images, 0, 'My Project', false, onSelect);
+        const initialNodes = Array.from(container.querySelectorAll('.thumb-item'));
+        expect(initialNodes[0].classList.contains('active')).toBe(true);
+
+        // Transition to slide 1 (same project and image list)
+        renderFilmstripHelper(container, images, 1, 'My Project', false, onSelect);
+        const updatedNodes = Array.from(container.querySelectorAll('.thumb-item'));
+
+        // Verify DOM elements were preserved (same references)
+        expect(updatedNodes[0]).toBe(initialNodes[0]);
+        expect(updatedNodes[1]).toBe(initialNodes[1]);
+        expect(updatedNodes[2]).toBe(initialNodes[2]);
+
+        // Verify class toggled correctly
+        expect(updatedNodes[0].classList.contains('active')).toBe(false);
+        expect(updatedNodes[1].classList.contains('active')).toBe(true);
     });
 });
