@@ -365,6 +365,24 @@ describe('PortfolioAnalytics', () => {
                 'scroll_depth',
                 expect.objectContaining({ percent_scrolled: 90 })
             );
+
+            mockGtag.mockClear();
+
+            // Additional scroll events after all milestones are tracked should be ignored and perform no work
+            window.dispatchEvent(new Event('scroll'));
+            expect(mockGtag).not.toHaveBeenCalled();
+        });
+
+        test('should remove scroll listener once all milestones are reached', () => {
+            const spyRemoveListener = jest.spyOn(window, 'removeEventListener');
+            Object.defineProperty(document.documentElement, 'scrollHeight', { value: 1000, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: 500, configurable: true });
+            Object.defineProperty(window, 'scrollY', { value: 500, configurable: true });
+
+            window.dispatchEvent(new Event('scroll'));
+
+            expect(spyRemoveListener).toHaveBeenCalledWith('scroll', expect.any(Function));
+            spyRemoveListener.mockRestore();
         });
 
         test('should not track scroll depth if scrollHeight is less than or equal to innerHeight', () => {
