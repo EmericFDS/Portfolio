@@ -36,12 +36,12 @@ jobs:
           ./scripts/build-infomaniak.sh
 
       - name: Deploy dist-infomaniak/ to Infomaniak via SSH/Rsync
-        if: ${{ secrets.INFOMANIAK_SSH_HOST != '' && secrets.INFOMANIAK_SSH_USER != '' && secrets.INFOMANIAK_SSH_KEY != '' }}
         env:
           SSH_HOST: ${{ secrets.INFOMANIAK_SSH_HOST }}
           SSH_USER: ${{ secrets.INFOMANIAK_SSH_USER }}
           SSH_KEY: ${{ secrets.INFOMANIAK_SSH_KEY }}
           REMOTE_PATH: ${{ secrets.INFOMANIAK_REMOTE_PATH || '~/sites/emericfds.com' }}
+        if: ${{ env.SSH_HOST != '' && env.SSH_USER != '' && env.SSH_KEY != '' }}
         run: |
           install -m 700 -d ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/infomaniak_ed25519
