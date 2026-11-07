@@ -1,0 +1,254 @@
+# Emeric Ferreira Dos Santos (Emeric FDS) — Complete AI Knowledge Base (llms-full.txt)
+
+> Exhaustive bilingual (EN/FR) reference covering Emeric Ferreira Dos Santos's engineering & UX/UI profile, technical stack, verified career timeline, academic credentials, recruiter FAQ, and complete 33-project catalog (2015–2026) across Artificial Intelligence, NLP, Machine Learning, Native Rust/Tauri Desktop Software, UX/UI & Information Architecture, Zero-Knowledge Web Security, and Commercial Game Design.
+
+## 1. Executive Profile
+- **Full Name**: Emeric Ferreira Dos Santos (Emeric FDS / Emeric Dos Santos)
+- **Primary Title (EN)**: AI Engineer, Full-Stack Product Builder & UX/UI Designer
+- **Primary Title (FR)**: Ingénieur IA, Développeur Full-Stack & UX/UI Designer
+- **Location**: Geneva (1227 Les Acacias), Switzerland (CH-GE)
+- **Swiss Residence & Work Permit**: Permanent Swiss Residence **Permit C (Permis C)**
+- **Driving Licenses**: Categories **A, B**
+- **Languages (Quadrilingual)**: French (Native / Langue maternelle), Portuguese (Fluent / C2), English (Good Professional / B2), Spanish (Good Professional / B2)
+- **Availability**: Open to AI Engineer, Full-Stack Developer, Product Builder, or UX/UI Designer opportunities and consulting in Geneva, Lausanne, Romandie, Switzerland, and Remote Europe
+- **Canonical URL (EN)**: https://emericfds.com/
+- **Canonical URL (FR)**: https://emericfds.com/fr/
+- **Live SaaS Product**: https://obvioustool.com/ (Obvious Tool)
+- **Contact Email**: contact@emericfds.com
+- **LinkedIn**: https://www.linkedin.com/in/emericfds/
+- **GitHub**: https://github.com/EmericFDS
+
+## 2. Technical & UX Stack
+- **Artificial Intelligence & Application Logic**: Autonomous AI Agents, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Prompt Engineering, Natural Language Processing (NLP), OCR & Unstructured Document Parsing, Sentiment & Market Regime Analysis, Computer Vision (YOLOv8, OpenCV), Python, C#, PyTorch, Scikit-learn.
+- **Full-Stack Web & Native Desktop**: TypeScript, JavaScript (ES6+), React, Next.js, Vite, Node.js, Rust, Tauri (cross-platform native desktop apps), HTML5, CSS3, Client-Side Cryptography (AES-256 WebCrypto API), REST APIs, Docker, Git.
+- **UX/UI Design, Ergonomics & Information Architecture**: UX/UI & Interaction Design, Information Architecture, User Navigation Schemas, Storyboards, Interactive Interface Prototyping, User Testing & Ergonomic Simplification, Graphic & Editorial Layout, Figma, Adobe Creative Suite.
+- **Interactive Systems, 3D & Engines**: Unity 3D/2D, Unreal Engine, 3D Modeling, Animations & Textures, Gaea Procedural Terrain, Blender, 3ds Max, Arduino & Bitalino Biofeedback Sensors, Processing.
+
+## 3. Verified Professional Experience
+- **02.2022 — Present | Digital Advisor, Trainer & Internal App UX/UI Designer — Declix (OCE Labor Market Program, Geneva, Switzerland)**: UX/UI design and prototyping of interfaces for internal applications; graphic design and layout of instructional materials; digital tools training and pedagogical coaching; user reception and flow management; IT & administrative support, hardware fleet responsibility, and team management.
+- **2022 — Present | AI Engineer & Full-Stack Software Creator (Geneva, Switzerland — https://obvioustool.com)**: End-to-end architecture and production shipping of AI, Web, and native Rust/Tauri applications: *Obvious Tool* (https://obvioustool.com — 50+ tools & embedded AI), *PhotoLift* (88% JPEG size optimization), *CVite* (NLP resume extraction), *Smart Bucket* (quantitative ML), and *GhostLink* (client-side AES-256).
+- **08.2018 — 08.2021 | Level Designer & Interactive UX Designer — Freelance (Toulouse, France & International Studios)**: Information architecture and interaction design (structure, user journeys, navigation schemas, storyboards); user testing and direct iterations on interface ergonomics; 3D modeling, animations, textures, and scripts (Unity, Unreal), highlighted by the worldwide commercial release of *Pure Mahjong* on Nintendo Switch (1,000+ handcrafted levels).
+- **02.2017 — 07.2017 | Digital Project Assistant (Internship) — FabLab Caldas da Rainha (Portugal)**: Official web platform development, 3D modeling & resin printing, real-time biofeedback media (*EMOT.IO*), and maker project support (preceded by Client Relations internship at Atelier Ricardo Santos, Leiria, 05–06.2015).
+
+## 4. Academic Credentials & Certifications
+- **2023 | PERCO Certification — Basic Occupational Health & Safety**: Ecoservices (Geneva, Switzerland)
+- **2017 — 2018 | University Degree (DU) in Level Design — Gamagora**: Université Lumière Lyon 2 (Lyon, France) — 17-person studio delivery of *Koda: Kiyomori's Guardian*
+- **2015 — 2017 | Higher Technical Degree (BTS / TeSP) in Digital Media Design**: ESAD — Escola Superior de Arte e Design (Caldas da Rainha, Portugal)
+- **2012 — 2015 | Vocational Diploma (BEP) in Marketing**: Colégio Dr. Luís Pereira da Costa (Monte Redondo, Portugal)
+
+## 5. Structured Q&A (EN / FR)
+- **Q: What AI, software, and UX projects does Emeric Ferreira Dos Santos build?**
+  A: He designs and ships end-to-end AI Agents, LLM/RAG pipelines, NLP document extraction platforms (CVite), the live developer and AI workspace Obvious Tool (https://obvioustool.com), native Rust/Tauri desktop applications (PhotoLift — 88% JPEG size optimization, 6-minute studio workflow), autonomous ML analytics systems (Smart Bucket), zero-knowledge AES-256 web apps (GhostLink), and internal application UX/UI prototypes at Declix (Geneva).
+- **Q: Quel est son statut de résidence et sa disponibilité à Genève / Suisse ?**
+  A: Basé à Genève (1227 Les Acacias, Suisse) avec un **Permis d'établissement C (Permis C)** et les permis de conduire **A et B**, quadrilingue Français (natif) / Portugais (C2) / Anglais (B2) / Espagnol (B2), il est disponible pour des opportunités d'Ingénieur IA, Développeur Full-Stack, Product Builder ou UX/UI Designer en Suisse romande et à distance.
+- **Q: How do his UX/UI, Declix, and Level Design experiences complement his AI engineering?**
+  A: Between designing internal app interfaces and training users daily at Declix (Geneva) and shipping commercial titles like Pure Mahjong (1,000+ levels on Nintendo Switch), Emeric grounds every AI/software system in real-world user testing, clear information architecture, and friction-free ergonomics.
+
+---
+
+## 6. Complete Project Inventory (33 Shipped Projects, 2015–2026)
+
+### 1. PhotoLift (2026)
+- **Category**: Native Desktop Software (Rust / Tauri)
+- **Summary (EN)**: High-throughput desktop application for event and studio photo management. Automates session-based import, sorting, color grading, cropping, and batch compression—reducing JPEG file weight by ~88% (~1.16 MB to ~133 KB) with a 6-minute average per-client workflow.
+- **Summary (FR)**: Application de bureau native (Rust + Tauri) pour la gestion et le traitement rapide de photos studio : import automatique, tri par séance, retouche colorimétrique et compression de 88 % (~6 min par client).
+- **Technologies**: Tauri, React, Rust, Image Processing
+
+### 2. Obvious Tool (2025)
+- **Live URL**: https://obvioustool.com/
+- **Category**: Live SaaS / AI & Developer Workspace (NLP / Local-First)
+- **Summary (EN)**: Unified digital Swiss Army knife for developers and creatives (https://obvioustool.com) combining 50+ essential tools (converters, encoders, image/audio processors) with embedded AI modules for paraphrasing, grammar correction, and translation—running locally and ad-free for complete data privacy.
+- **Summary (FR)**: Suite unifiée en ligne (https://obvioustool.com) réunissant plus de 50 outils essentiels pour développeurs et créatifs avec modules d'IA embarquée (paraphrase, correction, traduction), fonctionnant en local et sans publicité.
+- **Technologies**: React, Desktop App, Embedded AI, Local-First Privacy
+
+### 3. CVite (2025)
+- **Category**: Applied NLP & Document AI
+- **Summary (EN)**: AI-powered resume platform featuring automated NLP extraction from existing PDF/image resumes to populate structured profiles instantly, paired with a real-time typographic layout and template editor.
+- **Summary (FR)**: Plateforme intelligente de création de CV propulsée par l'IA : extraction automatique depuis PDF/image et éditeur de mise en page en temps réel.
+- **Technologies**: React, NLP, AI Integration, Vite
+
+### 4. Smart Bucket (2025)
+- **Category**: Machine Learning & Quantitative FinTech
+- **Summary (EN)**: Autonomous crypto portfolio management engine driven by AI: dynamic multi-asset allocation and rebalancing across BTC, ETH, SOL, and TON, 24/7 market regime and sentiment monitoring, and executive performance telemetry.
+- **Summary (FR)**: Système autonome de gestion de portefeuille crypto piloté par l'IA avec allocation dynamique, surveillance de marché et analyse de sentiment 24/7.
+- **Technologies**: Python, Machine Learning, React, Quantitative Analytics
+
+### 5. GhostLink (2024)
+- **Category**: Zero-Knowledge Web Security
+- **Summary (EN)**: Serverless cryptographic web app to share text, credentials, or files via an encrypted URL. Uses 100% client-side AES-256 encryption with zero server database storage—the link hash is the sole data carrier.
+- **Summary (FR)**: Application web de partage de secrets chiffrée AES-256 entièrement côté client, sans aucun stockage serveur.
+- **Technologies**: React, AES-256 Cryptography, Zero-Knowledge Web App
+
+### 6. Turn Base Battle Game (2021)
+- **Category**: Games & 3D Level Design
+- **Summary (EN)**: Mobile tactical RPG featuring 4 handcrafted scenes: demonic dungeon entrance/menu environment plus 3 combat zones (throne room, library, underground tombs) and an experimental exterior arena.
+- **Summary (FR)**: Jeu mobile tactique au tour par tour comprenant 4 environnements (entrée de donjon, salle du trône, bibliothèque, tombes souterraines).
+- **Technologies**: Unity, Level Design, Mobile
+
+### 7. Gravity Defy (2021)
+- **Category**: Games & 3D Level Design
+- **Summary (EN)**: Demanding physics-based mobile motorcycle parkour game featuring 14 progressive obstacle levels across Low Poly city, forest, and mountain biomes.
+- **Summary (FR)**: Jeu mobile de parkour moto comprenant 14 niveaux progressifs en Low Poly (ville, forêt, montagne).
+- **Technologies**: Unity, Level Design, Mobile
+
+### 8. Cubic Level (2021)
+- **Category**: Games & Voxel Design
+- **Summary (EN)**: Top-down mobile adventure map built in a cubic Voxel aesthetic, engineered for fluid player navigation alongside custom game animations.
+- **Summary (FR)**: Niveau mobile en vue de dessus style Voxel conçu pour une circulation fluide avec animations sur-mesure.
+- **Technologies**: Voxel, Level Design, Mobile
+- **Video**: https://www.youtube.com/watch?v=HIJzEN4P0TA
+
+### 9. Pure Mahjong (2020)
+- **Category**: Commercial Console Game (Nintendo Switch)
+- **Summary (EN)**: Photorealistic puzzle game published worldwide on Nintendo Switch, taking players through the 24 Chinese solar calendar events across 1,000+ individually designed levels with daily progression mechanics.
+- **Summary (FR)**: Jeu de Mahjong photo-réaliste commercialisé sur Nintendo Switch comprenant plus de 1 000 niveaux conçus individuellement autour des 24 périodes du calendrier solaire chinois.
+- **Technologies**: Nintendo Switch, Unity, Systemic Level Design
+- **Nintendo eShop**: https://www.nintendo.co.uk/Games/Nintendo-Switch-download-software/Pure-Mahjong-1579159.html
+
+### 10. Parkour Game (2020)
+- **Category**: Games & 3D Level Design
+- **Summary (EN)**: Third-person urban parkour game featuring 5 vertical indoor and rooftop levels focused on wall-climbing and flow navigation.
+- **Summary (FR)**: Jeu de parkour urbain à la 3e personne réunissant 5 niveaux verticaux intérieurs et extérieurs.
+- **Technologies**: Unity, 3D, Level Design
+
+### 11. Cartoon Level (2019)
+- **Category**: Games & Procedural Terrain
+- **Summary (EN)**: Stylized natural environment map (forest, mountain, lake, rivers) created in 1 month of client iteration using Gaea terrain generation and Unity.
+- **Summary (FR)**: Carte prototype cartoon dans un environnement naturel réalisée sous Gaea et Unity.
+- **Technologies**: Gaea, Unity, Terrain Design
+
+### 12. Hunting Game Map (2019)
+- **Category**: Games & Open-World Terrain
+- **Summary (EN)**: Large-scale semi-realistic first-person open-world map spanning forests, lakes, swamps, rivers, mountains, and plains.
+- **Summary (FR)**: Vaste carte ouverte semi-réaliste pour FPS réunissant forêts, marécages, lacs et montagnes.
+- **Technologies**: Level Design, Procedural Terrain, Unity
+
+### 13. 3 Pigs Game (2019)
+- **Category**: Games & Narrative Level Design
+- **Summary (EN)**: Freelance linear 6-zone level adapting the Three Little Pigs story with resource gathering and defense progression.
+- **Summary (FR)**: Niveau narratif en 6 zones basé sur les Trois Petits Cochons avec collecte de ressources.
+- **Technologies**: Unity, Level Design, Freelance
+
+### 14. World Building (2019)
+- **Category**: 3D Environment & Procedural Design
+- **Summary (EN)**: Realistic geological terrain studies generated in Gaea and integrated into real-time Unity scenes.
+- **Summary (FR)**: Génération procédurale de terrains réalistes sous Gaea et intégration temps réel dans Unity.
+- **Technologies**: Gaea, Unity, World Building
+
+### 15. Perfect Angle (2019)
+- **Category**: Web Game (JavaScript)
+- **Summary (EN)**: Browser-based 2D trajectory and reflection puzzle game with progressive difficulty curves.
+- **Summary (FR)**: Jeu de réflexion 2D sur navigateur à difficulté progressive.
+- **Technologies**: JavaScript, HTML5, 2D Puzzle
+
+### 16. Koda: Kiyomori's Guardian (2018)
+- **Category**: 3D Action-Platformer (Gamagora Studio Project)
+- **Summary (EN)**: 3D platform-adventure game inspired by Japanese folklore, developed in 3 months by a 17-student team at Gamagora (Université Lumière Lyon 2) and showcased at the Gamagora Game Show 2018.
+- **Summary (FR)**: Jeu d'aventure/plateforme 3D inspiré du folklore japonais créé en équipe de 17 étudiants à Gamagora (Lyon 2).
+- **Technologies**: Unity, C#, Level Design
+- **Itch.io**: https://gamagora.itch.io/koda
+- **Trailer**: https://www.youtube.com/watch?v=RNpgW7T4oU8
+
+### 17. Antivirus: Data City (2018)
+- **Category**: Systemic 3D Action Game
+- **Summary (EN)**: Modular Tron-style neon voxel city defense game where viral corruption spreads systemically district by district.
+- **Summary (FR)**: Jeu d'action systémique dans une ville numérique modulaire en voxel/néon où l'infection se propage par quartier.
+- **Technologies**: Unity, Voxel, Systemic Level Design
+- **Trailer**: https://www.youtube.com/watch?v=vxTW0W2Zbok
+
+### 18. Underground Water Junction (2018)
+- **Category**: Multiplayer Level Design (Unreal Engine)
+- **Summary (EN)**: Symmetrical 3v3 Capture The Flag multiplayer sewer junction map built with Unreal Engine / UDK for Unreal Tournament.
+- **Summary (FR)**: Carte multijoueur symétrique CTF 3v3 pour Unreal Tournament réalisée sous Unreal Engine.
+- **Technologies**: Unreal Engine, Multiplayer Level Design
+- **Trailer**: https://www.youtube.com/watch?v=C6l0aLzwxuM
+
+### 19. Sleeping Pit (2018)
+- **Category**: Puzzle Game Design
+- **Summary (EN)**: Medieval fantasy puzzle dungeon built around divisible slime mechanics to trigger multi-stage switches.
+- **Summary (FR)**: Jeu de puzzle médiéval-fantastique reposant sur des slimes divisibles activant des mécanismes complexes.
+- **Technologies**: Game Design, Unity, Puzzle
+
+### 20. Deficiency (2018)
+- **Category**: Educational Serious Game (Web)
+- **Summary (EN)**: 2D HTML5/JavaScript serious game modeling immune system responses against viral infection (HIV).
+- **Summary (FR)**: Serious game éducatif 2D en JavaScript/HTML5 modélisant la réponse immunitaire face aux virus.
+- **Technologies**: JavaScript, HTML5, Serious Game
+
+### 21. Unity Prototypes (2018)
+- **Category**: Spatial & Gameplay Prototyping
+- **Summary (EN)**: Collection of Unity C# level blockouts exploring architectural volumes, lighting cues, and navigation mechanics.
+- **Summary (FR)**: Collection de prototypes Unity explorant les volumes, l'éclairage et la navigation.
+- **Technologies**: Unity, C#, Prototyping
+
+### 22. Trackmania Map (2018)
+- **Category**: Racing Level Design
+- **Summary (EN)**: Three Trackmania circuits calibrated for technical precision, high-speed flow, and competitive Time Attack.
+- **Summary (FR)**: Trois circuits Trackmania calibrés pour la précision technique, la vitesse et le Time Attack.
+- **Technologies**: Trackmania, Racing Level Design
+
+### 23. Tom Atom Rescue (2017)
+- **Category**: 2D Platformer / RPG
+- **Summary (EN)**: Futuristic 2D platformer/RPG built in Unity/C# featuring equipment upgrades and flying vehicles.
+- **Summary (FR)**: Platformer/RPG 2D futuriste sous Unity/C# avec améliorations d'équipement et véhicules volants.
+- **Technologies**: Unity, C#, 2D Platformer
+
+### 24. EMOT.IO (2017)
+- **Category**: Hardware Biofeedback & Real-Time Interactive Media
+- **Summary (EN)**: Interactive cinematic installation using Arduino and Bitalino physiological sensors (heart rate, skin temperature) to transform visuals and sound in real time via Processing.
+- **Summary (FR)**: Expérience cinématographique interactive utilisant des capteurs biométriques Bitalino/Arduino pour adapter l'image et le son en temps réel sous Processing.
+- **Technologies**: Arduino, Bitalino, Processing, Biofeedback
+
+### 25. FabLab Caldas da Rainha (2017)
+- **Category**: Web Platform
+- **Summary (EN)**: Official website for FabLab Caldas da Rainha (Portugal), presenting digital fabrication machines, workshops, and maker projects.
+- **Summary (FR)**: Plateforme web officielle du FabLab Caldas da Rainha présentant les machines et projets de la communauté maker.
+- **Technologies**: HTML5, CSS, Bootstrap, Web Design
+
+### 26. Online Store Design (2017)
+- **Category**: E-Commerce UI/Web
+- **Summary (EN)**: Responsive storefront architecture and product catalog templates.
+- **Summary (FR)**: Architecture d'interface et maquettes pour une boutique e-commerce moderne.
+- **Technologies**: HTML5, CSS3, UI Design
+
+### 27. 3D Portfolio (2017)
+- **Category**: 3D Modeling & Rendering
+- **Summary (EN)**: Hard-surface 3D modeling and studio renders (custom arcade cabinet, VR hardware, architectural props) in Blender and 3ds Max.
+- **Summary (FR)**: Modélisation 3D et rendus studio sous Blender et 3ds Max.
+- **Technologies**: Blender, 3ds Max, Texturing
+
+### 28. Simple Movements (2017)
+- **Category**: JavaScript Physics & Behavioral AI
+- **Summary (EN)**: Custom HTML5/JavaScript 2D movement engine and autonomous steering behavior prototype.
+- **Summary (FR)**: Moteur de mouvement fluide 2D et IA comportementale en JavaScript.
+- **Technologies**: JavaScript, HTML5 Canvas
+
+### 29. 2D Car Prototype (2017)
+- **Category**: JavaScript Physics Prototype
+- **Summary (EN)**: Top-down 2D vehicle physics and collision response prototype in JavaScript.
+- **Summary (FR)**: Prototype de physique automobile 2D et gestion des collisions en JavaScript.
+- **Technologies**: JavaScript, HTML5 Canvas
+
+### 30. Tron (Prototype 3) (2017)
+- **Category**: Local Multiplayer Web Game
+- **Summary (EN)**: Two-player local arcade light-cycle game built with JavaScript and HTML5.
+- **Summary (FR)**: Jeu d'arcade multijoueur local inspiré de Tron en JavaScript/HTML5.
+- **Technologies**: JavaScript, HTML5
+
+### 31. Graphic Design Portfolio (2017)
+- **Category**: Visual Identity & Print
+- **Summary (EN)**: Brand identity systems, logotypes, editorial layouts, and vector illustrations.
+- **Summary (FR)**: Identités visuelles, logotypes, mises en page et illustrations vectorielles.
+- **Technologies**: Illustrator, InDesign, Photoshop
+
+### 32. Satoshi Tajiri Info (2017)
+- **Category**: Editorial Typography
+- **Summary (EN)**: Multi-page editorial publication profiling Pokémon creator Satoshi Tajiri.
+- **Summary (FR)**: Dossier éditorial consacré au créateur de Pokémon, Satoshi Tajiri.
+- **Technologies**: InDesign, Editorial Layout
+
+### 33. Claycity (Minecraft) (2015)
+- **Category**: Large-Scale Voxel Urbanism
+- **Summary (EN)**: North American metropolitan city build featuring high-density downtown districts, parks, and multi-modal transit infrastructure.
+- **Summary (FR)**: Métropole nord-américaine à grande échelle avec gratte-ciels, parcs et réseau de transport complet.
+- **Technologies**: Voxel Architecture, Urban Level Design

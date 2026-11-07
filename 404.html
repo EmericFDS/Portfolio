@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Introuvable | Emeric Ferreira Dos Santos</title>
+    <meta name="robots" content="noindex, follow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Google tag (gtag.js) — Regional Consent Mode v2 + 404 Error Telemetry (CSP-strict external init) -->
+    <script src="/gtag-init.js" data-page-type="404"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0"></script>
+
+    <style>
+        .error-shell {
+            min-height: calc(100vh - var(--header-height));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .error-card {
+            max-width: 560px;
+            width: 100%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-card);
+            padding: 3rem 2.5rem;
+            text-align: center;
+        }
+
+        .error-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-primary);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .error-code {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 8vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .error-desc {
+            font-size: 1rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .error-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <a href="/" class="brand-wrapper" aria-label="Emeric Ferreira Dos Santos — Home">
+                <span class="brand-mark" aria-hidden="true">E<span class="brand-mark-dot">.</span></span>
+                <span class="brand-text-col">
+                    <span class="brand-name">Emeric Ferreira Dos Santos</span>
+                    <span class="brand-location">Geneva, Switzerland</span>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="error-shell">
+        <div class="error-card">
+            <span class="error-eyebrow">HTTP 404</span>
+            <h1 class="error-code">Page introuvable</h1>
+            <p class="error-desc">
+                La page demandée n'existe pas ou a été déplacée.<br>
+                <span style="color: var(--text-tertiary); font-size: 0.92rem;">The page you requested could not be found.</span>
+            </p>
+            <div class="error-actions">
+                <a href="/" class="btn-primary">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    <span>Portfolio (EN)</span>
+                </a>
+                <a href="/fr/" class="btn-secondary">
+                    <span>Version Française</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

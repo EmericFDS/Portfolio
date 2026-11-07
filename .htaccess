@@ -1,0 +1,122 @@
+# ==============================================================================
+# INFOMANIAK WEB HOSTING — PRODUCTION SECURITY, SEO/GEO & PERFORMANCE (.htaccess)
+# Canonical Domain: https://emericfds.com/ (Geneva, Switzerland — Swiss Hosting)
+# ==============================================================================
+
+Options -Indexes -MultiViews
+AddDefaultCharset UTF-8
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+ServerSignature Off
+
+# ------------------------------------------------------------------------------
+# 1. HTTPS ENFORCEMENT, CANONICAL HOST & SENSITIVE PATH PROTECTION
+# ------------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Allow Let's Encrypt ACME HTTP-01 renewal challenges on Infomaniak untouched
+    RewriteRule ^\.well-known/acme-challenge/ - [L]
+
+    # Block dangerous HTTP methods
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK) [NC]
+    RewriteRule ^ - [F,L]
+
+    # Block access to hidden dot-files and dot-directories (e.g. .git, .env, .DS_Store) except /.well-known/
+    RewriteRule ^(?!\.well-known/)(?:.*/)?\.[^/]+ - [F,L]
+
+    # Force HTTPS (compatible with Infomaniak SSL load balancer X-Forwarded-Proto)
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:[0-9]+)?$ [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # Canonical non-www redirect (www.emericfds.com -> emericfds.com)
+    RewriteCond %{HTTP_HOST} ^www\.emericfds\.com$ [NC]
+    RewriteRule ^ https://emericfds.com%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# Block direct access to non-public config, backup, test, and build files
+<FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|orig|psd|sh|sql|sw[op]|yml|yaml|md)$|^package(-lock)?\.json$|\.test\.js$|^CNAME$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+
+# ------------------------------------------------------------------------------
+# 2. HTTP SECURITY HEADERS (Mozilla Observatory A+ / Strict CSP without unsafe-inline JS)
+# ------------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    # Strip backend technology fingerprints
+    Header always unset X-Powered-By
+    Header unset X-Powered-By
+
+    # HSTS (2 years, subdomains, preload-ready)
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+    # Anti-MIME sniffing & Clickjacking protection
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+
+    # Privacy-preserving referrer policy (preserves AI engine & search attribution domain)
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Lock down unused browser hardware/tracking APIs while allowing fullscreen gallery
+    Header always set Permissions-Policy "accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), interest-cohort=()"
+
+    # Process isolation while allowing external target=_blank links cleanly
+    Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+
+    # Strict Content-Security-Policy (ZERO 'unsafe-inline' and ZERO 'unsafe-eval' in script-src)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+    # Ensure AI Crawlers (ChatGPT, Claude, Gemini, Perplexity) & Search Bots index freely
+    <FilesMatch "^(index\.html|llms\.txt|llms-full\.txt|sitemap\.xml)$">
+        Header set X-Robots-Tag "index, follow, max-snippet:-1, max-image-preview:large"
+    </FilesMatch>
+    <FilesMatch "^404\.html$">
+        Header set X-Robots-Tag "noindex, follow"
+    </FilesMatch>
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 3. UTF-8 & MIME TYPES FOR AI KNOWLEDGE FILES (llms.txt) & MODERN MEDIA
+# ------------------------------------------------------------------------------
+<IfModule mod_mime.c>
+    AddType text/plain .txt
+    AddCharset UTF-8 .html .css .js .json .xml .txt .svg
+    AddType image/webp .webp
+    AddType image/svg+xml .svg
+    AddType application/xml .xml
+    AddType application/pdf .pdf
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 4. COMPRESSION (GZIP / DEFLATE) & OPTIMAL CACHE-CONTROL
+# ------------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 hour"
+
+    # HTML, Sitemap & AI Knowledge files: fast refresh on update
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType text/plain "access plus 1 hour"
+    ExpiresByType application/xml "access plus 1 hour"
+    ExpiresByType text/xml "access plus 1 hour"
+
+    # Stylesheets & Scripts
+    ExpiresByType text/css "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType text/javascript "access plus 7 days"
+
+    # Static Images, Icons & PDFs
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType application/pdf "access plus 1 month"
+</IfModule>

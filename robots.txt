@@ -1,0 +1,97 @@
+# ==============================================================================
+# robots.txt — Emeric Ferreira Dos Santos (https://emericfds.com)
+# AI Engineer & Full-Stack Product Builder | Geneva, Switzerland
+# Explicitly welcomes Search Engines, AI Search Crawlers & LLM Assistants
+# ==============================================================================
+
+# --- OpenAI / ChatGPT Search & Assistant ---
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# --- Anthropic / Claude Search & Assistant ---
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# --- Google Search & Gemini / Vertex AI ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Google-CloudVertexBot
+Allow: /
+
+# --- Perplexity AI ---
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# --- Microsoft Bing / Copilot ---
+User-agent: Bingbot
+Allow: /
+
+# --- Apple Spotlight & Apple Intelligence ---
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Mistral AI / Le Chat ---
+User-agent: MistralAI-User
+Allow: /
+
+# --- DuckDuckGo / Meta / You.com / Cohere / CommonCrawl ---
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# --- Default Rule for All Crawlers ---
+User-agent: *
+Disallow: /private/
+Disallow: /scratch/
+Disallow: /node_modules/
+Allow: /
+
+# --- Canonical Sitemap & AI Knowledge Base (llms.txt Standard) ---
+Sitemap: https://emericfds.com/sitemap.xml
+# Concise AI Summary: https://emericfds.com/llms.txt
+# Complete 33-Project Knowledge Base: https://emericfds.com/llms-full.txt

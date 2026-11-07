@@ -1,0 +1,1732 @@
+// ============================================================
+// PORTFOLIO JAVASCRIPT — Emeric Ferreira Dos Santos
+// Creative Technologist / Canvas UI Engine / Bento Experience
+// ============================================================
+
+// Data directly inlined to ensure strictly local functionality without server
+const projects = [
+    {
+        id: 111,
+        title: "Obvious Tool",
+        description: `Your Digital Swiss Army Knife. A unified suite of tools for developers and creatives.
+
+**Multi-Tools:** Over 50 essential tools (Converters, Encoders, Image/Audio processing) in one app.
+**Embedded AI:** AI-powered modules for paraphrasing, text correction, and translation.
+**Private & Fast:** Runs locally, ad-free, with a modern and fluid interface.`,
+        descriptionFr: `Votre Couteau Suisse Numérique. Une suite unifiée d'outils pour développeurs et créatifs.
+
+**Multi-Outils :** Plus de 50 outils essentiels (Convertisseurs, Encodeurs, traitement Image/Audio) en une seule app.
+**IA Embarquée :** Modules IA pour la paraphrase, la correction de texte et la traduction.
+**Privé & Rapide :** Fonctionne en local, sans pub, avec une interface moderne et fluide.`,
+        category: "nlp",
+        year: "2025",
+        tech: ["React", "Desktop App", "AI Utils", "Privacy"],
+        icon: "fa-toolbox",
+        links: [
+            { label: "obvioustool.com", url: "https://obvioustool.com" }
+        ],
+        images: [
+            "./img/ia/ObviousTool/ot2.webp",
+            "./img/ia/ObviousTool/ot1.webp",
+            "./img/ia/ObviousTool/ot3.webp",
+            "./img/ia/ObviousTool/ot4.webp",
+            "./img/ia/ObviousTool/ot5.webp",
+            "./img/ia/ObviousTool/ot6.webp",
+            "./img/ia/ObviousTool/ot7.webp",
+            "./img/ia/ObviousTool/ot8.webp",
+            "./img/ia/ObviousTool/ot9.webp",
+            "./img/ia/ObviousTool/ot10.webp",
+            "./img/ia/ObviousTool/ot11.webp"
+        ]
+    },
+    {
+        id: 112,
+        title: "PhotoLift",
+        description: `Desktop application for fast photo management and processing.
+        
+**Optimized Workflow:** Automatic import, sorting by sessions, and quick touch-ups.
+**Powerful Tools:** Integrated image editor with color adjustments, cropping, and filters.
+**Intuitive Interface:** Modern and clean design for a smooth user experience.`,
+        descriptionFr: `Application de bureau pour la gestion et le traitement rapide de photos.
+        
+**Workflow Optimisé :** Import automatique, tri par sessions et retouches rapides.
+**Outils Puissants :** Éditeur d'images intégré avec ajustements de couleurs, recadrage et filtres.
+**Interface Intuitive :** Design moderne et épuré pour une expérience utilisateur fluide.`,
+        category: "other",
+        year: "2026",
+        tech: ["Tauri", "React", "Rust", "Image Processing"],
+        icon: "fa-camera",
+        images: [
+            "./img/other/PhotoLift/pl2.webp",
+            "./img/other/PhotoLift/pl1.webp",
+            "./img/other/PhotoLift/pl3.webp",
+            "./img/other/PhotoLift/pl4.webp",
+            "./img/other/PhotoLift/pl5.webp",
+            "./img/other/PhotoLift/pl6.webp",
+            "./img/other/PhotoLift/pl7.webp",
+            "./img/other/PhotoLift/pl8.webp"
+        ]
+    },
+    {
+        id: 110,
+        title: "CVite",
+        description: `Intelligent resume creation platform powered by AI.
+
+**Smart Extraction:** Automatic analysis of existing resumes (PDF, Image) to populate your profile instantly.
+**Advanced Editor:** Real-time customization of templates, colors, and layouts.
+**UX Focused:** Smooth and intuitive interface designed to simplify job hunting.`,
+        descriptionFr: `Plateforme intelligente de création de CV propulsée par l'IA.
+
+**Extraction Intelligente :** Analyse automatique de CV existants (PDF, Image) pour remplir votre profil instantanément.
+**Éditeur Avancé :** Personnalisation en temps réel des modèles, couleurs et mises en page.
+**UX au Centre :** Interface fluide et intuitive conçue pour simplifier la recherche d'emploi.`,
+        category: "nlp",
+        year: "2025",
+        tech: ["React", "NLP", "AI Integration", "Vite"],
+        icon: "fa-file-alt",
+        images: [
+            "./img/ia/CVite/cv1.webp",
+            "./img/ia/CVite/cv4.webp",
+            "./img/ia/CVite/cv2.webp",
+            "./img/ia/CVite/cv3.webp",
+            "./img/ia/CVite/cv5.webp",
+            "./img/ia/CVite/cv6.webp",
+            "./img/ia/CVite/cv7.webp",
+            "./img/ia/CVite/cv8.webp",
+            "./img/ia/CVite/cv9.webp",
+            "./img/ia/CVite/cv10.webp",
+            "./img/ia/CVite/cv11.webp",
+            "./img/ia/CVite/cv12.webp"
+        ]
+    },
+    {
+        id: 109,
+        title: "Smart Bucket",
+        description: `Autonomous crypto portfolio management system driven by AI.
+
+**Autopilot:** Dynamic asset allocation and automated rebalancing across BTC, ETH, SOL, etc.
+**Strategic Analysis:** 24/7 market monitoring, sentiment analysis, and low-latency execution (0.0s).
+**Modern Interface:** Comprehensive dashboard for tracking performance, liquidity, and transaction history.`,
+        descriptionFr: `Système autonome de gestion de portefeuille crypto piloté par l'IA.
+
+**Pilote Automatique :** Allocation dynamique des actifs et rééquilibrage automatisé sur BTC, ETH, SOL, etc.
+**Analyse Stratégique :** Surveillance du marché 24/7, analyse de sentiment et exécution à faible latence (0.0s).
+**Interface Moderne :** Tableau de bord complet pour suivre les performances, la liquidité et l'historique des transactions.`,
+        category: "ml",
+        year: "2025",
+        tech: ["Python", "Machine Learning", "React", "Trading"],
+        icon: "fa-robot",
+        images: [
+            "./img/ia/SmartBucket/sb2.webp",
+            "./img/ia/SmartBucket/sb1.webp",
+            "./img/ia/SmartBucket/sb3.webp",
+            "./img/ia/SmartBucket/sb4.webp"
+        ]
+    },
+    {
+        id: 108,
+        title: "GhostLink",
+        description: `Share Secrets Securely. Encrypt text, files, or images into a secure link. Nothing is ever stored on a server. The link is the data.
+
+**Total Security:** Full client-side AES-256 encryption. Your data never leaves your device without being encrypted.
+**Privacy:** No permanent storage. The generated link contains all information needed for decryption.
+**Simplicity:** Share passwords, private keys, or sensitive files in one click.`,
+        descriptionFr: `Partagez vos secrets en toute sécurité. Chiffrez du texte, des fichiers ou des images dans un lien sécurisé. Rien n'est jamais stocké sur un serveur. Le lien est la donnée.
+
+**Sécurité Totale :** Chiffrement AES-256 entièrement côté client. Vos données ne quittent jamais votre appareil sans être chiffrées.
+**Confidentialité :** Aucun stockage permanent. Le lien généré contient toutes les informations nécessaires au déchiffrement.
+**Simplicité :** Partagez mots de passe, clés privées ou fichiers sensibles en un clic.`,
+        category: "web",
+        year: "2024",
+        tech: ["React", "Cryptography", "Web App"],
+        icon: "fa-user-secret",
+        images: [
+            "./img/web/GhostLink/ghostlink_4.webp",
+            "./img/web/GhostLink/ghostlink_3.webp",
+            "./img/web/GhostLink/ghostlink_2.webp",
+            "./img/web/GhostLink/ghostlink_1.webp"
+        ]
+    },
+    {
+        id: 24,
+        title: "Turn Base Battle Game",
+        description: "This is a mobile game project for which I created 4 different scenes.\n\nFirst, I was tasked with creating the home environment that appears at the start of the game. This scene later serves as the background for the main menu. It represents the entrance to a demonic dungeon where battles take place.\n\nNext, I focused on creating three levels that are combat zones within this dungeon: a throne room, a library, and finally underground tombs.\n\nI also created a final outdoor level which remains experimental.",
+        descriptionFr: "Projet de jeu mobile pour lequel j'ai créé 4 scènes différentes.\n\nD'abord, j'ai été chargé de créer l'environnement d'accueil qui apparaît au démarrage du jeu. Cette scène sert ensuite de fond pour le menu principal. Elle représente l'entrée d'un donjon démoniaque où se déroulent les combats.\n\nEnsuite, j'ai créé trois niveaux qui sont des zones de combat dans ce donjon : une salle du trône, une bibliothèque et enfin des tombes souterraines.\n\nJ'ai également créé un dernier niveau extérieur qui reste expérimental.",
+        category: "games",
+        year: "2021",
+        tech: ["Level Design", "Mobile", "Unity"],
+        icon: "fa-chess-board",
+        images: [
+            "./img/games/TurnBaseBattle/Menu.webp",
+            "./img/games/TurnBaseBattle/DongeonA.webp",
+            "./img/games/TurnBaseBattle/DongeonB.webp",
+            "./img/games/TurnBaseBattle/DongeonC.webp",
+            "./img/games/TurnBaseBattle/Battle.webp"
+        ]
+    },
+    {
+        id: 8,
+        title: "Gravity Defy",
+        description: `Gravity Defy is a mobile motorcycle parkour game. I participated in the creation of 14 levels for this client.
+
+The gameplay is demanding: you must cross levels full of various obstacles. I worked on the level design to offer an interesting and progressive challenge in polished Low Poly environments (city, forest, mountain).`,
+        descriptionFr: `Gravity Defy est un jeu mobile de parkour en moto. J'ai participé à la création de 14 niveaux pour ce client.
+
+Le gameplay est exigeant : il faut traverser des niveaux remplis d'obstacles variés. J'ai travaillé sur le level design pour offrir un challenge intéressant et progressif dans des environnements Low Poly soignés (ville, forêt, montagne).`,
+        category: "games",
+        year: "2021",
+        tech: ["Unity", "Level Design", "Mobile"],
+        icon: "fa-motorcycle",
+        images: [
+            "./img/games/GravityDefy/1.webp",
+            "./img/games/GravityDefy/2.webp",
+            "./img/games/GravityDefy/3.webp",
+            "./img/games/GravityDefy/4.webp",
+            "./img/games/GravityDefy/5.webp",
+            "./img/games/GravityDefy/6.webp",
+            "./img/games/GravityDefy/7.webp",
+            "./img/games/GravityDefy/8.webp",
+            "./img/games/GravityDefy/9.webp",
+            "./img/games/GravityDefy/10.webp",
+            "./img/games/GravityDefy/11.webp",
+            "./img/games/GravityDefy/12.webp",
+            "./img/games/GravityDefy/13.webp",
+            "./img/games/GravityDefy/14.webp",
+            "./img/games/GravityDefy/15.webp",
+            "./img/games/GravityDefy/16.webp",
+            "./img/games/GravityDefy/17.webp",
+            "./img/games/GravityDefy/18.webp",
+            "./img/games/GravityDefy/19.webp",
+            "./img/games/GravityDefy/20.webp",
+            "./img/games/GravityDefy/21.webp",
+            "./img/games/GravityDefy/22.webp",
+            "./img/games/GravityDefy/23.webp",
+            "./img/games/GravityDefy/24.webp",
+            "./img/games/GravityDefy/25.webp",
+            "./img/games/GravityDefy/26.webp",
+            "./img/games/GravityDefy/27.webp",
+            "./img/games/GravityDefy/28.webp"
+        ]
+    },
+    {
+        id: 25,
+        title: "Cubic Level",
+        description: `A charming level designed for a top-down mobile game.
+
+The level is entirely composed of blocks and assets with a 'Voxel' cubic art style.
+The main challenge of this map was to create an environment with fluid circulation for the player. I managed to make navigation fun while maintaining a polished aesthetic. I also created some animations for the game.`,
+        descriptionFr: `Un niveau charmant conçu pour un jeu mobile en vue de dessus.
+
+Le niveau est entièrement composé de blocs et d'assets avec un style artistique cubique 'Voxel'.
+Le principal défi de cette carte était de créer un environnement avec une circulation fluide pour le joueur. J'ai réussi à rendre la navigation amusante tout en maintenant une esthétique soignée. J'ai également créé des animations pour le jeu.`,
+        category: "games",
+        year: "2021",
+        tech: ["Voxel", "Level Design", "Mobile"],
+        icon: "fa-cube",
+        links: [
+            { label: "Vidéo Animation", url: "https://www.youtube.com/watch?v=HIJzEN4P0TA" }
+        ],
+        images: [
+            "./img/games/CubicLevel/LevelCapture20.webp",
+            "./img/games/CubicLevel/LevelCapture21.webp",
+            "./img/games/CubicLevel/LevelCapture22.webp",
+            "./img/games/CubicLevel/LevelCapture23.webp",
+            "./img/games/CubicLevel/LevelCapture24.webp",
+            "./img/games/CubicLevel/LevelCapture25.webp",
+            "./img/games/CubicLevel/LevelCapture26.webp",
+            "./img/games/CubicLevel/LevelCapture27.webp",
+            "./img/games/CubicLevel/LevelCapture28.webp",
+            "./img/games/CubicLevel/LevelCapture29.webp",
+            "./img/games/CubicLevel/LevelCapture30.webp",
+            "./img/games/CubicLevel/LevelCapture31.webp",
+            "./img/games/CubicLevel/LevelCapture32.webp",
+            "./img/games/CubicLevel/LevelCapture33.webp",
+            "./img/games/CubicLevel/LevelCapture34.webp",
+            "./img/games/CubicLevel/LevelCapture35.webp",
+            "./img/games/CubicLevel/LevelCapture36.webp",
+            "./img/games/CubicLevel/LevelCapture37.webp",
+            "./img/games/CubicLevel/LevelCapture38.webp",
+            "./img/games/CubicLevel/LevelCapture39.webp",
+            "./img/games/CubicLevel/LevelCapture40.webp"
+        ]
+    },
+    {
+        id: 11,
+        title: "Parkour Game",
+        description: `For this project, I created 5 levels for a Parkour-style game where the player must jump, climb walls, and find the exit.
+
+The character is played in the third person, offering a better overview of the environment.
+It's an urban environment designed to maximize verticality and match the Parkour universe.
+Some levels are also indoors, offering new challenges and a variety of environments.`,
+        descriptionFr: `Pour ce projet, j'ai créé 5 niveaux pour un jeu style Parkour où le joueur doit sauter, escalader les murs et trouver la sortie.
+
+Le personnage se joue en troisième personne, offrant une meilleure vue d'ensemble de l'environnement.
+C'est un environnement urbain conçu pour maximiser la verticalité et correspondre à l'univers du Parkour.
+Certains niveaux sont également en intérieur, offrant de nouveaux défis et une variété d'environnements.`,
+        category: "games",
+        year: "2020",
+        tech: ["Level Design", "Unity", "3D"],
+        icon: "fa-running",
+        images: [
+            "./img/games/ParkourGame/1.webp",
+            "./img/games/ParkourGame/2.webp",
+            "./img/games/ParkourGame/3.webp",
+            "./img/games/ParkourGame/4.webp",
+            "./img/games/ParkourGame/5.webp",
+            "./img/games/ParkourGame/6.webp",
+            "./img/games/ParkourGame/7.webp",
+            "./img/games/ParkourGame/8.webp",
+            "./img/games/ParkourGame/9.webp",
+            "./img/games/ParkourGame/10.webp",
+            "./img/games/ParkourGame/11.webp",
+            "./img/games/ParkourGame/12.webp",
+            "./img/games/ParkourGame/13.webp",
+            "./img/games/ParkourGame/14.webp",
+            "./img/games/ParkourGame/15.webp",
+            "./img/games/ParkourGame/16.webp",
+            "./img/games/ParkourGame/17.webp",
+            "./img/games/ParkourGame/18.webp",
+            "./img/games/ParkourGame/19.webp",
+            "./img/games/ParkourGame/20.webp",
+            "./img/games/ParkourGame/21.webp",
+            "./img/games/ParkourGame/22.webp",
+            "./img/games/ParkourGame/23.webp",
+            "./img/games/ParkourGame/24.webp",
+            "./img/games/ParkourGame/25.webp",
+            "./img/games/ParkourGame/26.webp",
+            "./img/games/ParkourGame/27.webp",
+            "./img/games/ParkourGame/28.webp",
+            "./img/games/ParkourGame/29.webp"
+        ]
+    },
+    {
+        id: 10,
+        title: "Pure Mahjong",
+        description: `Pure Mahjong is a photorealistic Mahjong game that takes the user on a journey through 24 Chinese solar calendar events.
+
+The game contains hundreds of levels for each day of the year. With over 1000 individually designed levels, Pure Mahjong offers a wide variety of gameplay. Some levels are solved in minutes, others can take hours.
+
+Every day, 4 new levels await you, ranging from relatively easy to very difficult.`,
+        descriptionFr: `Pure Mahjong est un jeu de Mahjong photo-réaliste qui emmène l'utilisateur dans un voyage à travers 24 événements du calendrier solaire chinois.
+
+Le jeu contient des centaines de niveaux pour chaque jour de l'année. Avec plus de 1000 niveaux conçus individuellement, Pure Mahjong offre une grande variété de gameplay. Certains niveaux se résolvent en minutes, d'autres peuvent prendre des heures.
+
+Chaque jour, 4 nouveaux niveaux vous attendent, allant de relativement facile à très difficile.`,
+        category: "games",
+        year: "2020",
+        tech: ["Level Design", "Nintendo Switch", "Unity"],
+        icon: "fa-puzzle-piece",
+        links: [
+            { label: "Nintendo eShop", url: "https://www.nintendo.co.uk/Games/Nintendo-Switch-download-software/Pure-Mahjong-1579159.html" },
+            { label: "Site Officiel", url: "http://thebinaryfamily.com/fr/pure-mahjong/" }
+        ],
+        images: [
+            "./img/games/PureMahjong/PureMahjong1.webp",
+            "./img/games/PureMahjong/PureMahjong2.webp",
+            "./img/games/PureMahjong/PureMahjong3.webp",
+            "./img/games/PureMahjong/PureMahjong4.webp",
+            "./img/games/PureMahjong/PureMahjong5.webp",
+            "./img/games/PureMahjong/PureMahjong6.webp",
+            "./img/games/PureMahjong/PureMahjong7.webp",
+            "./img/games/PureMahjong/PureMahjong8.webp",
+            "./img/games/PureMahjong/PureMahjong9.webp"
+        ]
+    },
+    {
+        id: 26,
+        title: "Cartoon Level",
+        description: `Prototype map for a cartoon game intended for a young audience.
+
+The constraints were to create a small to medium-sized map in a natural environment (forest, mountain, lake, rivers). The cartoon style was chosen for its colorful visual impact.
+
+I used the Unity engine and the Gaea terrain generator. The project was completed in one month in constant iteration with the client.`,
+        descriptionFr: `Carte prototype pour un jeu cartoon destiné à un jeune public.
+
+Les contraintes étaient de créer une carte de taille petite à moyenne dans un environnement naturel (forêt, montagne, lac, rivières). Le style cartoon a été choisi pour son impact visuel coloré.
+
+J'ai utilisé le moteur Unity et le générateur de terrain Gaea. Le projet a été réalisé en un mois en itération constante avec le client.`,
+        category: "games",
+        year: "2019",
+        tech: ["Gaea", "Unity", "Cartoon"],
+        icon: "fa-tree",
+        images: [
+            "./img/games/CartoonLevel/1.webp",
+            "./img/games/CartoonLevel/2.webp",
+            "./img/games/CartoonLevel/3.webp",
+            "./img/games/CartoonLevel/4.webp",
+            "./img/games/CartoonLevel/5.webp",
+            "./img/games/CartoonLevel/6.webp",
+            "./img/games/CartoonLevel/7.webp",
+            "./img/games/CartoonLevel/8.webp",
+            "./img/games/CartoonLevel/9.webp",
+            "./img/games/CartoonLevel/10.webp",
+            "./img/games/CartoonLevel/11.webp"
+        ]
+    },
+    {
+        id: 16,
+        title: "Hunting Game Map",
+        description: `Creation of a vast map for a first-person shooter (FPS) hunting game.
+
+The map is composed of forests, lakes, swamps, rivers, mountains, and plains. It is designed to be vast to immerse the player in a rich natural environment.
+The semi-realistic graphic style was created with a dedicated asset pack and a terrain generator for the entire topography.`,
+        descriptionFr: `Création d'une vaste carte pour un jeu de chasse en vue à la première personne (FPS).
+
+La carte est composée de forêts, lacs, marécages, rivières, montagnes et plaines. Elle est conçue pour être vaste afin d'immerger le joueur dans un environnement naturel riche.
+Le style graphique semi-réaliste a été créé avec un pack d'assets dédié et un générateur de terrain pour toute la topographie.`,
+        category: "games",
+        year: "2019",
+        tech: ["Level Design", "Terrain", "Nature"],
+        icon: "fa-tree",
+        images: [
+            "./img/games/HuntingGame/HuntGame1.webp",
+            "./img/games/HuntingGame/HuntGame2.webp",
+            "./img/games/HuntingGame/HuntGame3.webp",
+            "./img/games/HuntingGame/HuntGame4.webp",
+            "./img/games/HuntingGame/HuntGame5.webp",
+            "./img/games/HuntingGame/HuntGame6.webp",
+            "./img/games/HuntingGame/HuntGame7.webp",
+            "./img/games/HuntingGame/HuntGame8.webp",
+            "./img/games/HuntingGame/HuntGame9.webp",
+            "./img/games/HuntingGame/HuntGame10.webp",
+            "./img/games/HuntingGame/HuntGame11.webp",
+            "./img/games/HuntingGame/HuntGame12.webp",
+            "./img/games/HuntingGame/HuntGame13.webp",
+            "./img/games/HuntingGame/HuntGame14.webp",
+            "./img/games/HuntingGame/HuntGame15.webp",
+            "./img/games/HuntingGame/HuntGame16.webp",
+            "./img/games/HuntingGame/HuntGame17.webp",
+            "./img/games/HuntingGame/HuntGame18.webp"
+        ]
+    },
+    {
+        id: 27,
+        title: "3 Pigs Game",
+        description: `Level created for a freelance mission, based on the story of the 3 little pigs.
+
+The level is linear (right to left) and divided into 6 distinct zones: the mother's house, the straw construction zone, an enemy zone, the wood house, a bridge crossing a lake, and finally the brick house.
+The goal is to travel through the forest and collect resources to build the houses and resist the wolf.`,
+        descriptionFr: `Niveau créé pour une mission freelance, basé sur l'histoire des 3 petits cochons.
+
+Le niveau est linéaire (de droite à gauche) et divisé en 6 zones distinctes : la maison de la mère, la zone de construction en paille, une zone d'ennemis, la maison en bois, un pont traversant un lac, et enfin la maison en briques.
+L'objectif est de traverser la forêt et de collecter des ressources pour construire les maisons et résister au loup.`,
+        category: "games",
+        year: "2019",
+        tech: ["Level Design", "Freelance", "Unity"],
+        icon: "fa-piggy-bank",
+        images: [
+            "./img/games/3Pigs/3pigs1.webp",
+            "./img/games/3Pigs/3pigs2.webp",
+            "./img/games/3Pigs/3pigs3.webp",
+            "./img/games/3Pigs/3pigs4.webp",
+            "./img/games/3Pigs/3pigs5.webp",
+            "./img/games/3Pigs/3pigs6.webp"
+        ]
+    },
+    {
+        id: 6,
+        title: "Koda: Kiyomori's Guardian",
+        description: `Koda: Kiyomori's Guardian is a dreamy 3D platform adventure game based on Japanese folklore. You play as Koda, a Tanuki guardian of the forest.
+
+**The Story:** The forest is divided into 4 zones protected by divine entities. After a terrible event, the forest is corrupted by Yokais. Koda must use his abilities to purify the forest.
+
+**The Project:** 3-month student project (Gamagora) created by 17 students. Presented at the Gamagora Game Show 2018.`,
+        descriptionFr: `Koda : Le Gardien de Kiyomori est un jeu d'aventure/plateforme 3D onirique basé sur le folklore japonais. Vous incarnez Koda, un Tanuki gardien de la forêt.
+
+**L'Histoire :** La forêt est divisée en 4 zones protégées par des entités divines. Après un événement terrible, la forêt est corrompue par les Yokais. Koda doit utiliser ses capacités pour purifier la forêt.
+
+**Le Projet :** Projet étudiant de 3 mois (Gamagora) créé par 17 étudiants. Présenté au Gamagora Game Show 2018.`,
+        category: "games",
+        year: "2018",
+        tech: ["Unity", "C#", "Level Design"],
+        icon: "fa-torii-gate",
+        links: [
+            { label: "Télécharger (Itch.io)", url: "https://gamagora.itch.io/koda" },
+            { label: "Trailer", url: "https://www.youtube.com/watch?v=RNpgW7T4oU8" }
+        ],
+        images: [
+            "./img/games/Koda/Koda01.webp",
+            "./img/games/Koda/Koda02.webp",
+            "./img/games/Koda/Koda03.webp",
+            "./img/games/Koda/Koda04.webp",
+            "./img/games/Koda/Koda05.webp",
+            "./img/games/Koda/Koda06.webp",
+            "./img/games/Koda/Koda07.webp",
+            "./img/games/Koda/Koda08.webp",
+            "./img/games/Koda/Koda09.webp",
+            "./img/games/Koda/Koda10.webp"
+        ]
+    },
+    {
+        id: 7,
+        title: "Antivirus: Data City",
+        description: `Data City is under attack by destructive viruses. Antivirus, the superhero, must defend the city's Core.
+
+**Objective:** Protect the Core in the city center before corruption reaches it. Freeze infected areas and rebuild destroyed cubes.
+
+**Details:** The game takes place in a voxel/neon 'Tron' style digital city. The city is modular, composed of distinct districts connected by bridges, offering great verticality.
+I was in charge of Level Design, imagining this virtual universe and creating a systemic city where the infection spreads district by district.`,
+        descriptionFr: `Data City est attaquée par des virus destructeurs. Antivirus, le super-héros, doit défendre le Cœur de la ville.
+
+**Objectif :** Protéger le Cœur au centre de la ville avant que la corruption ne l'atteigne. Geler les zones infectées et reconstruire les cubes détruits.
+
+**Détails :** Le jeu se déroule dans une ville numérique en voxel/néon style 'Tron'. La ville est modulaire, composée de quartiers distincts reliés par des ponts, offrant une grande verticalité.
+J'étais en charge du Level Design, imaginant cet univers virtuel et créant une ville systémique où l'infection se propage quartier par quartier.`,
+        category: "games",
+        year: "2018",
+        tech: ["Unity", "Voxel", "Level Design"],
+        icon: "fa-city",
+        links: [
+            { label: "Télécharger", url: "https://mega.nz/#!i1x21ZDS!rblSNnBw0pUnwYVsCiM9CFgiGLcGM-ZKGwS6p8goxek" },
+            { label: "Trailer", url: "https://www.youtube.com/watch?v=vxTW0W2Zbok" }
+        ],
+        images: [
+            "./img/games/Antivirus/AntiVirus1.webp",
+            "./img/games/Antivirus/AntiVirus2.webp",
+            "./img/games/Antivirus/AntiVirus3.webp",
+            "./img/games/Antivirus/AntiVirus4.webp",
+            "./img/games/Antivirus/AntiVirus5.webp",
+            "./img/games/Antivirus/AntiVirus6.webp",
+            "./img/games/Antivirus/AntiVirus8.webp",
+            "./img/games/Antivirus/AntiVirus9.webp",
+            "./img/games/Antivirus/AntiVirus10.webp",
+            "./img/games/Antivirus/AntiVirus11.webp",
+            "./img/games/Antivirus/AntiVirus12.webp",
+            "./img/games/Antivirus/AntiVirus13.webp",
+            "./img/games/Antivirus/AntiVirus14.webp",
+            "./img/games/Antivirus/AntiVirus15.webp",
+            "./img/games/Antivirus/AntiVirus16.webp",
+            "./img/games/Antivirus/AntiVirus17.webp",
+            "./img/games/Antivirus/AntiVirus18.webp",
+            "./img/games/Antivirus/AntiVirus19.webp",
+            "./img/games/Antivirus/AntiVirus20.webp",
+            "./img/games/Antivirus/AntiVirus21.webp",
+            "./img/games/Antivirus/AntiVirus22.webp",
+            "./img/games/Antivirus/AntiVirus23.webp",
+            "./img/games/Antivirus/AntiVirus24.webp",
+            "./img/games/Antivirus/city.webp"
+        ]
+    },
+    {
+        id: 20,
+        title: "Underground Water Junction",
+        description: `Multiplayer map for Unreal Tournament (CTF 3v3), created with UDK.
+
+The level represents a junction of underground sewers. This confined space offers multiple hiding spots and access points, ideal for Capture The Flag.
+The space consists of two water crosses. Players can walk along the walls, enter adjacent buildings for ambushes, or take risks by jumping over the water.
+Verticality is present with one-story buildings, allowing for surprise attacks from above.`,
+        descriptionFr: `Carte multijoueur pour Unreal Tournament (CTF 3v3), créée avec UDK.
+
+Le niveau représente une jonction d'égouts souterrains. Cet espace confiné offre de multiples cachettes et points d'accès, idéal pour le Capture The Flag.
+L'espace est composé de deux croix d'eau. Les joueurs peuvent longer les murs, entrer dans les bâtiments adjacents pour tendre des embuscades, ou prendre des risques en sautant par-dessus l'eau.
+La verticalité est présente avec des bâtiments à un étage, permettant des attaques surprises d'en haut.`,
+        category: "games",
+        year: "2018",
+        tech: ["Unreal Engine", "Level Design", "Multiplayer"],
+        icon: "fa-water",
+        links: [
+            { label: "Télécharger Map", url: "./content/pdf/UndergroundWaterJunction.pdf" },
+            { label: "Trailer", url: "https://www.youtube.com/watch?v=C6l0aLzwxuM" }
+        ],
+        images: [
+            "./img/games/UWJ/UWJ01.webp",
+            "./img/games/UWJ/UWJ02.webp",
+            "./img/games/UWJ/UWJ03.webp",
+            "./img/games/UWJ/UWJ04.webp",
+            "./img/games/UWJ/UWJ05.webp",
+            "./img/games/UWJ/UWJ06.webp",
+            "./img/games/UWJ/UWJ07.webp",
+            "./img/games/UWJ/UWJ08.webp",
+            "./img/games/UWJ/UWJmap.webp"
+        ]
+    },
+    {
+        id: 30,
+        title: "Sleeping Pit",
+        description: "Medieval fantasy puzzle game. The player plays as a mage using divisible slimes to activate mechanisms and solve complex puzzles in a giant pit.",
+        descriptionFr: "Jeu de puzzle médiéval-fantastique. Le joueur incarne un mage utilisant des slimes divisibles pour activer des mécanismes et résoudre des puzzles complexes dans une fosse géante.",
+        category: "games",
+        year: "2018",
+        tech: ["Game Design", "Unity", "Puzzle"],
+        icon: "fa-dungeon",
+        links: [
+            { label: "Game Design Doc (PDF)", url: "./content/pdf/GDO_PSP_SLEEPING_PIT.pdf" }
+        ],
+        images: [
+            "./img/games/sleepingPit/1.webp",
+            "./img/games/sleepingPit/2.webp",
+            "./img/games/sleepingPit/3.webp",
+            "./img/games/sleepingPit/4.webp",
+            "./img/games/sleepingPit/5.webp",
+            "./img/games/sleepingPit/6.webp",
+            "./img/games/sleepingPit/7.webp",
+            "./img/games/sleepingPit/8.webp",
+            "./img/games/sleepingPit/Level01PSP.webp"
+        ]
+    },
+    {
+        id: 9,
+        title: "Deficiency",
+        description: "2D Serious Game about the immune system. Educational puzzle game to understand the action of viruses (HIV) and how biological defenses work.",
+        descriptionFr: "Serious Game 2D sur le système immunitaire. Jeu de puzzle éducatif pour comprendre l'action des virus (VIH) et le fonctionnement des défenses biologiques.",
+        category: "games",
+        year: "2018",
+        tech: ["JavaScript", "HTML5", "Serious Game"],
+        icon: "fa-puzzle-piece",
+        links: [
+            { label: "Play (Web)", url: "./EmericDosSantos.github.io-master/resources/Deficience_Web_V3/index.html" },
+            { label: "Game Concept (PDF)", url: "./content/pdf/DEFICIENCE.pdf" }
+        ],
+        images: [
+            "./img/games/deficienceNew.webp",
+            "./assets/images/legacy/Deficience.jpg"
+        ]
+    },
+    {
+        id: 14,
+        title: "Unity Prototypes",
+        description: "Collection of Level Design prototypes in Unity. Experimentation with volumes, lighting, and navigation mechanics.",
+        descriptionFr: "Collection de prototypes de Level Design sous Unity. Expérimentation avec les volumes, l'éclairage et les mécaniques de navigation.",
+        category: "games",
+        year: "2018",
+        tech: ["Unity", "Prototyping", "C#"],
+        icon: "fa-cubes",
+        images: [
+            "./img/games/Unity/Unity1.webp",
+            "./img/games/Unity/Unity2.webp",
+            "./img/games/Unity/Unity3.webp",
+            "./img/games/Unity/Unity4.webp"
+        ]
+    },
+    {
+        id: 17,
+        title: "Tom Atom Rescue",
+        description: "Futuristic 2D platformer / RPG. Play as Tom, a robot looking for his creator. Hostile world, equipment upgrades, flying vehicles.",
+        descriptionFr: "Platformer/RPG 2D futuriste. Incarnez Tom, un robot à la recherche de son créateur. Monde hostile, améliorations d'équipement, véhicules volants.",
+        category: "games",
+        year: "2017",
+        tech: ["Unity", "2D", "Platformer", "C#"],
+        icon: "fa-robot",
+        links: [
+            { label: "Play (Web)", url: "./EmericDosSantos.github.io-master/resources/Platform_Game_Prototype_1.4/index.html" }
+        ],
+        images: [
+            "./img/games/TomAtomRescu/platformGame1.webp",
+            "./img/games/TomAtomRescu/platformGame2.webp",
+            "./img/games/TomAtomRescu/platformGame3.webp",
+            "./img/games/TomAtomRescu/platformGame4.webp",
+            "./img/games/TomAtomRescu/platformGame5.webp",
+            "./img/games/TomAtomRescu/Tom Atom printsc.webp",
+            "./img/games/TomAtomRescu/badrobot printsc.webp",
+            "./img/games/TomAtomRescu/perso.webp",
+            "./img/games/TomAtomRescu/player printsc.webp"
+        ]
+    },
+    {
+        id: 31,
+        title: "World Building",
+        description: "Terrains created with Gaea and integrated into Unity. Demonstration of rapid creation of realistic and varied environments.",
+        descriptionFr: "Terrains créés avec Gaea et intégrés dans Unity. Démonstration de création rapide d'environnements réalistes et variés.",
+        category: "design",
+        year: "2019",
+        tech: ["Gaea", "Unity", "Terrain", "World Building"],
+        icon: "fa-globe-europe",
+        images: [
+            "./img/games/WorldBuilding/terrain1.webp",
+            "./img/games/WorldBuilding/terrain2.webp",
+            "./img/games/WorldBuilding/terrain3.webp"
+        ]
+    },
+    {
+        id: 18,
+        title: "3D Portfolio",
+        description: "3D modeling gallery. Objects, environments, and renders created with various tools (Blender, 3ds Max, Photoshop).",
+        descriptionFr: "Galerie de modélisation 3D. Objets, environnements et rendus créés avec divers outils (Blender, 3ds Max, Photoshop).",
+        category: "design",
+        year: "2017",
+        tech: ["3D", "Modeling", "Texturing"],
+        icon: "fa-cube",
+        images: [
+            "./img/3D/Grafiti.webp",
+            "./img/3D/Extintor1.webp",
+            "./img/3D/Extintor2.webp",
+            "./img/3D/M1.webp",
+            "./img/3D/M2.webp",
+            "./img/3D/photoshop-final.webp",
+            "./img/3D/Render01.webp",
+            "./img/3D/Apple.webp",
+            "./img/3D/ColgateBend.webp",
+            "./img/3D/Sayan_pods_final.webp",
+            "./img/3D/Torre01-1.webp",
+            "./img/3D/Torre01-2.webp",
+            "./img/3D/Torre02-01.webp",
+            "./img/3D/Torre02-02.webp",
+            "./img/3D/Torre02-1.webp",
+            "./img/3D/Arcade.webp",
+            "./img/3D/spinner.webp",
+            "./img/3D/VrSystem.webp"
+        ]
+    },
+    {
+        id: 22,
+        title: "Simple Movements",
+        description: "JavaScript learning prototype. Development of a fluid movement engine and basic behavioral AI.",
+        descriptionFr: "Prototype d'apprentissage JavaScript. Développement d'un moteur de mouvement fluide et d'IA comportementale basique.",
+        category: "games",
+        year: "2017",
+        tech: ["JavaScript", "HTML5", "Prototype"],
+        icon: "fa-gamepad",
+        links: [
+            { label: "Play", url: "./EmericDosSantos.github.io-master/resources/game/index.html" }
+        ],
+        images: ["./img/games/Game1.webp"]
+    },
+    {
+        id: 23,
+        title: "2D Car Prototype",
+        description: "2D racing game prototype in JavaScript. Testing physics management and vehicle collisions.",
+        descriptionFr: "Prototype de jeu de course 2D en JavaScript. Test de gestion de la physique et des collisions véhiculaires.",
+        category: "games",
+        year: "2017",
+        tech: ["JavaScript", "HTML5", "Prototype"],
+        icon: "fa-car-side",
+        links: [
+            { label: "Play", url: "./EmericDosSantos.github.io-master/resources/CarTest/index.html" }
+        ],
+        images: ["./img/games/Game2.webp"]
+    },
+    {
+        id: 21,
+        title: "Claycity (Minecraft)",
+        description: "Massive city inspired by North America. Dense city center, skyscrapers, parks, and large-scale transport infrastructure.",
+        descriptionFr: "Ville massive inspirée de l'Amérique du Nord. Centre-ville dense, gratte-ciels, parcs et infrastructure de transport à grande échelle.",
+        category: "games",
+        year: "2015",
+        tech: ["Minecraft", "Voxel", "Level Design"],
+        icon: "fa-building",
+        images: [
+            "./img/games/minecraft/1.webp",
+            "./img/games/minecraft/2.webp",
+            "./img/games/minecraft/3.webp",
+            "./img/games/minecraft/4.webp",
+            "./img/games/minecraft/5.webp",
+            "./img/games/minecraft/6.webp",
+            "./img/games/minecraft/7.webp",
+            "./img/games/minecraft/8.webp",
+            "./img/games/minecraft/9.webp",
+            "./img/games/minecraft/10.webp",
+            "./img/games/minecraft/11.webp",
+            "./img/games/minecraft/12.webp",
+            "./img/games/minecraft/13.webp",
+            "./img/games/minecraft/14.webp",
+            "./img/games/minecraft/15.webp",
+            "./img/games/minecraft/16.webp",
+            "./img/games/minecraft/17.webp",
+            "./img/games/minecraft/18.webp",
+            "./img/games/minecraft/19.webp",
+            "./img/games/minecraft/20.webp",
+            "./img/games/minecraft/21.webp",
+            "./img/games/minecraft/22.webp",
+            "./img/games/minecraft/23.webp",
+            "./img/games/minecraft/24.webp",
+            "./img/games/minecraft/25.webp",
+            "./img/games/minecraft/26.webp",
+            "./img/games/minecraft/27.webp",
+            "./img/games/minecraft/28.webp",
+            "./img/games/minecraft/29.webp",
+            "./img/games/minecraft/30.webp",
+            "./img/games/minecraft/31.webp",
+            "./img/games/minecraft/32.webp",
+            "./img/games/minecraft/33.webp",
+            "./img/games/minecraft/34.webp",
+            "./img/games/minecraft/35.webp",
+            "./img/games/minecraft/36.webp",
+            "./img/games/minecraft/37.webp",
+            "./img/games/minecraft/38.webp"
+        ]
+    },
+    {
+        id: 28,
+        title: "Trackmania Map",
+        description: `Creation of tracks for Trackmania as part of a Level Design course.
+        
+Three distinct tracks:
+- Green (Easy/Technical): Precise trajectories.
+- Blue (Medium/Speed): Race from point A to B with jumps and fast curves.
+- Green (Competitive): Loops, boosters, and narrow passages for Time Attack.`,
+        descriptionFr: `Création de circuits pour Trackmania dans le cadre d'un cours de Level Design.
+        
+Trois circuits distincts :
+- Vert (Facile/Technique) : Trajectoires précises.
+- Bleu (Moyen/Vitesse) : Course du point A au point B avec sauts et virages rapides.
+- Vert (Compétitif) : Loopings, boosters et passages étroits pour le Time Attack.`,
+        category: "games",
+        year: "2018",
+        tech: ["Trackmania", "Racing", "Level Design"],
+        icon: "fa-road",
+        links: [
+            { label: "Download Maps (PDF)", url: "./content/pdf/Trackmania.pdf" }
+        ],
+        images: [
+            "./img/games/Trackmania/track1.webp",
+            "./img/games/Trackmania/track2.webp",
+            "./img/games/Trackmania/track3.webp",
+            "./img/games/Trackmania/track4.webp",
+            "./img/games/Trackmania/track5.webp",
+            "./img/games/Trackmania/track8.webp",
+            "./img/games/Trackmania/track9.webp",
+            "./img/games/Trackmania/track11.webp",
+            "./img/games/Trackmania/track12.webp",
+            "./img/games/Trackmania/track13.webp",
+            "./img/games/Trackmania/track14.webp",
+            "./img/games/Trackmania/track16.webp",
+            "./img/games/Trackmania/track17.webp",
+            "./img/games/Trackmania/track19.webp",
+            "./img/games/Trackmania/track20.webp",
+            "./img/games/Trackmania/track21.webp",
+            "./img/games/Trackmania/track22.webp",
+            "./img/games/Trackmania/track23.webp",
+            "./img/games/Trackmania/track24.webp"
+        ]
+    },
+    {
+        id: 29,
+        title: "Perfect Angle",
+        description: `Personal 2D puzzle game. The goal is to move the player in the right direction to reach the exit.
+        
+The difficulty is progressive with increasingly complex puzzles requiring reflection and anticipation.`,
+        descriptionFr: `Jeu de puzzle 2D personnel. L'objectif est de déplacer le joueur dans la bonne direction pour atteindre la sortie.
+        
+La difficulté est progressive avec des puzzles de plus en plus complexes nécessitant réflexion et anticipation.`,
+        category: "games",
+        year: "2019",
+        tech: ["JavaScript", "Puzzle", "2D"],
+        icon: "fa-shapes",
+        links: [
+            { label: "Play (Web)", url: "./EmericDosSantos.github.io-master/resources/Perfect_Angle_Browser_Version/index.html" }
+        ],
+        images: [
+            "./img/games/PerfectAngle/pa1.webp",
+            "./img/games/PerfectAngle/pa2.webp",
+            "./img/games/PerfectAngle/pa3.webp",
+            "./img/games/PerfectAngle/pa4.webp",
+            "./img/games/PerfectAngle/pa5.webp"
+        ]
+    },
+    {
+        id: 101,
+        title: "Tron (Prototype 3)",
+        description: "Local multiplayer Snake game on the theme of Tron. 2D top-down view.",
+        descriptionFr: "Jeu Snake multijoueur local sur le thème de Tron. Vue 2D de dessus.",
+        category: "games",
+        year: "2017",
+        tech: ["JavaScript", "HTML5", "Local Multiplayer"],
+        icon: "fa-gamepad",
+        images: [
+            "./img/games/tron1.webp",
+            "./img/games/tron2.webp"
+        ]
+    },
+    {
+        id: 103,
+        title: "Online Store Design",
+        description: "Mockups for a modern online store. Product presentation and user interface.",
+        descriptionFr: "Maquettes pour une boutique en ligne moderne. Présentation de produits et interface utilisateur.",
+        category: "web",
+        year: "2017",
+        tech: ["HTML", "CSS", "E-commerce"],
+        icon: "fa-shopping-cart",
+        images: [
+            "./assets/images/legacy/html_css/OnlineStore-01.jpg",
+            "./assets/images/legacy/html_css/OnlineStore-02.jpg",
+            "./assets/images/legacy/html_css/OnlineStore-03.jpg",
+            "./assets/images/legacy/html_css/OnlineStore-04.jpg"
+        ]
+    },
+    {
+        id: 104,
+        title: "FabLab Caldas da Rainha",
+        description: "Official website of FabLab Caldas da Rainha. Interactive platform presenting the resources, machines, and projects of the maker community.",
+        descriptionFr: "Site web officiel du FabLab Caldas da Rainha. Plateforme interactive présentant les ressources, machines et projets de la communauté maker.",
+        category: "web",
+        year: "2017",
+        tech: ["HTML", "Bootstrap", "Web Design"],
+        icon: "fa-tools",
+        images: [
+            "./assets/images/legacy/html_css/WebPage1.png",
+            "./assets/images/legacy/html_css/WebPage2.png",
+            "./assets/images/legacy/html_css/WebPage3.png",
+            "./assets/images/legacy/html_css/WebPage4.png"
+        ]
+    },
+    {
+        id: 105,
+        title: "EMOT.IO",
+        description: `Interactive cinematic experience. A visual narrative that evolves in real-time according to the viewer's emotions.
+
+**Biofeedback:** Use of Bitalino sensors (Heart rate, Temperature) to analyze emotional state.
+**Real-Time Processing:** Dynamic transformation of image and sound via Processing according to biometric data.
+**Concept:** Compare real physiological data with the viewer's subjective experience.`,
+        descriptionFr: `Expérience cinématographique interactive. Un récit visuel qui évolue en temps réel selon les émotions du spectateur.
+
+**Biofeedback :** Utilisation de capteurs Bitalino (Fréquence cardiaque, Température) pour analyser l'état émotionnel.
+**Traitement Temps Réel :** Transformation dynamique de l'image et du son via Processing selon les données biométriques.
+**Concept :** Comparer les données physiologiques réelles avec l'expérience subjective du spectateur.`,
+        category: "other",
+        year: "2017",
+        tech: ["Arduino", "Processing", "Biofeedback", "Bitalino"],
+        icon: "fa-heartbeat",
+        images: [
+            "./assets/images/legacy/arduino/projeto1.jpg",
+            "./assets/images/legacy/arduino/projeto2.jpg",
+            "./assets/images/legacy/arduino/projeto3.jpg",
+            "./assets/images/legacy/arduino/projeto4.jpg",
+            "./assets/images/legacy/arduino/projeto5.jpg"
+        ]
+    },
+    {
+        id: 106,
+        title: "Graphic Design Portfolio",
+        description: "Graphic design work including logos, layouts, and illustrations.",
+        descriptionFr: "Travaux de design graphique incluant logos, mises en page et illustrations.",
+        category: "design",
+        year: "2017",
+        tech: ["Photoshop", "Illustrator", "InDesign"],
+        icon: "fa-paint-brush",
+        images: [
+            "./assets/images/legacy/design_grafic/Final_Lego-page-001.jpg",
+            "./assets/images/legacy/design_grafic/Final_Lego-page-002.jpg",
+            "./assets/images/legacy/design_grafic/Hand_Emeric.jpg",
+            "./assets/images/legacy/design_grafic/Logo.jpg"
+        ]
+    },
+    {
+        id: 107,
+        title: "Satoshi Tajiri Info",
+        description: "Editorial layout about the creator of Pokémon, Satoshi Tajiri.",
+        descriptionFr: "Mise en page éditoriale sur le créateur de Pokémon, Satoshi Tajiri.",
+        category: "design",
+        year: "2017",
+        tech: ["InDesign", "Layout", "Editorial"],
+        icon: "fa-book-open",
+        images: [
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-001.jpg",
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-002.jpg",
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-003.jpg",
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-004.jpg",
+            "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-005.jpg"
+        ]
+    }
+];
+
+// Tech Icon Mapping
+const TECH_ICON_MAP = {
+    "Python": "fab fa-python",
+    "TensorFlow": "fas fa-brain",
+    "OpenCV": "fas fa-eye",
+    "YOLOv8": "fas fa-object-group",
+    "LangChain": "fas fa-link",
+    "OpenAI API": "fas fa-robot",
+    "Pinecone": "fas fa-database",
+    "React": "fab fa-react",
+    "Scikit-learn": "fas fa-cogs",
+    "Pandas": "fas fa-table",
+    "XGBoost": "fas fa-chart-line",
+    "FastAPI": "fas fa-bolt",
+    "Next.js": "fab fa-react",
+    "Vite": "fas fa-bolt",
+    "Stable Diffusion": "fas fa-wand-magic-sparkles",
+    "Node.js": "fab fa-node-js",
+    "AWS": "fab fa-aws",
+    "PyTorch": "fas fa-fire",
+    "FaceNet": "fas fa-id-badge",
+    "Docker": "fab fa-docker",
+    "Git": "fab fa-git-alt",
+    "Rust": "fas fa-gear",
+    "Tauri": "fas fa-shield-halved",
+    "Unity": "fab fa-unity",
+    "C#": "fas fa-code",
+    "Level Design": "fas fa-layer-group",
+    "Mobile": "fas fa-mobile-screen-button",
+    "Voxel": "fas fa-cube",
+    "HTML5": "fab fa-html5",
+    "HTML": "fab fa-html5",
+    "CSS": "fab fa-css3-alt",
+    "JavaScript": "fab fa-js",
+    "Bootstrap": "fab fa-bootstrap",
+    "Serious Game": "fas fa-graduation-cap",
+    "Nintendo Switch": "fas fa-gamepad",
+    "3D": "fas fa-cube",
+    "Puzzle": "fas fa-puzzle-piece",
+    "Trackmania": "fas fa-flag-checkered",
+    "Racing": "fas fa-gauge-high",
+    "Prototyping": "fas fa-compass-drafting",
+    "Gaea": "fas fa-mountain",
+    "World Building": "fas fa-earth-europe",
+    "Terrain": "fas fa-leaf",
+    "Nature": "fas fa-tree",
+    "Arduino": "fas fa-microchip",
+    "Processing": "fas fa-wave-square",
+    "Photoshop": "fas fa-palette",
+    "Illustrator": "fas fa-pen-nib",
+    "InDesign": "fas fa-newspaper",
+    "NLP": "fas fa-comments",
+    "Trading": "fas fa-chart-candlestick",
+    "Cryptography": "fas fa-lock",
+    "Web App": "fas fa-globe",
+    "Unreal Engine": "fas fa-gamepad",
+    "Multiplayer": "fas fa-users",
+    "Minecraft": "fas fa-cubes",
+    "2D": "fas fa-square",
+    "Platformer": "fas fa-person-running",
+    "Modeling": "fas fa-shapes",
+    "Texturing": "fas fa-brush",
+    "Image Processing": "fas fa-sliders",
+    "Desktop App": "fas fa-desktop",
+    "AI Utils": "fas fa-microchip",
+    "Privacy": "fas fa-user-shield",
+    "AI Integration": "fas fa-brain"
+};
+
+// ============================================================
+// MAIN INTERACTIVE EXPLORER, CASE STUDY GALLERY & LIGHTBOX
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Resolve relative ./ paths cleanly when served from /fr/ static route
+    const assetPrefix = document.documentElement.getAttribute('data-asset-prefix') ||
+        ((window.location.pathname === '/fr' || window.location.pathname.startsWith('/fr/') || window.location.pathname.endsWith('/fr/index.html')) ? '..' : '.');
+    function resolveAssetPath(url) {
+        if (!url) return url;
+        if (assetPrefix !== '.' && url.startsWith('./')) {
+            return assetPrefix + url.slice(1);
+        }
+        return url;
+    }
+
+    // 1. Initialize Internationalization
+    if (typeof I18N !== 'undefined' && typeof TRANSLATIONS !== 'undefined') {
+        I18N.init(TRANSLATIONS);
+    }
+
+    // Sort projects anti-chronologically (Newest first), keeping Obvious Tool (live SaaS) pinned first
+    projects.sort((a, b) => {
+        if (a.id === 111) return -1;
+        if (b.id === 111) return 1;
+        return parseInt(b.year) - parseInt(a.year);
+    });
+
+    // Compute category counts in a single pass
+    const categoryCounts = {
+        'all': projects.length,
+        'ai': 0,
+        'web': 0,
+        'games': 0,
+        'design': 0,
+        'other': 0
+    };
+    for (let i = 0; i < projects.length; i++) {
+        const cat = projects[i].category;
+        if (cat === 'cv' || cat === 'nlp' || cat === 'ml') {
+            categoryCounts.ai++;
+        } else if (categoryCounts[cat] !== undefined) {
+            categoryCounts[cat]++;
+        }
+    }
+
+    // Update filter buttons badge count
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+        const filter = btn.getAttribute('data-filter');
+        const count = categoryCounts[filter] || 0;
+        const countSpan = btn.querySelector('.filter-count');
+        if (countSpan) countSpan.textContent = count;
+    });
+
+    // State Management
+    let filteredProjects = [];
+    let currentProjectIndex = 0;
+    let currentImageIndex = 0;
+
+    // DOM Elements
+    const projectTitleEl = document.getElementById('project-title');
+    const projectIconEl = document.getElementById('project-icon');
+    const projectCategoryEl = document.getElementById('project-category-badge');
+    const projectYearEl = document.getElementById('project-year-badge');
+    const projectDescEl = document.getElementById('dynamic-project-content');
+    const projectTechEl = document.getElementById('project-tech-tags');
+    const projectLinksEl = document.getElementById('project-links-list');
+    const projectCounterEl = document.getElementById('project-nav-counter');
+    const quickStripEl = document.getElementById('explorer-quick-strip');
+    const btnPrevProj = document.getElementById('btn-prev-proj');
+    const btnNextProj = document.getElementById('btn-next-proj');
+    const btnPrevImg = document.getElementById('btn-prev-img');
+    const btnNextImg = document.getElementById('btn-next-img');
+    const mainGalleryImg = document.getElementById('gallery-active-image');
+    const filmstripEl = document.getElementById('gallery-filmstrip');
+    const expandImageBtn = document.getElementById('expand-image-btn');
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-image');
+    const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
+    const lightboxNextBtn = document.getElementById('lightbox-next-btn');
+    const lightboxFilmstrip = document.getElementById('lightbox-filmstrip');
+
+    // Email Copy & Toast Logic
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const toast = document.getElementById('toast-notification');
+    const secureEmailLink = document.getElementById('secure-email-link');
+
+    if (secureEmailLink) {
+        secureEmailLink.href = 'mailto:contact@emericfds.com';
+        secureEmailLink.addEventListener('click', () => {
+            if (typeof PortfolioAnalytics !== 'undefined') {
+                PortfolioAnalytics.trackContactAction('mailto_click', 'contact@emericfds.com');
+            }
+        });
+    }
+
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', () => {
+            const email = 'contact@emericfds.com';
+            navigator.clipboard.writeText(email).then(() => {
+                showToast(typeof I18N !== 'undefined' ? I18N.t('footer.copiedToast') : 'Email copied to clipboard! ✨');
+                if (typeof PortfolioAnalytics !== 'undefined') {
+                    PortfolioAnalytics.trackContactAction('copy_clipboard', email);
+                }
+            }).catch((err) => {
+                console.warn('Failed to copy email to clipboard, falling back to mailto:', err);
+                window.location.href = `mailto:${email}`;
+            });
+        });
+    }
+
+    function showToast(msg) {
+        if (!toast) return;
+        const msgSpan = toast.querySelector('.toast-message');
+        if (msgSpan) msgSpan.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // Helper function to escape HTML special characters for XSS prevention
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // Markdown Description Formatter
+    function formatMarkdown(text) {
+        if (!text) return '';
+        let formatted = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>')
+            .replace(/\n\n/g, '<br><br>')
+            .replace(/\n/g, '<br>');
+
+        if (formatted.includes('<li>')) {
+            formatted = formatted.replace(/(<li>.*?<\/li>)+/g, '<ul style="padding-left: 20px; list-style-type: disc;">$&</ul>');
+        }
+        return formatted;
+    }
+
+    // Render Quick-Jump Project Selector Chips
+    function renderQuickStrip() {
+        if (!quickStripEl) return;
+        if (!filteredProjects.length) {
+            quickStripEl.innerHTML = '';
+            return;
+        }
+        quickStripEl.innerHTML = filteredProjects.map((proj, idx) => `
+            <button type="button" class="quick-proj-chip ${idx === currentProjectIndex ? 'active' : ''}" data-proj-idx="${idx}">
+                ${escapeHtml(proj.title)}
+            </button>
+        `).join('');
+
+        quickStripEl.querySelectorAll('.quick-proj-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const idx = parseInt(chip.getAttribute('data-proj-idx'), 10);
+                if (!Number.isNaN(idx) && idx !== currentProjectIndex) {
+                    currentProjectIndex = idx;
+                    updateProjectView();
+                }
+            });
+        });
+
+        const activeChip = quickStripEl.querySelector('.quick-proj-chip.active');
+        if (activeChip && quickStripEl.clientWidth > 0) {
+            const chipLeft = activeChip.offsetLeft;
+            const chipRight = chipLeft + activeChip.offsetWidth;
+            const viewLeft = quickStripEl.scrollLeft;
+            const viewRight = viewLeft + quickStripEl.clientWidth;
+            if (chipLeft < viewLeft || chipRight > viewRight) {
+                quickStripEl.scrollLeft = Math.max(0, chipLeft - (quickStripEl.clientWidth - activeChip.offsetWidth) / 2);
+            }
+        }
+    }
+
+    // Render Project Details
+    function updateProjectView(skipTelemetry = false) {
+        if (filteredProjects.length === 0) {
+            if (projectTitleEl) projectTitleEl.textContent = (typeof I18N !== 'undefined') ? I18N.t('projects.empty.title') : 'No projects';
+            if (projectDescEl) {
+                projectDescEl.innerHTML = `<p class="current-project-desc">${(typeof I18N !== 'undefined') ? I18N.t('projects.empty.desc') : 'Please select another category.'}</p>`;
+                projectDescEl.scrollTop = 0;
+            }
+            if (projectTechEl) projectTechEl.innerHTML = '';
+            if (projectLinksEl) projectLinksEl.innerHTML = '';
+            if (mainGalleryImg) mainGalleryImg.src = '';
+            if (filmstripEl) filmstripEl.innerHTML = '';
+            if (projectCounterEl) projectCounterEl.innerHTML = '0 / 0';
+            renderQuickStrip();
+            return;
+        }
+
+        const project = filteredProjects[currentProjectIndex];
+        const currentLang = (typeof I18N !== 'undefined') ? I18N.getLocale() : 'en';
+
+        // 1. Header Meta
+        if (projectTitleEl) projectTitleEl.textContent = project.title;
+        if (projectIconEl) projectIconEl.className = `fas ${project.icon || 'fa-code'}`;
+        if (projectCategoryEl) projectCategoryEl.textContent = (project.category || 'PROJECT').toUpperCase();
+        if (projectYearEl) projectYearEl.textContent = project.year;
+
+        // 2. Formatted Description
+        if (projectDescEl) {
+            const rawDesc = (currentLang === 'fr' && project.descriptionFr) ? project.descriptionFr : project.description;
+            projectDescEl.innerHTML = `<div class="current-project-desc">${formatMarkdown(rawDesc)}</div>`;
+            projectDescEl.scrollTop = 0;
+        }
+
+        // 3. Links
+        if (projectLinksEl) {
+            if (project.links && project.links.length > 0) {
+                projectLinksEl.innerHTML = project.links.map(link => `
+                    <a href="${escapeHtml(resolveAssetPath(link.url))}" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                        <i class="fas fa-arrow-up-right-from-square"></i> ${escapeHtml(link.label)}
+                    </a>
+                `).join('');
+            } else {
+                projectLinksEl.innerHTML = '';
+            }
+        }
+
+        // 4. Tech Tags
+        if (projectTechEl) {
+            projectTechEl.textContent = '';
+            (project.tech || []).forEach(t => {
+                const iconClass = TECH_ICON_MAP[t] || 'fas fa-code';
+                const pill = document.createElement('span');
+                pill.className = 'tech-tag-pill';
+                const icon = document.createElement('i');
+                icon.className = iconClass;
+                pill.appendChild(icon);
+                pill.appendChild(document.createTextNode(' ' + t));
+                projectTechEl.appendChild(pill);
+            });
+        }
+
+        // 5. Counter & Navigation Button States
+        if (projectCounterEl) {
+            projectCounterEl.innerHTML = `<span>${String(currentProjectIndex + 1).padStart(2, '0')}</span> / ${String(filteredProjects.length).padStart(2, '0')}`;
+        }
+
+        if (btnPrevProj) btnPrevProj.disabled = (filteredProjects.length <= 1);
+        if (btnNextProj) btnNextProj.disabled = (filteredProjects.length <= 1);
+
+        // 6. Sync Quick-Jump Strip & Gallery
+        renderQuickStrip();
+        currentImageIndex = 0;
+        updateGalleryDisplay();
+
+        // 7. Analytics Telemetry for Viewed Project
+        if (!skipTelemetry && typeof PortfolioAnalytics !== 'undefined' && project) {
+            PortfolioAnalytics.trackProjectView(project, currentProjectIndex, filteredProjects.length);
+        }
+    }
+
+    // High-Definition Asset Map (Lossless PNG/JPG for main view & fullscreen lightbox)
+    const HD_IMAGE_MAP = {
+        // Koda: Kiyomori's Guardian
+        "./img/games/Koda/Koda01.webp": "./assets/images/legacy/Koda/Koda01.jpg",
+        "./img/games/Koda/Koda02.webp": "./assets/images/legacy/Koda/Koda02.jpg",
+        "./img/games/Koda/Koda03.webp": "./assets/images/legacy/Koda/Koda03.jpg",
+        "./img/games/Koda/Koda04.webp": "./assets/images/legacy/Koda/Koda04.jpg",
+        "./img/games/Koda/Koda05.webp": "./assets/images/legacy/Koda/Koda05.jpg",
+        "./img/games/Koda/Koda06.webp": "./assets/images/legacy/Koda/Koda06.jpg",
+        "./img/games/Koda/Koda07.webp": "./assets/images/legacy/Koda/Koda07.jpg",
+        "./img/games/Koda/Koda08.webp": "./assets/images/legacy/Koda/Koda08.jpg",
+        "./img/games/Koda/Koda09.webp": "./assets/images/legacy/Koda/Koda09.jpg",
+        "./img/games/Koda/Koda10.webp": "./assets/images/legacy/Koda/Koda10.jpg",
+
+        // Antivirus: Data City
+        "./img/games/Antivirus/AntiVirus1.webp": "./assets/images/legacy/Antivirus/AntiVirus1.jpg",
+        "./img/games/Antivirus/AntiVirus2.webp": "./assets/images/legacy/Antivirus/AntiVirus2.jpg",
+        "./img/games/Antivirus/AntiVirus3.webp": "./assets/images/legacy/Antivirus/AntiVirus3.jpg",
+        "./img/games/Antivirus/AntiVirus4.webp": "./assets/images/legacy/Antivirus/AntiVirus4.jpg",
+        "./img/games/Antivirus/AntiVirus5.webp": "./assets/images/legacy/Antivirus/AntiVirus5.jpg",
+        "./img/games/Antivirus/AntiVirus6.webp": "./assets/images/legacy/Antivirus/AntiVirus6.jpg",
+        "./img/games/Antivirus/AntiVirus8.webp": "./assets/images/legacy/Antivirus/AntiVirus8.jpg",
+        "./img/games/Antivirus/AntiVirus9.webp": "./assets/images/legacy/Antivirus/AntiVirus9.jpg",
+        "./img/games/Antivirus/AntiVirus10.webp": "./assets/images/legacy/Antivirus/AntiVirus10.jpg",
+        "./img/games/Antivirus/AntiVirus11.webp": "./assets/images/legacy/Antivirus/AntiVirus11.jpg",
+        "./img/games/Antivirus/AntiVirus12.webp": "./assets/images/legacy/Antivirus/AntiVirus12.jpg",
+        "./img/games/Antivirus/AntiVirus20.webp": "./assets/images/legacy/Antivirus/AntiVirus20.jpg",
+
+        // Underground Water Junction
+        "./img/games/UWJ/UWJ01.webp": "./assets/images/legacy/UWJ/UWJ01.jpg",
+        "./img/games/UWJ/UWJ02.webp": "./assets/images/legacy/UWJ/UWJ02.jpg",
+        "./img/games/UWJ/UWJ03.webp": "./assets/images/legacy/UWJ/UWJ03.jpg",
+        "./img/games/UWJ/UWJ04.webp": "./assets/images/legacy/UWJ/UWJ04.jpg",
+        "./img/games/UWJ/UWJ05.webp": "./assets/images/legacy/UWJ/UWJ05.jpg",
+        "./img/games/UWJ/UWJ06.webp": "./assets/images/legacy/UWJ/UWJ06.jpg",
+        "./img/games/UWJ/UWJ07.webp": "./assets/images/legacy/UWJ/UWJ07.jpg",
+        "./img/games/UWJ/UWJ08.webp": "./assets/images/legacy/UWJ/UWJ08.jpg",
+
+        // Deficiency
+        "./img/games/Deficience.webp": "./assets/images/legacy/Deficience.jpg",
+        "./img/games/deficienceNew.webp": "./assets/images/legacy/Deficience.jpg",
+        "./assets/images/legacy/Deficience.jpg": "./assets/images/legacy/Deficience.jpg",
+
+        // Tom Atom Rescue
+        "./img/games/TomAtomRescu/platformGame1.webp": "./assets/images/legacy/platform game1.png",
+        "./img/games/TomAtomRescu/platformGame2.webp": "./assets/images/legacy/platform game2.png",
+        "./img/games/TomAtomRescu/platformGame3.webp": "./assets/images/legacy/platform game3.png",
+        "./img/games/TomAtomRescu/platformGame4.webp": "./assets/images/legacy/platform game4.png",
+        "./img/games/TomAtomRescu/platformGame5.webp": "./assets/images/legacy/platform game5.png",
+        "./img/games/TomAtomRescu/Tom Atom printsc.webp": "./assets/images/legacy/Tom Atom printsc.png",
+        "./img/games/TomAtomRescu/badrobot printsc.webp": "./assets/images/legacy/badrobot printsc.png",
+        "./img/games/TomAtomRescu/perso.webp": "./assets/images/legacy/perso.png",
+        "./img/games/TomAtomRescu/player printsc.webp": "./assets/images/legacy/player printsc.png",
+        "./img/games/Tom Atom printsc.webp": "./assets/images/legacy/Tom Atom printsc.png",
+        "./img/games/PlatformGame/platform game1.webp": "./assets/images/legacy/platform game1.png",
+        "./img/games/PlatformGame/platform game2.webp": "./assets/images/legacy/platform game2.png",
+        "./img/games/PlatformGame/platform game3.webp": "./assets/images/legacy/platform game3.png",
+        "./img/games/PlatformGame/platform game4.webp": "./assets/images/legacy/platform game4.png",
+        "./img/games/PlatformGame/platform game5.webp": "./assets/images/legacy/platform game5.png",
+
+        // Simple Movements & 2D Car Prototype
+        "./img/games/Game1.webp": "./assets/images/legacy/Game1.png",
+        "./img/games/Game2.webp": "./assets/images/legacy/Game2.png",
+
+        // Claycity (Minecraft)
+        "./img/games/minecraft/1.webp": "./assets/images/legacy/Claycity/claycity01.jpg",
+        "./img/games/minecraft/2.webp": "./assets/images/legacy/Claycity/claycity02.jpg",
+        "./img/games/minecraft/3.webp": "./assets/images/legacy/Claycity/claycity03.jpg",
+        "./img/games/minecraft/4.webp": "./assets/images/legacy/Claycity/claycity04.jpg",
+        "./img/games/minecraft/5.webp": "./assets/images/legacy/Claycity/claycity05.jpg",
+        "./img/games/minecraft/6.webp": "./assets/images/legacy/Claycity/claycity06.jpg",
+        "./img/games/minecraft/7.webp": "./assets/images/legacy/Claycity/claycity07.jpg",
+        "./img/games/minecraft/8.webp": "./assets/images/legacy/Claycity/claycity08.jpg",
+        "./img/games/minecraft/9.webp": "./assets/images/legacy/Claycity/claycity09.jpg",
+        "./img/games/minecraft/10.webp": "./assets/images/legacy/Claycity/claycity10.jpg",
+        "./img/games/minecraft/11.webp": "./assets/images/legacy/Claycity/claycity11.jpg",
+        "./img/games/minecraft/12.webp": "./assets/images/legacy/Claycity/claycity12.jpg",
+        "./img/games/minecraft/13.webp": "./assets/images/legacy/Claycity/claycity13.jpg",
+        "./img/games/minecraft/14.webp": "./assets/images/legacy/Claycity/claycity14.jpg",
+        "./img/games/minecraft/15.webp": "./assets/images/legacy/Claycity/claycity15.jpg",
+        "./img/games/minecraft/16.webp": "./assets/images/legacy/Claycity/claycity16.jpg",
+        "./img/games/minecraft/17.webp": "./assets/images/legacy/Claycity/claycity17.jpg",
+        "./img/games/minecraft/18.webp": "./assets/images/legacy/Claycity/claycity18.jpg",
+        "./img/games/minecraft/19.webp": "./assets/images/legacy/Claycity/claycity19.jpg",
+        "./img/games/minecraft/20.webp": "./assets/images/legacy/Claycity/claycity20.jpg",
+        "./img/games/minecraft/21.webp": "./assets/images/legacy/Claycity/claycity21.jpg",
+        "./img/games/minecraft/22.webp": "./assets/images/legacy/Claycity/claycity22.jpg",
+        "./img/games/minecraft/23.webp": "./assets/images/legacy/Claycity/claycity23.jpg",
+        "./img/games/minecraft/24.webp": "./assets/images/legacy/Claycity/claycity24.jpg",
+
+        // Trackmania Map
+        "./img/games/Trackmania/track1.webp": "./assets/images/legacy/Trackmania/track1.jpg",
+        "./img/games/Trackmania/track2.webp": "./assets/images/legacy/Trackmania/track2.jpg",
+        "./img/games/Trackmania/track3.webp": "./assets/images/legacy/Trackmania/track3.jpg",
+        "./img/games/Trackmania/track4.webp": "./assets/images/legacy/Trackmania/track4.jpg",
+        "./img/games/Trackmania/track5.webp": "./assets/images/legacy/Trackmania/track5.jpg",
+        "./img/games/Trackmania/track8.webp": "./assets/images/legacy/Trackmania/track8.jpg",
+        "./img/games/Trackmania/track9.webp": "./assets/images/legacy/Trackmania/track9.jpg",
+        "./img/games/Trackmania/track11.webp": "./assets/images/legacy/Trackmania/track11.jpg",
+        "./img/games/Trackmania/track12.webp": "./assets/images/legacy/Trackmania/track12.jpg",
+        "./img/games/Trackmania/track13.webp": "./assets/images/legacy/Trackmania/track13.jpg",
+        "./img/games/Trackmania/track14.webp": "./assets/images/legacy/Trackmania/track14.jpg",
+        "./img/games/Trackmania/track16.webp": "./assets/images/legacy/Trackmania/track16.jpg",
+        "./img/games/Trackmania/track17.webp": "./assets/images/legacy/Trackmania/track17.jpg",
+        "./img/games/Trackmania/track19.webp": "./assets/images/legacy/Trackmania/track19.jpg",
+        "./img/games/Trackmania/track20.webp": "./assets/images/legacy/Trackmania/track20.jpg",
+        "./img/games/Trackmania/track21.webp": "./assets/images/legacy/Trackmania/track21.jpg",
+        "./img/games/Trackmania/track22.webp": "./assets/images/legacy/Trackmania/track22.jpg",
+        "./img/games/Trackmania/track23.webp": "./assets/images/legacy/Trackmania/track23.jpg",
+        "./img/games/Trackmania/track24.webp": "./assets/images/legacy/Trackmania/track24.jpg",
+
+        // Tron (Prototype 3)
+        "./img/games/tron1.webp": "./assets/images/legacy/tron1.png",
+        "./img/games/tron2.webp": "./assets/images/legacy/tron2.png",
+
+        // Web & Design Projects
+        "./assets/images/legacy/html_css/OnlineStore-01.jpg": "./assets/images/legacy/html_css/OnlineStore-01.jpg",
+        "./assets/images/legacy/html_css/OnlineStore-02.jpg": "./assets/images/legacy/html_css/OnlineStore-02.jpg",
+        "./assets/images/legacy/html_css/OnlineStore-03.jpg": "./assets/images/legacy/html_css/OnlineStore-03.jpg",
+        "./assets/images/legacy/html_css/OnlineStore-04.jpg": "./assets/images/legacy/html_css/OnlineStore-04.jpg",
+        "./assets/images/legacy/html_css/WebPage1.png": "./assets/images/legacy/html_css/WebPage1.png",
+        "./assets/images/legacy/html_css/WebPage2.png": "./assets/images/legacy/html_css/WebPage2.png",
+        "./assets/images/legacy/html_css/WebPage3.png": "./assets/images/legacy/html_css/WebPage3.png",
+        "./assets/images/legacy/html_css/WebPage4.png": "./assets/images/legacy/html_css/WebPage4.png",
+        "./assets/images/legacy/arduino/projeto1.jpg": "./assets/images/legacy/arduino/projeto1.jpg",
+        "./assets/images/legacy/arduino/projeto2.jpg": "./assets/images/legacy/arduino/projeto2.jpg",
+        "./assets/images/legacy/arduino/projeto3.jpg": "./assets/images/legacy/arduino/projeto3.jpg",
+        "./assets/images/legacy/arduino/projeto4.jpg": "./assets/images/legacy/arduino/projeto4.jpg",
+        "./assets/images/legacy/arduino/projeto5.jpg": "./assets/images/legacy/arduino/projeto5.jpg",
+        "./assets/images/legacy/design_grafic/Final_Lego-page-001.jpg": "./assets/images/legacy/design_grafic/Final_Lego-page-001.jpg",
+        "./assets/images/legacy/design_grafic/Final_Lego-page-002.jpg": "./assets/images/legacy/design_grafic/Final_Lego-page-002.jpg",
+        "./assets/images/legacy/design_grafic/Hand_Emeric.jpg": "./assets/images/legacy/design_grafic/Hand_Emeric.jpg",
+        "./assets/images/legacy/design_grafic/Logo.jpg": "./assets/images/legacy/design_grafic/Logo.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-001.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-001.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-002.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-002.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-003.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-003.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-004.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-004.jpg",
+        "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-005.jpg": "./assets/images/legacy/design_grafic/Satoshi_Tajiri-page-005.jpg"
+    };
+
+    function getHighResImage(src) {
+        return HD_IMAGE_MAP[src] || src;
+    }
+
+    // Render Gallery Active Image & Filmstrip
+    function updateGalleryDisplay() {
+        if (!filteredProjects || filteredProjects.length === 0) return;
+        const project = filteredProjects[currentProjectIndex];
+        const images = project.images || [];
+
+        if (images.length === 0) {
+            if (mainGalleryImg) {
+                mainGalleryImg.src = '';
+                mainGalleryImg.alt = project.title;
+            }
+            if (filmstripEl) {
+                filmstripEl.textContent = '';
+                delete filmstripEl.dataset.renderKey;
+            }
+            if (btnPrevImg) btnPrevImg.style.display = 'none';
+            if (btnNextImg) btnNextImg.style.display = 'none';
+            return;
+        }
+
+        if (currentImageIndex >= images.length) currentImageIndex = 0;
+        if (currentImageIndex < 0) currentImageIndex = images.length - 1;
+
+        const currentWebp = images[currentImageIndex];
+        const currentHd = resolveAssetPath(getHighResImage(currentWebp));
+        const fallbackWebp = resolveAssetPath(currentWebp);
+
+        if (mainGalleryImg) {
+            mainGalleryImg.onerror = (currentHd !== fallbackWebp) ? function () {
+                this.onerror = null;
+                this.src = fallbackWebp;
+            } : null;
+            mainGalleryImg.src = currentHd;
+            mainGalleryImg.alt = `${project.title} — Preview ${currentImageIndex + 1}`;
+        }
+
+        const hasMultipleImages = images.length > 1;
+        if (btnPrevImg) btnPrevImg.style.display = hasMultipleImages ? 'flex' : 'none';
+        if (btnNextImg) btnNextImg.style.display = hasMultipleImages ? 'flex' : 'none';
+
+        function renderFilmstrip(container, imagesList, activeIdx, title, isFullscreen, projectKey) {
+            if (!container) return;
+            if (!imagesList || imagesList.length <= 1) {
+                container.style.display = 'none';
+                container.textContent = '';
+                delete container.dataset.renderKey;
+                return;
+            }
+
+            container.style.display = 'flex';
+            const renderKey = `${projectKey}:${imagesList.length}:${isFullscreen ? 1 : 0}`;
+
+            if (container.dataset.renderKey !== renderKey) {
+                container.textContent = '';
+                const labelPrefix = isFullscreen ? 'View fullscreen slide' : 'View slide';
+                const frag = document.createDocumentFragment();
+
+                imagesList.forEach((imgSrc, idx) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = idx === activeIdx ? 'thumb-item active' : 'thumb-item';
+                    thumb.setAttribute('data-idx', String(idx));
+                    thumb.setAttribute('role', 'button');
+                    thumb.setAttribute('aria-label', `${labelPrefix} ${idx + 1}`);
+                    thumb.setAttribute('tabindex', '0');
+
+                    const img = document.createElement('img');
+                    img.src = resolveAssetPath(imgSrc);
+                    img.alt = `${title} thumb ${idx + 1}`;
+                    img.loading = 'lazy';
+                    thumb.appendChild(img);
+
+                    thumb.addEventListener('click', (e) => {
+                        if (isFullscreen) e.stopPropagation();
+                        currentImageIndex = idx;
+                        updateGalleryDisplay();
+                    });
+                    thumb.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            if (isFullscreen) e.stopPropagation();
+                            currentImageIndex = idx;
+                            updateGalleryDisplay();
+                        }
+                    });
+
+                    frag.appendChild(thumb);
+                });
+
+                container.appendChild(frag);
+                container.dataset.renderKey = renderKey;
+            } else {
+                const thumbs = container.children;
+                for (let i = 0; i < thumbs.length; i++) {
+                    thumbs[i].classList.toggle('active', i === activeIdx);
+                }
+            }
+
+            const activeThumb = container.children[activeIdx];
+            if (activeThumb && container.clientWidth > 0) {
+                const tLeft = activeThumb.offsetLeft;
+                const tRight = tLeft + activeThumb.offsetWidth;
+                const vLeft = container.scrollLeft;
+                const vRight = vLeft + container.clientWidth;
+                if (tLeft < vLeft || tRight > vRight) {
+                    container.scrollLeft = Math.max(0, tLeft - (container.clientWidth - activeThumb.offsetWidth) / 2);
+                }
+            }
+        }
+
+        renderFilmstrip(filmstripEl, images, currentImageIndex, project.title, false, project.id);
+
+        if (lightboxModal && lightboxModal.classList.contains('active')) {
+            if (lightboxImg) {
+                lightboxImg.onerror = (currentHd !== fallbackWebp) ? function () {
+                    this.onerror = null;
+                    this.src = fallbackWebp;
+                } : null;
+                lightboxImg.src = currentHd;
+                lightboxImg.alt = `${project.title} — Fullscreen ${currentImageIndex + 1}`;
+            }
+            if (lightboxTitle) lightboxTitle.textContent = project.title;
+            if (lightboxCounter) {
+                lightboxCounter.textContent = `${String(currentImageIndex + 1).padStart(2, '0')} / ${String(images.length).padStart(2, '0')}`;
+            }
+            if (lightboxPrevBtn) lightboxPrevBtn.style.display = hasMultipleImages ? 'flex' : 'none';
+            if (lightboxNextBtn) lightboxNextBtn.style.display = hasMultipleImages ? 'flex' : 'none';
+
+            renderFilmstrip(lightboxFilmstrip, images, currentImageIndex, project.title, true, project.id);
+        }
+    }
+
+    // Global Navigation functions
+    window.changeProject = function (direction) {
+        if (filteredProjects.length === 0) return;
+        const count = filteredProjects.length;
+        currentProjectIndex = (currentProjectIndex + direction + count) % count;
+        updateProjectView();
+    };
+
+    window.changeImage = function (direction) {
+        if (filteredProjects.length === 0) return;
+        const project = filteredProjects[currentProjectIndex];
+        if (!project.images || project.images.length === 0) return;
+        const count = project.images.length;
+        currentImageIndex = (currentImageIndex + direction + count) % count;
+        updateGalleryDisplay();
+    };
+
+    if (btnPrevImg) {
+        btnPrevImg.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.changeImage(-1);
+        });
+    }
+    if (btnNextImg) {
+        btnNextImg.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.changeImage(1);
+        });
+    }
+    if (btnPrevProj) {
+        btnPrevProj.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.changeProject(-1);
+        });
+    }
+    if (btnNextProj) {
+        btnNextProj.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.changeProject(1);
+        });
+    }
+
+    // Bridge from Flagship Case Studies directly into Lightbox & Explorer (preserving scroll position)
+    window.openProjectGallery = function (projectId) {
+        const savedScrollY = window.scrollY || window.pageYOffset || 0;
+        const numericId = parseInt(projectId, 10);
+        filterProjects('all', true);
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            const isAll = b.getAttribute('data-filter') === 'all';
+            b.classList.toggle('active', isAll);
+            b.setAttribute('aria-selected', isAll ? 'true' : 'false');
+        });
+        const targetIdx = filteredProjects.findIndex(p => p.id === numericId);
+        if (targetIdx !== -1) {
+            currentProjectIndex = targetIdx;
+            updateProjectView();
+            openLightbox();
+        }
+        if ((window.scrollY || window.pageYOffset || 0) !== savedScrollY) {
+            window.scrollTo(0, savedScrollY);
+        }
+    };
+
+    // Attach click & keyboard handlers to Flagship Case Study gallery triggers
+    document.querySelectorAll('[data-open-gallery]').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const pid = trigger.getAttribute('data-open-gallery');
+            if (pid) window.openProjectGallery(pid);
+        });
+        if (trigger.tagName !== 'BUTTON') {
+            trigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const pid = trigger.getAttribute('data-open-gallery');
+                    if (pid) window.openProjectGallery(pid);
+                }
+            });
+        }
+    });
+
+    // Filter Logic
+    function filterProjects(filterId, skipTelemetry = false) {
+        if (filterId === 'all') {
+            filteredProjects = [...projects];
+        } else if (filterId === 'ai') {
+            filteredProjects = projects.filter(p => ['cv', 'nlp', 'ml'].includes(p.category));
+        } else {
+            filteredProjects = projects.filter(p => p.category === filterId);
+        }
+
+        currentProjectIndex = 0;
+        currentImageIndex = 0;
+        updateProjectView(skipTelemetry);
+    }
+
+    // Filter Button Clicks
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            const filter = btn.getAttribute('data-filter');
+            filterProjects(filter);
+
+            if (typeof PortfolioAnalytics !== 'undefined') {
+                PortfolioAnalytics.trackCategoryFilter(filter, filteredProjects.length);
+            }
+        });
+    });
+
+    // Lightbox Modal Handling
+    if (expandImageBtn && mainGalleryImg) {
+        expandImageBtn.addEventListener('click', openLightbox);
+        mainGalleryImg.addEventListener('click', openLightbox);
+    }
+
+    function openLightbox() {
+        if (!lightboxModal || !lightboxImg || filteredProjects.length === 0) return;
+        const project = filteredProjects[currentProjectIndex];
+        const images = project.images || [];
+        if (images.length === 0) return;
+
+        lightboxModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        updateGalleryDisplay();
+
+        if (typeof PortfolioAnalytics !== 'undefined' && project) {
+            PortfolioAnalytics.trackLightboxOpen(project.title, currentImageIndex);
+        }
+    }
+
+    function closeLightbox() {
+        if (!lightboxModal) return;
+        lightboxModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (lightboxCloseBtn) {
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+    }
+
+    if (lightboxPrevBtn) {
+        lightboxPrevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.changeImage(-1);
+        });
+    }
+
+    if (lightboxNextBtn) {
+        lightboxNextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.changeImage(1);
+        });
+    }
+
+    if (lightboxModal) {
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) closeLightbox();
+        });
+    }
+
+    // Keyboard Navigation (Lightbox only unless explorer focused)
+    window.addEventListener('keydown', (e) => {
+        if (lightboxModal && lightboxModal.classList.contains('active')) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') window.changeImage(-1);
+            if (e.key === 'ArrowRight') window.changeImage(1);
+        }
+    });
+
+    // Language Toggle Click Event (preserving vertical scroll position)
+    const langBtn = document.getElementById('lang-toggle');
+    if (langBtn) {
+        langBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof I18N !== 'undefined') {
+                const savedScrollY = window.scrollY || window.pageYOffset || 0;
+                I18N.toggle();
+                updateProjectView(true);
+                if ((window.scrollY || window.pageYOffset || 0) !== savedScrollY) {
+                    window.scrollTo(0, savedScrollY);
+                }
+
+                if (typeof PortfolioAnalytics !== 'undefined') {
+                    PortfolioAnalytics.trackLanguageChange(I18N.getLocale());
+                }
+            }
+        });
+    }
+
+    // Initial Filter Activation (All 33 projects, newest first, without inflating initial project telemetry)
+    filterProjects('all', true);
+});
+
