@@ -400,10 +400,18 @@ button {
 .hero-title-role {
     display: block;
     margin-top: 0.65rem;
-    font-size: clamp(1.35rem, 2.5vw, 2.05rem);
+    font-size: clamp(1.05rem, 1.62vw, 1.35rem);
     font-weight: 600;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
     color: var(--ink-secondary);
+    white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+    .hero-title-role {
+        white-space: normal;
+        font-size: clamp(1rem, 4.8vw, 1.25rem);
+    }
 }
 
 .hero-summary {

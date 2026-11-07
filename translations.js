@@ -7,9 +7,9 @@ const TRANSLATIONS = {
     en: {
         // --- Meta / SEO / Schema ---
         _meta: {
-            title: "Emeric Ferreira Dos Santos — AI Engineer, Full-Stack Builder & UX/UI Designer | Geneva, Switzerland",
-            description: "Emeric Ferreira Dos Santos is an AI Engineer, Full-Stack Builder, and UX/UI Designer in Geneva, Switzerland (Permit C), creating AI Agents, LLM/RAG apps, Obvious Tool (obvioustool.com), Rust/Tauri software, and user-centered interfaces.",
-            ogTitle: "Emeric Ferreira Dos Santos — AI Engineer, Full-Stack & UX/UI Designer (Geneva)",
+            title: "Emeric F.D.S. — AI Engineer, Full-Stack Builder & UX/UI Designer | Geneva, Switzerland",
+            description: "Emeric F.D.S. is an AI Engineer, Full-Stack Builder, and UX/UI Designer in Geneva, Switzerland (Permit C), creating AI Agents, LLM/RAG apps, Obvious Tool (obvioustool.com), Rust/Tauri software, and user-centered interfaces.",
+            ogTitle: "Emeric F.D.S. — AI Engineer, Full-Stack & UX/UI Designer (Geneva)",
             ogDescription: "Shipping production AI Agents, Web & Rust/Tauri apps (obvioustool.com, PhotoLift, CVite), and ergonomic UX/UI systems in Geneva, Switzerland (Swiss Permit C).",
             ldDescription: "AI Engineer, Full-Stack Product Builder, and UX/UI Designer based in Geneva, Switzerland (Swiss Permit C). Creator of Obvious Tool (obvioustool.com), PhotoLift, CVite, Smart Bucket, and GhostLink; Digital Advisor & UX/UI Designer at Declix (Geneva); shipped Nintendo Switch & Unity/Unreal interactive systems."
         },
@@ -137,15 +137,15 @@ const TRANSLATIONS = {
         // --- FAQ (GEO & Recruiter Q&A) ---
         "faq.eyebrow": "Frequently Asked Questions",
         "faq.title": "Key Information for Recruiters, Clients & AI Assistants",
-        "faq.q1": "What AI, software, and UX/UI projects does Emeric Ferreira Dos Santos build?",
+        "faq.q1": "What AI, software, and UX/UI projects does Emeric F.D.S. build?",
         "faq.a1": "Emeric designs and ships end-to-end <strong>AI Agents, LLM/RAG pipelines, and NLP document platforms</strong> (<em>CVite</em>), the live developer &amp; AI workspace <strong><a href=\"https://obvioustool.com\" target=\"_blank\" rel=\"noopener noreferrer\">Obvious Tool (obvioustool.com)</a></strong>, <strong>native Rust/Tauri desktop apps</strong> (<em>PhotoLift</em>), <strong>autonomous ML dashboards</strong> (<em>Smart Bucket</em>), <strong>zero-knowledge encrypted web apps</strong> (<em>GhostLink</em>), and ergonomic internal application interfaces at <strong>Declix (Geneva)</strong>.",
-        "faq.q2": "What is Emeric Ferreira Dos Santos's core technical and UX/UI stack?",
+        "faq.q2": "What is Emeric F.D.S.'s core technical and UX/UI stack?",
         "faq.a2": "He combines <strong>AI &amp; Application Logic</strong> (Python, LLMs, RAG, NLP, YOLOv8/OpenCV, C#), <strong>Full-Stack &amp; Native Software</strong> (React, TypeScript, Vite, Next.js, Rust, Tauri, AES-256 WebCrypto), <strong>UX/UI &amp; Information Architecture</strong> (interface prototyping, user testing, navigation schemas, storyboards, Figma, Adobe Suite), and <strong>3D Engines</strong> (Unity, Unreal Engine).",
         "faq.q3": "What is Emeric's work authorization and availability in Geneva and Switzerland?",
         "faq.a3": "Emeric lives in <strong>Geneva (1227 Les Acacias), Switzerland</strong>, holds a permanent <strong>Swiss C Residence Permit (Permis C)</strong> as well as <strong>A &amp; B driving licenses</strong>, and is open to <strong>AI Engineer, Full-Stack Developer, Product Builder, or UX/UI Designer</strong> opportunities across Geneva, Lausanne, Romandie, and Europe.",
         "faq.q4": "How do his UX/UI, Declix, and Level Design experiences complement his AI engineering?",
         "faq.a4": "Between designing internal app interfaces and training users daily at <strong>Declix (Geneva)</strong> and shipping commercial titles like <em>Pure Mahjong</em> (1,000+ levels on <strong>Nintendo Switch</strong>), Emeric grounds every technical system in <strong>real-world user testing, clear information architecture, and friction-free ergonomics</strong>.",
-        "faq.q5": "Which languages does Emeric Ferreira Dos Santos speak?",
+        "faq.q5": "Which languages does Emeric F.D.S. speak?",
         "faq.a5": "Emeric speaks <strong>four languages</strong>: native <strong>French</strong>, fluent <strong>Portuguese (C2)</strong>, good professional <strong>English (B2)</strong>, and good <strong>Spanish (B2)</strong>.",
 
         // --- Contact & Footer ---
@@ -176,9 +176,9 @@ const TRANSLATIONS = {
     fr: {
         // --- Meta / SEO / Schema ---
         _meta: {
-            title: "Emeric Ferreira Dos Santos — Ingénieur IA, Développeur Full-Stack & UX/UI Designer | Genève, Suisse",
-            description: "Portfolio d'Emeric Ferreira Dos Santos à Genève (Les Acacias, Permis C). Ingénieur IA, Full-Stack Builder & UX/UI Designer : Agents IA, Obvious Tool (obvioustool.com), Rust/Tauri, prototypage et ergonomie d'interfaces.",
-            ogTitle: "Emeric Ferreira Dos Santos — Ingénieur IA, Full-Stack & UX/UI Designer (Genève)",
+            title: "Emeric F.D.S. — Ingénieur IA, Développeur Full-Stack & UX/UI Designer | Genève, Suisse",
+            description: "Portfolio d'Emeric F.D.S. à Genève (Les Acacias, Permis C). Ingénieur IA, Full-Stack Builder & UX/UI Designer : Agents IA, Obvious Tool (obvioustool.com), Rust/Tauri, prototypage et ergonomie d'interfaces.",
+            ogTitle: "Emeric F.D.S. — Ingénieur IA, Full-Stack & UX/UI Designer (Genève)",
             ogDescription: "Conception d'Agents IA, applications Web & Rust/Tauri (obvioustool.com, PhotoLift, CVite) et design UX/UI centré utilisateur à Genève, Suisse (Permis C).",
             ldDescription: "Ingénieur IA, Développeur Full-Stack et UX/UI Designer basé à Genève, Suisse (Permis C). Créateur d'Obvious Tool (obvioustool.com), PhotoLift, CVite, Smart Bucket et GhostLink ; Conseiller, formateur numérique et concepteur UX/UI chez Declix (Genève) ; parcours commercial Nintendo Switch & Unity/Unreal."
         },
@@ -306,7 +306,7 @@ const TRANSLATIONS = {
         // --- FAQ (GEO & Recruiter Q&A) ---
         "faq.eyebrow": "Questions Fréquentes",
         "faq.title": "Informations Clés pour Recruteurs, Clients & Assistants IA",
-        "faq.q1": "Quels projets IA, logiciels et UX/UI Emeric Ferreira Dos Santos conçoit-il ?",
+        "faq.q1": "Quels projets IA, logiciels et UX/UI Emeric F.D.S. conçoit-il ?",
         "faq.a1": "Emeric conçoit et livre de bout en bout des <strong>Agents IA, pipelines LLM/RAG et plateformes NLP</strong> (<em>CVite</em>), la suite en ligne <strong><a href=\"https://obvioustool.com\" target=\"_blank\" rel=\"noopener noreferrer\">Obvious Tool (obvioustool.com)</a></strong>, des <strong>applications desktop natives en Rust/Tauri</strong> (<em>PhotoLift</em>), des <strong>tableaux de bord ML autonomes</strong> (<em>Smart Bucket</em>), des <strong>applications web chiffrées AES-256</strong> (<em>GhostLink</em>), ainsi que le prototypage UX/UI d'applications internes chez <strong>Declix (Genève)</strong>.",
         "faq.q2": "Quelles sont les compétences techniques et UX/UI principales d'Emeric ?",
         "faq.a2": "Il associe <strong>IA &amp; Logique Applicative</strong> (Python, LLMs, RAG, NLP, YOLOv8/OpenCV, C#), <strong>Full-Stack &amp; Natif</strong> (React, TypeScript, Vite, Next.js, Rust, Tauri, AES-256), <strong>Design UX/UI &amp; Architecture d'Information</strong> (prototypage d'interfaces, tests utilisateurs, schémas de navigation, storyboards, Figma, Suite Adobe) et <strong>Moteurs 3D</strong> (Unity, Unreal Engine).",
@@ -314,7 +314,7 @@ const TRANSLATIONS = {
         "faq.a3": "Établi à <strong>Genève (1227 Les Acacias), Suisse</strong>, Emeric est titulaire du <strong>Permis d'établissement C</strong> ainsi que des <strong>permis de conduire A et B</strong>. Il est ouvert aux opportunités d'<strong>Ingénieur IA, Développeur Full-Stack, Product Builder ou UX/UI Designer</strong> à Genève, Lausanne, en Suisse romande et à distance.",
         "faq.q4": "Comment son expérience chez Declix et en Level Design renforce-t-elle ses produits logiciels ?",
         "faq.a4": "Entre la conception d'interfaces internes et l'accompagnement quotidien d'usagers chez <strong>Declix (Genève)</strong> d'une part, et la livraison de titres commerciaux comme <em>Pure Mahjong</em> (1 000+ niveaux sur <strong>Nintendo Switch</strong>) d'autre part, Emeric ancre chaque outil IA ou logiciel dans des <strong>tests utilisateurs réels, des parcours simplifiés et une ergonomie immédiate</strong>.",
-        "faq.q5": "Quelles langues parle Emeric Ferreira Dos Santos ?",
+        "faq.q5": "Quelles langues parle Emeric F.D.S. ?",
         "faq.a5": "Emeric parle <strong>quatre langues</strong> : <strong>Français</strong> (langue maternelle), <strong>Portugais (C2)</strong>, <strong>Anglais (B2)</strong> et <strong>Espagnol (B2)</strong>.",
 
         // --- Contact & Footer ---
