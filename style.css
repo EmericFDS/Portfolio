@@ -12,21 +12,24 @@
     --bg-subtle-hover: hsl(38, 18%, 91.5%);  /* #ECE9E2 */
     --bg-inverse: hsl(222, 48%, 9%);         /* #0C1322 */
 
-    /* Border Tokens — Neutral Hairlines Only */
+    /* Border Tokens — Warm Neutral Hairlines */
     --border-hairline: hsl(38, 14%, 88%);    /* #E4E1DA */
-    --border-strong: hsl(220, 14%, 78%);     /* #BFC5D0 */
+    --border-strong: hsl(36, 12%, 76%);      /* #C8C5BD */
 
     /* Ink / Typography Colors (WCAG AA/AAA Verified) */
-    --ink-primary: hsl(222, 48%, 9%);        /* #0C1322 — 18.1:1 */
-    --ink-secondary: hsl(220, 22%, 25%);     /* #323C4E — 10.6:1 */
-    --ink-muted: hsl(220, 13%, 42%);         /* #5D6679 — 5.4:1 */
-    --ink-caption: hsl(220, 11%, 48%);       /* #6D7688 — 4.55:1 */
+    --ink-primary: hsl(222, 36%, 10%);       /* #101522 — 17.5:1 */
+    --ink-secondary: hsl(220, 18%, 26%);     /* #373F4E — 10.1:1 */
+    --ink-muted: hsl(220, 12%, 42%);         /* #5E6575 — 5.4:1 */
+    --ink-caption: hsl(220, 10%, 48%);       /* #6E7584 — 4.5:1 */
 
-    /* Single Curated Accent — Deep Swiss Ultramarine */
-    --accent: hsl(221, 83%, 45%);            /* #1451D2 */
-    --accent-hover: hsl(222, 86%, 36%);      /* #0D3CAD */
-    --accent-soft: hsl(220, 75%, 96%);       /* #EFF4FD */
-    --status-emerald: hsl(158, 72%, 31%);    /* #16885B */
+    /* Curated Accent System — Swiss Vermillion Orange (#ff7800) */
+    --accent: #ff7800;                       /* #FF7800 — Signature Pure Accent */
+    --accent-hover: #e66a00;                 /* #E66A00 — Warm Deepened Hover */
+    --accent-dark: #b84e00;                  /* #B84E00 — Accessible High-Contrast Ink (5.1:1) */
+    --accent-soft: rgba(255, 120, 0, 0.07);  /* #FFF5ED — Subtle Luminous Wash */
+    --accent-border: rgba(255, 120, 0, 0.22);/* Delicate Hairline Accent */
+    --accent-glow: rgba(255, 120, 0, 0.22);  /* Tactile Warm Glow */
+    --status-emerald: hsl(158, 72%, 31%);    /* #16885B — Retained for Availability */
 
     /* Typography Stack */
     --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -92,8 +95,8 @@ button {
 }
 
 ::selection {
-    background: var(--accent);
-    color: #ffffff;
+    background: rgba(255, 120, 0, 0.22);
+    color: var(--ink-primary);
 }
 
 :focus-visible {
@@ -148,14 +151,25 @@ button {
 }
 
 .eyebrow {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-dark);
     margin-bottom: 0.65rem;
+}
+
+.eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
 }
 
 .section-title {
@@ -221,7 +235,7 @@ button {
 }
 
 .brand-mark-dot {
-    color: #60a5fa;
+    color: var(--accent);
 }
 
 .brand-text-col {
@@ -576,7 +590,7 @@ button {
     font-family: var(--font-mono);
     font-size: 0.76rem;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-dark);
     margin-bottom: 0.9rem;
     display: block;
 }
@@ -711,7 +725,7 @@ button {
 }
 
 .case-domain {
-    color: var(--accent);
+    color: var(--accent-dark);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -813,8 +827,8 @@ button {
     padding: 0.32rem 0.72rem;
     border-radius: var(--radius-sm);
     background: var(--accent-soft);
-    border: 1px solid rgba(20, 81, 210, 0.2);
-    color: var(--accent);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-dark);
 }
 
 .case-action-btn.case-live-btn:hover {
@@ -829,7 +843,7 @@ button {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--accent);
+    color: var(--accent-dark);
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border-hairline);
     margin-top: 0.5rem;
@@ -901,8 +915,9 @@ button {
 }
 
 .filter-btn.active .filter-count {
-    background: rgba(255, 255, 255, 0.18);
+    background: var(--accent);
     color: #ffffff;
+    font-weight: 700;
 }
 
 /* Quick-Jump Selector Strip */
@@ -937,8 +952,8 @@ button {
 
 .quick-proj-chip.active {
     background: var(--accent-soft);
-    color: var(--accent);
-    border-color: rgba(20, 81, 210, 0.2);
+    color: var(--accent-dark);
+    border-color: var(--accent-border);
     font-weight: 600;
 }
 
@@ -989,8 +1004,9 @@ button {
 }
 
 .project-category-pill {
-    color: var(--accent);
+    color: var(--accent-dark);
     background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
 }
 
 .project-title-text {
@@ -1302,7 +1318,7 @@ button {
 .directory-item-meta {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    color: var(--accent);
+    color: var(--accent-dark);
     margin-bottom: 0.35rem;
 }
 
@@ -1359,7 +1375,7 @@ button {
 .timeline-org {
     font-size: 0.86rem;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-dark);
     margin-top: 0.15rem;
     margin-bottom: 0.5rem;
 }
