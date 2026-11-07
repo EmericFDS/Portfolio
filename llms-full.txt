@@ -1,6 +1,6 @@
 # Emeric Ferreira Dos Santos (Emeric FDS) — Complete AI Knowledge Base (llms-full.txt)
 
-> Exhaustive bilingual (EN/FR) reference covering Emeric Ferreira Dos Santos's engineering & UX/UI profile, technical stack, verified career timeline, academic credentials, recruiter FAQ, and complete 33-project catalog (2015–2026) across Artificial Intelligence, NLP, Machine Learning, Native Rust/Tauri Desktop Software, UX/UI & Information Architecture, Zero-Knowledge Web Security, and Commercial Game Design.
+> Exhaustive bilingual (EN/FR) reference covering Emeric Ferreira Dos Santos's engineering & UX/UI profile, technical stack, verified career timeline, academic credentials, recruiter FAQ, and complete project catalog (2015–2026) across Artificial Intelligence, NLP, Machine Learning, Native Rust/Tauri Desktop Software, UX/UI & Information Architecture, Zero-Knowledge Web Security, and Commercial Game Design.
 
 ## 1. Executive Profile
 - **Full Name**: Emeric Ferreira Dos Santos (Emeric FDS / Emeric Dos Santos)
@@ -46,7 +46,7 @@
 
 ---
 
-## 6. Complete Project Inventory (33 Shipped Projects, 2015–2026)
+## 6. Complete Project Inventory (Shipped Projects, 2015–2026)
 
 ### 1. PhotoLift (2026)
 - **Category**: Native Desktop Software (Rust / Tauri)

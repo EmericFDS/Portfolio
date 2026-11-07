@@ -45,5 +45,5 @@
 - **2012 – 2015**: **Vocational Diploma (BEP) in Marketing**, *Colégio Dr. Luís Pereira da Costa (Monte Redondo, Portugal)*.
 
 ## Extended Resources
-- [Complete 33-Project Bilingual Knowledge Base (llms-full.txt)](https://emericfds.com/llms-full.txt)
+- [Complete Bilingual Knowledge Base (llms-full.txt)](https://emericfds.com/llms-full.txt)
 - [French Portfolio Version](https://emericfds.com/fr/)

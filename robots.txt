@@ -94,4 +94,4 @@ Allow: /
 # --- Canonical Sitemap & AI Knowledge Base (llms.txt Standard) ---
 Sitemap: https://emericfds.com/sitemap.xml
 # Concise AI Summary: https://emericfds.com/llms.txt
-# Complete 33-Project Knowledge Base: https://emericfds.com/llms-full.txt
+# Complete Knowledge Base: https://emericfds.com/llms-full.txt

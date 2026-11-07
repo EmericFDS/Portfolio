@@ -17,7 +17,7 @@ const TRANSLATIONS = {
         // --- Header / Navigation ---
         "nav.status": "Available",
         "nav.expertise": "Expertise",
-        "nav.projects": "Projects (33)",
+        "nav.projects": "Projects",
         "nav.experience": "Experience",
         "nav.faq": "FAQ",
         "nav.about": "About",
@@ -29,11 +29,11 @@ const TRANSLATIONS = {
         "hero.dateline.status": "Swiss Permit C · Open to AI / Full-Stack / UX-UI Roles",
         "hero.role": "AI Engineer, Full-Stack Builder & UX/UI Designer",
         "hero.subtitle": "AI Engineer, Full-Stack Developer & UX/UI Designer",
-        "hero.tagline": "Designing and shipping production-grade <strong>AI Agents, LLM/RAG pipelines, and native &amp; web applications</strong>. Combining rigorous software engineering (Python, TypeScript/React, Rust/Tauri) with concrete field expertise in <strong>UX/UI prototyping, information architecture, and user testing</strong> across 33 shipped products.",
+        "hero.tagline": "Designing and shipping production-grade <strong>AI Agents, LLM/RAG pipelines, and native &amp; web applications</strong>. Combining rigorous software engineering (Python, TypeScript/React, Rust/Tauri) with concrete field expertise in <strong>UX/UI prototyping, information architecture, and user testing</strong> across production-shipped products.",
         "hero.ctaProjects": "Explore Projects",
         "hero.ctaContact": "Get in Touch",
         "hero.badgeLocation": "Geneva, Switzerland",
-        "hero.metric1.val": "33",
+        "hero.metric1.val": "30+",
         "hero.metric1.label": "Shipped Apps, Tools & Games",
         "hero.metric2.val": "5+",
         "hero.metric2.label": "Flagship AI & Native Products (2024–2026)",
@@ -55,8 +55,8 @@ const TRANSLATIONS = {
 
         // --- Projects & Realizations Explorer ---
         "projects.eyebrow": "Selected & Complete Work (2015–2026)",
-        "projects.title": "Projects & Realizations (33 Projects)",
-        "projects.lead": "Browse all 33 projects shipped between 2015 and 2026: live AI & developer suite (Obvious Tool), native Rust/Tauri desktop software, NLP extraction, Web security, UX/UI design, and Nintendo Switch games.",
+        "projects.title": "Projects & Realizations",
+        "projects.lead": "Browse projects shipped between 2015 and 2026: live AI & developer suite (Obvious Tool), native Rust/Tauri desktop software, NLP extraction, Web security, UX/UI design, and Nintendo Switch games.",
         "projects.filter.all": "All",
         "projects.filter.ai": "AI & ML",
         "projects.filter.web": "Web",
@@ -72,7 +72,7 @@ const TRANSLATIONS = {
         "projects.viewFullscreen": "Fullscreen",
         "projects.closeModal": "Close modal",
         "projects.keyboardHint": "← → to navigate",
-        "projects.directorySummary": "View complete text index of all 33 projects (AI, Web, Games, Design)",
+        "projects.directorySummary": "View complete text index of all projects (AI, Web, Games, Design)",
 
         // --- Career, Education & Stack (Synced with Verified CV) ---
         "resume.eyebrow": "Career, Education & Skills",
@@ -186,7 +186,7 @@ const TRANSLATIONS = {
         // --- Header / Navigation ---
         "nav.status": "Disponible",
         "nav.expertise": "Expertise",
-        "nav.projects": "Projets (33)",
+        "nav.projects": "Projets",
         "nav.experience": "Parcours",
         "nav.faq": "FAQ",
         "nav.about": "À Propos",
@@ -198,11 +198,11 @@ const TRANSLATIONS = {
         "hero.dateline.status": "Permis C · Disponible (IA / Full-Stack / UX-UI)",
         "hero.role": "Ingénieur IA, Full-Stack Builder & UX/UI Designer",
         "hero.subtitle": "Ingénieur IA, Développeur Full-Stack & UX/UI Designer",
-        "hero.tagline": "Conception et mise en production d'<strong>Agents IA, pipelines LLM/RAG et applications Web &amp; Desktop natives</strong>. J'allie rigueur logicielle (Python, TypeScript/React, Rust/Tauri) et expérience terrain en <strong>design UX/UI, architecture d'information et tests utilisateurs</strong> sur 33 projets livrés.",
+        "hero.tagline": "Conception et mise en production d'<strong>Agents IA, pipelines LLM/RAG et applications Web &amp; Desktop natives</strong>. J'allie rigueur logicielle (Python, TypeScript/React, Rust/Tauri) et expérience terrain en <strong>design UX/UI, architecture d'information et tests utilisateurs</strong> sur mes projets livrés.",
         "hero.ctaProjects": "Voir les projets",
         "hero.ctaContact": "Me contacter",
         "hero.badgeLocation": "Genève, Suisse",
-        "hero.metric1.val": "33",
+        "hero.metric1.val": "30+",
         "hero.metric1.label": "Applications, Outils & Jeux livrés",
         "hero.metric2.val": "5+",
         "hero.metric2.label": "Produits IA & Natifs phares (2024–2026)",
@@ -224,8 +224,8 @@ const TRANSLATIONS = {
 
         // --- Projects & Realizations Explorer ---
         "projects.eyebrow": "Réalisations (2015–2026)",
-        "projects.title": "Projets & Réalisations (33 Projets)",
-        "projects.lead": "Parcourez mes 33 projets livrés entre 2015 et 2026 : suite IA & outils en ligne (Obvious Tool), logiciels natifs Rust/Tauri, extraction NLP, cybersécurité Web, design UX/UI et jeux publiés sur Nintendo Switch.",
+        "projects.title": "Projets & Réalisations",
+        "projects.lead": "Parcourez mes réalisations livrées entre 2015 et 2026 : suite IA & outils en ligne (Obvious Tool), logiciels natifs Rust/Tauri, extraction NLP, cybersécurité Web, design UX/UI et jeux publiés sur Nintendo Switch.",
         "projects.filter.all": "Tous",
         "projects.filter.ai": "IA & ML",
         "projects.filter.web": "Web",
@@ -241,7 +241,7 @@ const TRANSLATIONS = {
         "projects.viewFullscreen": "Plein écran",
         "projects.closeModal": "Fermer la fenêtre",
         "projects.keyboardHint": "Touches ← → pour naviguer",
-        "projects.directorySummary": "Afficher l'index textuel complet des 33 projets (IA, Web, Jeux, Design)",
+        "projects.directorySummary": "Afficher l'index textuel complet des projets (IA, Web, Jeux, Design)",
 
         // --- Career, Education & Stack (Synced with Verified CV) ---
         "resume.eyebrow": "Parcours, Formations & Compétences",

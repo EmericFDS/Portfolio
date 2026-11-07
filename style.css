@@ -374,9 +374,18 @@ button {
     margin-bottom: 1.35rem;
 }
 
+.hero-first-name,
+.hero-last-name {
+    display: block;
+}
+
+.hero-last-name {
+    margin-top: 0.15rem;
+}
+
 .hero-title-role {
     display: block;
-    margin-top: 0.35rem;
+    margin-top: 0.65rem;
     font-size: clamp(1.35rem, 2.5vw, 2.05rem);
     font-weight: 600;
     letter-spacing: -0.025em;
@@ -450,13 +459,21 @@ button {
 
 .hero-trust-links {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 1.35rem;
+    gap: 1.25rem;
     padding-top: 1.35rem;
     border-top: 1px solid var(--border-hairline);
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     color: var(--ink-muted);
+    white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+    .hero-trust-links {
+        flex-wrap: wrap;
+        gap: 0.75rem 1.15rem;
+    }
 }
 
 .trust-link {
@@ -466,6 +483,8 @@ button {
     font-weight: 500;
     color: var(--ink-secondary);
     transition: color 0.18s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .trust-link:hover {
@@ -818,7 +837,7 @@ button {
 
 
 /* ==========================================================================
-   6. INTERACTIVE 33-PROJECT ARCHIVE & EXPLORER
+   6. INTERACTIVE PROJECT ARCHIVE & EXPLORER
    ========================================================================== */
 .explorer-card {
     background: var(--bg-surface);
@@ -1215,7 +1234,7 @@ button {
     font-weight: 700;
 }
 
-/* Native Crawlable 33-Project Directory (<details>) */
+/* Native Crawlable Project Directory (<details>) */
 .crawlable-directory {
     margin-top: 1.25rem;
     background: var(--bg-surface);

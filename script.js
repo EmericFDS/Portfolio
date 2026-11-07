@@ -1726,7 +1726,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial Filter Activation (All 33 projects, newest first, without inflating initial project telemetry)
+    // Initial Filter Activation (All projects, newest first, without inflating initial project telemetry)
     filterProjects('all', true);
 });
 

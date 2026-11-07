@@ -6,7 +6,7 @@
 - **Portfolio (Français)**: [https://emericfds.com/fr/](https://emericfds.com/fr/)
 - **Live SaaS Product (*Obvious Tool*)**: [https://obvioustool.com/](https://obvioustool.com/)
 - **AI Agent Summary (`llms.txt`)**: [https://emericfds.com/llms.txt](https://emericfds.com/llms.txt)
-- **Full 33-Project Knowledge Base (`llms-full.txt`)**: [https://emericfds.com/llms-full.txt](https://emericfds.com/llms-full.txt)
+- **Full Knowledge Base (`llms-full.txt`)**: [https://emericfds.com/llms-full.txt](https://emericfds.com/llms-full.txt)
 - **LinkedIn**: [linkedin.com/in/emericfds](https://www.linkedin.com/in/emericfds/)
 - **Direct Contact**: [contact@emericfds.com](mailto:contact@emericfds.com)
 
