@@ -6,6 +6,40 @@
 // Data directly inlined to ensure strictly local functionality without server
 const projects = [
     {
+        id: 111,
+        title: "Obvious Tool",
+        description: `Your Digital Swiss Army Knife. A unified suite of tools for developers and creatives.
+
+**Multi-Tools:** Over 50 essential tools (Converters, Encoders, Image/Audio processing) in one app.
+**Embedded AI:** AI-powered modules for paraphrasing, text correction, and translation.
+**Private & Fast:** Runs locally, ad-free, with a modern and fluid interface.`,
+        descriptionFr: `Votre Couteau Suisse Numérique. Une suite unifiée d'outils pour développeurs et créatifs.
+
+**Multi-Outils :** Plus de 50 outils essentiels (Convertisseurs, Encodeurs, traitement Image/Audio) en une seule app.
+**IA Embarquée :** Modules IA pour la paraphrase, la correction de texte et la traduction.
+**Privé & Rapide :** Fonctionne en local, sans pub, avec une interface moderne et fluide.`,
+        category: "nlp",
+        year: "2025",
+        tech: ["React", "Desktop App", "AI Utils", "Privacy"],
+        icon: "fa-toolbox",
+        links: [
+            { label: "obvioustool.com", url: "https://obvioustool.com" }
+        ],
+        images: [
+            "./img/ia/ObviousTool/ot2.webp",
+            "./img/ia/ObviousTool/ot1.webp",
+            "./img/ia/ObviousTool/ot3.webp",
+            "./img/ia/ObviousTool/ot4.webp",
+            "./img/ia/ObviousTool/ot5.webp",
+            "./img/ia/ObviousTool/ot6.webp",
+            "./img/ia/ObviousTool/ot7.webp",
+            "./img/ia/ObviousTool/ot8.webp",
+            "./img/ia/ObviousTool/ot9.webp",
+            "./img/ia/ObviousTool/ot10.webp",
+            "./img/ia/ObviousTool/ot11.webp"
+        ]
+    },
+    {
         id: 112,
         title: "PhotoLift",
         description: `Desktop application for fast photo management and processing.
@@ -23,45 +57,14 @@ const projects = [
         tech: ["Tauri", "React", "Rust", "Image Processing"],
         icon: "fa-camera",
         images: [
-            "./img/other/PhotoLift/pl1.webp",
             "./img/other/PhotoLift/pl2.webp",
+            "./img/other/PhotoLift/pl1.webp",
             "./img/other/PhotoLift/pl3.webp",
             "./img/other/PhotoLift/pl4.webp",
             "./img/other/PhotoLift/pl5.webp",
             "./img/other/PhotoLift/pl6.webp",
             "./img/other/PhotoLift/pl7.webp",
             "./img/other/PhotoLift/pl8.webp"
-        ]
-    },
-    {
-        id: 111,
-        title: "Obvious Tool",
-        description: `Your Digital Swiss Army Knife. A unified suite of tools for developers and creatives.
-
-**Multi-Tools:** Over 50 essential tools (Converters, Encoders, Image/Audio processing) in one app.
-**Embedded AI:** AI-powered modules for paraphrasing, text correction, and translation.
-**Private & Fast:** Runs locally, ad-free, with a modern and fluid interface.`,
-        descriptionFr: `Votre Couteau Suisse Numérique. Une suite unifiée d'outils pour développeurs et créatifs.
-
-**Multi-Outils :** Plus de 50 outils essentiels (Convertisseurs, Encodeurs, traitement Image/Audio) en une seule app.
-**IA Embarquée :** Modules IA pour la paraphrase, la correction de texte et la traduction.
-**Privé & Rapide :** Fonctionne en local, sans pub, avec une interface moderne et fluide.`,
-        category: "nlp",
-        year: "2025",
-        tech: ["React", "Desktop App", "AI Utils", "Privacy"],
-        icon: "fa-toolbox",
-        images: [
-            "./img/ia/ObviousTool/ot1.webp",
-            "./img/ia/ObviousTool/ot2.webp",
-            "./img/ia/ObviousTool/ot3.webp",
-            "./img/ia/ObviousTool/ot4.webp",
-            "./img/ia/ObviousTool/ot5.webp",
-            "./img/ia/ObviousTool/ot6.webp",
-            "./img/ia/ObviousTool/ot7.webp",
-            "./img/ia/ObviousTool/ot8.webp",
-            "./img/ia/ObviousTool/ot9.webp",
-            "./img/ia/ObviousTool/ot10.webp",
-            "./img/ia/ObviousTool/ot11.webp"
         ]
     },
     {
@@ -83,9 +86,9 @@ const projects = [
         icon: "fa-file-alt",
         images: [
             "./img/ia/CVite/cv1.webp",
+            "./img/ia/CVite/cv4.webp",
             "./img/ia/CVite/cv2.webp",
             "./img/ia/CVite/cv3.webp",
-            "./img/ia/CVite/cv4.webp",
             "./img/ia/CVite/cv5.webp",
             "./img/ia/CVite/cv6.webp",
             "./img/ia/CVite/cv7.webp",
@@ -114,8 +117,8 @@ const projects = [
         tech: ["Python", "Machine Learning", "React", "Trading"],
         icon: "fa-robot",
         images: [
-            "./img/ia/SmartBucket/sb1.webp",
             "./img/ia/SmartBucket/sb2.webp",
+            "./img/ia/SmartBucket/sb1.webp",
             "./img/ia/SmartBucket/sb3.webp",
             "./img/ia/SmartBucket/sb4.webp"
         ]
@@ -986,334 +989,31 @@ const TECH_ICON_MAP = {
 };
 
 // ============================================================
-// ============================================================
-// 1. CANVAS UI & GENERATIVE PARTICLES ENGINE
-// ============================================================
-class CanvasParticleEngine {
-    constructor(canvasId) {
-        this.canvas = document.getElementById(canvasId);
-        if (!this.canvas) return;
-        this.ctx = this.canvas.getContext('2d');
-        this.particles = [];
-        this.ripples = [];
-        this.numParticles = 52;
-        this.maxDistance = 140;
-        this.mouse = { x: -1000, y: -1000, radius: 160 };
-        this.lastScrollY = window.scrollY;
-        this.scrollVelocity = 0;
-        this.targetScrollVelocity = 0;
-        this.animationFrameId = null;
-        this.isRunning = false;
-        this.dpr = Math.min(window.devicePixelRatio || 1, 2);
-        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        this.init();
-    }
-
-    init() {
-        this.resize();
-        window.addEventListener('resize', () => this.resize(), { passive: true });
-        
-        // Mouse / Touch tracking on canvas
-        window.addEventListener('mousemove', (e) => {
-            this.mouse.x = e.clientX;
-            this.mouse.y = e.clientY;
-        }, { passive: true });
-
-        window.addEventListener('mouseleave', () => {
-            this.mouse.x = -1000;
-            this.mouse.y = -1000;
-        }, { passive: true });
-
-        // Ripple burst on click
-        window.addEventListener('pointerdown', (e) => {
-            this.addRipple(e.clientX, e.clientY);
-        }, { passive: true });
-
-        // Scroll reactive tracking for canvas fluid/parallax effect
-        window.addEventListener('scroll', () => {
-            if (this.prefersReducedMotion) return;
-            const currentY = window.scrollY;
-            const delta = currentY - this.lastScrollY;
-            this.lastScrollY = currentY;
-            this.targetScrollVelocity = Math.max(-45, Math.min(45, delta));
-        }, { passive: true });
-
-        // Visibility API to save battery/CPU
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                this.stop();
-            } else {
-                this.start();
-            }
-        });
-
-        this.createParticles();
-        this.start();
-    }
-
-    resize() {
-        if (!this.canvas) return;
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
-        this.canvas.width = this.width * this.dpr;
-        this.canvas.height = this.height * this.dpr;
-        this.ctx.scale(this.dpr, this.dpr);
-        this.numParticles = Math.min(Math.floor((this.width * this.height) / 14000), 75);
-        if (this.particles.length < this.numParticles) {
-            this.createParticles();
-        }
-    }
-
-    createParticles() {
-        this.particles = [];
-        for (let i = 0; i < this.numParticles; i++) {
-            const isCyan = Math.random() > 0.45;
-            const baseAlpha = Math.random() * 0.35 + 0.55;
-            const colorPrefix = isCyan ? 'rgba(0, 240, 255,' : 'rgba(99, 102, 241,';
-            this.particles.push({
-                x: Math.random() * this.width,
-                y: Math.random() * this.height,
-                vx: (Math.random() - 0.5) * 0.45,
-                vy: (Math.random() - 0.5) * 0.45,
-                radius: Math.random() * 2.0 + 1.2,
-                depth: Math.random() * 0.7 + 0.3, // 3D depth layer for parallax scrolling
-                baseAlpha,
-                color: colorPrefix,
-                // Pre-calculated style strings to eliminate string allocations in 60fps render loop
-                shadowColor: isCyan ? 'rgba(0, 240, 255, 0.6)' : 'rgba(99, 102, 241, 0.6)',
-                fillStyle: `${colorPrefix}${baseAlpha})`
-            });
-        }
-    }
-
-    addRipple(x, y, customRadius = 130, customColor = '0, 240, 255') {
-        if (this.prefersReducedMotion) return;
-        this.ripples.push({
-            x,
-            y,
-            radius: 5,
-            maxRadius: customRadius,
-            alpha: 0.75,
-            speed: 3.8,
-            color: customColor
-        });
-    }
-
-    // Soft energy wave centered on an element
-    pulseElement(element) {
-        if (!element || this.prefersReducedMotion) return;
-        const rect = element.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        this.addRipple(centerX, centerY, Math.max(rect.width, rect.height) * 0.65, '0, 240, 255');
-    }
-
-    start() {
-        if (this.isRunning) return;
-        this.isRunning = true;
-        this.loop();
-    }
-
-    stop() {
-        this.isRunning = false;
-        if (this.animationFrameId) {
-            cancelAnimationFrame(this.animationFrameId);
-            this.animationFrameId = null;
-        }
-    }
-
-    loop() {
-        if (!this.isRunning) return;
-        this.render();
-        this.animationFrameId = requestAnimationFrame(() => this.loop());
-    }
-
-    render() {
-        this.ctx.clearRect(0, 0, this.width, this.height);
-
-        // Smooth scroll velocity damping
-        this.scrollVelocity += (this.targetScrollVelocity - this.scrollVelocity) * 0.18;
-        this.targetScrollVelocity *= 0.88;
-
-        // Render Ripples
-        for (let r = this.ripples.length - 1; r >= 0; r--) {
-            const rip = this.ripples[r];
-            rip.radius += rip.speed;
-            rip.alpha -= 0.015;
-
-            if (rip.alpha <= 0 || rip.radius >= rip.maxRadius) {
-                this.ripples.splice(r, 1);
-                continue;
-            }
-
-            this.ctx.beginPath();
-            this.ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
-            this.ctx.strokeStyle = `rgba(${rip.color || '0, 240, 255'}, ${rip.alpha * 0.65})`;
-            this.ctx.lineWidth = 1.8;
-            this.ctx.stroke();
-        }
-
-        // Render Constellation Links First (to prevent line overlapping on dots)
-        // Hoist loop invariants and line width setting outside animation loop
-        const maxDistSq = this.maxDistance * this.maxDistance;
-        const invMaxDistance = 1 / this.maxDistance;
-        this.ctx.lineWidth = 0.85;
-
-        for (let i = 0; i < this.particles.length; i++) {
-            const p = this.particles[i];
-
-            if (!this.prefersReducedMotion) {
-                p.x += p.vx;
-                p.y += p.vy;
-
-                // Parallax scroll stream drift
-                if (Math.abs(this.scrollVelocity) > 0.05) {
-                    p.y -= this.scrollVelocity * p.depth * 0.35;
-                }
-
-                // Wrap around edges smoothly
-                if (p.x < -10) p.x = this.width + 10;
-                else if (p.x > this.width + 10) p.x = -10;
-
-                if (p.y < -10) p.y = this.height + 10;
-                else if (p.y > this.height + 10) p.y = -10;
-
-                // Mouse interactivity (gentle push) - check squared distance first to avoid expensive Math.sqrt calls
-                const dx = this.mouse.x - p.x;
-                const dy = this.mouse.y - p.y;
-                const distSq = dx * dx + dy * dy;
-                const radiusSq = this.mouse.radius * this.mouse.radius;
-                if (distSq < radiusSq && distSq > 0) {
-                    const dist = Math.sqrt(distSq);
-                    const force = (this.mouse.radius - dist) / this.mouse.radius;
-                    p.x -= (dx / dist) * force * 1.2;
-                    p.y -= (dy / dist) * force * 1.2;
-                }
-            }
-
-            // Connect nearby particles using cached inverse distance for fast multiplication
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const p2 = this.particles[j];
-                const dX = p.x - p2.x;
-                const dY = p.y - p2.y;
-                const distSq = dX * dX + dY * dY;
-
-                if (distSq < maxDistSq) {
-                    const lineAlpha = (1 - Math.sqrt(distSq) * invMaxDistance) * 0.28;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p.x, p.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
-                    this.ctx.stroke();
-                }
-            }
-        }
-
-        // Render Particle Dots with Soft Glow (shadowBlur set once outside loop)
-        this.ctx.shadowBlur = 6;
-        for (let i = 0; i < this.particles.length; i++) {
-            const p = this.particles[i];
-            const stretch = Math.min(Math.abs(this.scrollVelocity) * 0.15, 5);
-
-            this.ctx.shadowColor = p.shadowColor;
-
-            this.ctx.beginPath();
-            if (stretch > 0.6 && !this.prefersReducedMotion) {
-                this.ctx.ellipse(p.x, p.y, p.radius, p.radius + stretch, 0, 0, Math.PI * 2);
-            } else {
-                this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            }
-            this.ctx.fillStyle = p.fillStyle;
-            this.ctx.fill();
-        }
-        this.ctx.shadowBlur = 0;
-    }
-}
-
-// ============================================================
-// 2. SPOTLIGHT & CUSTOM CURSOR INTERACTION
-// ============================================================
-function initSpotlightAndCursor() {
-    let spotlightRaf = null;
-
-    // Optimized radial spotlight update: use event delegation and requestAnimationFrame
-    // to target only the hovered card and eliminate layout thrashing across all cards on mousemove
-    window.addEventListener('mousemove', (e) => {
-        const card = e.target.closest('.bento-card');
-        if (!card) return;
-
-        if (spotlightRaf) cancelAnimationFrame(spotlightRaf);
-        spotlightRaf = requestAnimationFrame(() => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    }, { passive: true });
-
-    // Custom Magnetic Cursor (Desktop only)
-    const cursorDot = document.getElementById('custom-cursor-dot');
-    const cursorRing = document.getElementById('custom-cursor-ring');
-
-    if (cursorDot && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let ringX = mouseX;
-        let ringY = mouseY;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
-        }, { passive: true });
-
-        // Smooth Lerp for ring
-        function renderCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            cursorRing.style.left = `${ringX}px`;
-            cursorRing.style.top = `${ringY}px`;
-            requestAnimationFrame(renderCursor);
-        }
-        requestAnimationFrame(renderCursor);
-
-        // Hover scale over interactive targets
-        const interactives = 'a, button, .filter-btn, .thumb-item, .bento-card, .project-nav-btn, .social-icon-btn';
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.closest(interactives)) {
-                document.body.classList.add('cursor-hovering');
-            }
-        });
-
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.closest(interactives)) {
-                document.body.classList.remove('cursor-hovering');
-            }
-        });
-    }
-}
-
-// ============================================================
-// 3. MAIN CAROUSEL & PROJECT SHOWCASE ENGINE
+// MAIN INTERACTIVE EXPLORER, CASE STUDY GALLERY & LIGHTBOX
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Canvas UI
-    const canvasEngine = new CanvasParticleEngine('bg-canvas');
-    window.canvasEngine = canvasEngine;
+    // Resolve relative ./ paths cleanly when served from /fr/ static route
+    const assetPrefix = document.documentElement.getAttribute('data-asset-prefix') ||
+        ((window.location.pathname === '/fr' || window.location.pathname.startsWith('/fr/') || window.location.pathname.endsWith('/fr/index.html')) ? '..' : '.');
+    function resolveAssetPath(url) {
+        if (!url) return url;
+        if (assetPrefix !== '.' && url.startsWith('./')) {
+            return assetPrefix + url.slice(1);
+        }
+        return url;
+    }
 
-    // 2. Initialize Spotlight & Cursor
-    initSpotlightAndCursor();
-
-    // 3. Initialize Internationalization
+    // 1. Initialize Internationalization
     if (typeof I18N !== 'undefined' && typeof TRANSLATIONS !== 'undefined') {
         I18N.init(TRANSLATIONS);
     }
 
-    // Sort projects anti-chronologically (Newest first)
-    projects.sort((a, b) => parseInt(b.year) - parseInt(a.year));
+    // Sort projects anti-chronologically (Newest first), keeping Obvious Tool (live SaaS) pinned first
+    projects.sort((a, b) => {
+        if (a.id === 111) return -1;
+        if (b.id === 111) return 1;
+        return parseInt(b.year) - parseInt(a.year);
+    });
 
     // Compute category counts in a single pass
     const categoryCounts = {
@@ -1355,8 +1055,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectTechEl = document.getElementById('project-tech-tags');
     const projectLinksEl = document.getElementById('project-links-list');
     const projectCounterEl = document.getElementById('project-nav-counter');
-    const topShadowEl = document.getElementById('scroll-shadow-top');
-    const bottomShadowEl = document.getElementById('scroll-shadow-bottom');
+    const quickStripEl = document.getElementById('explorer-quick-strip');
     const btnPrevProj = document.getElementById('btn-prev-proj');
     const btnNextProj = document.getElementById('btn-next-proj');
     const btnPrevImg = document.getElementById('btn-prev-img');
@@ -1372,48 +1071,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
     const lightboxNextBtn = document.getElementById('lightbox-next-btn');
     const lightboxFilmstrip = document.getElementById('lightbox-filmstrip');
-
-    // Dynamic Scroll Shadow Indicators
-    function updateScrollShadows() {
-        if (!projectDescEl) return;
-        const hasOverflow = projectDescEl.scrollHeight > projectDescEl.clientHeight + 4;
-        const isScrolledFromTop = projectDescEl.scrollTop > 6;
-        const isScrolledToBottom = (projectDescEl.scrollTop + projectDescEl.clientHeight) >= (projectDescEl.scrollHeight - 6);
-
-        if (topShadowEl) {
-            if (hasOverflow && isScrolledFromTop) {
-                topShadowEl.classList.add('visible');
-            } else {
-                topShadowEl.classList.remove('visible');
-            }
-        }
-
-        if (bottomShadowEl) {
-            if (hasOverflow && !isScrolledToBottom) {
-                bottomShadowEl.classList.add('visible');
-            } else {
-                bottomShadowEl.classList.remove('visible');
-            }
-        }
-    }
-
-    if (projectDescEl) {
-        let isScrollShadowTicking = false;
-        projectDescEl.addEventListener('scroll', () => {
-            if (!isScrollShadowTicking) {
-                isScrollShadowTicking = true;
-                requestAnimationFrame(() => {
-                    updateScrollShadows();
-                    if (window.canvasEngine && Math.random() < 0.25) {
-                        window.canvasEngine.targetScrollVelocity += (Math.random() - 0.5) * 1.5;
-                    }
-                    isScrollShadowTicking = false;
-                });
-            }
-        }, { passive: true });
-    }
-
-    window.addEventListener('resize', updateScrollShadows, { passive: true });
 
     // Email Copy & Toast Logic
     const copyEmailBtn = document.getElementById('copy-email-btn');
@@ -1446,7 +1103,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showToast(msg) {
         if (!toast) return;
-        toast.querySelector('.toast-message').textContent = msg;
+        const msgSpan = toast.querySelector('.toast-message');
+        if (msgSpan) msgSpan.textContent = msg;
         toast.classList.add('show');
         setTimeout(() => {
             toast.classList.remove('show');
@@ -1479,20 +1137,55 @@ document.addEventListener('DOMContentLoaded', () => {
         return formatted;
     }
 
+    // Render Quick-Jump Project Selector Chips
+    function renderQuickStrip() {
+        if (!quickStripEl) return;
+        if (!filteredProjects.length) {
+            quickStripEl.innerHTML = '';
+            return;
+        }
+        quickStripEl.innerHTML = filteredProjects.map((proj, idx) => `
+            <button type="button" class="quick-proj-chip ${idx === currentProjectIndex ? 'active' : ''}" data-proj-idx="${idx}">
+                ${escapeHtml(proj.title)}
+            </button>
+        `).join('');
+
+        quickStripEl.querySelectorAll('.quick-proj-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const idx = parseInt(chip.getAttribute('data-proj-idx'), 10);
+                if (!Number.isNaN(idx) && idx !== currentProjectIndex) {
+                    currentProjectIndex = idx;
+                    updateProjectView();
+                }
+            });
+        });
+
+        const activeChip = quickStripEl.querySelector('.quick-proj-chip.active');
+        if (activeChip && quickStripEl.clientWidth > 0) {
+            const chipLeft = activeChip.offsetLeft;
+            const chipRight = chipLeft + activeChip.offsetWidth;
+            const viewLeft = quickStripEl.scrollLeft;
+            const viewRight = viewLeft + quickStripEl.clientWidth;
+            if (chipLeft < viewLeft || chipRight > viewRight) {
+                quickStripEl.scrollLeft = Math.max(0, chipLeft - (quickStripEl.clientWidth - activeChip.offsetWidth) / 2);
+            }
+        }
+    }
+
     // Render Project Details
-    function updateProjectView() {
+    function updateProjectView(skipTelemetry = false) {
         if (filteredProjects.length === 0) {
             if (projectTitleEl) projectTitleEl.textContent = (typeof I18N !== 'undefined') ? I18N.t('projects.empty.title') : 'No projects';
             if (projectDescEl) {
                 projectDescEl.innerHTML = `<p class="current-project-desc">${(typeof I18N !== 'undefined') ? I18N.t('projects.empty.desc') : 'Please select another category.'}</p>`;
                 projectDescEl.scrollTop = 0;
-                requestAnimationFrame(updateScrollShadows);
             }
             if (projectTechEl) projectTechEl.innerHTML = '';
             if (projectLinksEl) projectLinksEl.innerHTML = '';
             if (mainGalleryImg) mainGalleryImg.src = '';
             if (filmstripEl) filmstripEl.innerHTML = '';
             if (projectCounterEl) projectCounterEl.innerHTML = '0 / 0';
+            renderQuickStrip();
             return;
         }
 
@@ -1505,19 +1198,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (projectCategoryEl) projectCategoryEl.textContent = (project.category || 'PROJECT').toUpperCase();
         if (projectYearEl) projectYearEl.textContent = project.year;
 
-        // 2. Formatted Description & Scroll Reset
+        // 2. Formatted Description
         if (projectDescEl) {
             const rawDesc = (currentLang === 'fr' && project.descriptionFr) ? project.descriptionFr : project.description;
             projectDescEl.innerHTML = `<div class="current-project-desc">${formatMarkdown(rawDesc)}</div>`;
             projectDescEl.scrollTop = 0;
-            requestAnimationFrame(updateScrollShadows);
         }
 
         // 3. Links
         if (projectLinksEl) {
             if (project.links && project.links.length > 0) {
                 projectLinksEl.innerHTML = project.links.map(link => `
-                    <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                    <a href="${escapeHtml(resolveAssetPath(link.url))}" target="_blank" rel="noopener noreferrer" class="project-link-btn">
                         <i class="fas fa-arrow-up-right-from-square"></i> ${escapeHtml(link.label)}
                     </a>
                 `).join('');
@@ -1549,18 +1241,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnPrevProj) btnPrevProj.disabled = (filteredProjects.length <= 1);
         if (btnNextProj) btnNextProj.disabled = (filteredProjects.length <= 1);
 
-        // 6. Reset & Render Gallery Images
+        // 6. Sync Quick-Jump Strip & Gallery
+        renderQuickStrip();
         currentImageIndex = 0;
         updateGalleryDisplay();
 
-        // 7. Pulse Canvas UI on Project Change
-        if (window.canvasEngine) {
-            const card = document.getElementById('projects-section');
-            if (card) window.canvasEngine.pulseElement(card);
-        }
-
-        // 8. Analytics Telemetry for Viewed Project
-        if (typeof PortfolioAnalytics !== 'undefined' && project) {
+        // 7. Analytics Telemetry for Viewed Project
+        if (!skipTelemetry && typeof PortfolioAnalytics !== 'undefined' && project) {
             PortfolioAnalytics.trackProjectView(project, currentProjectIndex, filteredProjects.length);
         }
     }
@@ -1717,82 +1404,117 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (images.length === 0) {
             if (mainGalleryImg) {
-                mainGalleryImg.src = 'https://placehold.co/800x600/0d121e/94a3b8?text=No+Image';
+                mainGalleryImg.src = '';
                 mainGalleryImg.alt = project.title;
             }
-            if (filmstripEl) filmstripEl.innerHTML = '';
+            if (filmstripEl) {
+                filmstripEl.textContent = '';
+                delete filmstripEl.dataset.renderKey;
+            }
             if (btnPrevImg) btnPrevImg.style.display = 'none';
             if (btnNextImg) btnNextImg.style.display = 'none';
             return;
         }
 
-        // Bounds validation
         if (currentImageIndex >= images.length) currentImageIndex = 0;
         if (currentImageIndex < 0) currentImageIndex = images.length - 1;
 
         const currentWebp = images[currentImageIndex];
-        const currentHd = getHighResImage(currentWebp);
+        const currentHd = resolveAssetPath(getHighResImage(currentWebp));
+        const fallbackWebp = resolveAssetPath(currentWebp);
 
-        // Set Main Image (High-Def with fallback)
         if (mainGalleryImg) {
-            mainGalleryImg.src = currentHd;
-            mainGalleryImg.alt = `${project.title} - Preview ${currentImageIndex + 1}`;
-            mainGalleryImg.onerror = function() {
+            mainGalleryImg.onerror = (currentHd !== fallbackWebp) ? function () {
                 this.onerror = null;
-                this.src = currentWebp;
-            };
+                this.src = fallbackWebp;
+            } : null;
+            mainGalleryImg.src = currentHd;
+            mainGalleryImg.alt = `${project.title} — Preview ${currentImageIndex + 1}`;
         }
 
-        // Image Nav Button Visibility
         const hasMultipleImages = images.length > 1;
         if (btnPrevImg) btnPrevImg.style.display = hasMultipleImages ? 'flex' : 'none';
         if (btnNextImg) btnNextImg.style.display = hasMultipleImages ? 'flex' : 'none';
 
-        // Helper function to render filmstrip thumbnail list and attach click/keyboard events
-        function renderFilmstrip(container, imagesList, activeIdx, title, isFullscreen) {
+        function renderFilmstrip(container, imagesList, activeIdx, title, isFullscreen, projectKey) {
             if (!container) return;
-            if (imagesList && imagesList.length > 1) {
-                container.style.display = 'flex';
-                const labelPrefix = isFullscreen ? 'View fullscreen slide' : 'View slide';
-                container.innerHTML = imagesList.map((imgSrc, idx) => `
-                    <div class="thumb-item ${idx === activeIdx ? 'active' : ''}" data-idx="${idx}" role="button" aria-label="${labelPrefix} ${idx + 1}" tabindex="0">
-                        <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(title)} thumb ${idx + 1}" loading="lazy">
-                    </div>
-                `).join('');
+            if (!imagesList || imagesList.length <= 1) {
+                container.style.display = 'none';
+                container.textContent = '';
+                delete container.dataset.renderKey;
+                return;
+            }
 
-                container.querySelectorAll('.thumb-item').forEach(thumb => {
+            container.style.display = 'flex';
+            const renderKey = `${projectKey}:${imagesList.length}:${isFullscreen ? 1 : 0}`;
+
+            if (container.dataset.renderKey !== renderKey) {
+                container.textContent = '';
+                const labelPrefix = isFullscreen ? 'View fullscreen slide' : 'View slide';
+                const frag = document.createDocumentFragment();
+
+                imagesList.forEach((imgSrc, idx) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = idx === activeIdx ? 'thumb-item active' : 'thumb-item';
+                    thumb.setAttribute('data-idx', String(idx));
+                    thumb.setAttribute('role', 'button');
+                    thumb.setAttribute('aria-label', `${labelPrefix} ${idx + 1}`);
+                    thumb.setAttribute('tabindex', '0');
+
+                    const img = document.createElement('img');
+                    img.src = resolveAssetPath(imgSrc);
+                    img.alt = `${title} thumb ${idx + 1}`;
+                    img.loading = 'lazy';
+                    thumb.appendChild(img);
+
                     thumb.addEventListener('click', (e) => {
                         if (isFullscreen) e.stopPropagation();
-                        currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
+                        currentImageIndex = idx;
                         updateGalleryDisplay();
                     });
                     thumb.addEventListener('keydown', (e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
                             if (isFullscreen) e.stopPropagation();
-                            currentImageIndex = parseInt(thumb.getAttribute('data-idx'));
+                            currentImageIndex = idx;
                             updateGalleryDisplay();
                         }
                     });
+
+                    frag.appendChild(thumb);
                 });
+
+                container.appendChild(frag);
+                container.dataset.renderKey = renderKey;
             } else {
-                container.style.display = 'none';
-                container.innerHTML = '';
+                const thumbs = container.children;
+                for (let i = 0; i < thumbs.length; i++) {
+                    thumbs[i].classList.toggle('active', i === activeIdx);
+                }
+            }
+
+            const activeThumb = container.children[activeIdx];
+            if (activeThumb && container.clientWidth > 0) {
+                const tLeft = activeThumb.offsetLeft;
+                const tRight = tLeft + activeThumb.offsetWidth;
+                const vLeft = container.scrollLeft;
+                const vRight = vLeft + container.clientWidth;
+                if (tLeft < vLeft || tRight > vRight) {
+                    container.scrollLeft = Math.max(0, tLeft - (container.clientWidth - activeThumb.offsetWidth) / 2);
+                }
             }
         }
 
-        // Render Filmstrip (Fast WebP thumbnails)
-        renderFilmstrip(filmstripEl, images, currentImageIndex, project.title, false);
+        renderFilmstrip(filmstripEl, images, currentImageIndex, project.title, false, project.id);
 
-        // Update Lightbox Modal if currently open (High-Def)
         if (lightboxModal && lightboxModal.classList.contains('active')) {
             if (lightboxImg) {
-                lightboxImg.src = currentHd;
-                lightboxImg.alt = `${project.title} - Fullscreen ${currentImageIndex + 1}`;
-                lightboxImg.onerror = function() {
+                lightboxImg.onerror = (currentHd !== fallbackWebp) ? function () {
                     this.onerror = null;
-                    this.src = currentWebp;
-                };
+                    this.src = fallbackWebp;
+                } : null;
+                lightboxImg.src = currentHd;
+                lightboxImg.alt = `${project.title} — Fullscreen ${currentImageIndex + 1}`;
             }
             if (lightboxTitle) lightboxTitle.textContent = project.title;
             if (lightboxCounter) {
@@ -1801,19 +1523,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (lightboxPrevBtn) lightboxPrevBtn.style.display = hasMultipleImages ? 'flex' : 'none';
             if (lightboxNextBtn) lightboxNextBtn.style.display = hasMultipleImages ? 'flex' : 'none';
 
-            renderFilmstrip(lightboxFilmstrip, images, currentImageIndex, project.title, true);
+            renderFilmstrip(lightboxFilmstrip, images, currentImageIndex, project.title, true, project.id);
         }
     }
 
     // Global Navigation functions
-    window.changeProject = function(direction) {
+    window.changeProject = function (direction) {
         if (filteredProjects.length === 0) return;
         const count = filteredProjects.length;
         currentProjectIndex = (currentProjectIndex + direction + count) % count;
         updateProjectView();
     };
 
-    window.changeImage = function(direction) {
+    window.changeImage = function (direction) {
         if (filteredProjects.length === 0) return;
         const project = filteredProjects[currentProjectIndex];
         if (!project.images || project.images.length === 0) return;
@@ -1822,8 +1544,76 @@ document.addEventListener('DOMContentLoaded', () => {
         updateGalleryDisplay();
     };
 
+    if (btnPrevImg) {
+        btnPrevImg.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.changeImage(-1);
+        });
+    }
+    if (btnNextImg) {
+        btnNextImg.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.changeImage(1);
+        });
+    }
+    if (btnPrevProj) {
+        btnPrevProj.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.changeProject(-1);
+        });
+    }
+    if (btnNextProj) {
+        btnNextProj.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.changeProject(1);
+        });
+    }
+
+    // Bridge from Flagship Case Studies directly into Lightbox & Explorer (preserving scroll position)
+    window.openProjectGallery = function (projectId) {
+        const savedScrollY = window.scrollY || window.pageYOffset || 0;
+        const numericId = parseInt(projectId, 10);
+        filterProjects('all', true);
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            const isAll = b.getAttribute('data-filter') === 'all';
+            b.classList.toggle('active', isAll);
+            b.setAttribute('aria-selected', isAll ? 'true' : 'false');
+        });
+        const targetIdx = filteredProjects.findIndex(p => p.id === numericId);
+        if (targetIdx !== -1) {
+            currentProjectIndex = targetIdx;
+            updateProjectView();
+            openLightbox();
+        }
+        if ((window.scrollY || window.pageYOffset || 0) !== savedScrollY) {
+            window.scrollTo(0, savedScrollY);
+        }
+    };
+
+    // Attach click & keyboard handlers to Flagship Case Study gallery triggers
+    document.querySelectorAll('[data-open-gallery]').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const pid = trigger.getAttribute('data-open-gallery');
+            if (pid) window.openProjectGallery(pid);
+        });
+        if (trigger.tagName !== 'BUTTON') {
+            trigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const pid = trigger.getAttribute('data-open-gallery');
+                    if (pid) window.openProjectGallery(pid);
+                }
+            });
+        }
+    });
+
     // Filter Logic
-    function filterProjects(filterId) {
+    function filterProjects(filterId, skipTelemetry = false) {
         if (filterId === 'all') {
             filteredProjects = [...projects];
         } else if (filterId === 'ai') {
@@ -1834,15 +1624,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentProjectIndex = 0;
         currentImageIndex = 0;
-        updateProjectView();
+        updateProjectView(skipTelemetry);
     }
 
     // Filter Button Clicks
     const filterBtns = document.querySelectorAll('.filter-btn');
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
             btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
             const filter = btn.getAttribute('data-filter');
             filterProjects(filter);
 
@@ -1854,13 +1648,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Lightbox Modal Handling
     if (expandImageBtn && mainGalleryImg) {
-        expandImageBtn.addEventListener('click', () => {
-            openLightbox();
-        });
-
-        mainGalleryImg.addEventListener('click', () => {
-            openLightbox();
-        });
+        expandImageBtn.addEventListener('click', openLightbox);
+        mainGalleryImg.addEventListener('click', openLightbox);
     }
 
     function openLightbox() {
@@ -1904,34 +1693,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lightboxModal) {
         lightboxModal.addEventListener('click', (e) => {
-            // Close if clicking outside the dialog content
             if (e.target === lightboxModal) closeLightbox();
         });
     }
 
-    // Keyboard Navigation (Arrow keys for projects/images, Escape for Lightbox)
+    // Keyboard Navigation (Lightbox only unless explorer focused)
     window.addEventListener('keydown', (e) => {
         if (lightboxModal && lightboxModal.classList.contains('active')) {
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') window.changeImage(-1);
             if (e.key === 'ArrowRight') window.changeImage(1);
-            return;
-        }
-
-        if (e.key === 'ArrowLeft') {
-            window.changeProject(-1);
-        } else if (e.key === 'ArrowRight') {
-            window.changeProject(1);
         }
     });
 
-    // Language Toggle Click Event
+    // Language Toggle Click Event (preserving vertical scroll position)
     const langBtn = document.getElementById('lang-toggle');
     if (langBtn) {
-        langBtn.addEventListener('click', () => {
+        langBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             if (typeof I18N !== 'undefined') {
+                const savedScrollY = window.scrollY || window.pageYOffset || 0;
                 I18N.toggle();
-                updateProjectView();
+                updateProjectView(true);
+                if ((window.scrollY || window.pageYOffset || 0) !== savedScrollY) {
+                    window.scrollTo(0, savedScrollY);
+                }
 
                 if (typeof PortfolioAnalytics !== 'undefined') {
                     PortfolioAnalytics.trackLanguageChange(I18N.getLocale());
@@ -1940,6 +1726,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial Filter Activation
-    filterProjects('ai');
+    // Initial Filter Activation (All 33 projects, newest first, without inflating initial project telemetry)
+    filterProjects('all', true);
 });
+

@@ -4,7 +4,8 @@
   "description": "**AI Architect & Full Stack Developer** based in Geneva 🇨🇭. Bridging the gap between AI Research and Industry.",
   "main": "data.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build:infomaniak": "bash ./scripts/build-infomaniak.sh"
   },
   "repository": {
     "type": "git",

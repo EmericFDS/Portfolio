@@ -5,135 +5,289 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- DNS Preconnect for High-Speed Analytics -->
+    <!-- Preconnect for High-Speed Analytics & Typography -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://region1.google-analytics.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Google tag (gtag.js) - Google Analytics 4 with Consent Mode v2 -->
+    <!-- Google tag (gtag.js) — GA4 with Regional Consent Mode v2 (Swiss nLPD + EU GDPR, CSP-strict external init) -->
+    <script src="gtag-init.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H7GJV51SW0"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
 
-        // Default Consent Mode v2 with stored consent detection
-        var _storedConsent = null;
-        try { _storedConsent = localStorage.getItem('portfolio_cookie_consent'); } catch (e) {}
-        var _analyticsConsent = _storedConsent === 'granted' ? 'granted' : 'denied';
+    <title>Emeric Ferreira Dos Santos — AI Engineer, Full-Stack Builder &amp; UX/UI Designer | Geneva, Switzerland</title>
 
-        gtag('consent', 'default', {
-            'analytics_storage': _analyticsConsent,
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'wait_for_update': 500
-        });
-
-        gtag('config', 'G-H7GJV51SW0', {
-            'send_page_view': true,
-            'anonymize_ip': true,
-            'cookie_flags': 'SameSite=None;Secure'
-        });
-    </script>
-
-
-    <title>Emeric Ferreira Dos Santos — AI Developer & Game Designer | Geneva, Switzerland</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Portfolio of Emeric Ferreira Dos Santos, AI Developer specializing in LLMs, RAG, Computer Vision, and Game Design. Based in Geneva, Switzerland. Explore projects in AI agents, web apps, and indie games.">
-    <meta name="keywords"
-        content="Emeric Dos Santos, EmericFDS, Portfolio, AI Developer, LLM, RAG, Computer Vision, Machine Learning, Game Designer, Level Design, Geneva, Switzerland, Unity, Python, React">
-    <meta name="author" content="Emeric Dos Santos">
+    <!-- Core SEO Meta Tags -->
+    <meta name="description" content="Emeric Ferreira Dos Santos is an AI Engineer, Full-Stack Builder, and UX/UI Designer in Geneva, Switzerland (Permit C), creating AI Agents, LLM/RAG apps, Obvious Tool (obvioustool.com), Rust/Tauri software, and user-centered interfaces.">
+    <meta name="author" content="Emeric Ferreira Dos Santos">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="geo.region" content="CH-GE">
+    <meta name="geo.placename" content="Geneva">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://emericfds.com/">
-    <meta property="og:title" content="Emeric Ferreira Dos Santos — AI Developer & Game Designer">
-    <meta property="og:description"
-        content="AI Developer specializing in LLMs, RAG, and Computer Vision. Game Designer with 10+ shipped projects. Based in Geneva, Switzerland.">
-    <meta property="og:image" content="https://emericfds.com/img/profile.jpg">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:site_name" content="Emeric FDS Portfolio">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://emericfds.com/">
-    <meta property="twitter:title" content="Emeric Ferreira Dos Santos — AI Developer & Game Designer">
-    <meta property="twitter:description"
-        content="AI Developer specializing in LLMs, RAG, and Computer Vision. Game Designer with 10+ shipped projects. Based in Geneva, Switzerland.">
-    <meta property="twitter:image" content="https://emericfds.com/img/profile.jpg">
-    <meta name="twitter:creator" content="@emericfds">
-
-    <meta name="googlebot" content="notranslate">
+    <!-- Canonical & Internationalization (Hreflang) -->
     <link rel="canonical" href="https://emericfds.com/">
     <link rel="alternate" hreflang="en" href="https://emericfds.com/">
-    <link rel="alternate" hreflang="fr" href="https://emericfds.com/?lang=fr">
+    <link rel="alternate" hreflang="fr" href="https://emericfds.com/fr/">
     <link rel="alternate" hreflang="x-default" href="https://emericfds.com/">
 
-    <!-- Autonomous AI Agent Discovery (llms.txt Standard) -->
-    <link rel="alternate" type="text/markdown" href="https://emericfds.com/llms.txt" title="AI Agent Specification (LLMs.txt)">
-    <link rel="alternate" type="text/plain" href="https://emericfds.com/llms-full.txt" title="Full AI Agent Knowledge Base">
-    <meta name="ai-agent" content="optimized, context=developer-portfolio, standard=llms.txt">
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://emericfds.com/">
+    <meta property="og:title" content="Emeric Ferreira Dos Santos — AI Engineer, Full-Stack &amp; UX/UI Designer (Geneva)">
+    <meta property="og:description" content="Shipping production AI Agents, Web &amp; Rust/Tauri apps (obvioustool.com, PhotoLift, CVite), and ergonomic UX/UI systems in Geneva, Switzerland (Swiss Permit C).">
+    <meta property="og:image" content="https://emericfds.com/img/profile.jpg">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <meta property="og:site_name" content="Emeric Ferreira Dos Santos">
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://emericfds.com/">
+    <meta property="twitter:title" content="Emeric Ferreira Dos Santos — AI Engineer, Full-Stack &amp; UX/UI Designer (Geneva)">
+    <meta property="twitter:description" content="Shipping production AI Agents, Web &amp; Rust/Tauri apps (obvioustool.com, PhotoLift, CVite), and ergonomic UX/UI systems in Geneva, Switzerland (Swiss Permit C).">
+    <meta property="twitter:image" content="https://emericfds.com/img/profile.jpg">
+
+    <!-- AI Agent & LLM Knowledge Discovery (llms.txt Standard) -->
+    <link rel="alternate" type="text/markdown" href="https://emericfds.com/llms.txt" title="AI Agent Summary (llms.txt)">
+    <link rel="alternate" type="text/plain" href="https://emericfds.com/llms-full.txt" title="Complete AI Knowledge Base (llms-full.txt)">
+
+    <!-- Comprehensive Schema.org Entity Graph (Person + Portfolio Software + FAQPage) -->
     <script type="application/ld+json">
     [
       {
         "@context": "https://schema.org",
         "@type": "ProfilePage",
-        "dateCreated": "2024-01-01T00:00:00+00:00",
-        "dateModified": "2026-03-19T00:00:00+00:00",
+        "@id": "https://emericfds.com/#profilepage",
+        "url": "https://emericfds.com/",
+        "inLanguage": "en",
+        "dateCreated": "2020-01-01T00:00:00+00:00",
+        "dateModified": "2026-11-07T00:00:00+00:00",
         "mainEntity": {
           "@type": "Person",
+          "@id": "https://emericfds.com/#person",
           "name": "Emeric Ferreira Dos Santos",
-          "alternateName": "Emeric FDS",
-          "jobTitle": "AI Developer & Game Designer",
-          "worksFor": { "@type": "Organization", "name": "Freelance" },
-          "url": "https://emericfds.com",
+          "alternateName": ["Emeric FDS", "Emeric F.D.S.", "Emeric Dos Santos"],
+          "jobTitle": "AI Engineer, Full-Stack Developer & UX/UI Designer",
+          "description": "AI Engineer, Full-Stack Product Builder, and UX/UI Designer based in Geneva, Switzerland (Swiss Permit C). Creator of Obvious Tool (obvioustool.com), PhotoLift, CVite, Smart Bucket, and GhostLink; Digital Advisor & UX/UI Designer at Declix (Geneva); shipped Nintendo Switch & Unity/Unreal interactive systems.",
+          "url": "https://emericfds.com/",
           "image": "https://emericfds.com/img/profile.jpg",
+          "email": "mailto:contact@emericfds.com",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Declix",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Geneva",
+              "addressCountry": "CH"
+            }
+          },
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Geneva",
+            "postalCode": "1227",
+            "addressLocality": "Geneva (Les Acacias)",
+            "addressRegion": "GE",
             "addressCountry": "CH"
           },
+          "workLocation": {
+            "@type": "Place",
+            "name": "Geneva, Switzerland"
+          },
+          "knowsLanguage": [
+            { "@type": "Language", "name": "French", "alternateName": "fr" },
+            { "@type": "Language", "name": "Portuguese", "alternateName": "pt" },
+            { "@type": "Language", "name": "English", "alternateName": "en" },
+            { "@type": "Language", "name": "Spanish", "alternateName": "es" }
+          ],
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Université Lumière Lyon 2 — Gamagora",
+              "location": "Lyon, France"
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "ESAD — Escola Superior de Arte e Design",
+              "location": "Caldas da Rainha, Portugal"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Colégio Dr. Luís Pereira da Costa",
+              "location": "Monte Redondo, Portugal"
+            }
+          ],
+          "knowsAbout": [
+            "Autonomous AI Agents",
+            "Large Language Models (LLMs)",
+            "Retrieval-Augmented Generation (RAG)",
+            "Natural Language Processing (NLP)",
+            "UX/UI Design & Information Architecture",
+            "Interface Prototyping & User Testing",
+            "Python",
+            "TypeScript & React",
+            "Rust & Tauri Desktop Applications",
+            "Client-Side Cryptography (AES-256)",
+            "Unity 3D, Unreal Engine & C#"
+          ],
           "sameAs": [
             "https://www.linkedin.com/in/emericfds/",
-            "https://github.com/EmericFDS"
-          ],
-          "knowsAbout": ["LLM", "RAG", "Computer Vision", "Game Design", "Level Design", "React", "Python", "Unity"],
-          "description": "Versatile & Creative AI Developer. Expert in AI Agents, LLMs, RAG, Computer Vision, and Game Design. Based in Geneva, Switzerland."
+            "https://github.com/EmericFDS",
+            "https://obvioustool.com/"
+          ]
         }
       },
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Emeric FDS Portfolio",
-        "alternateName": ["Emeric Dos Santos", "EmericFDS"],
+        "@id": "https://emericfds.com/#website",
+        "name": "Emeric Ferreira Dos Santos — AI Engineer, Full-Stack & UX/UI Portfolio",
+        "alternateName": ["Emeric FDS", "Emeric Dos Santos Portfolio"],
         "url": "https://emericfds.com/",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://emericfds.com/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+        "inLanguage": ["en", "fr"],
+        "publisher": { "@id": "https://emericfds.com/#person" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Flagship Software, AI & Console Projects by Emeric Ferreira Dos Santos",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "Obvious Tool",
+              "url": "https://obvioustool.com/",
+              "applicationCategory": "DeveloperApplication",
+              "operatingSystem": "Windows, macOS, Linux, Web",
+              "datePublished": "2025",
+              "description": "Live local-first developer and creative workspace (obvioustool.com) integrating 50+ utilities with embedded AI modules for paraphrasing, translation, and text correction.",
+              "author": { "@id": "https://emericfds.com/#person" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "CVite",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Web",
+              "datePublished": "2025",
+              "description": "AI-powered resume parsing and real-time editorial layout builder using NLP document extraction.",
+              "author": { "@id": "https://emericfds.com/#person" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "PhotoLift",
+              "applicationCategory": "MultimediaApplication",
+              "operatingSystem": "Windows, macOS",
+              "datePublished": "2026",
+              "description": "High-performance native Rust and Tauri desktop application for automated studio photo sorting, batch retouching, and 88% JPEG size optimization.",
+              "author": { "@id": "https://emericfds.com/#person" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "Smart Bucket",
+              "applicationCategory": "FinanceApplication",
+              "operatingSystem": "Web",
+              "datePublished": "2025",
+              "description": "Autonomous quantitative portfolio management engine driven by Machine Learning, market regime detection, and 24/7 sentiment analysis.",
+              "author": { "@id": "https://emericfds.com/#person" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "GhostLink",
+              "applicationCategory": "SecurityApplication",
+              "operatingSystem": "Web",
+              "datePublished": "2024",
+              "description": "Zero-knowledge client-side AES-256 secret and file sharing web application with zero server storage.",
+              "author": { "@id": "https://emericfds.com/#person" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@type": "VideoGame",
+              "name": "Pure Mahjong",
+              "gamePlatform": "Nintendo Switch",
+              "datePublished": "2020",
+              "url": "https://www.nintendo.co.uk/Games/Nintendo-Switch-download-software/Pure-Mahjong-1579159.html",
+              "description": "Commercial Nintendo Switch puzzle game featuring over 1,000 handcrafted levels across the 24 Chinese solar calendar events.",
+              "author": { "@id": "https://emericfds.com/#person" }
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What AI, software, and UX/UI projects does Emeric Ferreira Dos Santos build?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Emeric designs and ships end-to-end AI Agents, LLM/RAG pipelines, NLP document extraction platforms (CVite), the live developer and AI workspace Obvious Tool (https://obvioustool.com), native Rust/Tauri desktop applications (PhotoLift), autonomous ML analytics systems (Smart Bucket), zero-knowledge cryptographic web apps (GhostLink), and internal application UX/UI prototypes at Declix in Geneva."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Emeric Ferreira Dos Santos's core technical and UX/UI stack?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "He combines AI and Application Logic (Python, LLMs, RAG, NLP, YOLOv8/OpenCV, C#), Full-Stack and Native Software (React, TypeScript, Vite, Next.js, Rust, Tauri, AES-256 WebCrypto), UX/UI Design and Information Architecture (interface prototyping, user testing, navigation schemas, storyboards, Figma, Adobe Suite), and 3D Engines (Unity, Unreal Engine)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Emeric Ferreira Dos Santos's work authorization and availability in Geneva and Switzerland?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Emeric lives in Geneva (1227 Les Acacias), Switzerland, holds a permanent Swiss C Residence Permit (Permis C) as well as A and B driving licenses, and is available for AI Engineer, Full-Stack Developer, Product Builder, or UX/UI Designer opportunities in Geneva, Lausanne, Romandie, and across Europe."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do his UX/UI, Declix, and Level Design experiences complement his AI engineering?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Between designing internal app interfaces and training users daily at Declix (Geneva) and shipping commercial titles like Pure Mahjong (1,000+ levels on Nintendo Switch), Emeric grounds every technical system in real-world user testing, clear information architecture, and friction-free ergonomics."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which languages does Emeric Ferreira Dos Santos speak?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Emeric speaks four languages: native French, fluent Portuguese (C2), good professional English (B2), and good Spanish (B2)."
+            }
+          }
+        ]
       }
     ]
     </script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <!-- Swiss Editorial Typography -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 
     <!-- Icons -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <!-- Styles -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Favicon -->
@@ -141,413 +295,675 @@
 </head>
 
 <body>
-    <!-- Accessibility Skip Link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Canvas UI Interactive Engine -->
-    <canvas id="bg-canvas" aria-hidden="true"></canvas>
-    <div class="bg-ambient-layer" aria-hidden="true"></div>
-    <div class="bg-grid-overlay" aria-hidden="true"></div>
-
-    <!-- Custom Cursor Follower (Desktop Fine Pointer Only) -->
-    <div class="custom-cursor-dot" id="custom-cursor-dot" aria-hidden="true"></div>
-    <div class="custom-cursor-ring" id="custom-cursor-ring" aria-hidden="true"></div>
-
-    <!-- Floating Top Navigation Bar (Divided Islands) -->
+    <!-- ====================================================================
+         STICKY SWISS EDITORIAL HEADER
+         ==================================================================== -->
     <header class="site-header" role="banner">
-        <!-- Left Island: Identity -->
-        <div class="header-left-island">
-            <a href="#" class="brand-wrapper" aria-label="Emeric F.D.S. Portfolio Home">
-                <div class="brand-avatar-wrapper">
-                    <img src="./img/profile.jpg" alt="Emeric F.D.S." class="brand-avatar-img" width="36" height="36">
-                </div>
-                <div class="brand-name">Emeric <span class="brand-tag">F.D.S.</span></div>
+        <div class="header-inner">
+            <a href="#" class="brand-wrapper" id="nav-brand-home" aria-label="Emeric Ferreira Dos Santos — Home">
+                <span class="brand-mark" aria-hidden="true">E<span class="brand-mark-dot">.</span></span>
+                <span class="brand-text-col">
+                    <span class="brand-name">Emeric Ferreira Dos Santos</span>
+                    <span class="brand-location" data-i18n="hero.badgeLocation">Geneva, Switzerland</span>
+                </span>
             </a>
-        </div>
 
-        <!-- Right Island: Graphic Language Switcher -->
-        <div class="header-right-island">
-            <button id="lang-toggle" class="lang-toggle-btn" aria-label="Switch language">
-                <svg class="flag-icon" viewBox="0 0 640 480" width="18" height="13" aria-hidden="true" style="border-radius:2px; display:inline-block; vertical-align:middle; box-shadow:0 0 2px rgba(0,0,0,0.5);"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 245 180L565 0h75v60L435 240l205 180v60h-75L320 300 75 480H0v-60l205-180L0 60V0z"/><path fill="#C8102E" d="m424 288 216 156v36h-48L376 324zm-208-96L0 36V0h48l216 156zm184-48 240-180h-48L352 108zm-240 96L0 444v36h48l240-180z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M267 0h106v480H267zM0 187h640v106H0z"/></svg>
-                <span>EN</span>
-            </button>
+            <nav class="primary-nav" aria-label="Primary Navigation">
+                <a href="#expertise-section" class="nav-link" id="nav-link-expertise" data-i18n="nav.expertise">Expertise</a>
+                <a href="#projects-section" class="nav-link" id="nav-link-archive" data-i18n="nav.projects">Projects (33)</a>
+                <a href="#experience-section" class="nav-link" id="nav-link-experience" data-i18n="nav.experience">Experience</a>
+                <a href="#faq-section" class="nav-link" id="nav-link-faq" data-i18n="nav.faq">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <button id="lang-toggle" type="button" class="lang-toggle-btn" aria-label="Passer en français">
+                    <span>EN</span><span style="opacity:0.45">/</span><span style="opacity:0.65">FR</span>
+                </button>
+                <a href="#contact-section" id="header-contact-cta" class="header-cta" data-analytics-cta="header_contact">
+                    <span data-i18n="nav.contact">Contact</span>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Bento Grid Content -->
-    <main class="bento-wrapper" id="main-content">
-        <div class="bento-grid">
+    <!-- ====================================================================
+         MAIN EDITORIAL CONTENT
+         ==================================================================== -->
+    <main class="page-shell" id="main-content">
 
-            <!-- Row 1: Hero Card (Span 7) -->
-            <section class="bento-card hero-card" aria-label="Hero Overview">
+        <!-- 1. EXECUTIVE HERO SECTION -->
+        <section class="hero-section" aria-labelledby="hero-main-heading">
+            <div class="hero-grid">
                 <div>
-                    <div class="hero-role-badge">
-                        <i class="fas fa-sparkles"></i>
-                        <span data-i18n="hero.role">Creative Technologist • AI & Game Dev</span>
+                    <div class="hero-dateline">
+                        <span data-i18n="hero.dateline.location">Geneva (Les Acacias), Switzerland</span>
+                        <span class="dateline-sep" aria-hidden="true">·</span>
+                        <span data-i18n="hero.dateline.langs">FR · PT · EN · ES</span>
+                        <span class="dateline-sep" aria-hidden="true">·</span>
+                        <span class="dateline-availability" data-i18n="hero.dateline.status">Swiss Permit C · Open to AI / Full-Stack / UX-UI Roles</span>
                     </div>
-                    <h1 class="hero-title">
-                        <span class="hero-first-name">Emeric</span><br>
-                        <span class="text-gradient">FERREIRA DOS SANTOS</span>
+
+                    <h1 class="hero-title" id="hero-main-heading">
+                        Emeric Ferreira Dos Santos
+                        <span class="hero-title-role" data-i18n="hero.role">AI Engineer, Full-Stack Builder &amp; UX/UI Designer</span>
                     </h1>
-                    <p class="hero-tagline" data-i18n="hero.tagline">
-                        Engineering intelligent solutions, creative UI interactions, and immersive game worlds.
+
+                    <p class="hero-summary" data-i18n="hero.tagline">
+                        Designing and shipping production-grade <strong>AI Agents, LLM/RAG pipelines, and native &amp; web applications</strong>. Combining rigorous software engineering (Python, TypeScript/React, Rust/Tauri) with concrete field expertise in <strong>UX/UI prototyping, information architecture, and user testing</strong> across 33 shipped products.
                     </p>
-                </div>
 
-                <div class="hero-cta-group">
-                    <a href="#projects-section" class="btn-primary">
-                        <i class="fas fa-layer-group"></i>
-                        <span data-i18n="hero.ctaProjects">Explore Projects</span>
-                    </a>
-                    <a href="#contact-section" class="btn-secondary">
-                        <i class="fas fa-envelope"></i>
-                        <span data-i18n="hero.ctaContact">Get in Touch</span>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Row 1: About Card (Span 5) -->
-            <section class="bento-card about-card" id="about-section" aria-label="About Me">
-                <div>
-                    <div class="card-label">
-                        <i class="fas fa-user-astronaut"></i>
-                        <span data-i18n="about.title">About Me</span>
+                    <div class="hero-cta-row">
+                        <a href="#projects-section" id="hero-cta-projects" class="btn-primary" data-analytics-cta="hero_explore_projects">
+                            <span data-i18n="hero.ctaProjects">Explore Projects</span>
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                        </a>
+                        <a href="#contact-section" id="hero-cta-contact" class="btn-secondary" data-analytics-cta="hero_contact">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            <span data-i18n="hero.ctaContact">Get in Touch</span>
+                        </a>
                     </div>
-                    <p class="about-content" data-i18n="about.content">
-                        <strong>Versatile & Creative Developer.</strong>
-                        <br><br>
-                        My expertise ranges from orchestrating <strong>AI Agents</strong> (LLM, RAG, Computer Vision) to developing immersive 
-                        <strong>Video Games</strong> (Unity, C#).
-                        With international experience gained across France, Switzerland, and Portugal, I design innovative solutions that combine technical robustness with polished design.
+
+                    <div class="hero-trust-links">
+                        <a href="https://obvioustool.com" target="_blank" rel="noopener noreferrer" class="trust-link" id="hero-obvioustool-link">
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> obvioustool.com
+                        </a>
+                        <a href="https://github.com/EmericFDS" target="_blank" rel="noopener noreferrer" class="trust-link" id="hero-github-link">
+                            <i class="fab fa-github" aria-hidden="true"></i> github.com/EmericFDS
+                        </a>
+                        <a href="https://www.linkedin.com/in/emericfds/" target="_blank" rel="noopener noreferrer" class="trust-link" id="hero-linkedin-link">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i> linkedin.com/in/emericfds
+                        </a>
+                        <a href="mailto:contact@emericfds.com" class="trust-link" id="hero-email-link">
+                            <i class="fas fa-envelope" aria-hidden="true"></i> contact@emericfds.com
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portrait & Quantified Track Record -->
+                <aside class="hero-profile-sheet" aria-label="Key Career Metrics">
+                    <div class="portrait-frame">
+                        <img src="./img/profile.jpg" alt="Portrait of Emeric Ferreira Dos Santos, AI Engineer, Full-Stack Developer & UX/UI Designer in Geneva" class="portrait-img" width="600" height="555" fetchpriority="high">
+                    </div>
+
+                    <div class="hero-metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-value" data-i18n="hero.metric1.val">33</span>
+                            <span class="metric-label" data-i18n="hero.metric1.label">Shipped Apps, Tools &amp; Games</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value" data-i18n="hero.metric2.val">5+</span>
+                            <span class="metric-label" data-i18n="hero.metric2.label">Flagship AI &amp; Native Products (2024–2026)</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value" data-i18n="hero.metric3.val">1,000+</span>
+                            <span class="metric-label" data-i18n="hero.metric3.label">Commercial Levels on Nintendo Switch</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value" data-i18n="hero.metric4.val">FR · PT · EN · ES</span>
+                            <span class="metric-label" data-i18n="hero.metric4.label">4 Languages · Geneva, CH (Permit C)</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- 2. CORE ENGINEERING CAPABILITIES -->
+        <section class="editorial-section" id="expertise-section" aria-labelledby="expertise-heading">
+            <div class="section-header">
+                <div class="section-header-main">
+                    <span class="eyebrow" data-i18n="exp.eyebrow">Core Capabilities</span>
+                    <h2 class="section-title" id="expertise-heading" data-i18n="exp.title">AI Engineering, Full-Stack Software &amp; UX/UI Design</h2>
+                    <p class="section-lead" data-i18n="exp.lead">
+                        End-to-end product execution combining AI automation, native software performance, and field-tested interface ergonomics.
                     </p>
                 </div>
+            </div>
 
-                <div class="about-badges">
-                    <span class="skill-pill"><i class="fas fa-brain"></i> <span data-i18n="about.badge1">AI Agents & LLM RAG</span></span>
-                    <span class="skill-pill"><i class="fas fa-gamepad"></i> <span data-i18n="about.badge2">10+ Shipped Games</span></span>
-                    <span class="skill-pill"><i class="fas fa-palette"></i> <span data-i18n="about.badge3">Creative UI & Canvas</span></span>
+            <div class="capabilities-grid">
+                <article class="capability-card">
+                    <div>
+                        <span class="capability-num">01</span>
+                        <h3 class="capability-title" data-i18n="exp.c1.title">AI Agents, LLMs &amp; RAG Systems</h3>
+                        <p class="capability-desc" data-i18n="exp.c1.desc">
+                            Design and orchestration of autonomous workflows, document extraction pipelines (PDF/OCR/NLP), semantic retrieval (RAG), Computer Vision (YOLOv8, OpenCV), and privacy-first local AI modules.
+                        </p>
+                    </div>
+                    <div class="capability-tags">
+                        <span class="spec-chip">LLMs &amp; RAG</span>
+                        <span class="spec-chip">AI Agents</span>
+                        <span class="spec-chip">NLP / OCR</span>
+                        <span class="spec-chip">Python</span>
+                        <span class="spec-chip">PyTorch / YOLOv8</span>
+                    </div>
+                </article>
+
+                <article class="capability-card">
+                    <div>
+                        <span class="capability-num">02</span>
+                        <h3 class="capability-title" data-i18n="exp.c2.title">Full-Stack Web &amp; Native Desktop</h3>
+                        <p class="capability-desc" data-i18n="exp.c2.desc">
+                            Architecture of responsive web platforms and ultra-fast native desktop software using React, TypeScript, Next.js, Vite, Python, Rust/Tauri, and client-side AES-256 cryptography.
+                        </p>
+                    </div>
+                    <div class="capability-tags">
+                        <span class="spec-chip">React / TypeScript</span>
+                        <span class="spec-chip">Rust &amp; Tauri</span>
+                        <span class="spec-chip">Next.js / Vite</span>
+                        <span class="spec-chip">AES-256 WebCrypto</span>
+                    </div>
+                </article>
+
+                <article class="capability-card">
+                    <div>
+                        <span class="capability-num">03</span>
+                        <h3 class="capability-title" data-i18n="exp.c3.title">UX/UI Design, Info Architecture &amp; 3D</h3>
+                        <p class="capability-desc" data-i18n="exp.c3.desc">
+                            Concrete field experience in interface prototyping, user testing, information architecture, navigation flows, and ergonomic simplification—enriched by Unity, Unreal Engine, and shipped Nintendo Switch production.
+                        </p>
+                    </div>
+                    <div class="capability-tags">
+                        <span class="spec-chip">UX/UI &amp; Prototyping</span>
+                        <span class="spec-chip">User Testing</span>
+                        <span class="spec-chip">Unity / Unreal / C#</span>
+                        <span class="spec-chip">Nintendo Switch</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. INTERACTIVE 33-PROJECT EXPLORER & CRAWLABLE DIRECTORY -->
+        <section class="editorial-section" id="projects-section" aria-labelledby="archive-heading">
+            <div class="section-header">
+                <div class="section-header-main">
+                    <span class="eyebrow" data-i18n="projects.eyebrow">Selected &amp; Complete Work (2015–2026)</span>
+                    <h2 class="section-title" id="archive-heading" data-i18n="projects.title">Projects &amp; Realizations (33 Projects)</h2>
+                    <p class="section-lead" data-i18n="projects.lead">
+                        Browse all 33 projects shipped between 2015 and 2026: live AI &amp; developer suite (Obvious Tool), native Rust/Tauri desktop software, NLP extraction, Web security, UX/UI design, and Nintendo Switch games.
+                    </p>
                 </div>
-            </section>
+            </div>
 
-            <!-- Row 2: Featured Projects Showcase (Span 12) -->
-            <section class="bento-card domains-card" id="projects-section" aria-label="Featured Projects">
+            <div class="explorer-card">
                 <div class="projects-top-bar">
-                    <div class="card-label" style="margin-bottom: 0;">
-                        <i class="fas fa-diagram-project"></i>
-                        <span data-i18n="projects.title">Featured Projects</span>
-                    </div>
-
                     <div class="project-filters" role="tablist" aria-label="Project Category Filters">
-                        <button class="filter-btn active" data-filter="ai" role="tab" aria-selected="true">
-                            <span data-i18n="projects.filter.ai">AI</span>
-                            <span class="filter-count">5</span>
+                        <button class="filter-btn active" id="filter-btn-all" data-filter="all" role="tab" aria-selected="true">
+                            <span data-i18n="projects.filter.all">All</span>
+                            <span class="filter-count">33</span>
                         </button>
-                        <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">
+                        <button class="filter-btn" id="filter-btn-ai" data-filter="ai" role="tab" aria-selected="false">
+                            <span data-i18n="projects.filter.ai">AI &amp; ML</span>
+                            <span class="filter-count">3</span>
+                        </button>
+                        <button class="filter-btn" id="filter-btn-web" data-filter="web" role="tab" aria-selected="false">
                             <span data-i18n="projects.filter.web">Web</span>
                             <span class="filter-count">3</span>
                         </button>
-                        <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">
-                            <span data-i18n="projects.filter.games">Games</span>
-                            <span class="filter-count">19</span>
+                        <button class="filter-btn" id="filter-btn-games" data-filter="games" role="tab" aria-selected="false">
+                            <span data-i18n="projects.filter.games">Games &amp; 3D</span>
+                            <span class="filter-count">21</span>
                         </button>
-                        <button class="filter-btn" data-filter="design" role="tab" aria-selected="false">
+                        <button class="filter-btn" id="filter-btn-design" data-filter="design" role="tab" aria-selected="false">
                             <span data-i18n="projects.filter.design">Design</span>
                             <span class="filter-count">4</span>
                         </button>
-                        <button class="filter-btn" data-filter="other" role="tab" aria-selected="false">
-                            <span data-i18n="projects.filter.other">Other</span>
+                        <button class="filter-btn" id="filter-btn-other" data-filter="other" role="tab" aria-selected="false">
+                            <span data-i18n="projects.filter.other">Desktop &amp; IoT</span>
                             <span class="filter-count">2</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Master-Detail Project Carousel View -->
+                <!-- 1-Click Project Selector Chips -->
+                <div id="explorer-quick-strip" class="explorer-quick-strip" aria-label="Quick project selector"></div>
+
+                <!-- Master-Detail Interactive Viewer -->
                 <div class="projects-content-wrapper">
-                    <!-- Left Column: Details & Tech -->
                     <div class="project-info-container">
-                        <!-- Top Header Block: Meta, Title, and Action Links -->
-                        <div class="project-info-header">
+                        <div>
                             <div class="project-meta-header">
                                 <div class="project-icon-badge">
-                                    <i id="project-icon" class="fas fa-code"></i>
+                                    <i id="project-icon" class="fas fa-toolbox" aria-hidden="true"></i>
                                 </div>
-                                <span id="project-category-badge" class="project-category-pill">AI</span>
-                                <span id="project-year-badge" class="project-year-pill">2026</span>
+                                <span id="project-category-badge" class="project-category-pill">NLP</span>
+                                <span id="project-year-badge" class="project-year-pill">2025</span>
                             </div>
 
-                            <h2 id="project-title" class="project-title-text">Project Title</h2>
+                            <h3 id="project-title" class="project-title-text">Obvious Tool</h3>
 
                             <div id="project-links-list" class="project-links-container">
-                                <!-- Dynamic Action Links (Demo, Video, Repo, PDF) -->
+                                <a href="https://obvioustool.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                                    <i class="fas fa-arrow-up-right-from-square"></i> obvioustool.com
+                                </a>
                             </div>
                         </div>
 
-                        <!-- Scrollable Middle Block: Directly bounded by top & bottom borders -->
                         <div class="relative-scroll-wrapper">
-                            <div class="scroll-indicator-shadow top" id="scroll-shadow-top" aria-hidden="true"></div>
                             <div id="dynamic-project-content" class="dynamic-scroll-content" tabindex="0" role="region" aria-label="Project description">
-                                <!-- Dynamic Description & Specs -->
-                            </div>
-                            <div class="scroll-indicator-shadow bottom" id="scroll-shadow-bottom" aria-hidden="true">
-                                <span class="scroll-hint-icon"><i class="fas fa-chevron-down"></i></span>
+                                <p>Your Digital Swiss Army Knife: unified developer and creative workspace integrating 50+ tools with embedded local AI modules for paraphrasing, correction, and translation.</p>
                             </div>
                         </div>
 
-                        <div class="project-tech-footer">
-                            <div class="card-label" style="margin-bottom: 0.35rem; font-size: 0.78rem;">
-                                <i class="fas fa-microchip"></i>
-                                <span data-i18n="projects.tech.title">Technologies:</span>
-                            </div>
+                        <div>
+                            <div class="tech-tags-label" data-i18n="projects.tech.title">Technologies:</div>
                             <div id="project-tech-tags" class="tech-tags-list">
-                                <!-- Dynamic Tech Tags -->
+                                <span class="tech-tag-pill">React</span>
+                                <span class="tech-tag-pill">Desktop App</span>
+                                <span class="tech-tag-pill">AI Utils</span>
+                                <span class="tech-tag-pill">Privacy</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Interactive Gallery & Filmstrip -->
                     <div class="project-images-container">
                         <div class="gallery-main-view">
-                            <button id="btn-prev-img" class="gallery-nav-btn left" onclick="window.changeImage(-1)" aria-label="Previous image">
-                                <i class="fas fa-chevron-left"></i>
+                            <button id="btn-prev-img" type="button" class="gallery-nav-btn left" aria-label="Previous image">
+                                <i class="fas fa-chevron-left" aria-hidden="true"></i>
                             </button>
 
-                            <img id="gallery-active-image" class="gallery-main-image" src="./img/other/PhotoLift/pl1.webp" alt="Project preview image">
+                            <img id="gallery-active-image" class="gallery-main-image" src="./img/ia/ObviousTool/ot2.webp" alt="Obvious Tool — Preview 1" width="800" height="500" loading="lazy">
 
-                            <button id="btn-next-img" class="gallery-nav-btn right" onclick="window.changeImage(1)" aria-label="Next image">
-                                <i class="fas fa-chevron-right"></i>
+                            <button id="btn-next-img" type="button" class="gallery-nav-btn right" aria-label="Next image">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
                             </button>
 
-                            <button id="expand-image-btn" class="gallery-expand-btn" aria-label="Expand image in high resolution">
-                                <i class="fas fa-expand"></i>
-                                <span data-i18n="projects.viewFullscreen">Expand</span>
+                            <button id="expand-image-btn" type="button" class="gallery-expand-btn" aria-label="Expand image in fullscreen">
+                                <i class="fas fa-expand" aria-hidden="true"></i>
+                                <span data-i18n="projects.viewFullscreen">Fullscreen</span>
                             </button>
                         </div>
 
-                        <!-- Filmstrip Thumbnails -->
-                        <div id="gallery-filmstrip" class="gallery-filmstrip" aria-label="Project thumbnails gallery">
-                            <!-- Injected by JavaScript -->
-                        </div>
+                        <div id="gallery-filmstrip" class="gallery-filmstrip" aria-label="Project thumbnails gallery"></div>
                     </div>
                 </div>
 
-                <!-- Navigation Controls Footer -->
                 <div class="project-controls-footer">
-                    <button id="btn-prev-proj" class="project-nav-btn" onclick="window.changeProject(-1)" aria-label="Previous project">
-                        <i class="fas fa-arrow-left"></i>
+                    <button id="btn-prev-proj" type="button" class="project-nav-btn" aria-label="Previous project">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
                         <span data-i18n="projects.nav.previous">Previous</span>
                     </button>
 
                     <div id="project-nav-counter" class="project-counter-indicator" aria-live="polite">
-                        <span>01</span> / 05
+                        <span>01</span> / 33
                     </div>
 
-                    <button id="btn-next-proj" class="project-nav-btn" onclick="window.changeProject(1)" aria-label="Next project">
+                    <button id="btn-next-proj" type="button" class="project-nav-btn" aria-label="Next project">
                         <span data-i18n="projects.nav.next">Next</span>
-                        <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </button>
                 </div>
-            </section>
+            </div>
 
-            <!-- Row 3: Compact Contact & Socials Footer (Span 12) -->
-            <footer class="bento-card contact-footer" id="contact-section" aria-label="Contact Information">
-                <div class="footer-main-row">
-                    <!-- Identity & Location -->
-                    <div class="footer-col-brand">
-                        <div class="footer-brand-title">Emeric <span class="brand-tag">F.D.S.</span></div>
-                        <a href="https://www.google.com/maps/place/Geneva" target="_blank" rel="noopener noreferrer" class="location-pill" aria-label="Geneva, Switzerland Google Maps">
-                            <i class="fas fa-location-dot"></i>
-                            <span data-i18n="footer.location.text">Geneva, Switzerland</span>
+            <!-- Legitimate, Semantic, Crawlable 33-Project Directory (Zero Hidden Cloaking) -->
+            <details class="crawlable-directory" id="complete-project-directory">
+                <summary>
+                    <span data-i18n="projects.directorySummary">View complete text index of all 33 projects (AI, Web, Games, Design)</span>
+                    <i class="fas fa-chevron-down directory-chevron" aria-hidden="true"></i>
+                </summary>
+                <div class="directory-grid">
+                    <div class="directory-item"><h3><a href="https://obvioustool.com" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Obvious Tool (obvioustool.com)</a></h3><div class="directory-item-meta">2025 · React, Embedded AI · Live</div><p>Local-first developer and creative suite combining 50+ tools with private AI text/translation modules.</p></div>
+                    <div class="directory-item"><h3>PhotoLift</h3><div class="directory-item-meta">2026 · Rust, Tauri, React</div><p>Native desktop studio photo manager with session sorting, retouching, and 88% compression.</p></div>
+                    <div class="directory-item"><h3>CVite</h3><div class="directory-item-meta">2025 · React, NLP, Vite</div><p>AI resume extraction platform parsing PDFs/images into customizable real-time CV templates.</p></div>
+                    <div class="directory-item"><h3>Smart Bucket</h3><div class="directory-item-meta">2025 · Python, ML, React</div><p>Autonomous quantitative crypto portfolio engine with 24/7 sentiment and momentum rebalancing.</p></div>
+                    <div class="directory-item"><h3>GhostLink</h3><div class="directory-item-meta">2024 · React, AES-256</div><p>Zero-knowledge client-side encrypted secret and file sharing via serverless URL payloads.</p></div>
+                    <div class="directory-item"><h3>Turn Base Battle Game</h3><div class="directory-item-meta">2021 · Unity, Level Design</div><p>Mobile tactical RPG featuring 4 dungeon combat environments (throne room, library, tombs).</p></div>
+                    <div class="directory-item"><h3>Gravity Defy</h3><div class="directory-item-meta">2021 · Unity, Mobile</div><p>Physics-based motorcycle parkour mobile game across 14 progressive low-poly levels.</p></div>
+                    <div class="directory-item"><h3>Cubic Level</h3><div class="directory-item-meta">2021 · Voxel, Level Design</div><p>Top-down mobile voxel adventure map engineered for fluid player circulation and custom animation.</p></div>
+                    <div class="directory-item"><h3>Pure Mahjong</h3><div class="directory-item-meta">2020 · Nintendo Switch, Unity</div><p>Commercial Nintendo Switch puzzle title with 1,000+ levels across 24 solar calendar events.</p></div>
+                    <div class="directory-item"><h3>Parkour Game</h3><div class="directory-item-meta">2020 · Unity, 3D</div><p>Third-person urban parkour game featuring 5 vertical indoor and rooftop levels.</p></div>
+                    <div class="directory-item"><h3>Cartoon Level</h3><div class="directory-item-meta">2019 · Unity, Gaea</div><p>Stylized natural terrain prototype (forest, lake, mountains) iterated with Gaea and Unity.</p></div>
+                    <div class="directory-item"><h3>Hunting Game Map</h3><div class="directory-item-meta">2019 · Terrain, Level Design</div><p>Large-scale semi-realistic open-world FPS terrain spanning swamps, forests, and valleys.</p></div>
+                    <div class="directory-item"><h3>3 Pigs Game</h3><div class="directory-item-meta">2019 · Unity, Freelance</div><p>Narrative 6-zone level design adaptation of the Three Little Pigs with resource progression.</p></div>
+                    <div class="directory-item"><h3>World Building</h3><div class="directory-item-meta">2019 · Gaea, Unity</div><p>Procedural realistic geological terrain generation and engine integration pipeline.</p></div>
+                    <div class="directory-item"><h3>Perfect Angle</h3><div class="directory-item-meta">2019 · JavaScript, 2D Puzzle</div><p>Browser-playable progressive trajectory and reflection puzzle game.</p></div>
+                    <div class="directory-item"><h3>Koda: Kiyomori's Guardian</h3><div class="directory-item-meta">2018 · Unity, C#</div><p>3D Japanese folklore platformer built by a 17-person team at Gamagora (Lyon 2).</p></div>
+                    <div class="directory-item"><h3>Antivirus: Data City</h3><div class="directory-item-meta">2018 · Unity, Voxel</div><p>Systemic Tron-inspired modular neon voxel city defense game.</p></div>
+                    <div class="directory-item"><h3>Underground Water Junction</h3><div class="directory-item-meta">2018 · Unreal Engine</div><p>Symmetrical 3v3 Capture The Flag multiplayer map built for Unreal Tournament.</p></div>
+                    <div class="directory-item"><h3>Sleeping Pit</h3><div class="directory-item-meta">2018 · Game Design, Unity</div><p>Medieval fantasy puzzle dungeon built around divisible slime mechanics.</p></div>
+                    <div class="directory-item"><h3>Deficiency</h3><div class="directory-item-meta">2018 · JavaScript, Serious Game</div><p>Educational 2D serious game modeling immune system defenses against viral infection.</p></div>
+                    <div class="directory-item"><h3>Unity Prototypes</h3><div class="directory-item-meta">2018 · Unity, C#</div><p>Experimental spatial blockouts, lighting studies, and navigation prototypes.</p></div>
+                    <div class="directory-item"><h3>Trackmania Map</h3><div class="directory-item-meta">2018 · Trackmania, Level Design</div><p>Three technical, speed, and competitive time-attack racing circuits.</p></div>
+                    <div class="directory-item"><h3>Tom Atom Rescue</h3><div class="directory-item-meta">2017 · Unity, C#, 2D RPG</div><p>Futuristic 2D action-platformer RPG with equipment upgrades and aerial vehicles.</p></div>
+                    <div class="directory-item"><h3>EMOT.IO</h3><div class="directory-item-meta">2017 · Arduino, Bitalino, Processing</div><p>Biofeedback interactive film adapting visuals and audio in real time from heart-rate sensors.</p></div>
+                    <div class="directory-item"><h3>FabLab Caldas da Rainha</h3><div class="directory-item-meta">2017 · Web, Maker Community</div><p>Official web platform presenting machines, workshops, and maker resources in Portugal.</p></div>
+                    <div class="directory-item"><h3>Online Store Design</h3><div class="directory-item-meta">2017 · HTML, CSS, UI</div><p>Clean e-commerce storefront architecture and product presentation templates.</p></div>
+                    <div class="directory-item"><h3>3D Portfolio</h3><div class="directory-item-meta">2017 · Blender, 3ds Max</div><p>Hard-surface 3D modeling, arcade hardware, VR headsets, and studio renders.</p></div>
+                    <div class="directory-item"><h3>Simple Movements</h3><div class="directory-item-meta">2017 · JavaScript, HTML5</div><p>Custom 2D movement physics engine and steering behavior AI prototype.</p></div>
+                    <div class="directory-item"><h3>2D Car Prototype</h3><div class="directory-item-meta">2017 · JavaScript, HTML5</div><p>Top-down vehicular physics, drift, and collision detection prototype.</p></div>
+                    <div class="directory-item"><h3>Tron (Prototype 3)</h3><div class="directory-item-meta">2017 · JavaScript, Multiplayer</div><p>Local multiplayer arcade light-cycle game built with HTML5 Canvas.</p></div>
+                    <div class="directory-item"><h3>Graphic Design Portfolio</h3><div class="directory-item-meta">2017 · Illustrator, InDesign</div><p>Brand identity marks, print layouts, and vector illustration studies.</p></div>
+                    <div class="directory-item"><h3>Satoshi Tajiri Editorial</h3><div class="directory-item-meta">2017 · InDesign, Typography</div><p>Multi-page editorial monograph dedicated to Pokémon creator Satoshi Tajiri.</p></div>
+                    <div class="directory-item"><h3>Claycity (Minecraft)</h3><div class="directory-item-meta">2015 · Voxel Urbanism</div><p>Large-scale North American metropolitan urban planning and transit infrastructure build.</p></div>
+                </div>
+            </details>
+        </section>
+
+        <!-- 4. EXPERIENCE, EDUCATION & TECHNICAL STACK -->
+        <section class="editorial-section" id="experience-section" aria-labelledby="resume-heading">
+            <div class="section-header">
+                <div class="section-header-main">
+                    <span class="eyebrow" data-i18n="resume.eyebrow">Career, Education &amp; Skills</span>
+                    <h2 class="section-title" id="resume-heading" data-i18n="resume.title">Professional Experience, Degrees &amp; Stack</h2>
+                    <p class="section-lead" data-i18n="resume.lead">
+                        Combining digital media design, marketing, interactive systems, UX/UI ergonomics, and modern AI/Full-Stack software engineering across Switzerland, France, and Portugal.
+                    </p>
+                </div>
+            </div>
+
+            <div class="resume-grid">
+                <!-- Left: Verified Professional Experience & Academic Degrees -->
+                <div class="timeline-list">
+                    <div class="timeline-divider-label" data-i18n="resume.subExp">Professional Experience</div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-period" data-i18n="resume.e1.period">02.2022 — Present</div>
+                        <div>
+                            <h3 class="timeline-role" data-i18n="resume.e1.role">Digital Advisor, Trainer &amp; Internal App UX/UI Designer</h3>
+                            <div class="timeline-org" data-i18n="resume.e1.org">Declix (OCE Labor Market Program) · Geneva, Switzerland</div>
+                            <p class="timeline-desc" data-i18n="resume.e1.desc">
+                                UX/UI interface design and prototyping for internal applications; graphic layout of instructional materials; digital tools training and pedagogical coaching; user reception &amp; flow management; IT support, hardware fleet ownership, and team management.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-period" data-i18n="resume.e2.period">2022 — Present</div>
+                        <div>
+                            <h3 class="timeline-role" data-i18n="resume.e2.role">AI Engineer &amp; Full-Stack Software Creator</h3>
+                            <div class="timeline-org" data-i18n="resume.e2.org">Independent Product Engineering · Geneva, Switzerland (obvioustool.com)</div>
+                            <p class="timeline-desc" data-i18n="resume.e2.desc">
+                                End-to-end architecture and production shipping of AI, Web, and native Rust/Tauri applications: Obvious Tool (obvioustool.com — 50+ tools &amp; embedded AI), PhotoLift (88% JPEG optimization), CVite (NLP resume extraction), Smart Bucket (quantitative ML), and GhostLink (client-side AES-256).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-period" data-i18n="resume.e3.period">08.2018 — 08.2021</div>
+                        <div>
+                            <h3 class="timeline-role" data-i18n="resume.e3.role">Level Designer &amp; Interactive UX/UI Designer (Freelance)</h3>
+                            <div class="timeline-org" data-i18n="resume.e3.org">Toulouse, France &amp; International Studios (Nintendo Switch, Mobile, PC)</div>
+                            <p class="timeline-desc" data-i18n="resume.e3.desc">
+                                Information architecture and interaction design (structure, user flows, navigation schemas, storyboards); user testing and direct ergonomic interface iterations; 3D modeling, animations, textures, and C#/application scripting (Unity, Unreal), including Pure Mahjong on Nintendo Switch.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-period" data-i18n="resume.e4.period">02.2017 — 07.2017</div>
+                        <div>
+                            <h3 class="timeline-role" data-i18n="resume.e4.role">Project Assistant — Digital Fabrication &amp; Web (Internship)</h3>
+                            <div class="timeline-org" data-i18n="resume.e4.org">FabLab Caldas da Rainha · Portugal</div>
+                            <p class="timeline-desc" data-i18n="resume.e4.desc">
+                                Official web platform development, 3D modeling &amp; resin printing, real-time biofeedback media (Arduino/Bitalino), and maker project support (preceded by Client Relations internship at Atelier Ricardo Santos, Leiria, 2015).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-divider-label" data-i18n="resume.subEdu">Education &amp; Certifications</div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-period" data-i18n="resume.edu1.period">2023</div>
+                        <div>
+                            <h3 class="timeline-role" data-i18n="resume.edu1.role">PERCO Certification — Occupational Health &amp; Safety</h3>
+                            <div class="timeline-org" data-i18n="resume.edu1.org">Ecoservices · Geneva, Switzerland</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-period" data-i18n="resume.edu2.period">2017 — 2018</div>
+                        <div>
+                            <h3 class="timeline-role" data-i18n="resume.edu2.role">University Degree (DU) in Level Design — Gamagora</h3>
+                            <div class="timeline-org" data-i18n="resume.edu2.org">Université Lumière Lyon 2 · Lyon, France</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-period" data-i18n="resume.edu3.period">2015 — 2017</div>
+                        <div>
+                            <h3 class="timeline-role" data-i18n="resume.edu3.role">Higher Technical Degree (BTS / TeSP) in Digital Media Design</h3>
+                            <div class="timeline-org" data-i18n="resume.edu3.org">ESAD — School of Arts and Design · Caldas da Rainha, Portugal</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-period" data-i18n="resume.edu4.period">2012 — 2015</div>
+                        <div>
+                            <h3 class="timeline-role" data-i18n="resume.edu4.role">Vocational Diploma (BEP) in Marketing</h3>
+                            <div class="timeline-org" data-i18n="resume.edu4.org">Colégio Dr. Luís Pereira da Costa · Monte Redondo, Portugal</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Technical Stack, UX Competencies & Languages -->
+                <aside class="stack-sheet" aria-label="Technical Skills, UX Competencies and Languages">
+                    <div class="stack-group">
+                        <h3 class="stack-group-title" data-i18n="stack.g1">AI, Full-Stack &amp; Application Logic</h3>
+                        <div class="stack-pills">
+                            <span class="spec-chip">LLMs &amp; RAG</span>
+                            <span class="spec-chip">AI Agents &amp; NLP</span>
+                            <span class="spec-chip">Python</span>
+                            <span class="spec-chip">React / TypeScript</span>
+                            <span class="spec-chip">Next.js / Vite</span>
+                            <span class="spec-chip">Rust &amp; Tauri</span>
+                            <span class="spec-chip">C#</span>
+                            <span class="spec-chip">AES-256 WebCrypto</span>
+                        </div>
+                    </div>
+
+                    <div class="stack-group">
+                        <h3 class="stack-group-title" data-i18n="stack.g2">UX/UI Design &amp; Ergonomics</h3>
+                        <div class="stack-pills">
+                            <span class="spec-chip">UX/UI &amp; Interaction Design</span>
+                            <span class="spec-chip">Information Architecture</span>
+                            <span class="spec-chip">Interface Prototyping</span>
+                            <span class="spec-chip">User Testing &amp; Ergonomics</span>
+                            <span class="spec-chip">Navigation Schemas &amp; Storyboards</span>
+                            <span class="spec-chip">Figma &amp; Adobe Suite</span>
+                        </div>
+                    </div>
+
+                    <div class="stack-group">
+                        <h3 class="stack-group-title" data-i18n="stack.g3">3D, Visual Media &amp; Engines</h3>
+                        <div class="stack-pills">
+                            <span class="spec-chip">Unity 3D / 2D</span>
+                            <span class="spec-chip">Unreal Engine</span>
+                            <span class="spec-chip">3D Modeling &amp; Animation</span>
+                            <span class="spec-chip">Gaea / Blender</span>
+                            <span class="spec-chip">Graphic &amp; Editorial Layout</span>
+                        </div>
+                    </div>
+
+                    <div class="stack-group">
+                        <h3 class="stack-group-title" data-i18n="stack.langs">Languages, Permit &amp; Mobility</h3>
+                        <div class="languages-list">
+                            <div class="lang-row">
+                                <span class="lang-name" data-i18n="stack.lang.fr">French</span>
+                                <span class="lang-level" data-i18n="stack.lang.frLevel">Native</span>
+                            </div>
+                            <div class="lang-row">
+                                <span class="lang-name" data-i18n="stack.lang.pt">Portuguese</span>
+                                <span class="lang-level" data-i18n="stack.lang.ptLevel">Fluent (C2)</span>
+                            </div>
+                            <div class="lang-row">
+                                <span class="lang-name" data-i18n="stack.lang.en">English</span>
+                                <span class="lang-level" data-i18n="stack.lang.enLevel">Good / Professional (B2)</span>
+                            </div>
+                            <div class="lang-row">
+                                <span class="lang-name" data-i18n="stack.lang.es">Spanish</span>
+                                <span class="lang-level" data-i18n="stack.lang.esLevel">Good / Professional (B2)</span>
+                            </div>
+                            <div class="lang-row">
+                                <span class="lang-name" data-i18n="stack.permit">Swiss Residence</span>
+                                <span class="lang-level" data-i18n="stack.permitVal">Permit C (Permanent) · Geneva</span>
+                            </div>
+                            <div class="lang-row">
+                                <span class="lang-name" data-i18n="stack.license">Driving Licenses</span>
+                                <span class="lang-level" data-i18n="stack.licenseVal">Categories A, B</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- 5. STRUCTURED FAQ (GEO / AI CITATION & RECRUITER Q&A) -->
+        <section class="editorial-section" id="faq-section" aria-labelledby="faq-heading">
+            <div class="section-header">
+                <div class="section-header-main">
+                    <span class="eyebrow" data-i18n="faq.eyebrow">Frequently Asked Questions</span>
+                    <h2 class="section-title" id="faq-heading" data-i18n="faq.title">Key Information for Recruiters, Clients &amp; AI Assistants</h2>
+                </div>
+            </div>
+
+            <div class="faq-list">
+                <details class="faq-item" open>
+                    <summary class="faq-question">
+                        <span data-i18n="faq.q1">What AI, software, and UX/UI projects does Emeric Ferreira Dos Santos build?</span>
+                        <i class="fas fa-plus faq-icon" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-answer" data-i18n="faq.a1">
+                        Emeric designs and ships end-to-end <strong>AI Agents, LLM/RAG pipelines, and NLP document platforms</strong> (<em>CVite</em>), the live developer &amp; AI workspace <strong><a href="https://obvioustool.com" target="_blank" rel="noopener noreferrer">Obvious Tool (obvioustool.com)</a></strong>, <strong>native Rust/Tauri desktop apps</strong> (<em>PhotoLift</em>), <strong>autonomous ML dashboards</strong> (<em>Smart Bucket</em>), <strong>zero-knowledge encrypted web apps</strong> (<em>GhostLink</em>), and ergonomic internal application interfaces at <strong>Declix (Geneva)</strong>.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span data-i18n="faq.q2">What is Emeric Ferreira Dos Santos's core technical and UX/UI stack?</span>
+                        <i class="fas fa-plus faq-icon" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-answer" data-i18n="faq.a2">
+                        He combines <strong>AI &amp; Application Logic</strong> (Python, LLMs, RAG, NLP, YOLOv8/OpenCV, C#), <strong>Full-Stack &amp; Native Software</strong> (React, TypeScript, Vite, Next.js, Rust, Tauri, AES-256 WebCrypto), <strong>UX/UI &amp; Information Architecture</strong> (interface prototyping, user testing, navigation schemas, storyboards, Figma, Adobe Suite), and <strong>3D Engines</strong> (Unity, Unreal Engine).
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span data-i18n="faq.q3">What is Emeric's work authorization and availability in Geneva and Switzerland?</span>
+                        <i class="fas fa-plus faq-icon" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-answer" data-i18n="faq.a3">
+                        Emeric lives in <strong>Geneva (1227 Les Acacias), Switzerland</strong>, holds a permanent <strong>Swiss C Residence Permit (Permis C)</strong> as well as <strong>A &amp; B driving licenses</strong>, and is open to <strong>AI Engineer, Full-Stack Developer, Product Builder, or UX/UI Designer</strong> opportunities across Geneva, Lausanne, Romandie, and Europe.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span data-i18n="faq.q4">How do his UX/UI, Declix, and Level Design experiences complement his AI engineering?</span>
+                        <i class="fas fa-plus faq-icon" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-answer" data-i18n="faq.a4">
+                        Between designing internal app interfaces and training users daily at <strong>Declix (Geneva)</strong> and shipping commercial titles like <em>Pure Mahjong</em> (1,000+ levels on <strong>Nintendo Switch</strong>), Emeric grounds every technical system in <strong>real-world user testing, clear information architecture, and friction-free ergonomics</strong>.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span data-i18n="faq.q5">Which languages does Emeric Ferreira Dos Santos speak?</span>
+                        <i class="fas fa-plus faq-icon" aria-hidden="true"></i>
+                    </summary>
+                    <div class="faq-answer" data-i18n="faq.a5">
+                        Emeric speaks <strong>four languages</strong>: native <strong>French</strong>, fluent <strong>Portuguese (C2)</strong>, good professional <strong>English (B2)</strong>, and good <strong>Spanish (B2)</strong>.
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 6. EXECUTIVE CONTACT & FOOTER -->
+        <section class="editorial-section" id="contact-section" aria-labelledby="contact-heading">
+            <div class="contact-card">
+                <div class="contact-copy">
+                    <span class="eyebrow" data-i18n="contact.eyebrow">Direct Contact</span>
+                    <h2 class="section-title" id="contact-heading" data-i18n="contact.title">Let's Build User-Centered AI, Software &amp; UX/UI Together</h2>
+                    <p class="section-lead" data-i18n="contact.lead">
+                        Recruiting an AI Engineer, Full-Stack Builder, or UX/UI Designer in Geneva (Swiss Permit C), or planning a custom application? Reach out directly—response within 24 hours.
+                    </p>
+                </div>
+
+                <div class="contact-actions-col">
+                    <div class="email-copy-group">
+                        <a id="secure-email-link" href="mailto:contact@emericfds.com" class="email-display-btn mail-direct" aria-label="Send email to contact@emericfds.com">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> contact@emericfds.com
+                        </a>
+                        <button id="copy-email-btn" type="button" class="email-display-btn" aria-label="Copy email address to clipboard">
+                            <i class="fas fa-copy" aria-hidden="true"></i>
+                            <span data-i18n="footer.copyEmail">Copy Email</span>
+                        </button>
+                    </div>
+
+                    <div class="social-links-row">
+                        <a href="https://obvioustool.com" target="_blank" rel="noopener noreferrer" class="social-text-link" id="footer-obvioustool-link">
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> obvioustool.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/emericfds/" target="_blank" rel="noopener noreferrer" class="social-text-link" id="footer-linkedin-link">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/EmericFDS" target="_blank" rel="noopener noreferrer" class="social-text-link" id="footer-github-link">
+                            <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                        </a>
+                        <a href="https://www.google.com/maps/place/1227+Les+Acacias,+Geneva" target="_blank" rel="noopener noreferrer" class="social-text-link" id="footer-location-link">
+                            <i class="fas fa-location-dot" aria-hidden="true"></i> <span data-i18n="footer.location.text">1227 Les Acacias · Geneva, Switzerland</span>
                         </a>
                     </div>
-
-                    <!-- Email Action Group -->
-                    <div class="footer-col-email">
-                        <div class="email-copy-group">
-                            <button id="copy-email-btn" class="email-display-btn" aria-label="Copy email address to clipboard">
-                                <i class="fas fa-copy"></i>
-                                <span data-i18n="footer.copyEmail">Copy Email</span>
-                            </button>
-                            <a id="secure-email-link" href="mailto:contact@emericfds.com" class="email-display-btn mail-direct" aria-label="Send direct email to contact@emericfds.com">
-                                <i class="fas fa-paper-plane"></i> contact@emericfds.com
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Social Networks -->
-                    <div class="footer-col-social">
-                        <div class="social-links-row">
-                            <a href="https://www.linkedin.com/in/emericfds/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Emeric Ferreira Dos Santos LinkedIn Profile">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://github.com/EmericFDS" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Emeric Ferreira Dos Santos GitHub Profile">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Discreet Centered Copyright Bar -->
-                <div class="footer-sub-row">
-                    <span>© 2026 Emeric Ferreira Dos Santos. <span data-i18n="footer.allRights">All rights reserved.</span></span>
+            <footer class="site-footer-bar" role="contentinfo">
+                <div>
+                    © 2026 Emeric Ferreira Dos Santos. <span data-i18n="footer.allRights">All rights reserved.</span>
+                </div>
+                <div class="footer-meta-links">
+                    <a href="/fr/" class="footer-meta-link" hreflang="fr">Version Française</a>
+                    <a href="/llms.txt" class="footer-meta-link">llms.txt</a>
+                    <a href="/sitemap.xml" class="footer-meta-link">Sitemap</a>
+                    <button type="button" id="privacy-settings-btn" class="footer-meta-link" data-i18n="footer.privacy">Privacy &amp; Analytics</button>
                 </div>
             </footer>
+        </section>
 
-        </div> <!-- Close bento-grid -->
     </main>
 
-    <!-- ========================================================
-         SEO: Static crawlable content for search engines.
-         Ensures 100% SEO indexability across all 33 projects.
-         ======================================================== -->
-    <section id="seo-static-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;left:-9999px;top:-9999px;">
-        <div lang="en">
-            <h2>Portfolio Projects — Emeric Ferreira Dos Santos</h2>
-            <p>AI Developer and Game Designer based in Geneva, Switzerland. Specializing in LLMs, RAG pipelines, Computer Vision, and Unity Game Development.</p>
-
-            <article>
-                <h3>PhotoLift — OTHER (2026)</h3>
-                <div>Desktop application for fast photo management and processing.<br><strong>Optimized Workflow:</strong> Automatic import, sorting by sessions, and quick touch-ups.<br><strong>Powerful Tools:</strong> Integrated image editor with color adjustments, cropping, and filters.<br><strong>Intuitive Interface:</strong> Modern and clean design for a smooth user experience.</div>
-                <p><strong>Technologies:</strong> Tauri, React, Rust, Image Processing</p>
-            </article>
-
-            <article>
-                <h3>Obvious Tool — NLP (2025)</h3>
-                <div>Your Digital Swiss Army Knife. A unified suite of tools for developers and creatives.<br><strong>Multi-Tools:</strong> Over 50 essential tools (Converters, Encoders, Image/Audio processing) in one app.<br><strong>Embedded AI:</strong> AI-powered modules for paraphrasing, text correction, and translation.<br><strong>Private & Fast:</strong> Runs locally, ad-free, with a modern and fluid interface.</div>
-                <p><strong>Technologies:</strong> React, Desktop App, AI Utils, Privacy</p>
-            </article>
-
-            <article>
-                <h3>CVite — NLP (2025)</h3>
-                <div>Intelligent resume creation platform powered by AI.<br><strong>Smart Extraction:</strong> Automatic analysis of existing resumes (PDF, Image) to populate your profile instantly.<br><strong>Advanced Editor:</strong> Real-time customization of templates, colors, and layouts.<br><strong>UX Focused:</strong> Smooth and intuitive interface designed to simplify job hunting.</div>
-                <p><strong>Technologies:</strong> React, NLP, AI Integration, Vite</p>
-            </article>
-
-            <article>
-                <h3>Smart Bucket — ML (2025)</h3>
-                <div>Autonomous crypto portfolio management system driven by AI.<br><strong>Autopilot:</strong> Dynamic asset allocation and automated rebalancing across BTC, ETH, SOL, etc.<br><strong>Strategic Analysis:</strong> 24/7 market monitoring, sentiment analysis, and low-latency execution (0.0s).<br><strong>Modern Interface:</strong> Comprehensive dashboard for tracking performance, liquidity, and transaction history.</div>
-                <p><strong>Technologies:</strong> Python, Machine Learning, React, Trading</p>
-            </article>
-
-            <article>
-                <h3>GhostLink — WEB (2024)</h3>
-                <div>Share Secrets Securely. Encrypt text, files, or images into a secure link. Nothing is ever stored on a server. The link is the data.<br><strong>Total Security:</strong> Full client-side AES-256 encryption. Your data never leaves your device without being encrypted.<br><strong>Privacy:</strong> No permanent storage. The generated link contains all information needed for decryption.<br><strong>Simplicity:</strong> Share passwords, private keys, or sensitive files in one click.</div>
-                <p><strong>Technologies:</strong> React, Cryptography, Web App</p>
-            </article>
-
-            <article>
-                <h3>Turn Base Battle Game — GAMES (2021)</h3>
-                <div>Mobile game project with 4 unique dungeon environments.<br><strong>Technologies:</strong> Level Design, Mobile, Unity</div>
-            </article>
-
-            <article>
-                <h3>Gravity Defy — GAMES (2021)</h3>
-                <div>Mobile motorcycle parkour game with 14 polished levels.<br><strong>Technologies:</strong> Unity, Level Design, Mobile</div>
-            </article>
-
-            <article>
-                <h3>Cubic Level — GAMES (2021)</h3>
-                <div>Charming voxel top-down mobile game map.<br><strong>Technologies:</strong> Voxel, Level Design, Mobile</div>
-            </article>
-
-            <article>
-                <h3>Pure Mahjong — GAMES (2020)</h3>
-                <div>Photorealistic Mahjong game with 1000+ levels for Nintendo Switch.<br><strong>Technologies:</strong> Level Design, Nintendo Switch, Unity</div>
-            </article>
-
-            <article>
-                <h3>Koda: Kiyomori's Guardian — GAMES (2018)</h3>
-                <div>Dreamy 3D platform adventure game based on Japanese folklore.<br><strong>Technologies:</strong> Unity, C#, Level Design</div>
-            </article>
-
-            <article>
-                <h3>Antivirus: Data City — GAMES (2018)</h3>
-                <div>Tron-like voxel city level design for core defense against viruses.<br><strong>Technologies:</strong> Unity, Voxel, Level Design</div>
-            </article>
-        </div>
-
-        <div lang="fr">
-            <h2>Projets de Portfolio — Emeric Ferreira Dos Santos</h2>
-            <p>Développeur IA et Game Designer basé à Genève, Suisse. Spécialisé dans les LLMs, les pipelines RAG, la vision par ordinateur et le développement de jeux Unity.</p>
-
-            <article>
-                <h3>PhotoLift — AUTRE (2026)</h3>
-                <div>Application de bureau pour la gestion et le traitement rapide de photos.<br><strong>Workflow Optimisé :</strong> Import automatique, tri par sessions et retouches rapides.<br><strong>Outils Puissants :</strong> Éditeur d'images intégré avec ajustements de couleurs, recadrage et filtres.<br><strong>Interface Intuitive :</strong> Design moderne et épuré pour une expérience utilisateur fluide.</div>
-                <p><strong>Technologies :</strong> Tauri, React, Rust, Traitement d'images</p>
-            </article>
-
-            <article>
-                <h3>Obvious Tool — NLP (2025)</h3>
-                <div>Votre Couteau Suisse Numérique. Plus de 50 outils essentiels en local avec modules IA embarqués.</div>
-                <p><strong>Technologies :</strong> React, Desktop App, AI Utils, Confidentialité</p>
-            </article>
-
-            <article>
-                <h3>CVite — NLP (2025)</h3>
-                <div>Plateforme intelligente de création de CV avec extraction IA et éditeur en temps réel.</div>
-                <p><strong>Technologies :</strong> React, NLP, Intégration IA, Vite</p>
-            </article>
-
-            <article>
-                <h3>Smart Bucket — ML (2025)</h3>
-                <div>Système autonome de gestion de portefeuille crypto piloté par l'IA et analyse de sentiment.</div>
-                <p><strong>Technologies :</strong> Python, Machine Learning, React, Trading</p>
-            </article>
-
-            <article>
-                <h3>GhostLink — WEB (2024)</h3>
-                <div>Partage de secrets sécurisé avec chiffrement client AES-256 sans stockage serveur.</div>
-                <p><strong>Technologies :</strong> React, Cryptographie, Web App</p>
-            </article>
-        </div>
-    </section>
-
-    <!-- Lightbox Modal with Fullscreen Navigation -->
+    <!-- Fullscreen Lightbox Modal -->
     <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Expanded project gallery">
         <div class="lightbox-dialog">
-            <!-- Header bar with Title, Counter and Close Button -->
             <div class="lightbox-top-bar">
                 <div id="lightbox-title" class="lightbox-title">Project Title</div>
-                <div id="lightbox-counter" class="lightbox-counter">01 / 05</div>
-                <button id="lightbox-close-btn" class="lightbox-close-btn" aria-label="Close fullscreen modal">
-                    <i class="fas fa-xmark"></i>
+                <div id="lightbox-counter" class="lightbox-counter">01 / 08</div>
+                <button id="lightbox-close-btn" type="button" class="lightbox-close-btn" aria-label="Close fullscreen modal">
+                    <i class="fas fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
 
-            <!-- Main Image Viewport with Previous & Next Arrows -->
             <div class="lightbox-view-wrapper">
-                <button id="lightbox-prev-btn" class="lightbox-nav-btn left" aria-label="Previous image">
-                    <i class="fas fa-chevron-left"></i>
+                <button id="lightbox-prev-btn" type="button" class="lightbox-nav-btn left" aria-label="Previous image">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
                 </button>
 
                 <img id="lightbox-image" class="lightbox-image" src="" alt="Expanded preview">
 
-                <button id="lightbox-next-btn" class="lightbox-nav-btn right" aria-label="Next image">
-                    <i class="fas fa-chevron-right"></i>
+                <button id="lightbox-next-btn" type="button" class="lightbox-nav-btn right" aria-label="Next image">
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
                 </button>
             </div>
 
-            <!-- Lightbox Filmstrip Thumbnails -->
-            <div id="lightbox-filmstrip" class="lightbox-filmstrip" aria-label="Gallery thumbnails">
-                <!-- Injected dynamically -->
-            </div>
+            <div id="lightbox-filmstrip" class="lightbox-filmstrip" aria-label="Gallery thumbnails"></div>
         </div>
     </div>
 
     <!-- Toast Notification -->
     <div id="toast-notification" class="toast-notification" role="status" aria-live="polite">
-        <i class="fas fa-circle-check" style="color: var(--accent-cyan);"></i>
+        <i class="fas fa-circle-check" aria-hidden="true"></i>
         <span class="toast-message"></span>
     </div>
 
-    <!-- Cookie Consent Banner (Google Consent Mode v2 & GDPR/nLPD) -->
-    <aside id="cookie-banner" class="cookie-banner" role="region" aria-label="Cookie consent">
+    <!-- Regional Privacy Banner (Shown automatically in EEA/UK; accessible anytime via footer) -->
+    <aside id="cookie-banner" class="cookie-banner" data-region-aware="true" role="region" aria-label="Privacy and analytics preferences">
         <div class="cookie-content">
-            <i class="fas fa-cookie-bite cookie-icon" aria-hidden="true"></i>
-            <p class="cookie-text" data-i18n="cookie.message">Ce site utilise des cookies de statistiques anonymes pour améliorer votre expérience.</p>
+            <p class="cookie-text" data-i18n="cookie.message">We use privacy-first, ad-free audience measurement (GA4) to understand portfolio visits.</p>
         </div>
         <div class="cookie-actions">
-            <button id="cookie-decline-btn" class="cookie-btn cookie-btn-decline" data-i18n="cookie.decline">Refuser</button>
-            <button id="cookie-accept-btn" class="cookie-btn cookie-btn-accept" data-i18n="cookie.accept">Accepter</button>
+            <button id="cookie-decline-btn" type="button" class="cookie-btn cookie-btn-decline" data-i18n="cookie.decline">Decline</button>
+            <button id="cookie-accept-btn" type="button" class="cookie-btn cookie-btn-accept" data-i18n="cookie.accept">Accept</button>
         </div>
     </aside>
 

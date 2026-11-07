@@ -485,3 +485,117 @@ describe('Filmstrip Rendering Helper Functions', () => {
         expect(container.innerHTML).toBe('');
     });
 });
+
+describe('Scroll Preservation, UX/UI Positioning, Clean Hero Summary & No Case Studies', () => {
+    const fs = require('fs');
+    const TRANSLATIONS = require('./translations.js');
+
+    test('script.js must never call scrollIntoView (prevents page scroll jump on #lang-toggle and gallery actions)', () => {
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+        expect(scriptCode).not.toContain('scrollIntoView');
+    });
+
+    test('Obvious Tool (id: 111) is the first project in script.js and includes live link https://obvioustool.com', () => {
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+        expect(scriptCode).toContain('url: "https://obvioustool.com"');
+        expect(scriptCode).toContain('label: "obvioustool.com"');
+        const firstIdMatch = scriptCode.match(/const projects = \[\s*\{\s*id:\s*(\d+)/);
+        expect(firstIdMatch).not.toBeNull();
+        expect(firstIdMatch[1]).toBe('111');
+    });
+
+    test('Hero presentation paragraph (hero.tagline) contains no website link in translations.js or HTML', () => {
+        expect(TRANSLATIONS.en['hero.tagline']).not.toContain('obvioustool.com');
+        expect(TRANSLATIONS.en['hero.tagline']).not.toContain('<a ');
+        expect(TRANSLATIONS.fr['hero.tagline']).not.toContain('obvioustool.com');
+        expect(TRANSLATIONS.fr['hero.tagline']).not.toContain('<a ');
+
+        for (const htmlPath of ['./index.html', './fr/index.html']) {
+            const html = fs.readFileSync(htmlPath, 'utf8');
+            const summaryMatch = html.match(/<p class="hero-summary"[^>]*>([\s\S]*?)<\/p>/);
+            expect(summaryMatch).not.toBeNull();
+            expect(summaryMatch[1]).not.toContain('obvioustool.com');
+            expect(summaryMatch[1]).not.toContain('<a ');
+        }
+    });
+
+    test('Site title, Hero role, and Schema jobTitle explicitly include UX/UI Designer, and Case Studies section is removed', () => {
+        expect(TRANSLATIONS.en._meta.title).toContain('UX/UI Designer');
+        expect(TRANSLATIONS.fr._meta.title).toContain('UX/UI Designer');
+        expect(TRANSLATIONS.en['hero.role']).toContain('UX/UI Designer');
+        expect(TRANSLATIONS.fr['hero.role']).toContain('UX/UI Designer');
+        expect(TRANSLATIONS.en['nav.caseStudies']).toBeUndefined();
+        expect(TRANSLATIONS.fr['nav.caseStudies']).toBeUndefined();
+
+        for (const htmlPath of ['./index.html', './fr/index.html']) {
+            const html = fs.readFileSync(htmlPath, 'utf8');
+            expect(html).not.toContain('case-studies-section');
+            expect(html).not.toContain('Études de cas');
+            expect(html).not.toContain('Case Studies');
+
+            const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/);
+            expect(titleMatch).not.toBeNull();
+            expect(titleMatch[1]).toContain('UX/UI Designer');
+
+            expect(html).toContain('https://obvioustool.com');
+            expect(html).toContain('Declix');
+            expect(html).toContain('1227 Les Acacias');
+            expect(html).toContain('PERCO');
+            expect(html).toContain('Dr. Luís Pereira da Costa');
+
+            const ldMatch = html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/);
+            expect(ldMatch).not.toBeNull();
+            const parsed = JSON.parse(ldMatch[1]);
+            expect(Array.isArray(parsed)).toBe(true);
+            const person = parsed[0].mainEntity;
+            expect(person.jobTitle).toContain('UX/UI Designer');
+            expect(person.worksFor.name).toBe('Declix');
+            expect(person.address.postalCode).toBe('1227');
+            expect(person.knowsLanguage.map(l => l.alternateName)).toEqual(['fr', 'pt', 'en', 'es']);
+            expect(person.sameAs).toContain('https://obvioustool.com/');
+            expect(parsed[2].itemListElement[0].item.url).toBe('https://obvioustool.com/');
+        }
+    });
+
+    test('Gallery navigation buttons use clean addEventListener bindings (no inline onclick) and cycle images & thumbnails smoothly', () => {
+        for (const htmlPath of ['./index.html', './fr/index.html']) {
+            const html = fs.readFileSync(htmlPath, 'utf8');
+            expect(html).not.toContain('onclick="window.changeImage');
+            expect(html).not.toContain('onclick="window.changeProject');
+        }
+        const scriptCode = fs.readFileSync('./script.js', 'utf8');
+        expect(scriptCode).toContain("btnNextImg.addEventListener('click'");
+        expect(scriptCode).toContain("btnPrevImg.addEventListener('click'");
+        expect(scriptCode).toContain('container.dataset.renderKey');
+    });
+
+    test('Infomaniak security hardening: zero inline executable scripts, strict CSP without unsafe-inline JS, HSTS, and security.txt', () => {
+        for (const htmlPath of ['./index.html', './fr/index.html', './404.html']) {
+            const html = fs.readFileSync(htmlPath, 'utf8');
+            const scriptTags = html.match(/<script\b[^>]*>/gi) || [];
+            scriptTags.forEach(tag => {
+                const isJsonLd = /type=["']application\/ld\+json["']/i.test(tag);
+                const hasSrc = /\bsrc=["'][^"']+["']/i.test(tag);
+                expect(isJsonLd || hasSrc).toBe(true);
+            });
+            expect(html).not.toMatch(/\bon[a-z]+\s*=/i);
+        }
+
+        const htaccess = fs.readFileSync('./.htaccess', 'utf8');
+        expect(htaccess).toContain('Strict-Transport-Security');
+        expect(htaccess).toContain('X-Content-Type-Options "nosniff"');
+        expect(htaccess).toContain('X-Frame-Options "DENY"');
+        expect(htaccess).toContain('.well-known/acme-challenge/');
+        const scriptSrcMatch = htaccess.match(/script-src\s+([^;]+);/);
+        expect(scriptSrcMatch).not.toBeNull();
+        expect(scriptSrcMatch[1]).not.toContain('unsafe-inline');
+        expect(scriptSrcMatch[1]).not.toContain('unsafe-eval');
+
+        const securityTxt = fs.readFileSync('./.well-known/security.txt', 'utf8');
+        expect(securityTxt).toContain('Contact: mailto:contact@emericfds.com');
+        expect(fs.existsSync('./gtag-init.js')).toBe(true);
+    });
+});
+
+
+

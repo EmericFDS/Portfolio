@@ -1,44 +1,49 @@
-# Emeric Ferreira Dos Santos (Emeric F.D.S.) — AI Developer & Game Designer
+# Emeric Ferreira Dos Santos — AI Engineer, Full-Stack Builder & UX/UI Designer (Geneva, Switzerland)
 
-> AI Developer specializing in Autonomous AI Agents, LLMs, RAG, and Computer Vision. Game Designer & Creative Technologist with 10+ shipped games and web applications. Based in Geneva, Switzerland. Available for hire and innovative projects.
+> Emeric Ferreira Dos Santos (Emeric FDS) is an AI Engineer, Full-Stack Software Builder, and UX/UI Designer based in Geneva (1227 Les Acacias), Switzerland, holding a permanent **Swiss C Residence Permit (Permis C)** and speaking **4 languages** (French Native, Portuguese C2, English B2, Spanish B2). Creator of **[Obvious Tool (obvioustool.com)](https://obvioustool.com/)**, *PhotoLift* (Rust/Tauri), *CVite* (NLP), *Smart Bucket* (ML), and *GhostLink* (AES-256); Digital Advisor, Trainer & Internal App UX/UI Designer at **Declix (Geneva)**; and shipped commercial console Level/UX/UI Designer (*Pure Mahjong* on Nintendo Switch — 1,000+ levels).
 
-## Developer Profile
-- **Full Name**: Emeric Ferreira Dos Santos
-- **Professional Name**: Emeric F.D.S.
-- **Role**: AI Developer, Creative Technologist & Game Designer
-- **Location**: Geneva, Switzerland
-- **Status**: Available for new opportunities / Freelance
-- **Website**: https://emericfds.com/
-- **Email**: contact@emericfds.com
-- **LinkedIn**: https://www.linkedin.com/in/emericfds/
-- **GitHub**: https://github.com/EmericFDS
+## Executive Identity & Availability
+- **Full Name**: Emeric Ferreira Dos Santos (Emeric FDS / Emeric Dos Santos)
+- **Primary Positioning**: AI Engineer, Full-Stack Product Builder & UX/UI Designer
+- **Location**: Geneva (1227 Les Acacias), Switzerland — Available in Geneva, Lausanne, Romandie, Switzerland, and Remote Europe
+- **Work Authorization**: **Swiss Permit C (Permis d'établissement C — Permanent Residence)** · Driving Licenses **A, B**
+- **Spoken Languages (Quadrilingual)**:
+  - **French**: Native
+  - **Portuguese**: Fluent / C2
+  - **English**: Good / Professional Working Proficiency (B2)
+  - **Spanish**: Good / Professional Working Proficiency (B2)
+- **Portfolio (English)**: [https://emericfds.com/](https://emericfds.com/)
+- **Portfolio (Français)**: [https://emericfds.com/fr/](https://emericfds.com/fr/)
+- **Live SaaS / Product**: [https://obvioustool.com/](https://obvioustool.com/) (*Obvious Tool*)
+- **Direct Email**: [contact@emericfds.com](mailto:contact@emericfds.com)
+- **LinkedIn**: [https://www.linkedin.com/in/emericfds/](https://www.linkedin.com/in/emericfds/)
+- **GitHub**: [https://github.com/EmericFDS](https://github.com/EmericFDS)
 
-## Core Competencies & Tech Stack
-- **Artificial Intelligence**: Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Autonomous AI Agents, Prompt Engineering, NLP, Computer Vision (YOLO, OpenCV), PyTorch, TensorFlow, Hugging Face.
-- **Software & Web Development**: Python, TypeScript, JavaScript (ES6+), React, Vite, Node.js, Next.js, HTML5/CSS3, Tailwind CSS, Canvas UI, REST APIs, WebSockets.
-- **Game Development & 3D**: Unity 3D/2D, C#, Level Design, Game Feel & Mechanics, Gameplay Programming, Blender, Shader Graph, VR/AR (Gear VR, Oculus).
-- **Design & Creative Direction**: UI/UX Design, Figma, Adobe Photoshop, Adobe Illustrator, Visual Storytelling, Responsive Systems.
+## Core Engineering & UX/UI Capabilities
+1. **AI Agents, LLMs & Applied ML**: Autonomous multi-step agents, Retrieval-Augmented Generation (RAG), unstructured document extraction (PDF/OCR/NLP), sentiment & market regime classification, Computer Vision (YOLOv8, OpenCV), privacy-first local AI modules (Python, PyTorch, Scikit-learn).
+2. **Full-Stack Web & Native Desktop Software**: End-to-end product architecture using TypeScript, JavaScript (ES6+), React, Next.js, Vite, Node.js, native cross-platform desktop apps with **Rust & Tauri**, C# application logic, and client-side cryptography (**AES-256 WebCrypto**).
+3. **UX/UI Design, Information Architecture & 3D Systems**: Concrete field experience in interface design and prototyping, user testing, information architecture, user navigation schemas, storyboards, and ergonomic simplification—plus 3D engines (**Unity**, **Unreal Engine**) and shipped **Nintendo Switch** production.
 
-## Featured Projects
+## Flagship Products & Realizations
+- **[Obvious Tool](https://obvioustool.com/) (2025 — Live AI & Developer Suite)**: Unified web & desktop workspace consolidating 50+ developer/creative utilities with embedded AI modules (paraphrasing, grammar correction, multilingual translation) running locally, ad-free, and privacy-first.
+- **PhotoLift (2026 — Native Rust & Tauri Desktop App)**: High-throughput studio photography application built with Rust, Tauri, and React. Automates session sorting, color grading, and batch compression (**88% JPEG size reduction**, ~6-minute per-client workflow). ([Projects](https://emericfds.com/#projects-section))
+- **CVite (2025 — Applied NLP & Document AI)**: AI resume platform parsing unstructured PDF/image resumes via NLP into customizable real-time editorial layouts. ([Projects](https://emericfds.com/#projects-section))
+- **Smart Bucket (2025 — Quantitative ML & FinTech)**: Autonomous digital asset portfolio engine combining 24/7 market regime detection, NLP sentiment analysis, and multi-asset rebalancing across BTC, ETH, SOL, and TON. ([Projects](https://emericfds.com/#projects-section))
+- **GhostLink (2024 — Zero-Knowledge Web Security)**: Serverless secret and file sharing web app using 100% client-side AES-256 encryption where the URL hash carries the encrypted payload. ([Projects](https://emericfds.com/#projects-section))
+- **[Pure Mahjong](https://www.nintendo.co.uk/Games/Nintendo-Switch-download-software/Pure-Mahjong-1579159.html) (2020 — Commercial Nintendo Switch Release)**: Commercial puzzle game published worldwide on Nintendo Switch featuring **1,000+ handcrafted levels** across the 24 Chinese solar calendar events.
 
-### Artificial Intelligence & Machine Learning
-- **[PhotoLift](https://github.com/EmericFDS/PhotoLift)**: High-performance desktop application for batch photo management, AI-assisted sorting, and instant touch-ups.
-- **[CVite](https://cvite.emericfds.com/)**: Intelligent resume builder platform powered by AI document extraction, NLP, and real-time layout customizer.
-- **[Smart Bucket](https://smartbucket.emericfds.com/)**: Autonomous crypto portfolio management system with real-time sentiment analysis, automated rebalancing, and low-latency execution.
-- **[Autonomous RAG Agent](https://github.com/EmericFDS)**: Enterprise document retrieval and multi-step reasoning agent with vector similarity search.
-- **[Real-time Object Detection](https://github.com/EmericFDS)**: High-throughput video stream analysis pipeline utilizing YOLOv8 and OpenCV.
+## Professional Experience
+- **02.2022 – Present | Digital Advisor, Trainer & Internal App UX/UI Designer — Declix (OCE Program), Geneva, Switzerland**: Conception and UX/UI prototyping of internal applications; graphic layout of instructional materials; digital tools training and candidate coaching; user reception & flow management; IT support, hardware fleet ownership, and team management.
+- **2022 – Present | AI Engineer & Full-Stack Software Creator — Geneva, Switzerland**: Independent product engineering shipping *Obvious Tool* ([obvioustool.com](https://obvioustool.com/)), *PhotoLift*, *CVite*, *Smart Bucket*, and *GhostLink*.
+- **08.2018 – 08.2021 | Level Designer & Interactive UX Designer (Freelance) — Toulouse, France & International Studios**: Information architecture, user navigation schemas, storyboards, user testing & ergonomic iterations, 3D modeling/animations/scripting (Unity, Unreal, C#), including *Pure Mahjong* on Nintendo Switch.
+- **02.2017 – 07.2017 | Project Assistant (Internship) — FabLab Caldas da Rainha, Portugal**: Official web platform, 3D modeling/printing, Arduino/Bitalino biofeedback (*EMOT.IO*).
 
-### Web Applications & Creative Tools
-- **[GhostLink](https://ghostlink.emericfds.com/)**: Zero-knowledge secret sharing utility with client-side AES-256 encryption. The link is the key; zero server-side storage.
-- **[Portfolio Canvas UI](https://emericfds.com/)**: High-performance interactive portfolio featuring 60 FPS generative constellation canvas, spotlight bento cards, and 100% Lighthouse audit compliance.
+## Education & Certifications
+- **2023**: **PERCO Certification** (Occupational Health & Safety) — *Ecoservices, Geneva, Switzerland*.
+- **2017 – 2018**: **University Degree (DU) in Level Design — Gamagora**, *Université Lumière Lyon 2 (Lyon, France)*.
+- **2015 – 2017**: **BTS / TeSP in Digital Media Design**, *ESAD — Escola Superior de Arte e Design (Caldas da Rainha, Portugal)*.
+- **2012 – 2015**: **Vocational Diploma (BEP) in Marketing**, *Colégio Dr. Luís Pereira da Costa (Monte Redondo, Portugal)*.
 
-### Game Design & Interactive Media
-- **[Pure Mahjong](https://www.nintendo.com/fr-fr/Jeux/Jeux-a-telecharger-sur-Nintendo-Switch/Pure-Mahjong-1859582.html)**: Shipped photorealistic Mahjong game for Nintendo Switch featuring 1,000+ levels and custom engine optimizations.
-- **[Turn Base Battle Game](https://github.com/EmericFDS)**: Tactical turn-based mobile RPG featuring 4 handcrafted dungeon environments built with Unity & C#.
-- **[Gravity Defy](https://github.com/EmericFDS)**: Physics-based motorcycle parkour mobile game with 14 challenging levels.
-- **[Cubic Level](https://github.com/EmericFDS)**: Voxel-art top-down adventure level design for mobile.
-- **[Koda: Kiyomori's Guardian](https://github.com/EmericFDS)**: Atmospheric 3D platformer inspired by Japanese mythology.
-
-## Documentation & AI Knowledge Base
-- **Full Project Catalog**: [llms-full.txt](https://emericfds.com/llms-full.txt)
-- **JSON-LD Schema**: [Schema.org ProfilePage](https://emericfds.com/)
+## Extended Resources
+- [Complete 33-Project Bilingual Knowledge Base (llms-full.txt)](https://emericfds.com/llms-full.txt)
+- [French Portfolio Version](https://emericfds.com/fr/)

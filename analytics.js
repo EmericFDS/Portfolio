@@ -1,41 +1,140 @@
 /**
- * ============================================================
+ * ============================================================================
  * PORTFOLIO ANALYTICS ENGINE — Emeric Ferreira Dos Santos
- * High-Precision GA4 Telemetry & Consent Mode v2 Helper
- * ============================================================
+ * High-Precision GA4 Telemetry, Regional Consent Mode v2 (Swiss nLPD + GDPR),
+ * & AI Chatbot Referral Attribution (ChatGPT, Claude, Gemini, Perplexity)
+ * ============================================================================
  */
 
 const PortfolioAnalytics = (function () {
     'use strict';
 
     const GA_MEASUREMENT_ID = 'G-H7GJV51SW0';
-    const isLocalhost = Boolean(
-        window.location.hostname === 'localhost' ||
-        window.location.hostname === '127.0.0.1' ||
-        window.location.hostname === '[::1]' ||
-        window.location.search.includes('debug_ga=true')
-    );
+    const CONSENT_KEY = 'portfolio_cookie_consent';
+    const AI_SESSION_KEY = 'portfolio_ai_source';
+
+    // EEA + UK Timezones where explicit GDPR/ePrivacy opt-in banner is required.
+    // Note: Europe/Zurich (Switzerland) follows revFADP/nLPD where anonymous,
+    // non-advertising audience measurement does not require a blocking banner.
+    const EEA_TIMEZONES = new Set([
+        'Europe/Amsterdam', 'Europe/Andorra', 'Europe/Athens', 'Europe/Berlin',
+        'Europe/Bratislava', 'Europe/Brussels', 'Europe/Bucharest', 'Europe/Budapest',
+        'Europe/Busingen', 'Europe/Copenhagen', 'Europe/Dublin', 'Europe/Gibraltar',
+        'Europe/Guernsey', 'Europe/Helsinki', 'Europe/Isle_of_Man', 'Europe/Jersey',
+        'Europe/Lisbon', 'Europe/Ljubljana', 'Europe/London', 'Europe/Luxembourg',
+        'Europe/Madrid', 'Europe/Malta', 'Europe/Monaco', 'Europe/Oslo',
+        'Europe/Paris', 'Europe/Podgorica', 'Europe/Prague', 'Europe/Riga',
+        'Europe/Rome', 'Europe/San_Marino', 'Europe/Sofia', 'Europe/Stockholm',
+        'Europe/Tallinn', 'Europe/Vaduz', 'Europe/Vatican', 'Europe/Vienna',
+        'Europe/Vilnius', 'Europe/Warsaw', 'Europe/Zagreb', 'Atlantic/Azores',
+        'Atlantic/Canary', 'Atlantic/Faroe', 'Atlantic/Madeira', 'Atlantic/Reykjavik'
+    ]);
+
+    // Known AI Assistants & Generative Search Engines
+    const AI_ENGINE_PATTERNS = [
+        { engine: 'chatgpt', match: /chatgpt\.com|chat\.openai\.com|openai\.com/i },
+        { engine: 'claude', match: /claude\.ai|anthropic\.com/i },
+        { engine: 'gemini', match: /gemini\.google\.com|bard\.google\.com|aistudio\.google\.com/i },
+        { engine: 'perplexity', match: /perplexity\.ai/i },
+        { engine: 'copilot', match: /copilot\.microsoft\.com|edgeservices\.bing\.com/i },
+        { engine: 'mistral', match: /chat\.mistral\.ai|mistral\.ai/i },
+        { engine: 'you_ai', match: /(^|\.)you\.com/i },
+        { engine: 'phind', match: /phind\.com/i },
+        { engine: 'meta_ai', match: /meta\.ai/i }
+    ];
+
+    function isDebugEnv() {
+        return Boolean(
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1' ||
+            window.location.hostname === '[::1]' ||
+            window.location.search.includes('debug_ga=true')
+        );
+    }
 
     /**
-     * Safe wrapper to dispatch GA4 events
+     * Detect whether the visitor arrived from an AI Chatbot or AI Search Engine
+     * @param {string} [referrerStr]
+     * @param {string} [searchStr]
+     * @returns {{ engine: string, source: string } | null}
+     */
+    function detectAISource(referrerStr, searchStr) {
+        const ref = typeof referrerStr === 'string' ? referrerStr : (document.referrer || '');
+        const search = typeof searchStr === 'string' ? searchStr : (window.location.search || '');
+
+        let utmSource = '';
+        let utmMedium = '';
+        try {
+            const params = new URLSearchParams(search);
+            utmSource = params.get('utm_source') || params.get('ref') || '';
+            utmMedium = params.get('utm_medium') || '';
+        } catch (e) { /* ignore malformed query */ }
+
+        const combined = `${utmSource} ${ref}`;
+        for (let i = 0; i < AI_ENGINE_PATTERNS.length; i++) {
+            const rule = AI_ENGINE_PATTERNS[i];
+            if (rule.match.test(combined)) {
+                return {
+                    engine: rule.engine,
+                    source: utmSource || ref || rule.engine
+                };
+            }
+        }
+
+        if (/^(ai|llm|chatbot|generative)$/i.test(utmMedium) && utmSource) {
+            return {
+                engine: utmSource.toLowerCase().replace(/[^a-z0-9_-]/g, '_'),
+                source: utmSource
+            };
+        }
+
+        return null;
+    }
+
+    /**
+     * Determine whether explicit GDPR/ePrivacy opt-in banner is required
+     * based on visitor timezone when region-aware mode is enabled.
+     */
+    function requiresExplicitOptIn() {
+        try {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (!tz) return true;
+            return EEA_TIMEZONES.has(tz);
+        } catch (e) {
+            return true;
+        }
+    }
+
+    /**
+     * Safe wrapper to dispatch GA4 events with session context
      * @param {string} eventName
      * @param {object} eventParams
      */
     function sendEvent(eventName, eventParams = {}) {
         try {
             if (typeof window.gtag === 'function') {
+                const debugMode = isDebugEnv();
+                let sessionAiEngine = undefined;
+                try {
+                    sessionAiEngine = sessionStorage.getItem(AI_SESSION_KEY) || undefined;
+                } catch (e) { /* ignore */ }
+
                 const enrichedParams = {
                     ...eventParams,
-                    debug_mode: isLocalhost,
+                    debug_mode: debugMode,
                     page_location: window.location.href,
                     page_path: window.location.pathname + window.location.search,
                     page_language: document.documentElement.lang || 'en',
                     screen_resolution: `${window.screen.width}x${window.screen.height}`
                 };
 
+                if (sessionAiEngine && !enrichedParams.ai_engine) {
+                    enrichedParams.ai_engine = sessionAiEngine;
+                }
+
                 window.gtag('event', eventName, enrichedParams);
 
-                if (isLocalhost) {
+                if (debugMode) {
                     console.log(`📊 [GA4 Telemetry] Event: "${eventName}"`, enrichedParams);
                 }
             }
@@ -45,17 +144,47 @@ const PortfolioAnalytics = (function () {
     }
 
     return {
+        GA_MEASUREMENT_ID,
+        detectAISource,
+        requiresExplicitOptIn,
+
         /**
-         * Initialize automatic interaction listeners
+         * Initialize automatic interaction listeners & AI referral attribution
          */
         init() {
             this.initConsentBanner();
+            this.trackTrafficAttribution();
             this.trackScrollMilestones();
             this.trackOutboundLinks();
+            this.trackCaseStudyViews();
+            this.trackFaqInteractions();
+            this.trackCtaClicks();
         },
 
         /**
-         * Track when a project is displayed / focused in the carousel
+         * Attribute visits originating from ChatGPT, Claude, Gemini, Perplexity, etc.
+         */
+        trackTrafficAttribution() {
+            const detected = detectAISource();
+            if (!detected) return;
+
+            let alreadyRecorded = false;
+            try {
+                alreadyRecorded = sessionStorage.getItem(AI_SESSION_KEY) === detected.engine;
+                sessionStorage.setItem(AI_SESSION_KEY, detected.engine);
+            } catch (e) { /* ignore storage restrictions */ }
+
+            if (!alreadyRecorded) {
+                sendEvent('ai_referral_visit', {
+                    ai_engine: detected.engine,
+                    ai_referrer: detected.source,
+                    traffic_origin_type: 'ai_assistant'
+                });
+            }
+        },
+
+        /**
+         * Track when a project is displayed / focused in the explorer
          */
         trackProjectView(project, index, total) {
             if (!project) return;
@@ -96,7 +225,7 @@ const PortfolioAnalytics = (function () {
          */
         trackContactAction(actionType, targetValue = 'contact@emericfds.com') {
             sendEvent('generate_lead', {
-                lead_type: actionType, // 'copy_clipboard' | 'mailto_click'
+                lead_type: actionType,
                 contact_channel: 'email',
                 value: targetValue
             });
@@ -112,7 +241,72 @@ const PortfolioAnalytics = (function () {
         },
 
         /**
-         * Automatically track outbound links (LinkedIn, GitHub, External Demos)
+         * Track flagship case study impressions (when recruiter reads a case card)
+         */
+        trackCaseStudyViews() {
+            if (typeof IntersectionObserver === 'undefined') return;
+            const cards = document.querySelectorAll('.case-study-card[data-project-id]');
+            if (!cards.length) return;
+
+            const seen = new Set();
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        const card = entry.target;
+                        const pid = card.getAttribute('data-project-id');
+                        const title = card.getAttribute('data-project-name') || pid;
+                        if (pid && !seen.has(pid)) {
+                            seen.add(pid);
+                            sendEvent('view_case_study', {
+                                project_id: pid,
+                                project_title: title
+                            });
+                            observer.unobserve(card);
+                        }
+                    }
+                });
+            }, { threshold: [0.5] });
+
+            cards.forEach((c) => observer.observe(c));
+        },
+
+        /**
+         * Track structured FAQ accordion opens
+         */
+        trackFaqInteractions() {
+            const faqItems = document.querySelectorAll('details.faq-item');
+            faqItems.forEach((item, idx) => {
+                item.addEventListener('toggle', () => {
+                    if (item.open) {
+                        const summaryEl = item.querySelector('summary');
+                        const questionText = summaryEl ? summaryEl.textContent.trim().slice(0, 100) : `faq_${idx + 1}`;
+                        sendEvent('open_faq_item', {
+                            faq_index: idx + 1,
+                            faq_question: questionText
+                        });
+                    }
+                });
+            });
+        },
+
+        /**
+         * Track primary CTA button clicks
+         */
+        trackCtaClicks() {
+            document.addEventListener('click', (e) => {
+                const ctaEl = e.target.closest('[data-analytics-cta]');
+                if (!ctaEl) return;
+                const ctaName = ctaEl.getAttribute('data-analytics-cta');
+                if (ctaName) {
+                    sendEvent('select_promotion', {
+                        promotion_name: ctaName
+                    });
+                }
+            }, { passive: true });
+        },
+
+        /**
+         * Automatically track outbound links (LinkedIn, GitHub, Nintendo eShop, Demos)
          */
         trackOutboundLinks() {
             document.addEventListener('click', (e) => {
@@ -127,6 +321,7 @@ const PortfolioAnalytics = (function () {
                     if (href.includes('linkedin.com')) linkCategory = 'linkedin_profile';
                     else if (href.includes('github.com')) linkCategory = 'github_profile';
                     else if (href.includes('google.com/maps')) linkCategory = 'location_map';
+                    else if (href.includes('nintendo.')) linkCategory = 'nintendo_eshop';
                     else if (targetLink.classList.contains('project-link-btn')) linkCategory = 'project_demo_or_repo';
 
                     sendEvent('click_outbound', {
@@ -170,38 +365,54 @@ const PortfolioAnalytics = (function () {
             const banner = document.getElementById('cookie-banner');
             const acceptBtn = document.getElementById('cookie-accept-btn');
             const declineBtn = document.getElementById('cookie-decline-btn');
+            const privacyTrigger = document.getElementById('privacy-settings-btn');
 
             if (!banner || !acceptBtn || !declineBtn) return;
 
             let storedConsent = null;
             try {
-                storedConsent = localStorage.getItem('portfolio_cookie_consent');
-            } catch (e) {}
+                storedConsent = localStorage.getItem(CONSENT_KEY);
+            } catch (e) { /* ignore */ }
 
-            // If user hasn't made a choice yet, display the banner smoothly
-            if (!storedConsent) {
+            const isRegionAware = banner.hasAttribute('data-region-aware');
+            const shouldAutoPrompt = !storedConsent && (!isRegionAware || requiresExplicitOptIn());
+
+            if (shouldAutoPrompt) {
                 setTimeout(() => {
                     banner.classList.add('show');
                 }, 800);
             }
 
+            if (privacyTrigger) {
+                privacyTrigger.addEventListener('click', () => {
+                    banner.classList.add('show');
+                });
+            }
+
             acceptBtn.addEventListener('click', () => {
                 try {
-                    localStorage.setItem('portfolio_cookie_consent', 'granted');
-                } catch (e) {}
+                    localStorage.setItem(CONSENT_KEY, 'granted');
+                } catch (e) { /* ignore */ }
 
                 if (typeof window.gtag === 'function') {
                     window.gtag('consent', 'update', {
                         'analytics_storage': 'granted'
                     });
+                    // Ensure EEA visitors who accept after initial load record a full attributed page_view
+                    if (isRegionAware) {
+                        sendEvent('page_view', {
+                            page_title: document.title,
+                            consent_recovered: true
+                        });
+                    }
                 }
                 banner.classList.remove('show');
             });
 
             declineBtn.addEventListener('click', () => {
                 try {
-                    localStorage.setItem('portfolio_cookie_consent', 'denied');
-                } catch (e) {}
+                    localStorage.setItem(CONSENT_KEY, 'denied');
+                } catch (e) { /* ignore */ }
 
                 if (typeof window.gtag === 'function') {
                     window.gtag('consent', 'update', {
@@ -214,7 +425,6 @@ const PortfolioAnalytics = (function () {
     };
 })();
 
-// Automatically initialize once DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => PortfolioAnalytics.init());
 } else {

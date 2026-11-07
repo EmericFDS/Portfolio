@@ -507,4 +507,167 @@ describe('PortfolioAnalytics', () => {
             spyOutbound.mockRestore();
         });
     });
+
+    describe('detectAISource() & trackTrafficAttribution()', () => {
+        beforeEach(() => {
+            sessionStorage.clear();
+        });
+
+        test('should accurately identify ChatGPT, Claude, Gemini, Perplexity, and Mistral referrers', () => {
+            expect(PortfolioAnalytics.detectAISource('https://chatgpt.com/', '')).toEqual({
+                engine: 'chatgpt',
+                source: 'https://chatgpt.com/'
+            });
+            expect(PortfolioAnalytics.detectAISource('', '?utm_source=chatgpt.com')).toEqual({
+                engine: 'chatgpt',
+                source: 'chatgpt.com'
+            });
+            expect(PortfolioAnalytics.detectAISource('https://claude.ai/chat/123', '')).toEqual({
+                engine: 'claude',
+                source: 'https://claude.ai/chat/123'
+            });
+            expect(PortfolioAnalytics.detectAISource('https://gemini.google.com/', '')).toEqual({
+                engine: 'gemini',
+                source: 'https://gemini.google.com/'
+            });
+            expect(PortfolioAnalytics.detectAISource('https://www.perplexity.ai/search/abc', '')).toEqual({
+                engine: 'perplexity',
+                source: 'https://www.perplexity.ai/search/abc'
+            });
+            expect(PortfolioAnalytics.detectAISource('https://chat.mistral.ai/', '')).toEqual({
+                engine: 'mistral',
+                source: 'https://chat.mistral.ai/'
+            });
+            expect(PortfolioAnalytics.detectAISource('https://www.google.com/', '')).toBeNull();
+        });
+
+        test('should fire ai_referral_visit once per session and enrich subsequent events with ai_engine', () => {
+            window.history.pushState({}, '', '/?utm_source=chatgpt.com');
+
+            PortfolioAnalytics.trackTrafficAttribution();
+            expect(mockGtag).toHaveBeenCalledWith(
+                'event',
+                'ai_referral_visit',
+                expect.objectContaining({
+                    ai_engine: 'chatgpt',
+                    ai_referrer: 'chatgpt.com',
+                    traffic_origin_type: 'ai_assistant'
+                })
+            );
+
+            mockGtag.mockClear();
+            // Calling again in same session should not duplicate ai_referral_visit
+            PortfolioAnalytics.trackTrafficAttribution();
+            expect(mockGtag).not.toHaveBeenCalled();
+
+            // Subsequent conversion event should carry ai_engine session context
+            PortfolioAnalytics.trackContactAction('mailto_click');
+            expect(mockGtag).toHaveBeenCalledWith(
+                'event',
+                'generate_lead',
+                expect.objectContaining({
+                    lead_type: 'mailto_click',
+                    ai_engine: 'chatgpt'
+                })
+            );
+
+            window.history.pushState({}, '', '/');
+            sessionStorage.clear();
+        });
+    });
+
+    describe('Regional Consent Mode v2 (data-region-aware)', () => {
+        test('should NOT auto-prompt banner in Switzerland (Europe/Zurich) when data-region-aware is set', () => {
+            const dtfSpy = jest.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+                resolvedOptions: () => ({ timeZone: 'Europe/Zurich' })
+            }));
+
+            document.body.innerHTML = `
+                <div id="cookie-banner" data-region-aware="true">
+                    <button id="cookie-accept-btn">Accept</button>
+                    <button id="cookie-decline-btn">Decline</button>
+                </div>
+                <button id="privacy-settings-btn">Privacy</button>
+            `;
+
+            const banner = document.getElementById('cookie-banner');
+            PortfolioAnalytics.initConsentBanner();
+            jest.advanceTimersByTime(1000);
+
+            expect(banner.classList.contains('show')).toBe(false);
+
+            // Manual trigger from footer still opens privacy settings
+            document.getElementById('privacy-settings-btn').click();
+            expect(banner.classList.contains('show')).toBe(true);
+
+            dtfSpy.mockRestore();
+        });
+
+        test('should auto-prompt banner in EEA (Europe/Paris) when data-region-aware is set and recover page_view on accept', () => {
+            const dtfSpy = jest.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+                resolvedOptions: () => ({ timeZone: 'Europe/Paris' })
+            }));
+
+            document.body.innerHTML = `
+                <div id="cookie-banner" data-region-aware="true">
+                    <button id="cookie-accept-btn">Accept</button>
+                    <button id="cookie-decline-btn">Decline</button>
+                </div>
+            `;
+
+            const banner = document.getElementById('cookie-banner');
+            PortfolioAnalytics.initConsentBanner();
+            jest.advanceTimersByTime(800);
+
+            expect(banner.classList.contains('show')).toBe(true);
+
+            document.getElementById('cookie-accept-btn').click();
+            expect(mockGtag).toHaveBeenCalledWith('consent', 'update', { analytics_storage: 'granted' });
+            expect(mockGtag).toHaveBeenCalledWith(
+                'event',
+                'page_view',
+                expect.objectContaining({ consent_recovered: true })
+            );
+
+            dtfSpy.mockRestore();
+        });
+    });
+
+    describe('trackCtaClicks() & trackFaqInteractions()', () => {
+        test('should track CTA clicks decorated with data-analytics-cta', () => {
+            document.body.innerHTML = `<a href="#contact" id="cta-btn" data-analytics-cta="hero_contact">Contact</a>`;
+            PortfolioAnalytics.trackCtaClicks();
+
+            document.getElementById('cta-btn').click();
+            expect(mockGtag).toHaveBeenCalledWith(
+                'event',
+                'select_promotion',
+                expect.objectContaining({ promotion_name: 'hero_contact' })
+            );
+        });
+
+        test('should track FAQ item open events', () => {
+            document.body.innerHTML = `
+                <details class="faq-item" id="faq-test">
+                    <summary>What stack does Emeric use?</summary>
+                    <div>Python, React, Rust/Tauri.</div>
+                </details>
+            `;
+            PortfolioAnalytics.trackFaqInteractions();
+
+            const detailsEl = document.getElementById('faq-test');
+            detailsEl.open = true;
+            detailsEl.dispatchEvent(new Event('toggle'));
+
+            expect(mockGtag).toHaveBeenCalledWith(
+                'event',
+                'open_faq_item',
+                expect.objectContaining({
+                    faq_index: 1,
+                    faq_question: 'What stack does Emeric use?'
+                })
+            );
+        });
+    });
 });
+

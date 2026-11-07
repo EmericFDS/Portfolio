@@ -387,4 +387,13 @@ describe('I18N.detectLocale()', () => {
         });
         expect(I18N.detectLocale()).toBe('en');
     });
+
+    test('5. Static localized path (/fr and /fr/) returns "fr" even if localStorage has "en"', () => {
+        localStorage.setItem('portfolio-lang', 'en');
+        window.history.pushState({}, '', '/fr/');
+        expect(I18N.detectLocale()).toBe('fr');
+
+        window.history.pushState({}, '', '/fr');
+        expect(I18N.detectLocale()).toBe('fr');
+    });
 });

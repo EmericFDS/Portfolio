@@ -1,0 +1,54 @@
+name: Test & Deploy to Infomaniak (Swiss Hosting)
+
+on:
+  push:
+    branches:
+      - main
+      - infomaniak-migration
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-deploy:
+    name: Verify Security/SEO & Sync to Infomaniak via SSH
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Private Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dev Dependencies & Run 100+ Security/SEO/UI Tests
+        run: |
+          npm ci
+          npm test
+
+      - name: Build Hardened Infomaniak Production Webroot
+        run: |
+          chmod +x ./scripts/build-infomaniak.sh
+          ./scripts/build-infomaniak.sh
+
+      - name: Deploy dist-infomaniak/ to Infomaniak via SSH/Rsync
+        if: ${{ secrets.INFOMANIAK_SSH_HOST != '' && secrets.INFOMANIAK_SSH_USER != '' && secrets.INFOMANIAK_SSH_KEY != '' }}
+        env:
+          SSH_HOST: ${{ secrets.INFOMANIAK_SSH_HOST }}
+          SSH_USER: ${{ secrets.INFOMANIAK_SSH_USER }}
+          SSH_KEY: ${{ secrets.INFOMANIAK_SSH_KEY }}
+          REMOTE_PATH: ${{ secrets.INFOMANIAK_REMOTE_PATH || '~/sites/emericfds.com' }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/infomaniak_ed25519
+          chmod 600 ~/.ssh/infomaniak_ed25519
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          rsync -avz --delete \
+            --exclude='.well-known/acme-challenge/' \
+            -e "ssh -i ~/.ssh/infomaniak_ed25519 -o StrictHostKeyChecking=yes" \
+            ./dist-infomaniak/ "${SSH_USER}@${SSH_HOST}:${REMOTE_PATH}/"
+          rm -f ~/.ssh/infomaniak_ed25519
