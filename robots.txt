@@ -65,6 +65,31 @@ Allow: /
 User-agent: MistralAI-User
 Allow: /
 
+User-agent: MistralAI-Agent
+Allow: /
+
+# --- DeepSeek AI ---
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: deepseek-ai
+Allow: /
+
+# --- xAI / Grok ---
+User-agent: GrokBot
+Allow: /
+
+User-agent: xAI-Search
+Allow: /
+
+# --- Amazon Bedrock / Q ---
+User-agent: Amazonbot
+Allow: /
+
+# --- ByteDance / TikTok AI ---
+User-agent: Bytespider
+Allow: /
+
 # --- DuckDuckGo / Meta / You.com / Cohere / CommonCrawl ---
 User-agent: DuckDuckBot
 Allow: /

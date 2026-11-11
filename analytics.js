@@ -36,12 +36,27 @@ const PortfolioAnalytics = (function () {
         { engine: 'claude', match: /claude\.ai|anthropic\.com/i },
         { engine: 'gemini', match: /gemini\.google\.com|bard\.google\.com|aistudio\.google\.com/i },
         { engine: 'perplexity', match: /perplexity\.ai/i },
+        { engine: 'deepseek', match: /chat\.deepseek\.com|deepseek\.com/i },
+        { engine: 'grok', match: /grok\.com|x\.ai/i },
         { engine: 'copilot', match: /copilot\.microsoft\.com|edgeservices\.bing\.com/i },
         { engine: 'mistral', match: /chat\.mistral\.ai|mistral\.ai/i },
+        { engine: 'huggingchat', match: /huggingface\.co\/chat|hf\.co\/chat/i },
+        { engine: 'cohere', match: /coral\.cohere\.com|cohere\.com/i },
         { engine: 'you_ai', match: /(^|\.)you\.com/i },
         { engine: 'phind', match: /phind\.com/i },
         { engine: 'meta_ai', match: /meta\.ai/i }
     ];
+
+    function getActiveProjectContext() {
+        try {
+            const titleEl = document.getElementById('project-title');
+            if (titleEl && titleEl.textContent) {
+                const text = titleEl.textContent.trim();
+                if (text && text !== 'No projects') return text;
+            }
+        } catch (e) { /* ignore */ }
+        return undefined;
+    }
 
     function isDebugEnv() {
         return Boolean(
@@ -159,6 +174,7 @@ const PortfolioAnalytics = (function () {
             this.trackCaseStudyViews();
             this.trackFaqInteractions();
             this.trackCtaClicks();
+            this.trackWebVitals();
         },
 
         /**
@@ -221,14 +237,19 @@ const PortfolioAnalytics = (function () {
         },
 
         /**
-         * Track high-intent contact actions
+         * Track high-intent contact actions (with active project attribution)
          */
         trackContactAction(actionType, targetValue = 'contact@emericfds.com') {
-            sendEvent('generate_lead', {
+            const activeProject = getActiveProjectContext();
+            const payload = {
                 lead_type: actionType,
                 contact_channel: 'email',
                 value: targetValue
-            });
+            };
+            if (activeProject) {
+                payload.active_project = activeProject;
+            }
+            sendEvent('generate_lead', payload);
         },
 
         /**
@@ -306,7 +327,7 @@ const PortfolioAnalytics = (function () {
         },
 
         /**
-         * Automatically track outbound links (LinkedIn, GitHub, Nintendo eShop, Demos)
+         * Automatically track outbound links (LinkedIn, GitHub, Nintendo eShop, Demos) & File Downloads
          */
         trackOutboundLinks() {
             document.addEventListener('click', (e) => {
@@ -314,8 +335,21 @@ const PortfolioAnalytics = (function () {
                 if (!targetLink || !targetLink.href) return;
 
                 const href = targetLink.href;
-                const isExternal = href.startsWith('http') && !href.includes(window.location.hostname);
+                const activeProject = getActiveProjectContext();
+                const isPdf = /\.pdf($|\?)/i.test(href);
 
+                if (isPdf) {
+                    const fileName = href.split('/').pop().split('?')[0];
+                    const payload = {
+                        file_name: fileName,
+                        file_extension: 'pdf',
+                        link_url: href
+                    };
+                    if (activeProject) payload.active_project = activeProject;
+                    sendEvent('file_download', payload);
+                }
+
+                const isExternal = href.startsWith('http') && !href.includes(window.location.hostname);
                 if (isExternal) {
                     let linkCategory = 'external_resource';
                     if (href.includes('linkedin.com')) linkCategory = 'linkedin_profile';
@@ -324,14 +358,83 @@ const PortfolioAnalytics = (function () {
                     else if (href.includes('nintendo.')) linkCategory = 'nintendo_eshop';
                     else if (targetLink.classList.contains('project-link-btn')) linkCategory = 'project_demo_or_repo';
 
-                    sendEvent('click_outbound', {
+                    const payload = {
                         link_url: href,
                         link_domain: new URL(href).hostname,
                         link_category: linkCategory,
                         link_text: (targetLink.innerText || targetLink.getAttribute('aria-label') || 'External Link').trim()
-                    });
+                    };
+                    if (activeProject) payload.active_project = activeProject;
+                    sendEvent('click_outbound', payload);
                 }
             }, { passive: true });
+        },
+
+        /**
+         * Real User Monitoring (RUM) for Core Web Vitals (LCP, CLS, FCP)
+         */
+        trackWebVitals() {
+            if (typeof window === 'undefined' || typeof PerformanceObserver !== 'function') return;
+
+            function reportMetric(name, value, rating) {
+                sendEvent('web_vitals', {
+                    metric_name: name,
+                    metric_value: Math.round(value),
+                    metric_rating: rating
+                });
+            }
+
+            try {
+                // LCP (Largest Contentful Paint)
+                const lcpObserver = new PerformanceObserver((entryList) => {
+                    const entries = entryList.getEntries();
+                    const lastEntry = entries[entries.length - 1];
+                    if (lastEntry) {
+                        const val = lastEntry.startTime;
+                        const rating = val <= 2500 ? 'good' : val <= 4000 ? 'needs_improvement' : 'poor';
+                        reportMetric('LCP', val, rating);
+                    }
+                });
+                lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+
+                // CLS (Cumulative Layout Shift)
+                let clsScore = 0;
+                const clsObserver = new PerformanceObserver((entryList) => {
+                    for (const entry of entryList.getEntries()) {
+                        if (!entry.hadRecentInput) {
+                            clsScore += entry.value;
+                        }
+                    }
+                });
+                clsObserver.observe({ type: 'layout-shift', buffered: true });
+
+                const reportCls = () => {
+                    if (clsScore > 0) {
+                        const rating = clsScore <= 0.1 ? 'good' : clsScore <= 0.25 ? 'needs_improvement' : 'poor';
+                        reportMetric('CLS', clsScore * 1000, rating);
+                        clsScore = 0;
+                    }
+                };
+                window.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'hidden') reportCls();
+                }, { once: true });
+                window.addEventListener('pagehide', reportCls, { once: true });
+
+                // FCP (First Contentful Paint)
+                const fcpObserver = new PerformanceObserver((entryList) => {
+                    for (const entry of entryList.getEntries()) {
+                        if (entry.name === 'first-contentful-paint') {
+                            const val = entry.startTime;
+                            const rating = val <= 1800 ? 'good' : val <= 3000 ? 'needs_improvement' : 'poor';
+                            reportMetric('FCP', val, rating);
+                            fcpObserver.disconnect();
+                        }
+                    }
+                });
+                fcpObserver.observe({ type: 'paint', buffered: true });
+            } catch (e) {
+                /* Ignore in environments without full PerformanceObserver support */
+            }
         },
 
         /**

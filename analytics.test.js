@@ -319,6 +319,32 @@ describe('PortfolioAnalytics', () => {
 
             expect(mockGtag).not.toHaveBeenCalled();
         });
+
+        test('should track PDF file downloads as file_download event and include active project context if present', () => {
+            const titleEl = document.createElement('h3');
+            titleEl.id = 'project-title';
+            titleEl.textContent = 'Obvious Tool';
+            document.body.appendChild(titleEl);
+
+            const pdfLink = document.createElement('a');
+            pdfLink.href = 'https://emericfds.com/content/pdf/UndergroundWaterJunction.pdf';
+            pdfLink.innerText = 'Download PDF Map';
+            document.body.appendChild(pdfLink);
+
+            pdfLink.click();
+
+            expect(mockGtag).toHaveBeenCalledWith(
+                'event',
+                'file_download',
+                expect.objectContaining({
+                    file_name: 'UndergroundWaterJunction.pdf',
+                    file_extension: 'pdf',
+                    active_project: 'Obvious Tool'
+                })
+            );
+
+            titleEl.remove();
+        });
     });
 
     describe('trackScrollMilestones()', () => {
@@ -537,6 +563,14 @@ describe('PortfolioAnalytics', () => {
             expect(PortfolioAnalytics.detectAISource('https://chat.mistral.ai/', '')).toEqual({
                 engine: 'mistral',
                 source: 'https://chat.mistral.ai/'
+            });
+            expect(PortfolioAnalytics.detectAISource('https://chat.deepseek.com/', '')).toEqual({
+                engine: 'deepseek',
+                source: 'https://chat.deepseek.com/'
+            });
+            expect(PortfolioAnalytics.detectAISource('https://grok.com/', '')).toEqual({
+                engine: 'grok',
+                source: 'https://grok.com/'
             });
             expect(PortfolioAnalytics.detectAISource('https://www.google.com/', '')).toBeNull();
         });

@@ -595,6 +595,23 @@ describe('Scroll Preservation, UX/UI Positioning, Clean Hero Summary & No Case S
         expect(securityTxt).toContain('Contact: mailto:contact@emericfds.com');
         expect(fs.existsSync('./gtag-init.js')).toBe(true);
     });
+
+    test('SEO & GEO Bot Directives: BreadcrumbList schema, hasOccupation, OpenGraph dimensions, and AI crawlers in robots.txt', () => {
+        const robots = fs.readFileSync('./robots.txt', 'utf8');
+        expect(robots).toContain('User-agent: DeepSeekBot');
+        expect(robots).toContain('User-agent: GrokBot');
+        expect(robots).toContain('User-agent: ClaudeBot');
+        expect(robots).toContain('User-agent: GPTBot');
+        expect(robots).toContain('User-agent: PerplexityBot');
+
+        for (const htmlPath of ['./index.html', './fr/index.html']) {
+            const html = fs.readFileSync(htmlPath, 'utf8');
+            expect(html).toContain('"@type": "BreadcrumbList"');
+            expect(html).toContain('"@type": "Occupation"');
+            expect(html).toContain('property="og:image:width" content="1200"');
+            expect(html).toContain('property="og:image:height" content="630"');
+        }
+    });
 });
 
 
